@@ -1,0 +1,274 @@
+{
+  "source": "DVWA",
+  "extraction_date": "2026-04-11",
+  "cleaning_date": "2026-04-11T11:57:03.339696",
+  "original_count": 51,
+  "cleaned_count": 19,
+  "removed_count": 32,
+  "snippets": [
+    {
+      "snippet_id": "dvwa_006",
+      "source": "DVWA",
+      "language": "php",
+      "category": "auth_bypass",
+      "security_level": "low",
+      "vulnerability_type": "bac",
+      "file_path": "vulnerabilities/bac/source/low.php",
+      "file_size": 4292,
+      "code": "<?php\nif (!defined('DVWA_WEB_PAGE_TO_ROOT')) {\n    define('DVWA_WEB_PAGE_TO_ROOT', '../../../');\n}\n\n// Get current user's ID\n$query = \"SELECT user_id, role FROM users WHERE user = '\" . dvwaCurrentUser() . \"';\";\n$result = mysqli_query($GLOBALS[\"___mysqli_ston\"], $query);\n$row = ($result && mysqli_num_rows($result) > 0) ? mysqli_fetch_assoc($result) : array('user_id' => 0, 'role' => '');\n$current_user_id = intval($row['user_id']);\n$role = $row['role'];\n\n// Slightly better access control (but still vulnerable)\n$html = \"\";\nif (isset($_GET['action']) && isset($_GET['user_id'])) {\n    if (!preg_match('/^\\d+$/', $_GET['user_id'])) {\n        $html .= \"<p>Invalid user ID format. Please enter a number.</p>\";\n    } else {\n        $id = intval($_GET['user_id']);\n        \n        // Check if user exists first\n        $check_query = \"SELECT user_id FROM users WHERE user_id = $id\";\n        $check_result = mysqli_query($GLOBALS[\"___mysqli_ston\"], $check_query);\n        $user_exists = ($check_result && mysqli_num_rows($check_result) > 0);\n        \n        if (!$user_exists) {\n            $html .= \"<p>No user found with ID: {$id}</p>\";\n        } else {\n            // \"Secure\" check that's still vulnerable\n            if (isset($_COOKIE['user_id'])) {\n                $cookie_id = intval($_COOKIE['user_id']);\n                \n                if ($id == $cookie_id) {\n                    // Access granted\n                    $query = \"SELECT first_name, last_name, user_id, avatar FROM users WHERE user_id = $id;\";\n                    $result = mysqli_query($GLOBALS[\"___mysqli_ston\"], $query);\n                    \n                    if ($result && mysqli_num_rows($result) > 0) {\n                        $row = mysqli_fetch_assoc($result);\n                        $html .= \"\n                            <div class=\\\"profile-info\\\">\n                                <h3>User Profile</h3>\n                                <p>User ID: {$row['user_id']}</p>\n                                <p>Name: {$row['first_name']} {$row['last_name']}</p>\n                                <p>Avatar: {$row['avatar']}</p>\n                                <!-- Hint: Cookies can be modified by users... -->\n                            </div>\";\n                    }\n                } else {\n                    $html .= \"<p>Access denied. You can only view your own profile.</p>\";\n                }\n            } else {\n                $html .= \"<p>Access denied. No user_id cookie found.</p>\";\n            }\n        }\n        \n        // Log access attempts\n        try {\n            // First check if the bac_log table exists\n            $check_table = \"SHOW TABLES LIKE 'bac_log'\";\n            $table_exists = mysqli_query($GLOBALS[\"___mysqli_ston\"], $check_table);\n            \n            if ($table_exists && mysqli_num_rows($table_exists) == 0) {\n                // Create the table if it doesn't exist\n                $create_table = \"CREATE TABLE IF NOT EXISTS bac_log (\n                   id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\n                    user_id INT(6) NULL,\n                    target_id INT(6) NULL,\n                    ip_address VARCHAR(50) NULL,\n                    action VARCHAR(50) NULL,\n                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n                )\";\n                mysqli_query($GLOBALS[\"___mysqli_ston\"], $create_table);\n            }\n            \n            // Log the access attempt\n            $ip = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];\n            $target_id = $user_exists ? $id : 0; // Use 0 for non-existent users\n            $log_query = \"INSERT INTO bac_log (user_id, target_id, ip_address) VALUES \n                        ({$current_user_id}, {$target_id}, '{$ip}')\";\n            mysqli_query($GLOBALS[\"___mysqli_ston\"], $log_query);\n        } catch (Exception $e) {\n            // Silently fail if logging doesn't work\n        }\n    }\n}\n\n// Show current user's role for context\n$role = isset($_COOKIE['user_role']) ? $_COOKIE['user_role'] : 'regular_user';\n$html .= \"<div class='info-banner'>Current Role: {$role}</div>\";\n\n// Set initial role cookie if not exists\nif (!isset($_COOKIE['user_role'])) {\n    setcookie('user_role', 'regular_user', time() + 3600, '/');\n}\n?>\n",
+      "description": "DVWA bac - low security level"
+    },
+    {
+      "snippet_id": "dvwa_007",
+      "source": "DVWA",
+      "language": "php",
+      "category": "auth_bypass",
+      "security_level": "medium",
+      "vulnerability_type": "bac",
+      "file_path": "vulnerabilities/bac/source/medium.php",
+      "file_size": 3649,
+      "code": "<?php\nif (!defined('DVWA_WEB_PAGE_TO_ROOT')) {\n    define('DVWA_WEB_PAGE_TO_ROOT', '../../../');\n}\n\n// Get current user's ID\n$query = \"SELECT user_id FROM users WHERE user = '\" . dvwaCurrentUser() . \"';\";\n$result = mysqli_query($GLOBALS[\"___mysqli_ston\"], $query);\n$current_user_id = ($result && mysqli_num_rows($result) > 0) ? mysqli_fetch_assoc($result)['user_id'] : 0;\n\n// Basic attempt at access control (but easily bypassed)\n$html = \"\";\nif (isset($_GET['action']) && isset($_GET['user_id'])) {\n    if (!preg_match('/^\\d+$/', $_GET['user_id'])) {\n        $html .= \"<p>Invalid user ID format. Please enter a number.</p>\";\n    } else {\n        $id = $_GET['user_id'];\n        $user_exists = false;\n        \n        // Check if user exists first\n        $check_query = \"SELECT user_id FROM users WHERE user_id = '$id'\";\n        $check_result = mysqli_query($GLOBALS[\"___mysqli_ston\"], $check_query);\n        $user_exists = ($check_result && mysqli_num_rows($check_result) > 0);\n        \n        // \"Secure\" check that's easily bypassed\n        if (isset($_GET['token']) && $_GET['token'] == 'user_token') {\n            if ($user_exists) {\n                $query = \"SELECT first_name, last_name, user_id, avatar FROM users WHERE user_id = '$id';\";\n                $result = mysqli_query($GLOBALS[\"___mysqli_ston\"], $query);\n                \n                if ($result && mysqli_num_rows($result) > 0) {\n                    $row = mysqli_fetch_assoc($result);\n                    $html .= \"\n                        <div class=\\\"profile-info\\\">\n                            <h3>User Profile</h3>\n                            <p>User ID: {$row['user_id']}</p>\n                            <p>Name: {$row['first_name']} {$row['last_name']}</p>\n                            <p>Avatar: {$row['avatar']}</p>\n                            <!-- Hint: This token check isn't very secure... -->\n                        </div>\";\n                }\n            } else {\n                $html .= \"<p>No user found with ID: {$id}</p>\";\n            }\n        } else {\n            $html .= \"<p>Access denied. Valid token required. <!-- Try using token=user_token --></p>\";\n        }\n        \n        // Log access attempts\n        try {\n            // First check if the bac_log table exists\n            $check_table = \"SHOW TABLES LIKE 'bac_log'\";\n            $table_exists = mysqli_query($GLOBALS[\"___mysqli_ston\"], $check_table);\n            \n            if ($table_exists && mysqli_num_rows($table_exists) == 0) {\n                // Create the table if it doesn't exist\n                $create_table = \"CREATE TABLE IF NOT EXISTS bac_log (\n                    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\n                    user_id INT(6) NULL,\n                    target_id INT(6) NULL,\n                    ip_address VARCHAR(50) NULL,\n                    action VARCHAR(50) NULL,\n                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n                )\";\n                mysqli_query($GLOBALS[\"___mysqli_ston\"], $create_table);\n            }\n            \n            // Log the access attempt - only log numeric target_id\n            $ip = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];\n            $target_id = $user_exists ? $id : 0; // Use 0 for non-existent users\n            $log_query = \"INSERT INTO bac_log (user_id, target_id, ip_address) VALUES \n                        ({$current_user_id}, {$target_id}, '{$ip}')\";\n            mysqli_query($GLOBALS[\"___mysqli_ston\"], $log_query);\n        } catch (Exception $e) {\n            // Silently fail if logging doesn't work\n        }\n    }\n}\n?>",
+      "description": "DVWA bac - medium security level"
+    },
+    {
+      "snippet_id": "dvwa_008",
+      "source": "DVWA",
+      "language": "php",
+      "category": "auth_bypass",
+      "security_level": "high",
+      "vulnerability_type": "bac",
+      "file_path": "vulnerabilities/bac/source/high.php",
+      "file_size": 5083,
+      "code": "<?php\nif (!defined('DVWA_WEB_PAGE_TO_ROOT')) {\n    define('DVWA_WEB_PAGE_TO_ROOT', '../../../');\n}\n\n// Get current user's ID with prepared statement\n$query = \"SELECT user_id, role FROM users WHERE user = ? LIMIT 1\";\n$stmt = mysqli_prepare($GLOBALS[\"___mysqli_ston\"], $query);\n$currentUser = dvwaCurrentUser();\nmysqli_stmt_bind_param($stmt, \"s\", $currentUser);\n\nmysqli_stmt_execute($stmt);\n$result = mysqli_stmt_get_result($stmt);\n$user_info = ($result && mysqli_num_rows($result) > 0) ? mysqli_fetch_assoc($result) : ['user_id' => 0, 'role' => ''];\n$current_user_id = intval($user_info['user_id']);\n$role = $user_info['role'];\nmysqli_stmt_close($stmt);\n\n// Better access control (but still vulnerable to session fixation)\n$html = \"\";\nif (isset($_GET['action']) && isset($_GET['user_id'])) {\n    if (!preg_match('/^\\d+$/', $_GET['user_id'])) {\n        $html .= \"<p>Invalid user ID format. Please enter a number.</p>\";\n    } else {\n        $id = intval($_GET['user_id']);\n\n        // Check if user exists first using prepared statement\n        $check_query = \"SELECT user_id FROM users WHERE user_id = ? LIMIT 1\";\n        $check_stmt = mysqli_prepare($GLOBALS[\"___mysqli_ston\"], $check_query);\n        mysqli_stmt_bind_param($check_stmt, \"i\", $id);\n        mysqli_stmt_execute($check_stmt);\n        mysqli_stmt_store_result($check_stmt);\n        $user_exists = (mysqli_stmt_num_rows($check_stmt) > 0);\n        mysqli_stmt_close($check_stmt);\n\n        if (!$user_exists) {\n            $html .= \"<p>No user found with ID: {$id}</p>\";\n        } else {\n            // \"Secure\" session-based check (but vulnerable to session fixation)\n            if (isset($_SESSION['user_id'])) {\n                $session_id = intval($_SESSION['user_id']);\n\n                if ($id == $session_id) {\n                    // Access granted - using prepared statement\n                    $query = \"SELECT first_name, last_name, user_id, avatar FROM users WHERE user_id = ?\";\n                    $stmt = mysqli_prepare($GLOBALS[\"___mysqli_ston\"], $query);\n                    mysqli_stmt_bind_param($stmt, \"i\", $id);\n                    mysqli_stmt_execute($stmt);\n                    $result = mysqli_stmt_get_result($stmt);\n\n                    if ($result && mysqli_num_rows($result) > 0) {\n                        $row = mysqli_fetch_assoc($result);\n                        $html .= \"\n                            <div class=\\\"profile-info\\\">\n                                <h3>User Profile</h3>\n                                <p>User ID: \" . htmlspecialchars($row['user_id'], ENT_QUOTES, 'UTF-8') . \"</p>\n                                <p>Name: \" . htmlspecialchars($row['first_name'], ENT_QUOTES, 'UTF-8') . \" \" .\n                            htmlspecialchars($row['last_name'], ENT_QUOTES, 'UTF-8') . \"</p>\n                                <p>Avatar: \" . htmlspecialchars($row['avatar'], ENT_QUOTES, 'UTF-8') . \"</p>\n                                <!-- Hint: Session management is better, but still vulnerable... -->\n                            </div>\";\n                    }\n                    mysqli_stmt_close($stmt);\n                } else {\n                    $html .= \"<p>Access denied. You can only view your own profile.</p>\";\n                }\n            } else {\n                $html .= \"<p>Access denied. No user_id in session.</p>\";\n            }\n        }\n\n        // Log access attempts with prepared statement\n        try {\n            // First check if the bac_log table exists\n            $check_table = \"SHOW TABLES LIKE 'bac_log'\";\n            $table_exists = mysqli_query($GLOBALS[\"___mysqli_ston\"], $check_table);\n\n            if ($table_exists && mysqli_num_rows($table_exists) == 0) {\n                // Create the table if it doesn't exist\n                $create_table = \"CREATE TABLE IF NOT EXISTS bac_log (\n                    id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,\n                    user_id INT(6) NULL,\n                    target_id INT(6) NULL,\n                    ip_address VARCHAR(50) NULL,\n                    action VARCHAR(50) NULL,\n                    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n                )\";\n                mysqli_query($GLOBALS[\"___mysqli_ston\"], $create_table);\n            }\n\n            // Log the access attempt with prepared statement\n            $ip = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : $_SERVER['REMOTE_ADDR'];\n            $target_id = $user_exists ? $id : 0; // Use 0 for non-existent users\n\n            $log_query = \"INSERT INTO bac_log (user_id, target_id, ip_address) VALUES (?, ?, ?)\";\n            $log_stmt = mysqli_prepare($GLOBALS[\"___mysqli_ston\"], $log_query);\n            mysqli_stmt_bind_param($log_stmt, \"iis\", $current_user_id, $target_id, $ip);\n            mysqli_stmt_execute($log_stmt);\n            mysqli_stmt_close($log_stmt);\n        } catch (Exception $e) {\n            // Silently fail if logging doesn't work\n        }\n    }\n}\n\n// Set initial session if not exists\nif (!isset($_SESSION['user_id'])) {\n    $_SESSION['user_id'] = $current_user_id;\n}\n?>",
+      "description": "DVWA bac - high security level"
+    },
+    {
+      "snippet_id": "dvwa_009",
+      "source": "DVWA",
+      "language": "php",
+      "category": "auth_bypass",
+      "security_level": "low",
+      "vulnerability_type": "brute",
+      "file_path": "vulnerabilities/brute/source/low.php",
+      "file_size": 1028,
+      "code": "<?php\r\n\r\nif( isset( $_GET[ 'Login' ] ) ) {\r\n\t// Get username\r\n\t$user = $_GET[ 'username' ];\r\n\r\n\t// Get password\r\n\t$pass = $_GET[ 'password' ];\r\n\t$pass = md5( $pass );\r\n\r\n\t// Check the database\r\n\t$query  = \"SELECT * FROM `users` WHERE user = '$user' AND password = '$pass';\";\r\n\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $query ) or die( '<pre>' . ((is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_error($GLOBALS[\"___mysqli_ston\"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );\r\n\r\n\tif( $result && mysqli_num_rows( $result ) == 1 ) {\r\n\t\t// Get users details\r\n\t\t$row    = mysqli_fetch_assoc( $result );\r\n\t\t$avatar = $row[\"avatar\"];\r\n\r\n\t\t// Login successful\r\n\t\t$html .= \"<p>Welcome to the password protected area {$user}</p>\";\r\n\t\t$html .= \"<img src=\\\"{$avatar}\\\" />\";\r\n\t}\r\n\telse {\r\n\t\t// Login failed\r\n\t\t$html .= \"<pre><br />Username and/or password incorrect.</pre>\";\r\n\t}\r\n\r\n\t((is_null($___mysqli_res = mysqli_close($GLOBALS[\"___mysqli_ston\"]))) ? false : $___mysqli_res);\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA brute - low security level"
+    },
+    {
+      "snippet_id": "dvwa_010",
+      "source": "DVWA",
+      "language": "php",
+      "category": "auth_bypass",
+      "security_level": "medium",
+      "vulnerability_type": "brute",
+      "file_path": "vulnerabilities/brute/source/medium.php",
+      "file_size": 1631,
+      "code": "<?php\r\n\r\nif( isset( $_GET[ 'Login' ] ) ) {\r\n\t// Sanitise username input\r\n\t$user = $_GET[ 'username' ];\r\n\t$user = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $user ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\r\n\t// Sanitise password input\r\n\t$pass = $_GET[ 'password' ];\r\n\t$pass = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $pass ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\t$pass = md5( $pass );\r\n\r\n\t// Check the database\r\n\t$query  = \"SELECT * FROM `users` WHERE user = '$user' AND password = '$pass';\";\r\n\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $query ) or die( '<pre>' . ((is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_error($GLOBALS[\"___mysqli_ston\"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );\r\n\r\n\tif( $result && mysqli_num_rows( $result ) == 1 ) {\r\n\t\t// Get users details\r\n\t\t$row    = mysqli_fetch_assoc( $result );\r\n\t\t$avatar = $row[\"avatar\"];\r\n\r\n\t\t// Login successful\r\n\t\t$html .= \"<p>Welcome to the password protected area {$user}</p>\";\r\n\t\t$html .= \"<img src=\\\"{$avatar}\\\" />\";\r\n\t}\r\n\telse {\r\n\t\t// Login failed\r\n\t\tsleep( 2 );\r\n\t\t$html .= \"<pre><br />Username and/or password incorrect.</pre>\";\r\n\t}\r\n\r\n\t((is_null($___mysqli_res = mysqli_close($GLOBALS[\"___mysqli_ston\"]))) ? false : $___mysqli_res);\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA brute - medium security level"
+    },
+    {
+      "snippet_id": "dvwa_011",
+      "source": "DVWA",
+      "language": "php",
+      "category": "auth_bypass",
+      "security_level": "high",
+      "vulnerability_type": "brute",
+      "file_path": "vulnerabilities/brute/source/high.php",
+      "file_size": 1875,
+      "code": "<?php\r\n\r\nif( isset( $_GET[ 'Login' ] ) ) {\r\n\t// Check Anti-CSRF token\r\n\tcheckToken( $_REQUEST[ 'user_token' ], $_SESSION[ 'session_token' ], 'index.php' );\r\n\r\n\t// Sanitise username input\r\n\t$user = $_GET[ 'username' ];\r\n\t$user = stripslashes( $user );\r\n\t$user = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $user ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\r\n\t// Sanitise password input\r\n\t$pass = $_GET[ 'password' ];\r\n\t$pass = stripslashes( $pass );\r\n\t$pass = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $pass ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\t$pass = md5( $pass );\r\n\r\n\t// Check database\r\n\t$query  = \"SELECT * FROM `users` WHERE user = '$user' AND password = '$pass';\";\r\n\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $query ) or die( '<pre>' . ((is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_error($GLOBALS[\"___mysqli_ston\"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );\r\n\r\n\tif( $result && mysqli_num_rows( $result ) == 1 ) {\r\n\t\t// Get users details\r\n\t\t$row    = mysqli_fetch_assoc( $result );\r\n\t\t$avatar = $row[\"avatar\"];\r\n\r\n\t\t// Login successful\r\n\t\t$html .= \"<p>Welcome to the password protected area {$user}</p>\";\r\n\t\t$html .= \"<img src=\\\"{$avatar}\\\" />\";\r\n\t}\r\n\telse {\r\n\t\t// Login failed\r\n\t\tsleep( rand( 0, 3 ) );\r\n\t\t$html .= \"<pre><br />Username and/or password incorrect.</pre>\";\r\n\t}\r\n\r\n\t((is_null($___mysqli_res = mysqli_close($GLOBALS[\"___mysqli_ston\"]))) ? false : $___mysqli_res);\r\n}\r\n\r\n// Generate Anti-CSRF token\r\ngenerateSessionToken();\r\n\r\n?>\r\n",
+      "description": "DVWA brute - high security level"
+    },
+    {
+      "snippet_id": "dvwa_014",
+      "source": "DVWA",
+      "language": "php",
+      "category": "auth_bypass",
+      "security_level": "high",
+      "vulnerability_type": "captcha",
+      "file_path": "vulnerabilities/captcha/source/high.php",
+      "file_size": 1851,
+      "code": "<?php\r\n\r\nif( isset( $_POST[ 'Change' ] ) ) {\r\n\t// Hide the CAPTCHA form\r\n\t$hide_form = true;\r\n\r\n\t// Get input\r\n\t$pass_new  = $_POST[ 'password_new' ];\r\n\t$pass_conf = $_POST[ 'password_conf' ];\r\n\r\n\t// Check CAPTCHA from 3rd party\r\n\t$resp = recaptcha_check_answer(\r\n\t\t$_DVWA[ 'recaptcha_private_key' ],\r\n\t\t$_POST['g-recaptcha-response']\r\n\t);\r\n\r\n\tif (\r\n\t\t$resp || \r\n\t\t(\r\n\t\t\t$_POST[ 'g-recaptcha-response' ] == 'hidd3n_valu3'\r\n\t\t\t&& $_SERVER[ 'HTTP_USER_AGENT' ] == 'reCAPTCHA'\r\n\t\t)\r\n\t){\r\n\t\t// CAPTCHA was correct. Do both new passwords match?\r\n\t\tif ($pass_new == $pass_conf) {\r\n\t\t\t$pass_new = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $pass_new ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\t\t\t$pass_new = md5( $pass_new );\r\n\r\n\t\t\t// Update database\r\n\t\t\t$insert = \"UPDATE `users` SET password = '$pass_new' WHERE user = '\" . dvwaCurrentUser() . \"' LIMIT 1;\";\r\n\t\t\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $insert ) or die( '<pre>' . ((is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_error($GLOBALS[\"___mysqli_ston\"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );\r\n\r\n\t\t\t// Feedback for user\r\n\t\t\t$html .= \"<pre>Password Changed.</pre>\";\r\n\r\n\t\t} else {\r\n\t\t\t// Ops. Password mismatch\r\n\t\t\t$html     .= \"<pre>Both passwords must match.</pre>\";\r\n\t\t\t$hide_form = false;\r\n\t\t}\r\n\r\n\t} else {\r\n\t\t// What happens when the CAPTCHA was entered incorrectly\r\n\t\t$html     .= \"<pre><br />The CAPTCHA was incorrect. Please try again.</pre>\";\r\n\t\t$hide_form = false;\r\n\t\treturn;\r\n\t}\r\n\r\n\t((is_null($___mysqli_res = mysqli_close($GLOBALS[\"___mysqli_ston\"]))) ? false : $___mysqli_res);\r\n}\r\n\r\n// Generate Anti-CSRF token\r\ngenerateSessionToken();\r\n\r\n?>\r\n",
+      "description": "DVWA captcha - high security level"
+    },
+    {
+      "snippet_id": "dvwa_018",
+      "source": "DVWA",
+      "language": "php",
+      "category": "xss",
+      "security_level": "low",
+      "vulnerability_type": "csp",
+      "file_path": "vulnerabilities/csp/source/low.php",
+      "file_size": 1013,
+      "code": "<?php\n\n$headerCSP = \"Content-Security-Policy: script-src 'self' https://pastebin.com hastebin.com www.toptal.com example.com code.jquery.com https://ssl.google-analytics.com unpkg.com cdn.jsdelivr.net digi.ninja ;\"; // allows js from various trusted locations\n\nheader($headerCSP);\n\n# These might work if you can't create your own for some reason\n# https://cdn.jsdelivr.net/gh/digininja/csp_bypass/alert.js\n# https://unpkg.com/@digininja/csp_bypass@1.0.0/index.js\n\n?>\n<?php\nif (isset ($_POST['include'])) {\n$page[ 'body' ] .= \"\n\t<script src='\" . $_POST['include'] . \"'></script>\n\";\n}\n$page[ 'body' ] .= '\n<form name=\"csp\" method=\"POST\">\n\t<p>You can include scripts from external sources, examine the Content Security Policy and enter a URL to include here:</p>\n\t<input size=\"50\" type=\"text\" name=\"include\" value=\"\" id=\"include\" />\n\t<input type=\"submit\" value=\"Include\" />\n</form>\n<p>\n\tYou will probably need to do some reading up on what some of the domains allowed by the CSP do and how they can be used.\n</p>\n';\n",
+      "description": "DVWA csp - low security level",
+      "original_category": "other_injection"
+    },
+    {
+      "snippet_id": "dvwa_021",
+      "source": "DVWA",
+      "language": "php",
+      "category": "csrf",
+      "security_level": "low",
+      "vulnerability_type": "csrf",
+      "file_path": "vulnerabilities/csrf/source/low.php",
+      "file_size": 1249,
+      "code": "<?php\r\n\r\nif( isset( $_GET[ 'Change' ] ) ) {\r\n\t// Get input\r\n\t$pass_new  = $_GET[ 'password_new' ];\r\n\t$pass_conf = $_GET[ 'password_conf' ];\r\n\r\n\t// Do the passwords match?\r\n\tif( $pass_new == $pass_conf ) {\r\n\t\t// They do!\r\n\t\t$pass_new = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $pass_new ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\t\t$pass_new = md5( $pass_new );\r\n\r\n\t\t// Update the database\r\n\t\t$current_user = dvwaCurrentUser();\r\n\t\t$insert = \"UPDATE `users` SET password = '$pass_new' WHERE user = '\" . $current_user . \"';\";\r\n\t\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $insert ) or die( '<pre>' . ((is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_error($GLOBALS[\"___mysqli_ston\"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );\r\n\r\n\t\t// Feedback for the user\r\n\t\t$html .= \"<pre>Password Changed.</pre>\";\r\n\t}\r\n\telse {\r\n\t\t// Issue with passwords matching\r\n\t\t$html .= \"<pre>Passwords did not match.</pre>\";\r\n\t}\r\n\r\n\t((is_null($___mysqli_res = mysqli_close($GLOBALS[\"___mysqli_ston\"]))) ? false : $___mysqli_res);\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA csrf - low security level"
+    },
+    {
+      "snippet_id": "dvwa_022",
+      "source": "DVWA",
+      "language": "php",
+      "category": "csrf",
+      "security_level": "medium",
+      "vulnerability_type": "csrf",
+      "file_path": "vulnerabilities/csrf/source/medium.php",
+      "file_size": 1516,
+      "code": "<?php\r\n\r\nif( isset( $_GET[ 'Change' ] ) ) {\r\n\t// Checks to see where the request came from\r\n\tif( stripos( $_SERVER[ 'HTTP_REFERER' ] ,$_SERVER[ 'SERVER_NAME' ]) !== false ) {\r\n\t\t// Get input\r\n\t\t$pass_new  = $_GET[ 'password_new' ];\r\n\t\t$pass_conf = $_GET[ 'password_conf' ];\r\n\r\n\t\t// Do the passwords match?\r\n\t\tif( $pass_new == $pass_conf ) {\r\n\t\t\t// They do!\r\n\t\t\t$pass_new = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $pass_new ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\t\t\t$pass_new = md5( $pass_new );\r\n\r\n\t\t\t// Update the database\r\n\t\t\t$current_user = dvwaCurrentUser();\r\n\t\t\t$insert = \"UPDATE `users` SET password = '$pass_new' WHERE user = '\" . $current_user . \"';\";\r\n\t\t\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $insert ) or die( '<pre>' . ((is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_error($GLOBALS[\"___mysqli_ston\"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );\r\n\r\n\t\t\t// Feedback for the user\r\n\t\t\t$html .= \"<pre>Password Changed.</pre>\";\r\n\t\t}\r\n\t\telse {\r\n\t\t\t// Issue with passwords matching\r\n\t\t\t$html .= \"<pre>Passwords did not match.</pre>\";\r\n\t\t}\r\n\t}\r\n\telse {\r\n\t\t// Didn't come from a trusted source\r\n\t\t$html .= \"<pre>That request didn't look correct.</pre>\";\r\n\t}\r\n\r\n\t((is_null($___mysqli_res = mysqli_close($GLOBALS[\"___mysqli_ston\"]))) ? false : $___mysqli_res);\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA csrf - medium security level"
+    },
+    {
+      "snippet_id": "dvwa_025",
+      "source": "DVWA",
+      "language": "php",
+      "category": "command_injection",
+      "security_level": "medium",
+      "vulnerability_type": "exec",
+      "file_path": "vulnerabilities/exec/source/medium.php",
+      "file_size": 630,
+      "code": "<?php\r\n\r\nif( isset( $_POST[ 'Submit' ]  ) ) {\r\n\t// Get input\r\n\t$target = $_REQUEST[ 'ip' ];\r\n\r\n\t// Set blacklist\r\n\t$substitutions = array(\r\n\t\t'&&' => '',\r\n\t\t';'  => '',\r\n\t);\r\n\r\n\t// Remove any of the characters in the array (blacklist).\r\n\t$target = str_replace( array_keys( $substitutions ), $substitutions, $target );\r\n\r\n\t// Determine OS and execute the ping command.\r\n\tif( stristr( php_uname( 's' ), 'Windows NT' ) ) {\r\n\t\t// Windows\r\n\t\t$cmd = shell_exec( 'ping  ' . $target );\r\n\t}\r\n\telse {\r\n\t\t// *nix\r\n\t\t$cmd = shell_exec( 'ping  -c 4 ' . $target );\r\n\t}\r\n\r\n\t// Feedback for the end user\r\n\t$html .= \"<pre>{$cmd}</pre>\";\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA exec - medium security level"
+    },
+    {
+      "snippet_id": "dvwa_026",
+      "source": "DVWA",
+      "language": "php",
+      "category": "command_injection",
+      "security_level": "high",
+      "vulnerability_type": "exec",
+      "file_path": "vulnerabilities/exec/source/high.php",
+      "file_size": 741,
+      "code": "<?php\r\n\r\nif( isset( $_POST[ 'Submit' ]  ) ) {\r\n\t// Get input\r\n\t$target = trim($_REQUEST[ 'ip' ]);\r\n\r\n\t// Set blacklist\r\n\t$substitutions = array(\r\n\t\t'||' => '',\r\n\t\t'&'  => '',\r\n\t\t';'  => '',\r\n\t\t'| ' => '',\r\n\t\t'-'  => '',\r\n\t\t'$'  => '',\r\n\t\t'('  => '',\r\n\t\t')'  => '',\r\n\t\t'`'  => '',\r\n\t);\r\n\r\n\t// Remove any of the characters in the array (blacklist).\r\n\t$target = str_replace( array_keys( $substitutions ), $substitutions, $target );\r\n\r\n\t// Determine OS and execute the ping command.\r\n\tif( stristr( php_uname( 's' ), 'Windows NT' ) ) {\r\n\t\t// Windows\r\n\t\t$cmd = shell_exec( 'ping  ' . $target );\r\n\t}\r\n\telse {\r\n\t\t// *nix\r\n\t\t$cmd = shell_exec( 'ping  -c 4 ' . $target );\r\n\t}\r\n\r\n\t// Feedback for the end user\r\n\t$html .= \"<pre>{$cmd}</pre>\";\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA exec - high security level"
+    },
+    {
+      "snippet_id": "dvwa_033",
+      "source": "DVWA",
+      "language": "php",
+      "category": "sql_injection",
+      "security_level": "low",
+      "vulnerability_type": "sqli",
+      "file_path": "vulnerabilities/sqli/source/low.php",
+      "file_size": 1650,
+      "code": "<?php\r\n\r\nif( isset( $_REQUEST[ 'Submit' ] ) ) {\r\n\t// Get input\r\n\t$id = $_REQUEST[ 'id' ];\r\n\r\n\tswitch ($_DVWA['SQLI_DB']) {\r\n\t\tcase MYSQL:\r\n\t\t\t// Check database\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = '$id';\";\r\n\t\t\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $query ) or die( '<pre>' . ((is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_error($GLOBALS[\"___mysqli_ston\"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );\r\n\r\n\t\t\t// Get results\r\n\t\t\twhile( $row = mysqli_fetch_assoc( $result ) ) {\r\n\t\t\t\t// Get values\r\n\t\t\t\t$first = $row[\"first_name\"];\r\n\t\t\t\t$last  = $row[\"last_name\"];\r\n\r\n\t\t\t\t// Feedback for end user\r\n\t\t\t\t$html .= \"<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>\";\r\n\t\t\t}\r\n\r\n\t\t\tmysqli_close($GLOBALS[\"___mysqli_ston\"]);\r\n\t\t\tbreak;\r\n\t\tcase SQLITE:\r\n\t\t\tglobal $sqlite_db_connection;\r\n\r\n\t\t\t#$sqlite_db_connection = new SQLite3($_DVWA['SQLITE_DB']);\r\n\t\t\t#$sqlite_db_connection->enableExceptions(true);\r\n\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = '$id';\";\r\n\t\t\t#print $query;\r\n\t\t\ttry {\r\n\t\t\t\t$results = $sqlite_db_connection->query($query);\r\n\t\t\t} catch (Exception $e) {\r\n\t\t\t\techo 'Caught exception: ' . $e->getMessage();\r\n\t\t\t\texit();\r\n\t\t\t}\r\n\r\n\t\t\tif ($results) {\r\n\t\t\t\twhile ($row = $results->fetchArray()) {\r\n\t\t\t\t\t// Get values\r\n\t\t\t\t\t$first = $row[\"first_name\"];\r\n\t\t\t\t\t$last  = $row[\"last_name\"];\r\n\r\n\t\t\t\t\t// Feedback for end user\r\n\t\t\t\t\t$html .= \"<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>\";\r\n\t\t\t\t}\r\n\t\t\t} else {\r\n\t\t\t\techo \"Error in fetch \".$sqlite_db->lastErrorMsg();\r\n\t\t\t}\r\n\t\t\tbreak;\r\n\t} \r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA sqli - low security level"
+    },
+    {
+      "snippet_id": "dvwa_034",
+      "source": "DVWA",
+      "language": "php",
+      "category": "sql_injection",
+      "security_level": "medium",
+      "vulnerability_type": "sqli",
+      "file_path": "vulnerabilities/sqli/source/medium.php",
+      "file_size": 1952,
+      "code": "<?php\r\n\r\nif( isset( $_POST[ 'Submit' ] ) ) {\r\n\t// Get input\r\n\t$id = $_POST[ 'id' ];\r\n\r\n\t$id = mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"], $id);\r\n\r\n\tswitch ($_DVWA['SQLI_DB']) {\r\n\t\tcase MYSQL:\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = $id;\";\r\n\t\t\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"], $query) or die( '<pre>' . mysqli_error($GLOBALS[\"___mysqli_ston\"]) . '</pre>' );\r\n\r\n\t\t\t// Get results\r\n\t\t\twhile( $row = mysqli_fetch_assoc( $result ) ) {\r\n\t\t\t\t// Display values\r\n\t\t\t\t$first = $row[\"first_name\"];\r\n\t\t\t\t$last  = $row[\"last_name\"];\r\n\r\n\t\t\t\t// Feedback for end user\r\n\t\t\t\t$html .= \"<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>\";\r\n\t\t\t}\r\n\t\t\tbreak;\r\n\t\tcase SQLITE:\r\n\t\t\tglobal $sqlite_db_connection;\r\n\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = $id;\";\r\n\t\t\t#print $query;\r\n\t\t\ttry {\r\n\t\t\t\t$results = $sqlite_db_connection->query($query);\r\n\t\t\t} catch (Exception $e) {\r\n\t\t\t\techo 'Caught exception: ' . $e->getMessage();\r\n\t\t\t\texit();\r\n\t\t\t}\r\n\r\n\t\t\tif ($results) {\r\n\t\t\t\twhile ($row = $results->fetchArray()) {\r\n\t\t\t\t\t// Get values\r\n\t\t\t\t\t$first = $row[\"first_name\"];\r\n\t\t\t\t\t$last  = $row[\"last_name\"];\r\n\r\n\t\t\t\t\t// Feedback for end user\r\n\t\t\t\t\t$html .= \"<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>\";\r\n\t\t\t\t}\r\n\t\t\t} else {\r\n\t\t\t\techo \"Error in fetch \".$sqlite_db->lastErrorMsg();\r\n\t\t\t}\r\n\t\t\tbreak;\r\n\t}\r\n}\r\n\r\n// This is used later on in the index.php page\r\n// Setting it here so we can close the database connection in here like in the rest of the source scripts\r\n$query  = \"SELECT COUNT(*) FROM users;\";\r\n$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $query ) or die( '<pre>' . ((is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_error($GLOBALS[\"___mysqli_ston\"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );\r\n$number_of_rows = mysqli_fetch_row( $result )[0];\r\n\r\nmysqli_close($GLOBALS[\"___mysqli_ston\"]);\r\n?>\r\n",
+      "description": "DVWA sqli - medium security level"
+    },
+    {
+      "snippet_id": "dvwa_035",
+      "source": "DVWA",
+      "language": "php",
+      "category": "sql_injection",
+      "security_level": "high",
+      "vulnerability_type": "sqli",
+      "file_path": "vulnerabilities/sqli/source/high.php",
+      "file_size": 1459,
+      "code": "<?php\r\n\r\nif( isset( $_SESSION [ 'id' ] ) ) {\r\n\t// Get input\r\n\t$id = $_SESSION[ 'id' ];\r\n\r\n\tswitch ($_DVWA['SQLI_DB']) {\r\n\t\tcase MYSQL:\r\n\t\t\t// Check database\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = '$id' LIMIT 1;\";\r\n\t\t\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"], $query ) or die( '<pre>Something went wrong.</pre>' );\r\n\r\n\t\t\t// Get results\r\n\t\t\twhile( $row = mysqli_fetch_assoc( $result ) ) {\r\n\t\t\t\t// Get values\r\n\t\t\t\t$first = $row[\"first_name\"];\r\n\t\t\t\t$last  = $row[\"last_name\"];\r\n\r\n\t\t\t\t// Feedback for end user\r\n\t\t\t\t$html .= \"<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>\";\r\n\t\t\t}\r\n\r\n\t\t\t((is_null($___mysqli_res = mysqli_close($GLOBALS[\"___mysqli_ston\"]))) ? false : $___mysqli_res);\t\t\r\n\t\t\tbreak;\r\n\t\tcase SQLITE:\r\n\t\t\tglobal $sqlite_db_connection;\r\n\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = '$id' LIMIT 1;\";\r\n\t\t\t#print $query;\r\n\t\t\ttry {\r\n\t\t\t\t$results = $sqlite_db_connection->query($query);\r\n\t\t\t} catch (Exception $e) {\r\n\t\t\t\techo 'Caught exception: ' . $e->getMessage();\r\n\t\t\t\texit();\r\n\t\t\t}\r\n\r\n\t\t\tif ($results) {\r\n\t\t\t\twhile ($row = $results->fetchArray()) {\r\n\t\t\t\t\t// Get values\r\n\t\t\t\t\t$first = $row[\"first_name\"];\r\n\t\t\t\t\t$last  = $row[\"last_name\"];\r\n\r\n\t\t\t\t\t// Feedback for end user\r\n\t\t\t\t\t$html .= \"<pre>ID: {$id}<br />First name: {$first}<br />Surname: {$last}</pre>\";\r\n\t\t\t\t}\r\n\t\t\t} else {\r\n\t\t\t\techo \"Error in fetch \".$sqlite_db->lastErrorMsg();\r\n\t\t\t}\r\n\t\t\tbreak;\r\n\t}\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA sqli - high security level"
+    },
+    {
+      "snippet_id": "dvwa_036",
+      "source": "DVWA",
+      "language": "php",
+      "category": "sql_injection",
+      "security_level": "low",
+      "vulnerability_type": "sqli_blind",
+      "file_path": "vulnerabilities/sqli_blind/source/low.php",
+      "file_size": 1413,
+      "code": "<?php\r\n\r\nif( isset( $_GET[ 'Submit' ] ) ) {\r\n\t// Get input\r\n\t$id = $_GET[ 'id' ];\r\n\t$exists = false;\r\n\r\n\tswitch ($_DVWA['SQLI_DB']) {\r\n\t\tcase MYSQL:\r\n\t\t\t// Check database\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = '$id';\";\r\n\t\t\ttry {\r\n\t\t\t\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $query ); // Removed 'or die' to suppress mysql errors\r\n\t\t\t} catch (Exception $e) {\r\n\t\t\t\tprint \"There was an error.\";\r\n\t\t\t\texit;\r\n\t\t\t}\r\n\r\n\t\t\t$exists = false;\r\n\t\t\tif ($result !== false) {\r\n\t\t\t\ttry {\r\n\t\t\t\t\t$exists = (mysqli_num_rows( $result ) > 0);\r\n\t\t\t\t} catch(Exception $e) {\r\n\t\t\t\t\t$exists = false;\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\t((is_null($___mysqli_res = mysqli_close($GLOBALS[\"___mysqli_ston\"]))) ? false : $___mysqli_res);\r\n\t\t\tbreak;\r\n\t\tcase SQLITE:\r\n\t\t\tglobal $sqlite_db_connection;\r\n\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = '$id';\";\r\n\t\t\ttry {\r\n\t\t\t\t$results = $sqlite_db_connection->query($query);\r\n\t\t\t\t$row = $results->fetchArray();\r\n\t\t\t\t$exists = $row !== false;\r\n\t\t\t} catch(Exception $e) {\r\n\t\t\t\t$exists = false;\r\n\t\t\t}\r\n\r\n\t\t\tbreak;\r\n\t}\r\n\r\n\tif ($exists) {\r\n\t\t// Feedback for end user\r\n\t\t$html .= '<pre>User ID exists in the database.</pre>';\r\n\t} else {\r\n\t\t// User wasn't found, so the page wasn't!\r\n\t\theader( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found' );\r\n\r\n\t\t// Feedback for end user\r\n\t\t$html .= '<pre>User ID is MISSING from the database.</pre>';\r\n\t}\r\n\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA sqli_blind - low security level"
+    },
+    {
+      "snippet_id": "dvwa_037",
+      "source": "DVWA",
+      "language": "php",
+      "category": "sql_injection",
+      "security_level": "medium",
+      "vulnerability_type": "sqli_blind",
+      "file_path": "vulnerabilities/sqli_blind/source/medium.php",
+      "file_size": 1527,
+      "code": "<?php\r\n\r\nif( isset( $_POST[ 'Submit' ]  ) ) {\r\n\t// Get input\r\n\t$id = $_POST[ 'id' ];\r\n\t$exists = false;\r\n\r\n\tswitch ($_DVWA['SQLI_DB']) {\r\n\t\tcase MYSQL:\r\n\t\t\t$id = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $id ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\r\n\t\t\t// Check database\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = $id;\";\r\n\t\t\ttry {\r\n\t\t\t\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $query ); // Removed 'or die' to suppress mysql errors\r\n\t\t\t} catch (Exception $e) {\r\n\t\t\t\tprint \"There was an error.\";\r\n\t\t\t\texit;\r\n\t\t\t}\r\n\r\n\t\t\t$exists = false;\r\n\t\t\tif ($result !== false) {\r\n\t\t\t\ttry {\r\n\t\t\t\t\t$exists = (mysqli_num_rows( $result ) > 0); // The '@' character suppresses errors\r\n\t\t\t\t} catch(Exception $e) {\r\n\t\t\t\t\t$exists = false;\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t\t\r\n\t\t\tbreak;\r\n\t\tcase SQLITE:\r\n\t\t\tglobal $sqlite_db_connection;\r\n\t\t\t\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = $id;\";\r\n\t\t\ttry {\r\n\t\t\t\t$results = $sqlite_db_connection->query($query);\r\n\t\t\t\t$row = $results->fetchArray();\r\n\t\t\t\t$exists = $row !== false;\r\n\t\t\t} catch(Exception $e) {\r\n\t\t\t\t$exists = false;\r\n\t\t\t}\r\n\t\t\tbreak;\r\n\t}\r\n\r\n\tif ($exists) {\r\n\t\t// Feedback for end user\r\n\t\t$html .= '<pre>User ID exists in the database.</pre>';\r\n\t} else {\r\n\t\t// Feedback for end user\r\n\t\t$html .= '<pre>User ID is MISSING from the database.</pre>';\r\n\t}\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA sqli_blind - medium security level"
+    },
+    {
+      "snippet_id": "dvwa_038",
+      "source": "DVWA",
+      "language": "php",
+      "category": "sql_injection",
+      "security_level": "high",
+      "vulnerability_type": "sqli_blind",
+      "file_path": "vulnerabilities/sqli_blind/source/high.php",
+      "file_size": 1566,
+      "code": "<?php\r\n\r\nif( isset( $_COOKIE[ 'id' ] ) ) {\r\n\t// Get input\r\n\t$id = $_COOKIE[ 'id' ];\r\n\t$exists = false;\r\n\r\n\tswitch ($_DVWA['SQLI_DB']) {\r\n\t\tcase MYSQL:\r\n\t\t\t// Check database\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = '$id' LIMIT 1;\";\r\n\t\t\ttry {\r\n\t\t\t\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $query ); // Removed 'or die' to suppress mysql errors\r\n\t\t\t} catch (Exception $e) {\r\n\t\t\t\t$result = false;\r\n\t\t\t}\r\n\r\n\t\t\t$exists = false;\r\n\t\t\tif ($result !== false) {\r\n\t\t\t\t// Get results\r\n\t\t\t\ttry {\r\n\t\t\t\t\t$exists = (mysqli_num_rows( $result ) > 0); // The '@' character suppresses errors\r\n\t\t\t\t} catch(Exception $e) {\r\n\t\t\t\t\t$exists = false;\r\n\t\t\t\t}\r\n\t\t\t}\r\n\r\n\t\t\t((is_null($___mysqli_res = mysqli_close($GLOBALS[\"___mysqli_ston\"]))) ? false : $___mysqli_res);\r\n\t\t\tbreak;\r\n\t\tcase SQLITE:\r\n\t\t\tglobal $sqlite_db_connection;\r\n\r\n\t\t\t$query  = \"SELECT first_name, last_name FROM users WHERE user_id = '$id' LIMIT 1;\";\r\n\t\t\ttry {\r\n\t\t\t\t$results = $sqlite_db_connection->query($query);\r\n\t\t\t\t$row = $results->fetchArray();\r\n\t\t\t\t$exists = $row !== false;\r\n\t\t\t} catch(Exception $e) {\r\n\t\t\t\t$exists = false;\r\n\t\t\t}\r\n\r\n\t\t\tbreak;\r\n\t}\r\n\r\n\tif ($exists) {\r\n\t\t// Feedback for end user\r\n\t\t$html .= '<pre>User ID exists in the database.</pre>';\r\n\t}\r\n\telse {\r\n\t\t// Might sleep a random amount\r\n\t\tif( rand( 0, 5 ) == 3 ) {\r\n\t\t\tsleep( rand( 2, 4 ) );\r\n\t\t}\r\n\r\n\t\t// User wasn't found, so the page wasn't!\r\n\t\theader( $_SERVER[ 'SERVER_PROTOCOL' ] . ' 404 Not Found' );\r\n\r\n\t\t// Feedback for end user\r\n\t\t$html .= '<pre>User ID is MISSING from the database.</pre>';\r\n\t}\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA sqli_blind - high security level"
+    },
+    {
+      "snippet_id": "dvwa_050",
+      "source": "DVWA",
+      "language": "php",
+      "category": "xss",
+      "security_level": "medium",
+      "vulnerability_type": "xss_s",
+      "file_path": "vulnerabilities/xss_s/source/medium.php",
+      "file_size": 1311,
+      "code": "<?php\r\n\r\nif( isset( $_POST[ 'btnSign' ] ) ) {\r\n\t// Get input\r\n\t$message = trim( $_POST[ 'mtxMessage' ] );\r\n\t$name    = trim( $_POST[ 'txtName' ] );\r\n\r\n\t// Sanitize message input\r\n\t$message = strip_tags( addslashes( $message ) );\r\n\t$message = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $message ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\t$message = htmlspecialchars( $message );\r\n\r\n\t// Sanitize name input\r\n\t$name = str_replace( '<script>', '', $name );\r\n\t$name = ((isset($GLOBALS[\"___mysqli_ston\"]) && is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_real_escape_string($GLOBALS[\"___mysqli_ston\"],  $name ) : ((trigger_error(\"[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.\", E_USER_ERROR)) ? \"\" : \"\"));\r\n\r\n\t// Update database\r\n\t$query  = \"INSERT INTO guestbook ( comment, name ) VALUES ( '$message', '$name' );\";\r\n\t$result = mysqli_query($GLOBALS[\"___mysqli_ston\"],  $query ) or die( '<pre>' . ((is_object($GLOBALS[\"___mysqli_ston\"])) ? mysqli_error($GLOBALS[\"___mysqli_ston\"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)) . '</pre>' );\r\n\r\n\t//mysql_close();\r\n}\r\n\r\n?>\r\n",
+      "description": "DVWA xss_s - medium security level"
+    }
+  ],
+  "cleaning_summary": {
+    "removed_by_reason": {
+      "Low PHP code ratio (mostly HTML/JavaScript)": 27,
+      "Category removed (cryptography)": 3,
+      "Effective code size too small (<200 bytes)": 2
+    },
+    "recategorized": {
+      "csp: other_injection → xss": 1
+    }
+  },
+  "statistics": {
+    "by_category": {
+      "auth_bypass": 7,
+      "xss": 2,
+      "csrf": 2,
+      "command_injection": 2,
+      "sql_injection": 6
+    },
+    "by_security_level": {
+      "low": 6,
+      "medium": 7,
+      "high": 6
+    },
+    "by_vuln_type": {
+      "bac": 3,
+      "brute": 3,
+      "captcha": 1,
+      "csp": 1,
+      "csrf": 2,
+      "exec": 2,
+      "sqli": 3,
+      "sqli_blind": 3,
+      "xss_s": 1
+    }
+  }
+}

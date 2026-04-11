@@ -1,0 +1,49 @@
+{
+  "extraction_date": "2026-04-11T11:55:17.537462",
+  "source": "WebGoat",
+  "github_repo": "WebGoat/WebGoat",
+  "github_branch": "main",
+  "total_snippets": 69,
+  "skipped_count": 59,
+  "skip_reasons": {
+    "too_small": 57,
+    "validation_boilerplate": 1,
+    "recategorization_removed": 1
+  },
+  "min_file_size": 1800,
+  "min_quality_score": 0.4,
+  "language": "java",
+  "category_breakdown": {
+    "auth_bypass": 25,
+    "other_injection": 10,
+    "csrf": 3,
+    "deserialization": 1,
+    "path_traversal": 5,
+    "sql_injection": 14,
+    "ssrf": 2,
+    "xss": 5,
+    "xxe": 4
+  },
+  "lesson_type_breakdown": {
+    "other": 41,
+    "assignment": 13,
+    "advanced": 5,
+    "introduction": 9,
+    "lesson": 1
+  },
+  "with_vulnerable_patterns": 58,
+  "average_quality_score": 0.86,
+  "cleaning_applied": true,
+  "cleaning_rules": {
+    "boilerplate_detection": true,
+    "quality_score_filter": 0.4,
+    "recategorized": [
+      "bypassrestrictions \u2192 auth_bypass",
+      "clientsidefiltering \u2192 auth_bypass"
+    ],
+    "removed_if_no_patterns": [
+      "other_injection"
+    ]
+  },
+  "notes": "Files in mitigation/ and secure/ subdirectories excluded. Validation boilerplate detected and skipped inline. Quality score < 0.4 skipped. other_injection recategorized or removed. Downloaded via GitHub API + raw URLs."
+}

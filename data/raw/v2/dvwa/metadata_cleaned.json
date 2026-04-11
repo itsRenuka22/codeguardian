@@ -1,0 +1,55 @@
+{
+  "cleaning_date": "2026-04-11T11:57:03.340336",
+  "source": "DVWA",
+  "original_count": 51,
+  "cleaned_count": 19,
+  "removed_count": 32,
+  "min_php_ratio": 0.2,
+  "min_effective_size": 200,
+  "language": "php",
+  "category_breakdown": {
+    "auth_bypass": 7,
+    "xss": 2,
+    "csrf": 2,
+    "command_injection": 2,
+    "sql_injection": 6
+  },
+  "level_breakdown": {
+    "low": 6,
+    "medium": 7,
+    "high": 6
+  },
+  "vuln_type_breakdown": {
+    "bac": 3,
+    "brute": 3,
+    "captcha": 1,
+    "csp": 1,
+    "csrf": 2,
+    "exec": 2,
+    "sqli": 3,
+    "sqli_blind": 3,
+    "xss_s": 1
+  },
+  "cleaning_applied": true,
+  "cleaning_rules": {
+    "recategorized": {
+      "csp": "xss",
+      "javascript": "xss"
+    },
+    "removed_categories": [
+      "cryptography"
+    ],
+    "content_reviewed": [
+      "api",
+      "open_redirect"
+    ]
+  },
+  "removed_by_reason": {
+    "Low PHP code ratio (mostly HTML/JavaScript)": 27,
+    "Category removed (cryptography)": 3,
+    "Effective code size too small (<200 bytes)": 2
+  },
+  "recategorized": {
+    "csp: other_injection \u2192 xss": 1
+  }
+}

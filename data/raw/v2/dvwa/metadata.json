@@ -1,0 +1,52 @@
+{
+  "extraction_date": "2026-04-11T11:25:48.793837",
+  "source": "DVWA",
+  "github_repo": "digininja/DVWA",
+  "total_snippets": 51,
+  "skipped_count": 6,
+  "min_file_size": 200,
+  "security_levels": [
+    "low",
+    "medium",
+    "high"
+  ],
+  "language": "php",
+  "category_breakdown": {
+    "other_injection": 13,
+    "auth_bypass": 13,
+    "csrf": 3,
+    "command_injection": 3,
+    "path_traversal": 2,
+    "sql_injection": 6,
+    "file_upload": 3,
+    "xss": 8
+  },
+  "level_breakdown": {
+    "low": 16,
+    "medium": 17,
+    "high": 18
+  },
+  "vuln_type_breakdown": {
+    "api": 3,
+    "authbypass": 2,
+    "bac": 3,
+    "brute": 3,
+    "captcha": 3,
+    "cryptography": 3,
+    "csp": 3,
+    "csrf": 3,
+    "exec": 3,
+    "fi": 2,
+    "javascript": 1,
+    "open_redirect": 3,
+    "sqli": 3,
+    "sqli_blind": 3,
+    "upload": 3,
+    "weak_id": 2,
+    "xss_d": 2,
+    "xss_r": 3,
+    "xss_s": 3
+  },
+  "cleaning_applied": false,
+  "notes": "impossible.php skipped (secure reference implementation). Files downloaded directly from GitHub."
+}
