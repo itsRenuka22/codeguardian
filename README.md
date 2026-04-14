@@ -56,7 +56,9 @@ Our dataset covers 12 types of vulnerabilities: SQL Injection, Cross-Site Script
 
 
 
-System Architecture
+## System Architecture
+
+```
 ┌─────────────────────────────────────────────────────────────┐
 │                       USER INTERFACE                        │
 │              (Web UI - Upload & View Results)               │
@@ -116,6 +118,7 @@ System Architecture
 │  CVE Database: 673 records                                  │
 │  OWASP Docs: 26 prevention guides                          │
 └─────────────────────────────────────────────────────────────┘
+```
 
 How It Works
 User uploads code through web interface
