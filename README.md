@@ -1,10 +1,10 @@
-# CodeGuardian 🛡️
+# CodeGuardian
 
 **AI-Powered Security Code Review System**
 
-An intelligent system that analyzes code for security vulnerabilities, explains them clearly, and provides fixes with professional references (OWASP, CWE, CVE).
+An intelligent system that analyzes code for security vulnerabilities using a GraphRAG-powered agent with a Planner → Executor → Critic loop, persistent caching, and professional references (OWASP, CWE, CVE).
 
-## 👥 Team Members
+## Team Members
 
 | Name | SJSU ID | Email |
 |------|---------|-------|
@@ -12,276 +12,296 @@ An intelligent system that analyzes code for security vulnerabilities, explains 
 | Ekant Kapgate | 015945761 | ekant.kapgate@sjsu.edu |
 | Viswa Surya Kumar Suvvada | 018316532 | viswasuryakumar.suvvada@sjsu.edu |
 
-**Course:** CMPE258 - Deep Learning  
+**Course:** CMPE258 - Deep Learning
 **Project Type:** LLMs + AI Agent System (Option 2)
 
-## ❓ What Problem Are We Solving?
-### The Problem:
+---
+
+## Problem Statement
+
 - Security vulnerabilities cost companies billions annually
-- Manual code review is slow and expensive
-- Existing tools give too many false alarms or unclear results
+- Manual code review is slow, expensive, and inconsistent
+- Existing static analysis tools produce too many false positives and lack contextual explanation
 
-### Our Solution:
-CodeGuardian uses AI to automatically:
-- Find security vulnerabilities in code
-- Explain why they're dangerous
-- Show how to fix them
-- Provide professional references (OWASP, CWE, CVE)
+**CodeGuardian** uses a GraphRAG + agent architecture to automatically detect vulnerabilities, explain their impact, and surface actionable fixes with authoritative citations.
 
-### Example:
-```php
-// User uploads this code:
-$id = $_GET['id'];
-$query = "SELECT * FROM users WHERE id = '$id'";
+---
 
-// CodeGuardian finds:
-// ⚠️ SQL Injection (CRITICAL)
-// 📍 Line 2: User input in SQL query
-// 💡 Fix: Use prepared statements
-// 📖 Reference: CWE-89, OWASP A03:2021
+## Project Progress
+
+| Phase | Description | Status |
+|-------|-------------|--------|
+| 1 | Data Collection & Preparation | Done |
+| 2 | Entity Extraction | Done |
+| 3 | Graph Construction (Neo4j / NetworkX) | Done |
+| 4 | Vector Indexing (ChromaDB + all-MiniLM-L6-v2) | Done |
+| 5 | Hybrid Querier (graph + vector) | Done |
+| 6 | Agent Architecture (Planner / Executor / Critic / Memory) | Done |
+| 7 | Multi-Model Testing (Claude / GPT-4 / Llama) | Pending |
+| 8 | UI Development (FastAPI + React) | Pending |
+| 9 | Comprehensive Evaluation & Report | Pending |
+
+---
+
+## System Architecture
+
+```
+┌──────────────────────────────────────────────────────────────┐
+│                        USER INTERFACE                        │
+│               (Web UI / CLI — file or inline code)           │
+└──────────────────────────────────────────────────────────────┘
+                              ↓
+┌──────────────────────────────────────────────────────────────┐
+│                       AI AGENT LAYER                         │
+│                                                              │
+│  ┌───────────┐   ┌───────────┐   ┌───────────┐             │
+│  │  PLANNER  │ → │ EXECUTOR  │ → │  CRITIC   │             │
+│  │           │   │           │   │           │             │
+│  │ Detects   │   │ Runs all  │   │ Scores    │             │
+│  │ language  │   │ queries   │   │ confidence│             │
+│  │ + vuln    │   │ dedupes   │   │ decides   │             │
+│  │ hints;    │   │ & ranks   │   │ retry or  │             │
+│  │ builds    │   │ results   │   │ accept    │             │
+│  │ query     │   │           │   │           │             │
+│  │ plan      │   │           │   │           │             │
+│  └───────────┘   └───────────┘   └───────────┘             │
+│                        ↑ retry if low confidence             │
+│              ┌──────────────────────┐                       │
+│              │   MEMORY (SHA-256    │                       │
+│              │   JSON cache)        │                       │
+│              └──────────────────────┘                       │
+└──────────────────────────────────────────────────────────────┘
+                              ↓
+┌──────────────────────────────────────────────────────────────┐
+│                      GRAPHRAG LAYER                          │
+│                                                              │
+│  ┌─────────────────────┐    ┌─────────────────────┐        │
+│  │   GRAPH DATABASE    │    │   VECTOR DATABASE   │        │
+│  │  Neo4j / NetworkX   │    │     ChromaDB        │        │
+│  │                     │    │                     │        │
+│  │  369 nodes          │    │  260 embeddings     │        │
+│  │  610 relationships  │    │  all-MiniLM-L6-v2   │        │
+│  │                     │    │  (local, no API key)│        │
+│  └─────────────────────┘    └─────────────────────┘        │
+│                                                              │
+│  Hybrid search → similar code + CWE + OWASP + fix patterns  │
+└──────────────────────────────────────────────────────────────┘
+                              ↓
+┌──────────────────────────────────────────────────────────────┐
+│                      DATA FOUNDATION                         │
+│  260 code examples  |  65 eval cases  |  673 CVE records    │
+│  26 OWASP docs      |  12 vuln types  |  citation map       │
+└──────────────────────────────────────────────────────────────┘
 ```
 
+---
 
-## 📊 Dataset
-
-We collected data from 7 different sources to train our system:
+## Dataset
 
 ### Code Examples (260 total)
 
-| Source | Files | Language | Purpose |
-|--------|-------|----------|---------|
+| Source | Count | Language | Notes |
+|--------|-------|----------|-------|
 | DVWA | 19 | PHP | Educational web security examples |
 | OWASP WebGoat | 69 | Java | Official OWASP training lessons |
-| OWASP Benchmark | 50 | Java | Test cases with known answers |
-| Exploit-DB | 159 | Multi | Real-world attack code |
-| GitHub Issues | 10 | Various | Production bugs from real projects |
+| OWASP Benchmark | 50 | Java | Test cases with known ground truth |
+| Exploit-DB | 109 | Multi | Real-world exploit code |
+| GitHub Issues | 13 | Various | Production bugs from open-source projects |
 
 ### Reference Data
 
 | Source | Count | Purpose |
 |--------|-------|---------|
-| CVE Database | 673 records | Real vulnerability reports for citations |
+| CVE Database | 673 records | Real vulnerability citations |
 | OWASP Docs | 26 pages | Official prevention guides |
 
-### Vulnerability Coverage
+### Vulnerability Types Covered (12)
 
-Our dataset covers 12 types of vulnerabilities:
-- SQL Injection
-- Cross-Site Scripting (XSS)
-- Command Injection
-- Path Traversal
-- File Inclusion
-- Authentication Bypass
-- Insecure Deserialization
-- XML External Entity (XXE)
-- Server-Side Request Forgery (SSRF)
-- Code Injection
-- LDAP Injection
-- Buffer Overflow
+SQL Injection, XSS, Command Injection, Path Traversal, File Inclusion, Authentication Bypass, Insecure Deserialization, XXE, SSRF, Code Injection, LDAP Injection, Buffer Overflow
 
+---
 
+## Quick Start
 
-## System Architecture
+### Prerequisites
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                       USER INTERFACE                        │
-│              (Web UI - Upload & View Results)               │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│                      AI AGENT LAYER                         │
-│                                                             │
-│   ┌──────────────┐  ┌──────────────┐  ┌──────────────┐   │
-│   │   PLANNER    │→ │   EXECUTOR   │→ │    CRITIC    │   │
-│   │ (Strategy)   │  │ (Run Tools)  │  │  (Quality)   │   │
-│   └──────────────┘  └──────────────┘  └──────────────┘   │
-│                            ↓                               │
-│              ┌─────────────────────────┐                  │
-│              │   MEMORY SYSTEM         │                  │
-│              │  (Learning & History)   │                  │
-│              └─────────────────────────┘                  │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│                     TOOLS LAYER                             │
-│                                                             │
-│  ┌────────────────────────────────────────────────────┐   │
-│  │              GRAPHRAG (Main Tool)                  │   │
-│  │  ┌──────────────────┐    ┌──────────────────┐    │   │
-│  │  │ GRAPH DATABASE   │ +  │ VECTOR DATABASE  │    │   │
-│  │  │    (Neo4j)       │    │   (ChromaDB)     │    │   │
-│  │  │                  │    │                  │    │   │
-│  │  │ • 260 Code nodes │    │ • 260 Embeddings │    │   │
-│  │  │ • 140+ Other     │    │ • Similarity     │    │   │
-│  │  │   nodes          │    │   Search         │    │   │
-│  │  │ • 600+ Relations │    │                  │    │   │
-│  │  └──────────────────┘    └──────────────────┘    │   │
-│  │                                                    │   │
-│  │  Returns: Similar code + CWE + OWASP + Fixes     │   │
-│  └────────────────────────────────────────────────────┘   │
-│                                                             │
-│  ┌────────────────────────────────────────────────────┐   │
-│  │              OTHER TOOLS                           │   │
-│  │  • Citation Lookup (OWASP/CWE/CVE)                │   │
-│  │  • Code Analyzers                                  │   │
-│  │  • Web Search (optional)                           │   │
-│  └────────────────────────────────────────────────────┘   │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│                    LLM PROVIDERS                            │
-│        Claude Sonnet 4  |  GPT-4o  |  Llama 3.1 70B        │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│                   DATA FOUNDATION                           │
-│                                                             │
-│  Knowledge Base: 260 code examples                         │
-│  Evaluation Set: 65 test cases                             │
-│  Citation Map: 12 vulnerability types                      │
-│  CVE Database: 673 records                                  │
-│  OWASP Docs: 26 prevention guides                          │
-└─────────────────────────────────────────────────────────────┘
+```bash
+pip install -r graphrag/requirements.txt
+# No API key needed — uses local all-MiniLM-L6-v2 embeddings
 ```
 
-## 🔄 How It Works
+### Analyze a file
 
-1. **User uploads code** through web interface
-2. **Agent plans analysis** - decides which tools to use
-3. **GraphRAG searches** - finds similar vulnerable code + related info
-4. **Agent executes** - gathers all relevant data
-5. **Critic evaluates** - checks quality of analysis
-6. **Memory stores** - learns from this analysis
-7. **LLM generates** - creates professional security report
-8. **User receives** - vulnerabilities, fixes, and references
-
-
-## 📈 Progress
-
-### ✅ Completed
-- **Data Collection & Preparation**
-  - Collected 307 code files from 5 sources (DVWA, WebGoat, OWASP Benchmark, Exploit-DB, GitHub Issues)
-  - Collected 673 CVE records from National Vulnerability Database
-  - Collected 26 OWASP documentation pages
-  - Cleaned and standardized all data
-  - Created knowledge base with 260 code examples
-  - Created evaluation set with 65 test cases
-  - Built citation map linking 12 vulnerability types to CWE, OWASP, CVE, and fixes
-
-### ⏳ Currently Implementing
-- **GraphRAG System (Phase 5)**
-  - Entity extraction from code (extracting functions, vulnerabilities, sources)
-  - Knowledge graph construction in Neo4j (creating nodes and relationships)
-  - Vector embedding generation using OpenAI
-  - ChromaDB indexing for similarity search
-  - Hybrid query interface (combining graph + vector search)
-
-
-### 📋 To Do
-
-#### AI Agent System
-- Planner component (strategy and planning)
-- Executor component (tool execution)
-- Critic component (quality evaluation)
-- Stateful memory system (learning and history)
-- Tool integration and orchestration
-
-#### Multi-Model Testing
-- Claude Sonnet 4 integration
-- GPT-4o integration
-- Llama 3.1 70B integration
-- Performance comparison and benchmarking
-
-#### User Interface
-- Web application development
-- Code upload functionality
-- Results visualization
-- Analysis history tracking
-
-#### Evaluation & Documentation
-- Testing on 65-case evaluation set
-- Metrics calculation (precision, recall, F1)
-- GraphRAG vs simple RAG comparison
-- Final project report
-- Presentation and demo video
-
-## 🎯 Project Milestones
-
-| Milestone | Status |
-|-----------|--------|
-| Data Collection Complete | ✅ Done |
-| Dataset Preparation Complete | ✅ Done |
-| GraphRAG Implementation | ⏳ In Progress |
-| AI Agent Development | 📋 To Do |
-| Multi-Model Testing | 📋 To Do |
-| UI Development | 📋 To Do |
-| Comprehensive Evaluation | 📋 To Do |
-| Final Deliverables | 📋 To Do |
-
-## 💻 How to Use (When Complete)
-
-```python
-# Upload code
-user_code = """
-$id = $_GET['id'];
-$query = "SELECT * FROM users WHERE id = '$id'";
-"""
-
-# Analyze
-report = codeguardian.analyze(user_code)
-
-# Get results
-print(report['vulnerabilities'])  # SQL Injection found
-print(report['fixes'])             # Use prepared statements
-print(report['references'])        # CWE-89, OWASP A03:2021
+```bash
+cd graphrag
+python analyze.py --file path/to/code.php
 ```
 
+### Analyze an inline snippet
 
-## 📂 Repository Structure
+```bash
+python analyze.py --code '$id = $_GET["id"]; mysqli_query($conn, $query);'
+```
+
+### Verbose output (show evidence matches)
+
+```bash
+python analyze.py --code '...' --verbose
+```
+
+### JSON output
+
+```bash
+python analyze.py --code '...' --json
+```
+
+### Run the full 65-case evaluation suite
+
+```bash
+python analyze.py --eval
+# Saves metrics to graphrag/data/eval_results.json
+```
+
+### Cache management
+
+```bash
+python analyze.py --cache-stats
+python analyze.py --clear-cache
+```
+
+### Run tests
+
+```bash
+cd graphrag
+pytest tests/ -v
+```
+
+---
+
+## Example Output
+
+```
+============================================================
+  VERDICT     : VULNERABLE (confidence 92%)
+  Language    : php
+  Vulns found : sql_injection, xss
+  Severity    : critical
+  Matches     : 7  |  Iterations: 1
+============================================================
+
+Fix Guidance:
+  [sql_injection]  Use prepared statements with parameterized queries
+  [xss]            Escape all output with htmlspecialchars()
+```
+
+### JSON result structure
+
+```json
+{
+  "verdict": "vulnerable",
+  "confidence": 0.92,
+  "vulnerability_types": ["sql_injection", "xss"],
+  "top_severity": "critical",
+  "language_detected": "php",
+  "suspected_by_planner": ["sql_injection", "xss"],
+  "total_matches": 7,
+  "iterations": 1,
+  "from_cache": false,
+  "evidence": [
+    {
+      "code_id": "php_sqli_001",
+      "language": "php",
+      "severity": "critical",
+      "similarity_distance": 0.08,
+      "cwes": [{"id": "CWE-89", "name": "SQL Injection"}],
+      "owasp_docs": [{"title": "OWASP A03:2021", "url": "..."}]
+    }
+  ],
+  "fix_guidance": [
+    {"vuln_type": "sql_injection", "description": "Use prepared statements..."}
+  ]
+}
+```
+
+---
+
+## Repository Structure
 
 ```
 codeguardian/
+├── README.md
 ├── data/
-│   ├── raw/                    # Original data from 7 sources
-│   └── processed/              # Clean datasets (260 examples + 65 tests)
-├── graphrag/                   # GraphRAG implementation (in progress)
-│   ├── src/                    # Core GraphRAG code
-│   ├── data/                   # Graph and vector databases
-│   └── tests/                  # Testing suite
-├── agent/                      # AI Agent system (to do)
-├── models/                     # LLM clients (to do)
-├── api/                        # Backend API (to do)
-├── frontend/                   # Web UI (to do)
-├── evaluation/                 # Evaluation scripts (to do)
-└── README.md
+│   ├── raw/                        # Original data from 5 sources
+│   └── processed/                  # knowledge_base.json, eval_set.json, citation_map.json
+└── graphrag/
+    ├── analyze.py                  # CLI entry point
+    ├── config.py                   # Central configuration (paths, model names)
+    ├── requirements.txt
+    ├── src/
+    │   ├── entity_extractor.py     # Extract functions/sources from code
+    │   ├── graph_store.py          # Neo4j + NetworkX dual-backend graph store
+    │   ├── graph_builder.py        # Build 369-node / 610-edge knowledge graph
+    │   ├── vector_indexer.py       # ChromaDB indexing with all-MiniLM-L6-v2
+    │   └── hybrid_querier.py       # Hybrid graph + vector search
+    ├── agent/
+    │   ├── agent.py                # CodeGuardianAgent orchestrator
+    │   ├── planner.py              # Language detection + query plan builder
+    │   ├── executor.py             # Runs queries, deduplicates, ranks results
+    │   ├── critic.py               # Confidence scoring + retry decision
+    │   └── memory.py               # SHA-256 JSON cache (persistent across runs)
+    ├── data/
+    │   ├── graph_db/               # NetworkX graph (JSON, auto-created)
+    │   ├── vector_db/              # ChromaDB persistent store (auto-created)
+    │   └── agent_cache.json        # Analysis result cache
+    └── tests/
+        ├── test_entity_extractor.py
+        ├── test_graph_builder.py
+        ├── test_vector_indexer.py
+        ├── test_hybrid_querier.py
+        └── test_agent.py
 ```
 
-## 🛠️ Technology Stack
+---
 
-**Databases:**
-- Neo4j (Graph database for relationships)
-- ChromaDB (Vector database for similarity search)
+## Agent Architecture (Phase 6)
 
-**AI Models:**
-- Claude Sonnet 4 (Anthropic)
-- GPT-4o (OpenAI)
-- Llama 3.1 70B (Meta)
+The agent runs a **Planner → Executor → Critic** loop with automatic retry on low confidence:
 
-**Backend:**
-- Python 3.9+
-- FastAPI (REST API)
+1. **Planner** — detects language (PHP/Python/Java/Ruby/JS) and vulnerability hints from code patterns; builds a prioritized list of GraphRAG queries
+2. **Executor** — runs all queries against the hybrid querier, deduplicates by `code_id`, ranks by severity then vector distance
+3. **Critic** — scores confidence using a heuristic formula:
+   - Base: `min(matches / 3, 1.0)`
+   - +0.20 for critical/high severity top match
+   - +0.15 if planner's suspected vuln types appear in results
+   - +0.10 for multiple distinct vuln types found
+   - -0.20 if top vector distance > 0.6
+4. **Retry** — if confidence < 0.35 and attempts < 2, replanner widens `top_k` and adds a broader fallback query
+5. **Memory** — results cached by SHA-256 of input code; cache survives restarts
 
-**Frontend:**
-- React
-- Tailwind CSS
+Verdict thresholds: ≥ 0.75 → `vulnerable` | ≥ 0.45 → `likely_vulnerable` | ≥ 0.20 → `unclear` | < 0.20 → `likely_clean`
 
-## 📚 Key References
+---
 
-**Security Resources:**
+## Technology Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Graph database | Neo4j (with NetworkX fallback for local dev) |
+| Vector database | ChromaDB |
+| Embeddings | `all-MiniLM-L6-v2` via sentence-transformers (local, no API key) |
+| LLMs (Phase 7) | Claude Sonnet 4 / GPT-4o / Llama 3.1 70B |
+| Backend (Phase 8) | Python 3.9+ / FastAPI |
+| Frontend (Phase 8) | React + Tailwind CSS |
+| Testing | pytest |
+
+---
+
+## References
+
+**Security:**
 - OWASP Top 10: https://owasp.org/Top10/
 - CWE Database: https://cwe.mitre.org/
-- CVE Database: https://nvd.nist.gov/
+- CVE / NVD: https://nvd.nist.gov/
 
 **Data Sources:**
 - DVWA: https://github.com/digininja/DVWA
@@ -291,3 +311,4 @@ codeguardian/
 **Technologies:**
 - Neo4j: https://neo4j.com/
 - ChromaDB: https://docs.trychroma.com/
+- sentence-transformers: https://www.sbert.net/
