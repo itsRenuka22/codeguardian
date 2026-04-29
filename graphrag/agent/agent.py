@@ -17,6 +17,7 @@ from .planner import Planner
 from .executor import Executor
 from .critic import Critic
 from .memory import Memory
+from line_detector import detect_vulnerable_lines
 
 
 class CodeGuardianAgent:
@@ -128,6 +129,8 @@ class CodeGuardianAgent:
                         "description": desc,
                     })
 
+        line_findings = detect_vulnerable_lines(code, score.vuln_types_found)
+
         return {
             "verdict":           score.verdict,
             "confidence":        score.confidence,
@@ -137,6 +140,7 @@ class CodeGuardianAgent:
             "suspected_by_planner": plan.suspected_vulns,
             "evidence":          evidence,
             "fix_guidance":      fix_guidance,
+            "line_findings":     line_findings,
             "total_matches":     len(matches),
             "iterations":        iterations,
             "from_cache":        False,
