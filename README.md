@@ -37,9 +37,9 @@ An intelligent system that analyzes code for security vulnerabilities using a Gr
 | 4 | Vector Indexing (ChromaDB + all-MiniLM-L6-v2) | Done |
 | 5 | Hybrid Querier (graph + vector) | Done |
 | 6 | Agent Architecture (Planner / Executor / Critic / Memory) | Done |
-| 7 | Multi-Model Testing (Claude / GPT-4 / Llama) | Pending |
-| 8 | UI Development (FastAPI + React) | Pending |
-| 9 | Comprehensive Evaluation & Report | Pending |
+| 7 | Multi-Model Support (Claude / GPT-4o / Gemini / Ollama) | Done |
+| 8 | UI Development (FastAPI + HTML/JS frontend) | Done |
+| 9 | Comprehensive Evaluation & Report | In Progress |
 
 ---
 
@@ -169,6 +169,28 @@ python analyze.py --cache-stats
 python analyze.py --clear-cache
 ```
 
+### Start the Web UI (FastAPI + frontend)
+
+```bash
+cd graphrag
+uvicorn api.main:app --reload --port 8000
+# Open http://localhost:8000 in your browser
+```
+
+The UI lets you paste code or upload a file, select an LLM (Claude / GPT-4o / Gemini / Ollama), and view the analysis report with line-level highlights.
+
+### Set API keys at runtime
+
+Keys can be provided via the UI or as environment variables:
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+export OPENAI_API_KEY=sk-...
+export GOOGLE_API_KEY=...
+```
+
+Ollama runs locally — no key required.
+
 ### Run tests
 
 ```bash
@@ -242,28 +264,41 @@ codeguardian/
     │   ├── graph_store.py          # Neo4j + NetworkX dual-backend graph store
     │   ├── graph_builder.py        # Build 369-node / 610-edge knowledge graph
     │   ├── vector_indexer.py       # ChromaDB indexing with all-MiniLM-L6-v2
-    │   └── hybrid_querier.py       # Hybrid graph + vector search
+    │   ├── hybrid_querier.py       # Hybrid graph + vector search
+    │   └── line_detector.py        # Maps vuln types to exact lines via regex
     ├── agent/
     │   ├── agent.py                # CodeGuardianAgent orchestrator
     │   ├── planner.py              # Language detection + query plan builder
     │   ├── executor.py             # Runs queries, deduplicates, ranks results
     │   ├── critic.py               # Confidence scoring + retry decision
     │   └── memory.py               # SHA-256 JSON cache (persistent across runs)
+    ├── models/
+    │   ├── base.py                 # Abstract LLMClient interface
+    │   ├── claude_client.py        # Anthropic Claude (Sonnet 4)
+    │   ├── openai_client.py        # OpenAI GPT-4o
+    │   ├── gemini_client.py        # Google Gemini 1.5 Pro
+    │   ├── ollama_client.py        # Ollama (local Llama 3 / Mistral)
+    │   ├── llm_evaluator.py        # Runs multi-model comparison
+    │   └── report_generator.py     # Formats LLM output into structured reports
+    ├── api/
+    │   └── main.py                 # FastAPI server (REST + static file serving)
+    ├── static/
+    │   └── index.html              # Single-page frontend UI
     ├── data/
     │   ├── graph_db/               # NetworkX graph (JSON, auto-created)
     │   ├── vector_db/              # ChromaDB persistent store (auto-created)
-    │   └── agent_cache.json        # Analysis result cache
+    │   ├── agent_cache.json        # Analysis result cache
+    │   └── eval_results.json       # Evaluation suite results
     └── tests/
         ├── test_entity_extractor.py
-        ├── test_graph_builder.py
         ├── test_vector_indexer.py
-        ├── test_hybrid_querier.py
+        ├── test_setup.py
         └── test_agent.py
 ```
 
 ---
 
-## Agent Architecture (Phase 6)
+## Agent Architecture
 
 The agent runs a **Planner → Executor → Critic** loop with automatic retry on low confidence:
 
@@ -282,6 +317,38 @@ Verdict thresholds: ≥ 0.75 → `vulnerable` | ≥ 0.45 → `likely_vulnerable`
 
 ---
 
+## Multi-Model LLM Support
+
+After the GraphRAG agent produces a structured analysis, an optional LLM layer generates a human-readable security report. Four backends are supported:
+
+| Model | Provider | Key required |
+|-------|----------|-------------|
+| Claude Sonnet 4 | Anthropic | `ANTHROPIC_API_KEY` |
+| GPT-4o | OpenAI | `OPENAI_API_KEY` |
+| Gemini 1.5 Pro | Google | `GOOGLE_API_KEY` |
+| Llama 3 / Mistral | Ollama (local) | None |
+
+All clients share the same `LLMClient` interface (`models/base.py`), making it easy to swap models without changing the rest of the pipeline. The `llm_evaluator.py` module runs all available models in parallel and compares their outputs.
+
+---
+
+## Web UI
+
+Start the server and open `http://localhost:8000`:
+
+```bash
+cd graphrag
+uvicorn api.main:app --reload --port 8000
+```
+
+Features:
+- Paste code or upload a file
+- Select LLM backend (Claude / GPT-4o / Gemini / Ollama)
+- View verdict, confidence score, and vulnerable line highlights
+- Download full JSON report
+
+---
+
 ## Technology Stack
 
 | Layer | Technology |
@@ -289,9 +356,9 @@ Verdict thresholds: ≥ 0.75 → `vulnerable` | ≥ 0.45 → `likely_vulnerable`
 | Graph database | Neo4j (with NetworkX fallback for local dev) |
 | Vector database | ChromaDB |
 | Embeddings | `all-MiniLM-L6-v2` via sentence-transformers (local, no API key) |
-| LLMs (Phase 7) | Claude Sonnet 4 / GPT-4o / Llama 3.1 70B |
-| Backend (Phase 8) | Python 3.9+ / FastAPI |
-| Frontend (Phase 8) | React + Tailwind CSS |
+| LLMs | Claude Sonnet 4 / GPT-4o / Gemini 1.5 Pro / Llama 3 (Ollama) |
+| Backend | Python 3.9+ / FastAPI |
+| Frontend | HTML + Vanilla JS (single-page, no build step) |
 | Testing | pytest |
 
 ---
