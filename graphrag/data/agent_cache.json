@@ -1,5 +1,314 @@
 {
-  "19100b2c06261ad8": {
+  "7ec0a7e9b0ed87c1": {
+    "verdict": "vulnerable",
+    "confidence": 1.0,
+    "vulnerability_types": [
+      "sql_injection",
+      "command_injection",
+      "xss",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_072",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.2864,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_107",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3026,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3343,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_256",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3345,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_193",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4682,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "command_injection",
+        "description": "Avoid calling OS commands with user input entirely; Use language-native APIs instead of shell commands; If shell calls are unavoidable, use allowlist input validation"
+      },
+      {
+        "vuln_type": "xss",
+        "description": "Escape all untrusted data before inserting into HTML output; Use a Content Security Policy (CSP) header; Validate and sanitize input server-side"
+      },
+      {
+        "vuln_type": "auth_bypass",
+        "description": "Enforce authentication on every protected endpoint; Use strong, well-reviewed authentication libraries; Implement multi-factor authentication for sensitive actions"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "total_matches": 10,
+    "iterations": 1,
+    "from_cache": false,
+    "_cached_at": "2026-04-28T21:37:51.574852"
+  },
+  "adea0401c6637b6a": {
+    "verdict": "vulnerable",
+    "confidence": 1.0,
+    "vulnerability_types": [
+      "sql_injection",
+      "rce",
+      "command_injection",
+      "auth_bypass",
+      "file_upload",
+      "xss",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection",
+      "command_injection"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_072",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.2864,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_107",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3026,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3343,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_256",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3345,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_237",
+        "language": "perl",
+        "severity": "critical",
+        "vulnerability_types": [
+          "rce"
+        ],
+        "similarity_distance": 0.4835,
+        "cwes": [
+          {
+            "id": "CWE-94",
+            "name": "Improper Control of Generation of Code"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "rce",
+        "description": "Avoid executing user-supplied code or commands; Sandbox code execution in isolated environments; Apply strict input validation and allowlists"
+      },
+      {
+        "vuln_type": "command_injection",
+        "description": "Avoid calling OS commands with user input entirely; Use language-native APIs instead of shell commands; If shell calls are unavoidable, use allowlist input validation"
+      },
+      {
+        "vuln_type": "auth_bypass",
+        "description": "Enforce authentication on every protected endpoint; Use strong, well-reviewed authentication libraries; Implement multi-factor authentication for sensitive actions"
+      },
+      {
+        "vuln_type": "file_upload",
+        "description": "Validate file type by content (magic bytes), not just extension; Rename uploaded files to random names on the server; Store uploaded files outside the web root"
+      },
+      {
+        "vuln_type": "xss",
+        "description": "Escape all untrusted data before inserting into HTML output; Use a Content Security Policy (CSP) header; Validate and sanitize input server-side"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "total_matches": 12,
+    "iterations": 1,
+    "from_cache": false,
+    "_cached_at": "2026-04-28T21:37:58.204455"
+  },
+  "5185db0613c8324a": {
     "verdict": "vulnerable",
     "confidence": 1.0,
     "vulnerability_types": [
@@ -83,7 +392,7 @@
         "vulnerability_types": [
           "sql_injection"
         ],
-        "similarity_distance": 0.356,
+        "similarity_distance": 0.3568,
         "cwes": [
           {
             "id": "CWE-89",
@@ -104,7 +413,7 @@
         "vulnerability_types": [
           "sql_injection"
         ],
-        "similarity_distance": 0.3678,
+        "similarity_distance": 0.3624,
         "cwes": [
           {
             "id": "CWE-89",
@@ -136,23 +445,68 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:52:26.555769"
+    "_cached_at": "2026-04-28T21:37:59.854003"
   },
-  "3b2da36aa5c2063f": {
+  "0b56220de20e6789": {
     "verdict": "vulnerable",
     "confidence": 1.0,
     "vulnerability_types": [
       "sql_injection",
-      "command_injection",
+      "rce",
       "auth_bypass",
+      "xss",
+      "file_upload",
       "other_injection"
     ],
     "top_severity": "critical",
     "language_detected": "php",
     "suspected_by_planner": [
-      "code_injection"
+      "sql_injection",
+      "xss"
     ],
     "evidence": [
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.2583,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_001",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.2742,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
       {
         "code_id": "code_107",
         "language": "php",
@@ -160,7 +514,7 @@
         "vulnerability_types": [
           "sql_injection"
         ],
-        "similarity_distance": 0.3768,
+        "similarity_distance": 0.3026,
         "cwes": [
           {
             "id": "CWE-89",
@@ -181,7 +535,7 @@
         "vulnerability_types": [
           "sql_injection"
         ],
-        "similarity_distance": 0.3846,
+        "similarity_distance": 0.3159,
         "cwes": [
           {
             "id": "CWE-89",
@@ -196,65 +550,23 @@
         ]
       },
       {
-        "code_id": "code_208",
-        "language": "js",
+        "code_id": "code_256",
+        "language": "php",
         "severity": "critical",
         "vulnerability_types": [
-          "command_injection"
+          "sql_injection"
         ],
-        "similarity_distance": 0.6532,
+        "similarity_distance": 0.3345,
         "cwes": [
           {
-            "id": "CWE-78",
-            "name": "Improper Neutralization of Special Elements in OS Command"
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
           }
         ],
         "owasp_docs": [
           {
             "title": "A03:2021 \u2013 Injection",
-            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
-          }
-        ]
-      },
-      {
-        "code_id": "code_193",
-        "language": "php",
-        "severity": "critical",
-        "vulnerability_types": [
-          "command_injection"
-        ],
-        "similarity_distance": 0.675,
-        "cwes": [
-          {
-            "id": "CWE-78",
-            "name": "Improper Neutralization of Special Elements in OS Command"
-          }
-        ],
-        "owasp_docs": [
-          {
-            "title": "A03:2021 \u2013 Injection",
-            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
-          }
-        ]
-      },
-      {
-        "code_id": "code_081",
-        "language": "php",
-        "severity": "high",
-        "vulnerability_types": [
-          "auth_bypass"
-        ],
-        "similarity_distance": 0.6629,
-        "cwes": [
-          {
-            "id": "CWE-287",
-            "name": "Improper Authentication"
-          }
-        ],
-        "owasp_docs": [
-          {
-            "title": "A07:2021 \u2013 Identification and Authentication Failures",
-            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
           }
         ]
       }
@@ -265,164 +577,185 @@
         "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
       },
       {
-        "vuln_type": "command_injection",
-        "description": "Avoid calling OS commands with user input entirely; Use language-native APIs instead of shell commands; If shell calls are unavoidable, use allowlist input validation"
+        "vuln_type": "rce",
+        "description": "Avoid executing user-supplied code or commands; Sandbox code execution in isolated environments; Apply strict input validation and allowlists"
       },
       {
         "vuln_type": "auth_bypass",
         "description": "Enforce authentication on every protected endpoint; Use strong, well-reviewed authentication libraries; Implement multi-factor authentication for sensitive actions"
       },
       {
+        "vuln_type": "xss",
+        "description": "Escape all untrusted data before inserting into HTML output; Use a Content Security Policy (CSP) header; Validate and sanitize input server-side"
+      },
+      {
+        "vuln_type": "file_upload",
+        "description": "Validate file type by content (magic bytes), not just extension; Rename uploaded files to random names on the server; Store uploaded files outside the web root"
+      },
+      {
         "vuln_type": "other_injection",
         "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
       }
     ],
-    "total_matches": 8,
+    "total_matches": 12,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:08.609999"
+    "_cached_at": "2026-04-28T21:38:13.707386"
   },
-  "ab5df625bc76dbd4": {
+  "e3516feb45049a43": {
     "verdict": "vulnerable",
     "confidence": 1.0,
     "vulnerability_types": [
+      "sql_injection",
       "rce",
-      "command_injection",
       "xss",
-      "csrf"
+      "auth_bypass",
+      "file_upload",
+      "other_injection"
     ],
     "top_severity": "critical",
-    "language_detected": "unknown",
-    "suspected_by_planner": [],
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection",
+      "xss"
+    ],
     "evidence": [
       {
-        "code_id": "code_077",
-        "language": "python",
+        "code_id": "code_072",
+        "language": "php",
         "severity": "critical",
         "vulnerability_types": [
-          "rce"
+          "sql_injection"
         ],
-        "similarity_distance": 0.8916,
+        "similarity_distance": 0.2864,
         "cwes": [
           {
-            "id": "CWE-94",
-            "name": "Improper Control of Generation of Code"
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
           }
         ],
         "owasp_docs": [
           {
             "title": "A03:2021 \u2013 Injection",
-            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
           }
         ]
       },
       {
-        "code_id": "code_116",
-        "language": "python",
+        "code_id": "code_107",
+        "language": "php",
         "severity": "critical",
         "vulnerability_types": [
-          "rce"
+          "sql_injection"
         ],
-        "similarity_distance": 0.8936,
+        "similarity_distance": 0.3026,
         "cwes": [
           {
-            "id": "CWE-94",
-            "name": "Improper Control of Generation of Code"
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
           }
         ],
         "owasp_docs": [
           {
             "title": "A03:2021 \u2013 Injection",
-            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
           }
         ]
       },
       {
-        "code_id": "code_055",
-        "language": "ruby",
+        "code_id": "code_256",
+        "language": "php",
         "severity": "critical",
         "vulnerability_types": [
-          "command_injection"
+          "sql_injection"
         ],
-        "similarity_distance": 0.8996,
+        "similarity_distance": 0.3345,
         "cwes": [
           {
-            "id": "CWE-78",
-            "name": "Improper Neutralization of Special Elements in OS Command"
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
           }
         ],
         "owasp_docs": [
           {
             "title": "A03:2021 \u2013 Injection",
-            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
           }
         ]
       },
       {
-        "code_id": "code_114",
-        "language": "java",
-        "severity": "high",
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
         "vulnerability_types": [
-          "xss"
+          "sql_injection"
         ],
-        "similarity_distance": 0.903,
+        "similarity_distance": 0.3715,
         "cwes": [
           {
-            "id": "CWE-79",
-            "name": "Improper Neutralization of Input During Web Page Generation"
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
           }
         ],
         "owasp_docs": [
           {
             "title": "A03:2021 \u2013 Injection",
-            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html"
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
           }
         ]
       },
       {
-        "code_id": "code_244",
-        "language": "perl",
-        "severity": "medium",
+        "code_id": "code_001",
+        "language": "php",
+        "severity": "critical",
         "vulnerability_types": [
-          "csrf"
+          "sql_injection"
         ],
-        "similarity_distance": 0.907,
+        "similarity_distance": 0.3791,
         "cwes": [
           {
-            "id": "CWE-352",
-            "name": "Cross-Site Request Forgery"
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
           }
         ],
         "owasp_docs": [
           {
-            "title": "A01:2021 \u2013 Broken Access Control",
-            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html"
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
           }
         ]
       }
     ],
     "fix_guidance": [
       {
-        "vuln_type": "rce",
-        "description": "Avoid executing user-supplied code or commands; Sandbox code execution in isolated environments; Apply strict input validation and allowlists"
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
       },
       {
-        "vuln_type": "command_injection",
-        "description": "Avoid calling OS commands with user input entirely; Use language-native APIs instead of shell commands; If shell calls are unavoidable, use allowlist input validation"
+        "vuln_type": "rce",
+        "description": "Avoid executing user-supplied code or commands; Sandbox code execution in isolated environments; Apply strict input validation and allowlists"
       },
       {
         "vuln_type": "xss",
         "description": "Escape all untrusted data before inserting into HTML output; Use a Content Security Policy (CSP) header; Validate and sanitize input server-side"
       },
       {
-        "vuln_type": "csrf",
-        "description": "Use synchronizer token pattern (anti-CSRF tokens); Use SameSite cookie attribute (Strict or Lax); Verify Origin and Referer headers for state-changing requests"
+        "vuln_type": "auth_bypass",
+        "description": "Enforce authentication on every protected endpoint; Use strong, well-reviewed authentication libraries; Implement multi-factor authentication for sensitive actions"
+      },
+      {
+        "vuln_type": "file_upload",
+        "description": "Validate file type by content (magic bytes), not just extension; Rename uploaded files to random names on the server; Store uploaded files outside the web root"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
       }
     ],
-    "total_matches": 5,
+    "total_matches": 13,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:32.775158"
+    "_cached_at": "2026-04-29T04:47:05.070147"
   },
   "1a78a4df33e847e6": {
     "verdict": "vulnerable",
@@ -567,7 +900,7 @@
     "total_matches": 14,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.271188"
+    "_cached_at": "2026-04-29T04:47:23.465502"
   },
   "652bb44d14a9d81c": {
     "verdict": "vulnerable",
@@ -706,7 +1039,7 @@
     "total_matches": 8,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.294908"
+    "_cached_at": "2026-04-29T04:47:23.488209"
   },
   "55773c232654ad98": {
     "verdict": "vulnerable",
@@ -865,7 +1198,7 @@
     "total_matches": 12,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.319091"
+    "_cached_at": "2026-04-29T04:47:23.511275"
   },
   "d718de6b22eabe0f": {
     "verdict": "vulnerable",
@@ -1010,7 +1343,7 @@
     "total_matches": 11,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.345490"
+    "_cached_at": "2026-04-29T04:47:23.536045"
   },
   "e3b703d6180c5c1e": {
     "verdict": "vulnerable",
@@ -1162,7 +1495,7 @@
     "total_matches": 9,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.364278"
+    "_cached_at": "2026-04-29T04:47:23.554212"
   },
   "7fc5803997910560": {
     "verdict": "vulnerable",
@@ -1314,7 +1647,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.384934"
+    "_cached_at": "2026-04-29T04:47:23.573510"
   },
   "ddd11c5d4d8cf468": {
     "verdict": "vulnerable",
@@ -1458,7 +1791,7 @@
     "total_matches": 13,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.408054"
+    "_cached_at": "2026-04-29T04:47:23.595624"
   },
   "25302332317feac7": {
     "verdict": "vulnerable",
@@ -1595,7 +1928,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.429254"
+    "_cached_at": "2026-04-29T04:47:23.615628"
   },
   "9282393163df54cc": {
     "verdict": "vulnerable",
@@ -1747,7 +2080,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.448074"
+    "_cached_at": "2026-04-29T04:47:23.633230"
   },
   "9427e8d188a64514": {
     "verdict": "vulnerable",
@@ -1894,7 +2227,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.467197"
+    "_cached_at": "2026-04-29T04:47:23.651392"
   },
   "841ce2d647870a6b": {
     "verdict": "vulnerable",
@@ -2046,7 +2379,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.488363"
+    "_cached_at": "2026-04-29T04:47:23.671467"
   },
   "1aaf3930dda8de17": {
     "verdict": "vulnerable",
@@ -2193,7 +2526,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.508859"
+    "_cached_at": "2026-04-29T04:47:23.690606"
   },
   "076d0b5a16ceae8b": {
     "verdict": "vulnerable",
@@ -2345,7 +2678,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.528422"
+    "_cached_at": "2026-04-29T04:47:23.709292"
   },
   "c7beb46a5820dc56": {
     "verdict": "vulnerable",
@@ -2494,7 +2827,7 @@
     "total_matches": 14,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.553952"
+    "_cached_at": "2026-04-29T04:47:23.732759"
   },
   "6156ec8fc72d5bd0": {
     "verdict": "vulnerable",
@@ -2641,7 +2974,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.574526"
+    "_cached_at": "2026-04-29T04:47:23.751341"
   },
   "6181aab2068538eb": {
     "verdict": "vulnerable",
@@ -2773,7 +3106,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.596123"
+    "_cached_at": "2026-04-29T04:47:23.771917"
   },
   "093967e6d42c6407": {
     "verdict": "vulnerable",
@@ -2905,7 +3238,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.615928"
+    "_cached_at": "2026-04-29T04:47:23.791077"
   },
   "f7eacec9826d9ed8": {
     "verdict": "vulnerable",
@@ -3042,7 +3375,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.636366"
+    "_cached_at": "2026-04-29T04:47:23.810143"
   },
   "5fc9612f5b248d3b": {
     "verdict": "vulnerable",
@@ -3174,7 +3507,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.656899"
+    "_cached_at": "2026-04-29T04:47:23.829644"
   },
   "e7535d8be1fed2e9": {
     "verdict": "vulnerable",
@@ -3306,7 +3639,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.677429"
+    "_cached_at": "2026-04-29T04:47:23.848941"
   },
   "e5d5316a658c88d2": {
     "verdict": "vulnerable",
@@ -3451,7 +3784,7 @@
     "total_matches": 17,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.705328"
+    "_cached_at": "2026-04-29T04:47:23.875566"
   },
   "b13eb9b8df4e5331": {
     "verdict": "vulnerable",
@@ -3596,7 +3929,7 @@
     "total_matches": 17,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.733165"
+    "_cached_at": "2026-04-29T04:47:23.902443"
   },
   "192c74badc8ade26": {
     "verdict": "vulnerable",
@@ -3741,7 +4074,7 @@
     "total_matches": 17,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.761376"
+    "_cached_at": "2026-04-29T04:47:23.929476"
   },
   "8820b84c66b7b3fc": {
     "verdict": "vulnerable",
@@ -3886,7 +4219,7 @@
     "total_matches": 17,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.789045"
+    "_cached_at": "2026-04-29T04:47:23.956280"
   },
   "62e91f0ed8506660": {
     "verdict": "vulnerable",
@@ -4031,7 +4364,7 @@
     "total_matches": 17,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.817817"
+    "_cached_at": "2026-04-29T04:47:23.983844"
   },
   "5e8d5297c174f5fd": {
     "verdict": "vulnerable",
@@ -4175,7 +4508,7 @@
     "total_matches": 15,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.841691"
+    "_cached_at": "2026-04-29T04:47:24.007045"
   },
   "9097e0f3687bdc73": {
     "verdict": "vulnerable",
@@ -4319,7 +4652,7 @@
     "total_matches": 15,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.866029"
+    "_cached_at": "2026-04-29T04:47:24.030350"
   },
   "258d5c30398b43c8": {
     "verdict": "vulnerable",
@@ -4456,7 +4789,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.886481"
+    "_cached_at": "2026-04-29T04:47:24.049529"
   },
   "0922a49b5a2faf57": {
     "verdict": "vulnerable",
@@ -4593,7 +4926,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.906531"
+    "_cached_at": "2026-04-29T04:47:24.068935"
   },
   "cb1295edbab941e6": {
     "verdict": "vulnerable",
@@ -4730,7 +5063,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.926444"
+    "_cached_at": "2026-04-29T04:47:24.088854"
   },
   "10c9fa0b3a1ee69c": {
     "verdict": "vulnerable",
@@ -4879,7 +5212,7 @@
     "total_matches": 15,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.951515"
+    "_cached_at": "2026-04-29T04:47:24.113031"
   },
   "bbb4691ac44f67bc": {
     "verdict": "vulnerable",
@@ -5028,7 +5361,7 @@
     "total_matches": 15,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.976550"
+    "_cached_at": "2026-04-29T04:47:24.136572"
   },
   "a255f606e867ce7b": {
     "verdict": "vulnerable",
@@ -5170,7 +5503,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:48.996493"
+    "_cached_at": "2026-04-29T04:47:24.156634"
   },
   "32f2549ffaf9ea4d": {
     "verdict": "vulnerable",
@@ -5314,7 +5647,7 @@
     "total_matches": 15,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.022828"
+    "_cached_at": "2026-04-29T04:47:24.181308"
   },
   "c851f7b335e6665e": {
     "verdict": "vulnerable",
@@ -5458,7 +5791,7 @@
     "total_matches": 15,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.048154"
+    "_cached_at": "2026-04-29T04:47:24.205658"
   },
   "5167133886485ef2": {
     "verdict": "vulnerable",
@@ -5599,10 +5932,10 @@
         "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
       }
     ],
-    "total_matches": 11,
+    "total_matches": 12,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.073308"
+    "_cached_at": "2026-04-29T04:47:24.229525"
   },
   "6452fce2464dfa5f": {
     "verdict": "vulnerable",
@@ -5743,10 +6076,10 @@
         "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
       }
     ],
-    "total_matches": 11,
+    "total_matches": 12,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.098969"
+    "_cached_at": "2026-04-29T04:47:24.253246"
   },
   "564f71b0edf30a26": {
     "verdict": "vulnerable",
@@ -5888,7 +6221,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.120568"
+    "_cached_at": "2026-04-29T04:47:24.273462"
   },
   "32df683b6527a410": {
     "verdict": "vulnerable",
@@ -6030,7 +6363,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.142135"
+    "_cached_at": "2026-04-29T04:47:24.293636"
   },
   "a0f78c2c8d5b4381": {
     "verdict": "vulnerable",
@@ -6174,7 +6507,7 @@
     "total_matches": 15,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.169304"
+    "_cached_at": "2026-04-29T04:47:24.318661"
   },
   "261aa0390fef8f4d": {
     "verdict": "vulnerable",
@@ -6311,7 +6644,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.191987"
+    "_cached_at": "2026-04-29T04:47:24.339497"
   },
   "c2497a76a17b5278": {
     "verdict": "vulnerable",
@@ -6448,7 +6781,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.213606"
+    "_cached_at": "2026-04-29T04:47:24.359542"
   },
   "b69ba53a339d0df9": {
     "verdict": "vulnerable",
@@ -6585,7 +6918,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.235840"
+    "_cached_at": "2026-04-29T04:47:24.380268"
   },
   "4088b4cdb02a6dc6": {
     "verdict": "vulnerable",
@@ -6730,7 +7063,7 @@
     "total_matches": 17,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.266571"
+    "_cached_at": "2026-04-29T04:47:24.409161"
   },
   "64ccaa37d5e7c146": {
     "verdict": "vulnerable",
@@ -6867,7 +7200,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.288398"
+    "_cached_at": "2026-04-29T04:47:24.430147"
   },
   "eb77ac55daea5d0d": {
     "verdict": "vulnerable",
@@ -7009,7 +7342,7 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.306609"
+    "_cached_at": "2026-04-29T04:47:24.448327"
   },
   "514c5e80f35c1777": {
     "verdict": "vulnerable",
@@ -7141,7 +7474,7 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.323030"
+    "_cached_at": "2026-04-29T04:47:24.464131"
   },
   "1a7ae90a3e62cdb8": {
     "verdict": "vulnerable",
@@ -7278,7 +7611,7 @@
     "total_matches": 9,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.346700"
+    "_cached_at": "2026-04-29T04:47:24.486508"
   },
   "4d3b097739d98e47": {
     "verdict": "vulnerable",
@@ -7410,7 +7743,7 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.365319"
+    "_cached_at": "2026-04-29T04:47:24.504037"
   },
   "a71763cde42f0b21": {
     "verdict": "vulnerable",
@@ -7555,7 +7888,7 @@
     "total_matches": 15,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.399947"
+    "_cached_at": "2026-04-29T04:47:24.535626"
   },
   "364904ab94bd8560": {
     "verdict": "vulnerable",
@@ -7699,7 +8032,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.424367"
+    "_cached_at": "2026-04-29T04:47:24.558718"
   },
   "12a4036bcb5c7b8d": {
     "verdict": "vulnerable",
@@ -7841,7 +8174,7 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.442396"
+    "_cached_at": "2026-04-29T04:47:24.576165"
   },
   "72f65386cd3a0814": {
     "verdict": "vulnerable",
@@ -7985,7 +8318,7 @@
     "total_matches": 15,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.473551"
+    "_cached_at": "2026-04-29T04:47:24.604688"
   },
   "87067d2ded8a3a64": {
     "verdict": "vulnerable",
@@ -8124,7 +8457,7 @@
     "total_matches": 12,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.499476"
+    "_cached_at": "2026-04-29T04:47:24.630149"
   },
   "b2aa2f76d252dd9c": {
     "verdict": "vulnerable",
@@ -8278,7 +8611,7 @@
     "total_matches": 13,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.528604"
+    "_cached_at": "2026-04-29T04:47:24.657013"
   },
   "399d039a9edb2870": {
     "verdict": "vulnerable",
@@ -8438,7 +8771,7 @@
     "total_matches": 12,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.560964"
+    "_cached_at": "2026-04-29T04:47:24.687866"
   },
   "506c2deb19093835": {
     "verdict": "vulnerable",
@@ -8585,7 +8918,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.580735"
+    "_cached_at": "2026-04-29T04:47:24.706057"
   },
   "d98f53ab7efbbbec": {
     "verdict": "vulnerable",
@@ -8712,7 +9045,7 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.595566"
+    "_cached_at": "2026-04-29T04:47:24.720228"
   },
   "ecfbba7aea3ed45a": {
     "verdict": "vulnerable",
@@ -8854,7 +9187,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.618605"
+    "_cached_at": "2026-04-29T04:47:24.741653"
   },
   "96d713140d9ce75a": {
     "verdict": "vulnerable",
@@ -8981,7 +9314,7 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.632694"
+    "_cached_at": "2026-04-29T04:47:24.755090"
   },
   "62631827ff434fa6": {
     "verdict": "vulnerable",
@@ -9128,7 +9461,7 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.648171"
+    "_cached_at": "2026-04-29T04:47:24.770028"
   },
   "b64cfda6a560f39a": {
     "verdict": "vulnerable",
@@ -9265,7 +9598,7 @@
     "total_matches": 10,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.671109"
+    "_cached_at": "2026-04-29T04:47:24.792330"
   },
   "65b7aa141701d7f4": {
     "verdict": "vulnerable",
@@ -9397,7 +9730,7 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.687500"
+    "_cached_at": "2026-04-29T04:47:24.808171"
   },
   "5f17902dfd3f1dd3": {
     "verdict": "vulnerable",
@@ -9529,7 +9862,7 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.707296"
+    "_cached_at": "2026-04-29T04:47:24.827115"
   },
   "f1c6259e7f320269": {
     "verdict": "vulnerable",
@@ -9671,6 +10004,6 @@
     "total_matches": 5,
     "iterations": 1,
     "from_cache": false,
-    "_cached_at": "2026-04-28T20:53:49.737874"
+    "_cached_at": "2026-04-29T04:47:24.843030"
   }
 }
