@@ -399,40 +399,40 @@
 
               <div style="font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;padding:8px 2px 3px">Local (Ollama)</div>
 
-              <label class="model-option" id="opt-llama">
-                <input type="radio" name="llm" value="llama" onchange="selectModel('llama')">
-                <div class="model-info">
-                  <div class="model-name">Llama 3.1</div>
-                  <div class="model-desc">Ollama — free, local</div>
-                </div>
-                <span class="model-badge badge-offline" id="badge-llama">Checking…</span>
-              </label>
-
-              <label class="model-option" id="opt-codellama">
-                <input type="radio" name="llm" value="codellama" onchange="selectModel('codellama')">
-                <div class="model-info">
-                  <div class="model-name">CodeLlama 13B</div>
-                  <div class="model-desc">Ollama — code-specialized, local</div>
-                </div>
-                <span class="model-badge badge-offline" id="badge-codellama">Checking…</span>
-              </label>
-
               <label class="model-option" id="opt-deepseek">
                 <input type="radio" name="llm" value="deepseek" onchange="selectModel('deepseek')">
                 <div class="model-info">
-                  <div class="model-name">DeepSeek Coder 6.7B</div>
-                  <div class="model-desc">Ollama — code-specialized, local</div>
+                  <div class="model-name">DeepSeek R1</div>
+                  <div class="model-desc">Ollama — free, local</div>
                 </div>
                 <span class="model-badge badge-offline" id="badge-deepseek">Checking…</span>
               </label>
 
-              <label class="model-option" id="opt-qwen">
-                <input type="radio" name="llm" value="qwen" onchange="selectModel('qwen')">
+              <label class="model-option" id="opt-qwen7b">
+                <input type="radio" name="llm" value="qwen7b" onchange="selectModel('qwen7b')">
                 <div class="model-info">
-                  <div class="model-name">Qwen2.5 Coder 7B</div>
-                  <div class="model-desc">Ollama — code-specialized, local</div>
+                  <div class="model-name">Qwen 2.5 7B</div>
+                  <div class="model-desc">Ollama — free, local</div>
                 </div>
-                <span class="model-badge badge-offline" id="badge-qwen">Checking…</span>
+                <span class="model-badge badge-offline" id="badge-qwen7b">Checking…</span>
+              </label>
+
+              <label class="model-option" id="opt-qwen14b">
+                <input type="radio" name="llm" value="qwen14b" onchange="selectModel('qwen14b')">
+                <div class="model-info">
+                  <div class="model-name">Qwen 2.5 14B</div>
+                  <div class="model-desc">Ollama — free, local</div>
+                </div>
+                <span class="model-badge badge-offline" id="badge-qwen14b">Checking…</span>
+              </label>
+
+              <label class="model-option" id="opt-gemma">
+                <input type="radio" name="llm" value="gemma" onchange="selectModel('gemma')">
+                <div class="model-info">
+                  <div class="model-name">Gemma 3 1B</div>
+                  <div class="model-desc">Ollama — free, local</div>
+                </div>
+                <span class="model-badge badge-offline" id="badge-gemma">Checking…</span>
               </label>
             </div>
 
@@ -560,24 +560,24 @@
           <div class="chk-info"><div class="chk-name">Gemini 1.5 Pro</div></div>
           <span class="chk-tag tag-cloud">Cloud</span>
         </label>
-        <label class="model-chk-item" onclick="toggleModelChk(this,'llama')">
-          <input type="checkbox" id="chk-llama" value="llama">
-          <div class="chk-info"><div class="chk-name">Llama 3.1</div></div>
-          <span class="chk-tag tag-local">Local</span>
-        </label>
-        <label class="model-chk-item" onclick="toggleModelChk(this,'codellama')">
-          <input type="checkbox" id="chk-codellama" value="codellama">
-          <div class="chk-info"><div class="chk-name">CodeLlama 13B</div></div>
-          <span class="chk-tag tag-local">Local</span>
-        </label>
         <label class="model-chk-item" onclick="toggleModelChk(this,'deepseek')">
           <input type="checkbox" id="chk-deepseek" value="deepseek">
-          <div class="chk-info"><div class="chk-name">DeepSeek Coder</div></div>
+          <div class="chk-info"><div class="chk-name">DeepSeek R1</div></div>
           <span class="chk-tag tag-local">Local</span>
         </label>
-        <label class="model-chk-item" onclick="toggleModelChk(this,'qwen')">
-          <input type="checkbox" id="chk-qwen" value="qwen">
-          <div class="chk-info"><div class="chk-name">Qwen2.5 Coder</div></div>
+        <label class="model-chk-item" onclick="toggleModelChk(this,'qwen7b')">
+          <input type="checkbox" id="chk-qwen7b" value="qwen7b">
+          <div class="chk-info"><div class="chk-name">Qwen 2.5 7B</div></div>
+          <span class="chk-tag tag-local">Local</span>
+        </label>
+        <label class="model-chk-item" onclick="toggleModelChk(this,'qwen14b')">
+          <input type="checkbox" id="chk-qwen14b" value="qwen14b">
+          <div class="chk-info"><div class="chk-name">Qwen 2.5 14B</div></div>
+          <span class="chk-tag tag-local">Local</span>
+        </label>
+        <label class="model-chk-item" onclick="toggleModelChk(this,'gemma')">
+          <input type="checkbox" id="chk-gemma" value="gemma">
+          <div class="chk-info"><div class="chk-name">Gemma 3 1B</div></div>
           <span class="chk-tag tag-local">Local</span>
         </label>
       </div>
@@ -614,7 +614,7 @@
 
 let selectedModel = "";
 const apiKeys = { claude: "", gpt4: "", gemini: "" };
-const ALL_MODELS = ["none","claude","gpt4","gemini","llama","codellama","deepseek","qwen"];
+const ALL_MODELS = ["none","claude","gpt4","gemini","deepseek","qwen7b","qwen14b","gemma"];
 const CLOUD_MODELS = ["claude","gpt4","gemini"];
 
 /* ── Examples ── */
@@ -1036,7 +1036,7 @@ async function runEval() {
 }
 
 /* ══════════════ LLM MODEL COMPARISON ══════════════ */
-const COST_PER_CASE = { claude:0.0023, gpt4:0.0018, gemini:0.0009, llama:0, codellama:0, deepseek:0, qwen:0 };
+const COST_PER_CASE = { claude:0.0023, gpt4:0.0018, gemini:0.0009, deepseek:0, qwen7b:0, qwen14b:0, gemma:0 };
 let _selectedModels = new Set();
 let _selectedCases  = 10;
 
@@ -1062,7 +1062,7 @@ function updateCostEst() {
   if (_selectedModels.size === 0) { el.textContent = 'Select models to see cost estimate'; return; }
   let cost = 0;
   _selectedModels.forEach(k => { cost += (COST_PER_CASE[k] || 0) * _selectedCases; });
-  const hasLocal = [..._selectedModels].some(k => ['llama','codellama','deepseek','qwen'].includes(k));
+  const hasLocal = [..._selectedModels].some(k => ['deepseek','qwen7b','qwen14b','gemma'].includes(k));
   const note = hasLocal ? ' (local models free)' : '';
   el.textContent = `Estimated cost: ~$${cost.toFixed(4)} for ${_selectedCases} cases × ${_selectedModels.size} model(s)${note}`;
 }
