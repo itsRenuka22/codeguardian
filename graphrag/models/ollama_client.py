@@ -4,18 +4,18 @@ from .base import LLMClient
 from .report_generator import build_prompt
 
 _DISPLAY = {
-    "llama3.1":            "Llama 3.1 (Ollama)",
-    "codellama:13b":       "CodeLlama 13B (Ollama)",
-    "deepseek-coder:6.7b": "DeepSeek Coder 6.7B (Ollama)",
-    "qwen2.5-coder:7b":    "Qwen2.5 Coder 7B (Ollama)",
+    "deepseek-r1:latest": "DeepSeek R1 (Ollama)",
+    "qwen2.5:7b":         "Qwen 2.5 7B (Ollama)",
+    "qwen2.5:14b":        "Qwen 2.5 14B (Ollama)",
+    "gemma3:1b":          "Gemma 3 1B (Ollama)",
 }
 
 
 class OllamaClient(LLMClient):
-    model_id = "llama3.1"
-    display_name = "Llama 3.1 (Ollama)"
+    model_id = "deepseek-r1:latest"
+    display_name = "DeepSeek R1 (Ollama)"
 
-    def __init__(self, base_url: str = "http://localhost:11434", model: str = "llama3.1"):
+    def __init__(self, base_url: str = "http://localhost:11434", model: str = "deepseek-r1:latest"):
         self.base_url = base_url.rstrip("/")
         self._model   = model
         self.model_id = model
@@ -24,8 +24,10 @@ class OllamaClient(LLMClient):
     @property
     def is_available(self) -> bool:
         try:
-            urllib.request.urlopen(f"{self.base_url}/api/tags", timeout=2)
-            return True
+            with urllib.request.urlopen(f"{self.base_url}/api/tags", timeout=2) as r:
+                data = json.loads(r.read())
+            pulled = {m["name"] for m in data.get("models", [])}
+            return self._model in pulled
         except Exception:
             return False
 

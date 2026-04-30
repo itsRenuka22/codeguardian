@@ -46,12 +46,12 @@ def _get_agent():
 # ── Runtime API key store ──────────────────────────────────────
 _api_keys: dict = {}
 
-# Ollama model registry
+# Ollama model registry (models actually pulled locally)
 _OLLAMA_MODELS = {
-    "llama":     "llama3.1",
-    "codellama": "codellama:13b",
-    "deepseek":  "deepseek-coder:6.7b",
-    "qwen":      "qwen2.5-coder:7b",
+    "deepseek": "deepseek-r1:latest",
+    "qwen7b":   "qwen2.5:7b",
+    "qwen14b":  "qwen2.5:14b",
+    "gemma":    "gemma3:1b",
 }
 
 # Cloud model display names for /api/models
