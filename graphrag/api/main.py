@@ -12,8 +12,13 @@ from typing import Optional, Dict
 from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+
+# Load environment variables from .env file (located in parent directory)
+_ENV_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+load_dotenv(_ENV_PATH)
 
 _HERE     = os.path.dirname(os.path.abspath(__file__))
 _GRAPHRAG = os.path.dirname(_HERE)
