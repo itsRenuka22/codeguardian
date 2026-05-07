@@ -4,18 +4,17 @@ from .base import LLMClient
 from .report_generator import build_prompt
 
 _DISPLAY = {
-    "deepseek-r1:latest": "DeepSeek R1 (Ollama)",
-    "qwen2.5:7b":         "Qwen 2.5 7B (Ollama)",
-    "qwen2.5:14b":        "Qwen 2.5 14B (Ollama)",
-    "gemma3:1b":          "Gemma 3 1B (Ollama)",
+    "deepseek-r1:8b":   "DeepSeek R1 (Ollama)",
+    "gemma2:2b":        "Gemma 3 1B (Ollama)",
 }
 
 
 class OllamaClient(LLMClient):
-    model_id = "deepseek-r1:latest"
+    model_id = "deepseek-r1:8b"
     display_name = "DeepSeek R1 (Ollama)"
+    _TIMEOUT_S = 300  # 5 minutes — DeepSeek R1 reasoning can be slow
 
-    def __init__(self, base_url: str = "http://localhost:11434", model: str = "deepseek-r1:latest"):
+    def __init__(self, base_url: str = "http://localhost:11434", model: str = "deepseek-r1:8b"):
         self.base_url = base_url.rstrip("/")
         self._model   = model
         self.model_id = model
@@ -43,7 +42,7 @@ class OllamaClient(LLMClient):
             headers={"Content-Type": "application/json"},
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=120) as r:
+        with urllib.request.urlopen(req, timeout=self._TIMEOUT_S) as r:
             data = json.loads(r.read())
         return {
             "text":          data.get("response", ""),
@@ -67,7 +66,7 @@ class OllamaClient(LLMClient):
             headers={"Content-Type": "application/json"},
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=120) as r:
+        with urllib.request.urlopen(req, timeout=self._TIMEOUT_S) as r:
             data = json.loads(r.read())
         return {
             "text":          data.get("response", ""),

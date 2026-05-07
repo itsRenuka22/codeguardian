@@ -62,17 +62,34 @@ def _extract_json(text: str) -> dict:
 class LLMEvaluator:
     """Evaluates a single code snippet through a raw LLM call (zero-shot classification)."""
 
-    def evaluate_case(self, code: str, llm_client) -> dict:
+    def evaluate_case(self, code: str, llm_client, timeout_s: int = 300) -> dict:
         """
         Returns:
           verdict, vulnerability_types, severity, reasoning,
           cost_usd, latency_s, input_tokens, output_tokens
+
+        Raises:
+          TimeoutError: if the LLM call exceeds timeout_s
+          RuntimeError: on other LLM errors
         """
+        import socket
+        import urllib.error
+
         prompt = build_classify_prompt(code)
         t0 = time.time()
-        raw = llm_client.generate_raw(_CLASSIFY_SYSTEM, prompt)
-        latency = time.time() - t0
 
+        try:
+            raw = llm_client.generate_raw(_CLASSIFY_SYSTEM, prompt)
+        except (socket.timeout, urllib.error.URLError) as exc:
+            elapsed = time.time() - t0
+            raise TimeoutError(
+                f"{llm_client.display_name} did not respond within {timeout_s}s "
+                f"(elapsed: {elapsed:.1f}s)"
+            ) from exc
+        except Exception as exc:
+            raise RuntimeError(f"{llm_client.display_name} error: {str(exc)}") from exc
+
+        latency = time.time() - t0
         parsed = _extract_json(raw["text"])
 
         return {

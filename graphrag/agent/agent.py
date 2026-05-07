@@ -89,7 +89,7 @@ class CodeGuardianAgent:
         while True:
             iterations += 1
             exec_result = self.executor.execute(plan)
-            score = self.critic.score(exec_result)
+            score = self.critic.score(code, exec_result)
 
             if not score.should_retry:
                 break
@@ -103,6 +103,9 @@ class CodeGuardianAgent:
 
     def _format(self, code, plan, exec_result, score, iterations) -> dict:
         matches = exec_result.matches
+        is_clean   = score.verdict == "clean"
+        impossible = set(score.impossible_vulns)
+        possible_vulns = [v for v in score.vuln_types_found if v not in impossible]
 
         evidence = []
         for m in matches[:5]:
@@ -122,28 +125,32 @@ class CodeGuardianAgent:
         for m in matches:
             for fp in m.get("fix_patterns", []):
                 desc = fp.get("description", "")
-                if desc and desc not in seen_fixes:
+                vt   = fp.get("vuln_type", "")
+                if desc and desc not in seen_fixes and vt not in impossible:
                     seen_fixes.add(desc)
                     fix_guidance.append({
-                        "vuln_type":   fp.get("vuln_type", ""),
+                        "vuln_type":   vt,
                         "description": desc,
                     })
 
-        line_findings = detect_vulnerable_lines(code, score.vuln_types_found)
+        line_findings = detect_vulnerable_lines(code, possible_vulns)
 
         return {
-            "verdict":           score.verdict,
-            "confidence":        score.confidence,
-            "vulnerability_types": score.vuln_types_found,
-            "top_severity":      score.top_severity,
-            "language_detected": plan.language,
+            "verdict":              score.verdict,
+            "confidence":           score.confidence,
+            "vulnerability_types":  possible_vulns,
+            "all_matched_vulns":    score.vuln_types_found,
+            "top_severity":         "" if is_clean else score.top_severity,
+            "language_detected":    plan.language,
             "suspected_by_planner": plan.suspected_vulns,
-            "evidence":          evidence,
-            "fix_guidance":      fix_guidance,
-            "line_findings":     line_findings,
-            "total_matches":     len(matches),
-            "iterations":        iterations,
-            "from_cache":        False,
+            "evidence":             [] if is_clean else evidence,
+            "fix_guidance":         [] if is_clean else fix_guidance,
+            "line_findings":        [] if is_clean else line_findings,
+            "total_matches":        len(matches),
+            "iterations":           iterations,
+            "impossible_vulns":     score.impossible_vulns,
+            "patterns_found":       score.patterns_found,
+            "from_cache":           False,
         }
 
     # ── utilities ─────────────────────────────────────────────────────────────

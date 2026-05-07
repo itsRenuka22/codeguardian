@@ -323,12 +323,12 @@
 <!-- ═══════════════════ HERO ═══════════════════ -->
 <div class="hero" id="heroSection">
   <h1>AI-Powered Security Code Review</h1>
-  <p>GraphRAG + Planner–Executor–Critic agent with Claude, GPT-4o, and Llama report generation.</p>
+  <p>GraphRAG + Planner–Executor–Critic agent with Gemini Flash and local Ollama model report generation.</p>
   <div class="hero-stats">
     <div><div class="stat-num">260</div><div class="stat-label">Code Examples</div></div>
     <div><div class="stat-num">12</div><div class="stat-label">Vuln Types</div></div>
     <div><div class="stat-num">673</div><div class="stat-label">CVE Records</div></div>
-    <div><div class="stat-num">65</div><div class="stat-label">Eval Cases</div></div>
+    <div><div class="stat-num">90</div><div class="stat-label">Eval Cases</div></div>
   </div>
 </div>
 
@@ -370,83 +370,39 @@
                 <span class="model-badge badge-avail">Always On</span>
               </label>
 
-              <label class="model-option" id="opt-claude">
-                <input type="radio" name="llm" value="claude" onchange="selectModel('claude')">
+              <label class="model-option" id="opt-gemini-flash">
+                <input type="radio" name="llm" value="gemini-flash" onchange="selectModel('gemini-flash')">
                 <div class="model-info">
-                  <div class="model-name">Claude Sonnet 4.6</div>
-                  <div class="model-desc">Anthropic — requires API key</div>
-                </div>
-                <span class="model-badge badge-no-key" id="badge-claude">PROVIDE KEY</span>
-              </label>
-
-              <label class="model-option" id="opt-gpt4">
-                <input type="radio" name="llm" value="gpt4" onchange="selectModel('gpt4')">
-                <div class="model-info">
-                  <div class="model-name">GPT-4o</div>
-                  <div class="model-desc">OpenAI — requires API key</div>
-                </div>
-                <span class="model-badge badge-no-key" id="badge-gpt4">PROVIDE KEY</span>
-              </label>
-
-              <label class="model-option" id="opt-gemini">
-                <input type="radio" name="llm" value="gemini" onchange="selectModel('gemini')">
-                <div class="model-info">
-                  <div class="model-name">Gemini 1.5 Pro</div>
+                  <div class="model-name">Gemini Flash</div>
                   <div class="model-desc">Google — requires API key</div>
                 </div>
-                <span class="model-badge badge-no-key" id="badge-gemini">PROVIDE KEY</span>
+                <span class="model-badge badge-no-key" id="badge-gemini-flash">PROVIDE KEY</span>
               </label>
 
               <div style="font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.6px;padding:8px 2px 3px">Local (Ollama)</div>
 
-              <label class="model-option" id="opt-deepseek">
-                <input type="radio" name="llm" value="deepseek" onchange="selectModel('deepseek')">
+              <label class="model-option" id="opt-deepseek-r1">
+                <input type="radio" name="llm" value="deepseek-r1" onchange="selectModel('deepseek-r1')">
                 <div class="model-info">
                   <div class="model-name">DeepSeek R1</div>
                   <div class="model-desc">Ollama — free, local</div>
                 </div>
-                <span class="model-badge badge-offline" id="badge-deepseek">Checking…</span>
+                <span class="model-badge badge-offline" id="badge-deepseek-r1">Checking…</span>
               </label>
 
-              <label class="model-option" id="opt-qwen7b">
-                <input type="radio" name="llm" value="qwen7b" onchange="selectModel('qwen7b')">
-                <div class="model-info">
-                  <div class="model-name">Qwen 2.5 7B</div>
-                  <div class="model-desc">Ollama — free, local</div>
-                </div>
-                <span class="model-badge badge-offline" id="badge-qwen7b">Checking…</span>
-              </label>
-
-              <label class="model-option" id="opt-qwen14b">
-                <input type="radio" name="llm" value="qwen14b" onchange="selectModel('qwen14b')">
-                <div class="model-info">
-                  <div class="model-name">Qwen 2.5 14B</div>
-                  <div class="model-desc">Ollama — free, local</div>
-                </div>
-                <span class="model-badge badge-offline" id="badge-qwen14b">Checking…</span>
-              </label>
-
-              <label class="model-option" id="opt-gemma">
-                <input type="radio" name="llm" value="gemma" onchange="selectModel('gemma')">
+              <label class="model-option" id="opt-gemma3-1b">
+                <input type="radio" name="llm" value="gemma3-1b" onchange="selectModel('gemma3-1b')">
                 <div class="model-info">
                   <div class="model-name">Gemma 3 1B</div>
                   <div class="model-desc">Ollama — free, local</div>
                 </div>
-                <span class="model-badge badge-offline" id="badge-gemma">Checking…</span>
+                <span class="model-badge badge-offline" id="badge-gemma3-1b">Checking…</span>
               </label>
             </div>
 
-            <div class="api-key-row" id="keyRow-gemini">
-              <input type="password" id="key-gemini" placeholder="AIza…" oninput="cacheKey('gemini')">
-              <button class="btn-save-key" onclick="saveKey('gemini')">Save</button>
-            </div>
-            <div class="api-key-row" id="keyRow-claude">
-              <input type="password" id="key-claude" placeholder="sk-ant-api03-…" oninput="cacheKey('claude')">
-              <button class="btn-save-key" onclick="saveKey('claude')">Save</button>
-            </div>
-            <div class="api-key-row" id="keyRow-gpt4">
-              <input type="password" id="key-gpt4" placeholder="sk-…" oninput="cacheKey('gpt4')">
-              <button class="btn-save-key" onclick="saveKey('gpt4')">Save</button>
+            <div class="api-key-row" id="keyRow-gemini-flash">
+              <input type="password" id="key-gemini-flash" placeholder="AIza…" oninput="cacheKey('gemini-flash')">
+              <button class="btn-save-key" onclick="saveKey('gemini-flash')">Save</button>
             </div>
           </div>
 
@@ -507,7 +463,7 @@
   <div class="eval-page">
 
     <div class="eval-topbar">
-      <h2>GraphRAG Evaluation — 65 Test Cases</h2>
+      <h2>GraphRAG Evaluation — 90 Test Cases</h2>
       <div class="eval-actions">
         <button class="btn-secondary" onclick="loadEvalResults()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -545,38 +501,18 @@
         Select Models
       </div>
       <div class="model-chk-grid" id="modelChkGrid">
-        <label class="model-chk-item" onclick="toggleModelChk(this,'claude')">
-          <input type="checkbox" id="chk-claude" value="claude">
-          <div class="chk-info"><div class="chk-name">Claude Sonnet 4.6</div></div>
+        <label class="model-chk-item" onclick="toggleModelChk(this,'gemini-flash')">
+          <input type="checkbox" id="chk-gemini-flash" value="gemini-flash">
+          <div class="chk-info"><div class="chk-name">Gemini Flash</div></div>
           <span class="chk-tag tag-cloud">Cloud</span>
         </label>
-        <label class="model-chk-item" onclick="toggleModelChk(this,'gpt4')">
-          <input type="checkbox" id="chk-gpt4" value="gpt4">
-          <div class="chk-info"><div class="chk-name">GPT-4o</div></div>
-          <span class="chk-tag tag-cloud">Cloud</span>
-        </label>
-        <label class="model-chk-item" onclick="toggleModelChk(this,'gemini')">
-          <input type="checkbox" id="chk-gemini" value="gemini">
-          <div class="chk-info"><div class="chk-name">Gemini 1.5 Pro</div></div>
-          <span class="chk-tag tag-cloud">Cloud</span>
-        </label>
-        <label class="model-chk-item" onclick="toggleModelChk(this,'deepseek')">
-          <input type="checkbox" id="chk-deepseek" value="deepseek">
+        <label class="model-chk-item" onclick="toggleModelChk(this,'deepseek-r1')">
+          <input type="checkbox" id="chk-deepseek-r1" value="deepseek-r1">
           <div class="chk-info"><div class="chk-name">DeepSeek R1</div></div>
           <span class="chk-tag tag-local">Local</span>
         </label>
-        <label class="model-chk-item" onclick="toggleModelChk(this,'qwen7b')">
-          <input type="checkbox" id="chk-qwen7b" value="qwen7b">
-          <div class="chk-info"><div class="chk-name">Qwen 2.5 7B</div></div>
-          <span class="chk-tag tag-local">Local</span>
-        </label>
-        <label class="model-chk-item" onclick="toggleModelChk(this,'qwen14b')">
-          <input type="checkbox" id="chk-qwen14b" value="qwen14b">
-          <div class="chk-info"><div class="chk-name">Qwen 2.5 14B</div></div>
-          <span class="chk-tag tag-local">Local</span>
-        </label>
-        <label class="model-chk-item" onclick="toggleModelChk(this,'gemma')">
-          <input type="checkbox" id="chk-gemma" value="gemma">
+        <label class="model-chk-item" onclick="toggleModelChk(this,'gemma3-1b')">
+          <input type="checkbox" id="chk-gemma3-1b" value="gemma3-1b">
           <div class="chk-info"><div class="chk-name">Gemma 3 1B</div></div>
           <span class="chk-tag tag-local">Local</span>
         </label>
@@ -613,9 +549,9 @@
 "use strict";
 
 let selectedModel = "";
-const apiKeys = { claude: "", gpt4: "", gemini: "" };
-const ALL_MODELS = ["none","claude","gpt4","gemini","deepseek","qwen7b","qwen14b","gemma"];
-const CLOUD_MODELS = ["claude","gpt4","gemini"];
+const apiKeys = { "gemini-flash": "" };
+const ALL_MODELS = ["none","gemini-flash","deepseek-r1","gemma3-1b"];
+const CLOUD_MODELS = ["gemini-flash"];
 
 /* ── Examples ── */
 const EXAMPLES = {
@@ -734,9 +670,17 @@ function renderMd(text) {
 /* ── Render analysis ── */
 function renderResults(d) {
   const v = d.verdict, conf = d.confidence, pct = Math.round(conf * 100);
+  const isClean = v === "clean";
+
   document.getElementById('cachedPill').style.display = d.from_cache ? 'inline-flex' : 'none';
 
   const vulnTags = (d.vulnerability_types||[]).map(t=>`<span class="tag tag-vuln">${esc(t.replace(/_/g,' '))}</span>`).join('');
+
+  const impossibleVulns = (d.impossible_vulns||[]);
+  const impossibleHTML = impossibleVulns.length ? `
+    <div style="padding:10px 12px; background:#FEF9C3; border:1px solid #FDE68A; border-radius:var(--r-sm); margin-bottom:12px; font-size:12px;">
+      <strong style="color:#854D0E">ℹ Semantic Check:</strong> ${impossibleVulns.map(v=>v.replace(/_/g,' ')).join(', ')} flagged but semantically impossible in this code.
+    </div>` : '';
 
   const fixHTML = (d.fix_guidance||[]).slice(0,3).map(f=>`
     <div class="fix-card">
@@ -777,6 +721,7 @@ function renderResults(d) {
       <div class="meta-cell"><div class="meta-key">Iterations</div><div class="meta-val">${d.iterations}</div></div>
     </div>
     ${vulnTags ? `<div class="sec-title">Vulnerabilities</div><div class="tags">${vulnTags}</div>` : `<div class="tags"><span class="tag tag-lang">No vulnerabilities detected</span></div>`}
+    ${impossibleHTML}
 
     ${(d.line_findings||[]).length ? `
     <div class="sec-title" style="color:#B91C1C;margin-top:4px">
@@ -791,10 +736,11 @@ function renderResults(d) {
       </div>`).join('')}
     </div>` : ''}
 
-    <div class="divider"></div>
+    ${!isClean && (d.fix_guidance||[]).length ? `<div class="divider"></div>
     <div class="sec-title">Fix Guidance</div>
-    ${fixHTML}
-    ${evHTML ? `<div class="divider"></div><div class="sec-title">Evidence Matches (top ${Math.min(4,d.evidence.length)})</div>${evHTML}` : ''}
+    ${fixHTML}` : ''}
+
+    ${!isClean && evHTML ? `<div class="divider"></div><div class="sec-title">Evidence Matches (top ${Math.min(4,d.evidence.length)})</div>${evHTML}` : ''}
   </div>`;
 }
 
@@ -901,44 +847,8 @@ function renderEval(d) {
       <div class="cm-cell cm-tn"><div class="cm-num">${m.tn}</div><div class="cm-label">True Negative</div></div>
     </div>`;
 
-  /* comparison bars */
+  /* comparison bars — disabled vector-only UI */
   let cmpHTML = '';
-  if (vo) {
-    const rows = [
-      {label:'F1 Score',           gr:m.f1,                vo:vo.f1},
-      {label:'Precision',          gr:m.precision,          vo:vo.precision},
-      {label:'Recall',             gr:m.recall,             vo:vo.recall},
-      {label:'Vuln-Type Accuracy', gr:m.vuln_type_accuracy, vo:vo.vuln_type_accuracy},
-    ];
-    const gain = Math.round((m.vuln_type_accuracy - vo.vuln_type_accuracy)*100);
-    cmpHTML = `<div class="eval-section">
-      <div class="eval-section-title">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        GraphRAG vs Vector-Only Baseline
-      </div>
-      <div style="display:flex;gap:20px;margin-bottom:16px;font-size:12px;">
-        <span style="display:flex;align-items:center;gap:6px;"><span class="cmp-legend-dot" style="background:#2E6F40"></span>GraphRAG (full)</span>
-        <span style="display:flex;align-items:center;gap:6px;"><span class="cmp-legend-dot" style="background:#94A3B8"></span>Vector-Only</span>
-      </div>
-      ${rows.map(r=>`
-      <div class="comparison-row">
-        <div class="cmp-metric">${r.label}</div>
-        <div class="cmp-bars">
-          <div class="cmp-bar-wrap">
-            <div class="cmp-bar-track"><div class="cmp-bar-fill" style="width:${Math.round(r.gr*100)}%;background:#2E6F40"></div></div>
-            <div class="cmp-bar-pct" style="color:#2E6F40">${pctStr(r.gr)}</div>
-          </div>
-          <div class="cmp-bar-wrap">
-            <div class="cmp-bar-track"><div class="cmp-bar-fill" style="width:${Math.round(r.vo*100)}%;background:#94A3B8"></div></div>
-            <div class="cmp-bar-pct" style="color:#64748B">${pctStr(r.vo)}</div>
-          </div>
-        </div>
-      </div>`).join('')}
-      <p style="font-size:12px;color:var(--text-muted);margin-top:12px">
-        Graph traversal adds <strong style="color:var(--green)">+${gain}pp</strong> vuln-type accuracy by enriching vector results with CWE/OWASP/fix-pattern relationships.
-      </p>
-    </div>`;
-  }
 
   /* cases table */
   const rows = cases.map(c=>{

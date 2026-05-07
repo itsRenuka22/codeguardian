@@ -7,11 +7,13 @@ Run from graphrag/ directory:
 import os
 import sys
 import json
-from typing import Optional
+import uuid
+from typing import Optional, Dict
+from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
 
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 
 _HERE     = os.path.dirname(os.path.abspath(__file__))
 _GRAPHRAG = os.path.dirname(_HERE)
@@ -43,36 +45,38 @@ def _get_agent():
     return _agent
 
 
+# ── Analysis session store (1-hour TTL) ──────────────────────
+_analysis_sessions: Dict[str, dict] = {}
+
+def _cleanup_sessions():
+    """Remove sessions older than 1 hour"""
+    cutoff = datetime.now() - timedelta(hours=1)
+    expired = [sid for sid, data in _analysis_sessions.items() if data.get("timestamp", datetime.now()) < cutoff]
+    for sid in expired:
+        del _analysis_sessions[sid]
+
 # ── Runtime API key store ──────────────────────────────────────
 _api_keys: dict = {}
 
 # Ollama model registry (models actually pulled locally)
 _OLLAMA_MODELS = {
-    "deepseek": "deepseek-r1:latest",
-    "qwen7b":   "qwen2.5:7b",
-    "qwen14b":  "qwen2.5:14b",
-    "gemma":    "gemma3:1b",
+    "deepseek-r1": "deepseek-r1:8b",
+    "gemma3-1b":   "gemma2:2b",
 }
 
 # Cloud model display names for /api/models
 _CLOUD_MODELS = [
-    ("claude", "ClaudeClient"),
-    ("gpt4",   "OpenAIClient"),
-    ("gemini", "GeminiClient"),
+    ("gemini-flash", "GeminiClient"),
 ]
 
 
 def _make_llm(model_key: str, api_key: str = ""):
-    from models.claude_client  import ClaudeClient
-    from models.openai_client  import OpenAIClient
     from models.ollama_client  import OllamaClient
     from models.gemini_client  import GeminiClient
 
     key = api_key or _api_keys.get(model_key, "")
 
-    if model_key == "claude":   return ClaudeClient(api_key=key)
-    if model_key == "gpt4":     return OpenAIClient(api_key=key)
-    if model_key == "gemini":   return GeminiClient(api_key=key)
+    if model_key == "gemini-flash": return GeminiClient(api_key=key)
     if model_key in _OLLAMA_MODELS:
         return OllamaClient(model=_OLLAMA_MODELS[model_key])
     raise ValueError(f"Unknown model key: {model_key!r}")
@@ -124,10 +128,168 @@ async def analyze(request: Request):
     return JSONResponse(result)
 
 
+@app.post("/api/analyze-quick")
+async def analyze_quick(request: Request):
+    """Fast GraphRAG analysis without LLM report (~5 seconds)"""
+    _cleanup_sessions()
+
+    body      = await request.json()
+    code      = body.get("code", "").strip()
+    model_key = body.get("model", "").strip()
+
+    if not code:
+        raise HTTPException(400, "No code provided")
+
+    try:
+        result = _get_agent().analyze(code)
+    except Exception as exc:
+        raise HTTPException(500, str(exc)) from exc
+
+    # Generate analysis ID and store session
+    analysis_id = str(uuid.uuid4())
+    _analysis_sessions[analysis_id] = {
+        "code": code,
+        "result": result,
+        "model": model_key,
+        "timestamp": datetime.now(),
+    }
+
+    return JSONResponse({
+        "analysis_id": analysis_id,
+        "verdict": result.get("verdict"),
+        "confidence": result.get("confidence"),
+        "vulnerability_types": result.get("vulnerability_types", []),
+        "vulnerabilities": result.get("vulnerabilities", []),
+        "evidence": result.get("evidence", []),
+        "fix_guidance": result.get("fix_guidance", []),
+    })
+
+
+@app.post("/api/generate-report-stream")
+async def generate_report_stream(request: Request):
+    """Generate LLM report on demand for stored analysis"""
+    body        = await request.json()
+    analysis_id = body.get("analysis_id", "").strip()
+    api_key     = body.get("api_key", "").strip()
+
+    # Retrieve stored analysis
+    session = _analysis_sessions.get(analysis_id)
+    if not session:
+        raise HTTPException(404, "Analysis session not found or expired")
+
+    model_key = session.get("model", "gemini-flash")
+    code = session["code"]
+    result = session["result"]
+
+    async def event_generator():
+        import socket
+        import urllib.error
+
+        try:
+            # Get LLM client
+            llm = _make_llm(model_key, api_key or _api_keys.get(model_key, ""))
+
+            if not llm.is_available:
+                yield f"data: {json.dumps({'type': 'error', 'message': f'{llm.display_name} — API key not configured'})}\n\n"
+                return
+
+            yield f"data: {json.dumps({'type': 'start', 'model': llm.display_name})}\n\n"
+
+            # Generate report
+            try:
+                report_data = llm.generate_report(result, code)
+            except (socket.timeout, urllib.error.URLError) as e:
+                timeout_val = getattr(llm, "_TIMEOUT_S", "unknown")
+                msg = f"{llm.display_name} timed out after {timeout_val}s"
+                yield f"data: {json.dumps({'type': 'error', 'message': msg})}\n\n"
+                return
+            except Exception as e:
+                msg = f"{llm.display_name} error: {str(e)}"
+                yield f"data: {json.dumps({'type': 'error', 'message': msg})}\n\n"
+                return
+
+            yield f"data: {json.dumps({'type': 'report', 'content': report_data['text']})}\n\n"
+            yield f"data: {json.dumps({'type': 'metadata', 'tokens_in': report_data['input_tokens'], 'tokens_out': report_data['output_tokens'], 'cost': report_data['cost_usd']})}\n\n"
+            yield f"data: {json.dumps({'type': 'complete'})}\n\n"
+        except Exception as exc:
+            yield f"data: {json.dumps({'type': 'error', 'message': str(exc)})}\n\n"
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
+@app.post("/api/analyze-stream")
+async def analyze_stream(request: Request):
+    """Streaming analysis with real-time agent progress visibility"""
+    _cleanup_sessions()
+
+    body      = await request.json()
+    code      = body.get("code", "").strip()
+    model_key = body.get("model", "").strip()
+
+    if not code:
+        raise HTTPException(400, "No code provided")
+
+    async def event_generator():
+        try:
+            agent = _get_agent()
+
+            # ── PLANNER ────────────────────────────────────────────
+            yield f"data: {json.dumps({'type': 'progress', 'step': 'planning', 'message': '🎯 PLANNER: Analyzing code structure…'})}\n\n"
+
+            plan = agent.planner.plan(code)
+
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'planning', 'message': f'→ Language detected: {plan.language.upper()}'})}\n\n"
+            if plan.suspected_vulns:
+                vuln_list = ', '.join(plan.suspected_vulns)
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'planning', 'message': f'→ Suspected: {vuln_list}'})}\n\n"
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'planning', 'message': f'→ Building {len(plan.queries)} search queries'})}\n\n"
+
+            # ── EXECUTOR ───────────────────────────────────────────
+            yield f"data: {json.dumps({'type': 'progress', 'step': 'searching', 'message': f'⚙️ EXECUTOR: Running {len(plan.queries)} queries in parallel…'})}\n\n"
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'searching', 'message': '→ Knowledge base: 260 examples across 12 vulnerability types'})}\n\n"
+
+            exec_result = agent.executor.execute(plan)
+            matches = exec_result.matches
+            top_dist = min((m.get("similarity_distance", 1.0) for m in matches), default=1.0)
+
+            sim_label = (
+                "very similar"       if top_dist < 0.30 else
+                "moderately similar" if top_dist < 0.45 else
+                "weakly similar"
+            )
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'searching', 'message': f'→ {len(matches)} unique matches retrieved'})}\n\n"
+            if matches:
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'searching', 'message': f'→ Top match: distance {top_dist:.3f} ({sim_label})'})}\n\n"
+
+            # ── CRITIC ─────────────────────────────────────────────
+            yield f"data: {json.dumps({'type': 'progress', 'step': 'scoring', 'message': '🧠 CRITIC: Evaluating results…'})}\n\n"
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': '→ Running semantic validation…'})}\n\n"
+
+            score = agent.critic.score(code, exec_result)
+
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Verdict: {score.verdict.upper()}'})}\n\n"
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Confidence: {score.confidence*100:.0f}%'})}\n\n"
+
+            # ── STORE SESSION & RETURN RESULTS ──────────────────────
+            analysis_id = str(uuid.uuid4())
+            _analysis_sessions[analysis_id] = {
+                "code": code,
+                "result": agent._format(code, plan, exec_result, score, 1),
+                "model": model_key,
+                "timestamp": datetime.now(),
+            }
+
+            result = agent._format(code, plan, exec_result, score, 1)
+            yield f"data: {json.dumps({'type': 'complete', 'analysis_id': analysis_id, 'verdict': score.verdict, 'confidence': score.confidence})}\n\n"
+
+        except Exception as exc:
+            yield f"data: {json.dumps({'type': 'error', 'message': str(exc)})}\n\n"
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
 @app.get("/api/models")
 async def list_models():
-    from models.claude_client  import ClaudeClient
-    from models.openai_client  import OpenAIClient
     from models.gemini_client  import GeminiClient
     from models.ollama_client  import OllamaClient
 
@@ -139,8 +301,8 @@ async def list_models():
 
     out = []
 
-    # Cloud models
-    for key, Cls in [("claude", ClaudeClient), ("gpt4", OpenAIClient), ("gemini", GeminiClient)]:
+    # Cloud models (Gemini only)
+    for key, Cls in [("gemini-flash", GeminiClient)]:
         k = _api_keys.get(key, "")
         try:
             inst  = Cls(api_key=k)
@@ -180,7 +342,7 @@ async def configure_model(request: Request):
     body  = await request.json()
     model = body.get("model", "")
     key   = body.get("api_key", "").strip()
-    if model not in ("claude", "gpt4", "gemini"):
+    if model not in ("gemini-flash",):
         raise HTTPException(400, f"Unknown cloud model: {model!r}")
     _api_keys[model] = key
     return {"status": "ok", "model": model}
@@ -430,10 +592,23 @@ def _run_model_eval_sync(model_keys: list, max_cases: int) -> dict:
                     "latency_s":  r["latency_s"],
                     "reasoning":  r.get("reasoning", ""),
                 })
+            except TimeoutError as exc:
+                cases_log.append({
+                    "test_id": case.get("test_id", "?"),
+                    "error":   f"TIMEOUT: {str(exc)}",
+                    "error_type": "timeout",
+                })
+            except RuntimeError as exc:
+                cases_log.append({
+                    "test_id": case.get("test_id", "?"),
+                    "error":   f"LLM_ERROR: {str(exc)}",
+                    "error_type": "llm_error",
+                })
             except Exception as exc:
                 cases_log.append({
                     "test_id": case.get("test_id", "?"),
-                    "error":   str(exc),
+                    "error":   f"UNKNOWN: {str(exc)}",
+                    "error_type": "unknown",
                 })
 
         n = len(cases) or 1

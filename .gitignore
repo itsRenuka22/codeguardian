@@ -9,6 +9,10 @@
 *.key
 *.pem
 secrets/
+codeguardian/.env
+codeguardian/.env.local
+codeguardian/.env.*.local
+codeguardian/secrets/
 
 # ==========================================
 # Python

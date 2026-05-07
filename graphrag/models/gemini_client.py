@@ -4,10 +4,11 @@ from .report_generator import build_prompt, SYSTEM
 
 
 class GeminiClient(LLMClient):
-    model_id = "gemini-1.5-pro"
-    display_name = "Gemini 1.5 Pro"
-    _COST_IN  = 1.25   # $ per 1M input tokens
-    _COST_OUT = 5.00   # $ per 1M output tokens
+    model_id = "gemini-2.0-flash"
+    display_name = "Gemini Flash"
+    _COST_IN  = 0.075  # $ per 1M input tokens (Flash pricing)
+    _COST_OUT = 0.30   # $ per 1M output tokens (Flash pricing)
+    _TIMEOUT_S = 60    # Gemini Flash is typically fast
 
     def __init__(self, api_key: str = ""):
         self.api_key = api_key or os.getenv("GOOGLE_API_KEY", "")

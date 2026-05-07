@@ -34,7 +34,16 @@ class Memory:
         self._save()
 
     def stats(self) -> dict:
-        return {"entries": len(self._cache), "path": self.cache_path}
+        size_bytes = 0
+        if os.path.exists(self.cache_path):
+            size_bytes = os.path.getsize(self.cache_path)
+
+        return {
+            "entries": len(self._cache),
+            "path": self.cache_path,
+            "size_bytes": size_bytes,
+            "size_kb": round(size_bytes / 1024, 2),
+        }
 
     # ── private ───────────────────────────────────────────────────────────────
 
