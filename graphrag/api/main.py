@@ -285,7 +285,7 @@ async def analyze_stream(request: Request):
             }
 
             result = agent._format(code, plan, exec_result, score, 1)
-            yield f"data: {json.dumps({'type': 'complete', 'analysis_id': analysis_id, 'verdict': score.verdict, 'confidence': score.confidence})}\n\n"
+            yield f"data: {json.dumps({'type': 'complete', 'analysis_id': analysis_id, **result})}\n\n"
 
         except Exception as exc:
             yield f"data: {json.dumps({'type': 'error', 'message': str(exc)})}\n\n"

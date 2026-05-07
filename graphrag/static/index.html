@@ -783,7 +783,7 @@ async function streamingAnalyze(code, model, apiKey) {
         function processChunk() {
           reader.read().then(({ done, value }) => {
             if (done) {
-              resolve(finalData || {});
+              resolve(finalData || progressLog._complete_data || {});
               return;
             }
 
@@ -821,6 +821,11 @@ function handleStreamEvent(event, progressLog) {
     if (progressLog.length > 0) {
       progressLog[progressLog.length - 1].details.push(event.message);
       displayProgressLog(progressLog);
+    }
+  } else if (event.type === 'complete') {
+    // Store the complete event data for later use
+    if (!progressLog._complete_data) {
+      progressLog._complete_data = event;
     }
   }
 }

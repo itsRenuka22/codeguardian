@@ -10005,5 +10005,2660 @@
     "iterations": 1,
     "from_cache": false,
     "_cached_at": "2026-04-29T04:47:24.843030"
+  },
+  "006c6e7ef585a3c7": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "xxe",
+      "file_upload",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "xxe",
+      "file_upload",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T00:15:57.645785"
+  },
+  "138be79809f267e0": {
+    "verdict": "vulnerable",
+    "confidence": 1.0,
+    "vulnerability_types": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "all_matched_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_072",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.2864,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_107",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3026,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_256",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3345,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3404,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_001",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.361,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "auth_bypass",
+        "description": "Enforce authentication on every protected endpoint; Use strong, well-reviewed authentication libraries; Implement multi-factor authentication for sensitive actions"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "line_findings": [
+      {
+        "line_num": 2,
+        "content": "$id = $_GET['id'];",
+        "vuln_type": "sql_injection",
+        "reason": "Unsanitized user input in query"
+      },
+      {
+        "line_num": 2,
+        "content": "$id = $_GET['id'];",
+        "vuln_type": "general",
+        "reason": "Unsanitized user input"
+      },
+      {
+        "line_num": 3,
+        "content": "$query = \"SELECT * FROM users WHERE id = '$id'\";",
+        "vuln_type": "sql_injection",
+        "reason": "SQL string concatenation"
+      },
+      {
+        "line_num": 4,
+        "content": "$result = mysqli_query($conn, $query);",
+        "vuln_type": "sql_injection",
+        "reason": "Raw SQL query execution"
+      }
+    ],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": true,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": true
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T00:15:57.675634"
+  },
+  "d9d7ef37b60f9b78": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "file_upload",
+      "xxe",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "file_upload",
+      "xxe",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T00:15:57.697669"
+  },
+  "6741f512b7a61452": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "xxe",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 9,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "xxe",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T00:27:25.513006"
+  },
+  "7ffe671bfe5d9f07": {
+    "verdict": "vulnerable",
+    "confidence": 0.95,
+    "vulnerability_types": [
+      "sql_injection",
+      "xss",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "all_matched_vulns": [
+      "sql_injection",
+      "rce",
+      "xss",
+      "auth_bypass",
+      "file_upload",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection",
+      "xss"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_107",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3026,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_256",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3345,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_001",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3404,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3472,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_072",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.4024,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "xss",
+        "description": "Escape all untrusted data before inserting into HTML output; Use a Content Security Policy (CSP) header; Validate and sanitize input server-side"
+      },
+      {
+        "vuln_type": "auth_bypass",
+        "description": "Enforce authentication on every protected endpoint; Use strong, well-reviewed authentication libraries; Implement multi-factor authentication for sensitive actions"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "line_findings": [
+      {
+        "line_num": 3,
+        "content": "$stmt->execute([$_GET['id']]);",
+        "vuln_type": "sql_injection",
+        "reason": "Unsanitized user input in query"
+      },
+      {
+        "line_num": 3,
+        "content": "$stmt->execute([$_GET['id']]);",
+        "vuln_type": "general",
+        "reason": "Unsanitized user input"
+      },
+      {
+        "line_num": 5,
+        "content": "echo \"<h1>Hello, \" . htmlspecialchars($_GET['name'], ENT_QUOTES, 'UTF-8') . \"!</h1>\";",
+        "vuln_type": "sql_injection",
+        "reason": "Unsanitized user input in query"
+      },
+      {
+        "line_num": 5,
+        "content": "echo \"<h1>Hello, \" . htmlspecialchars($_GET['name'], ENT_QUOTES, 'UTF-8') . \"!</h1>\";",
+        "vuln_type": "xss",
+        "reason": "Unsanitized echo of user input"
+      },
+      {
+        "line_num": 5,
+        "content": "echo \"<h1>Hello, \" . htmlspecialchars($_GET['name'], ENT_QUOTES, 'UTF-8') . \"!</h1>\";",
+        "vuln_type": "general",
+        "reason": "Unsanitized user input"
+      }
+    ],
+    "total_matches": 12,
+    "iterations": 1,
+    "impossible_vulns": [
+      "rce",
+      "file_upload"
+    ],
+    "patterns_found": {
+      "has_os_calls": true,
+      "has_file_ops": false,
+      "has_sql": true,
+      "has_network": true,
+      "has_eval": false,
+      "has_user_input": true
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T00:27:46.215396"
+  },
+  "2a8364bd4332c25b": {
+    "verdict": "vulnerable",
+    "confidence": 1.0,
+    "vulnerability_types": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "all_matched_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_072",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.2864,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_107",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3026,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3268,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_256",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3345,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_001",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3426,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "auth_bypass",
+        "description": "Enforce authentication on every protected endpoint; Use strong, well-reviewed authentication libraries; Implement multi-factor authentication for sensitive actions"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "line_findings": [
+      {
+        "line_num": 2,
+        "content": "$id = $_GET[\"id\"];",
+        "vuln_type": "sql_injection",
+        "reason": "Unsanitized user input in query"
+      },
+      {
+        "line_num": 2,
+        "content": "$id = $_GET[\"id\"];",
+        "vuln_type": "general",
+        "reason": "Unsanitized user input"
+      },
+      {
+        "line_num": 3,
+        "content": "$query = \"SELECT * FROM users WHERE id = \\\"$id\\\"\";",
+        "vuln_type": "sql_injection",
+        "reason": "SQL string concatenation"
+      },
+      {
+        "line_num": 4,
+        "content": "mysqli_query($conn, $query);",
+        "vuln_type": "sql_injection",
+        "reason": "Raw SQL query execution"
+      }
+    ],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": true,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": true
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T00:52:10.629769"
+  },
+  "91136b6cd8afc86c": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "file_upload",
+      "xxe",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "file_upload",
+      "xxe",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.781390"
+  },
+  "1a1d3e445827e94b": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "path_traversal",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 9,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "path_traversal",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.803344"
+  },
+  "28f166261950fa95": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "auth_bypass",
+      "path_traversal",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "auth_bypass",
+      "path_traversal",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.820307"
+  },
+  "5fea5c8b22a73b1d": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "rce",
+      "path_traversal",
+      "auth_bypass",
+      "xxe",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "rce",
+      "path_traversal",
+      "auth_bypass",
+      "xxe",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.834823"
+  },
+  "1f39a90d2d991e23": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "rce",
+      "auth_bypass",
+      "path_traversal",
+      "xxe",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "rce",
+      "auth_bypass",
+      "path_traversal",
+      "xxe",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.848471"
+  },
+  "009c76a43d36af84": {
+    "verdict": "potentially_vulnerable",
+    "confidence": 0.6,
+    "vulnerability_types": [
+      "file_upload"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "rce",
+      "file_upload",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [
+      {
+        "code_id": "code_185",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4036,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_210",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4193,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_198",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4298,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_012",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.6343,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_082",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "rce"
+        ],
+        "similarity_distance": 0.6491,
+        "cwes": [
+          {
+            "id": "CWE-94",
+            "name": "Improper Control of Generation of Code"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "file_upload",
+        "description": "Validate file type by content (magic bytes), not just extension; Rename uploaded files to random names on the server; Store uploaded files outside the web root"
+      }
+    ],
+    "line_findings": [],
+    "total_matches": 9,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "rce",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": true,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.869115"
+  },
+  "ede8414ebd2a8e84": {
+    "verdict": "potentially_vulnerable",
+    "confidence": 0.8,
+    "vulnerability_types": [
+      "command_injection",
+      "sql_injection",
+      "other_injection"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "rce",
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "python",
+    "suspected_by_planner": [
+      "sql_injection"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_185",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4036,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_012",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4049,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_210",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4193,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_198",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4677,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_200",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "rce"
+        ],
+        "similarity_distance": 0.4778,
+        "cwes": [
+          {
+            "id": "CWE-94",
+            "name": "Improper Control of Generation of Code"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "command_injection",
+        "description": "Avoid calling OS commands with user input entirely; Use language-native APIs instead of shell commands; If shell calls are unavoidable, use allowlist input validation"
+      },
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "line_findings": [
+      {
+        "line_num": 6,
+        "content": "    cursor.execute(\"SELECT * FROM users WHERE id = ?\", (user_id,))",
+        "vuln_type": "sql_injection",
+        "reason": "Raw SQL query execution"
+      }
+    ],
+    "total_matches": 12,
+    "iterations": 1,
+    "impossible_vulns": [
+      "rce",
+      "auth_bypass"
+    ],
+    "patterns_found": {
+      "has_os_calls": true,
+      "has_file_ops": false,
+      "has_sql": true,
+      "has_network": true,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.891987"
+  },
+  "8e02789f39e4af6d": {
+    "verdict": "potentially_vulnerable",
+    "confidence": 0.6,
+    "vulnerability_types": [
+      "file_upload",
+      "csrf"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "rce",
+      "file_upload",
+      "other_injection",
+      "csrf"
+    ],
+    "top_severity": "critical",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [
+      {
+        "code_id": "code_185",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4036,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_012",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4049,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_210",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4193,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_198",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4298,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_077",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "rce"
+        ],
+        "similarity_distance": 0.6499,
+        "cwes": [
+          {
+            "id": "CWE-94",
+            "name": "Improper Control of Generation of Code"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "file_upload",
+        "description": "Validate file type by content (magic bytes), not just extension; Rename uploaded files to random names on the server; Store uploaded files outside the web root"
+      },
+      {
+        "vuln_type": "csrf",
+        "description": "Use synchronizer token pattern (anti-CSRF tokens); Use SameSite cookie attribute (Strict or Lax); Verify Origin and Referer headers for state-changing requests"
+      }
+    ],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "rce",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": true,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.910558"
+  },
+  "11d1207f4bc21d87": {
+    "verdict": "potentially_vulnerable",
+    "confidence": 0.65,
+    "vulnerability_types": [
+      "command_injection"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "path_traversal",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [
+      {
+        "code_id": "code_185",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4036,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_012",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4049,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_210",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4193,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_198",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4298,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_110",
+        "language": "python",
+        "severity": "high",
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "similarity_distance": 0.5901,
+        "cwes": [
+          {
+            "id": "CWE-22",
+            "name": "Improper Limitation of a Pathname to a Restricted Directory"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A01:2021 \u2013 Broken Access Control",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "command_injection",
+        "description": "Avoid calling OS commands with user input entirely; Use language-native APIs instead of shell commands; If shell calls are unavoidable, use allowlist input validation"
+      }
+    ],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "path_traversal",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": true,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.938680"
+  },
+  "b2739d2a07fa2017": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "rce",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 9,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "rce",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.954840"
+  },
+  "47d35bbd72220966": {
+    "verdict": "clean",
+    "confidence": 0.5,
+    "vulnerability_types": [
+      "xss"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "xss",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "unknown",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 5,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.968452"
+  },
+  "589732c1c66bd37a": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "unknown",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 5,
+    "iterations": 1,
+    "impossible_vulns": [
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.980694"
+  },
+  "f7f04e3df31dcb42": {
+    "verdict": "clean",
+    "confidence": 0.5,
+    "vulnerability_types": [
+      "xss"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "xss",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "unknown",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 5,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:04.991035"
+  },
+  "a2ecfc8a14abfeb0": {
+    "verdict": "clean",
+    "confidence": 0.45,
+    "vulnerability_types": [
+      "xss"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "auth_bypass",
+      "path_traversal",
+      "xss"
+    ],
+    "top_severity": "",
+    "language_detected": "unknown",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 5,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "auth_bypass",
+      "path_traversal"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.000946"
+  },
+  "8cbe3b4d4b149843": {
+    "verdict": "clean",
+    "confidence": 0.5,
+    "vulnerability_types": [
+      "xss"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "xss",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "unknown",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 5,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.013329"
+  },
+  "88a761ac3c08d8c5": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "path_traversal",
+      "file_upload",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "path_traversal",
+      "file_upload",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.027806"
+  },
+  "435c33e3e1a25426": {
+    "verdict": "potentially_vulnerable",
+    "confidence": 0.6,
+    "vulnerability_types": [
+      "csrf"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "path_traversal",
+      "other_injection",
+      "csrf"
+    ],
+    "top_severity": "critical",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [
+      {
+        "code_id": "code_185",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4036,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_012",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4049,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_210",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4193,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_198",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4298,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_236",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.752,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "csrf",
+        "description": "Use synchronizer token pattern (anti-CSRF tokens); Use SameSite cookie attribute (Strict or Lax); Verify Origin and Referer headers for state-changing requests"
+      }
+    ],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "path_traversal",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.042247"
+  },
+  "e66c261701c2e7fe": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "rce",
+      "file_upload",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 9,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "rce",
+      "file_upload",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.058040"
+  },
+  "4d1dfea1517ae503": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "path_traversal",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.071884"
+  },
+  "d1a99055cf655959": {
+    "verdict": "potentially_vulnerable",
+    "confidence": 0.55,
+    "vulnerability_types": [
+      "csrf"
+    ],
+    "all_matched_vulns": [
+      "command_injection",
+      "rce",
+      "auth_bypass",
+      "path_traversal",
+      "other_injection",
+      "csrf"
+    ],
+    "top_severity": "critical",
+    "language_detected": "python",
+    "suspected_by_planner": [],
+    "evidence": [
+      {
+        "code_id": "code_185",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4036,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_012",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4049,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_210",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4193,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_198",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "similarity_distance": 0.4298,
+        "cwes": [
+          {
+            "id": "CWE-78",
+            "name": "Improper Neutralization of Special Elements in OS Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_260",
+        "language": "python",
+        "severity": "critical",
+        "vulnerability_types": [
+          "rce"
+        ],
+        "similarity_distance": 0.6747,
+        "cwes": [
+          {
+            "id": "CWE-94",
+            "name": "Improper Control of Generation of Code"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_Injection_Defense_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "csrf",
+        "description": "Use synchronizer token pattern (anti-CSRF tokens); Use SameSite cookie attribute (Strict or Lax); Verify Origin and Referer headers for state-changing requests"
+      }
+    ],
+    "line_findings": [],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [
+      "command_injection",
+      "rce",
+      "auth_bypass",
+      "path_traversal",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.089435"
+  },
+  "71f89f9c2c83dc48": {
+    "verdict": "vulnerable",
+    "confidence": 1.0,
+    "vulnerability_types": [
+      "sql_injection",
+      "other_injection"
+    ],
+    "all_matched_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_107",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3026,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3343,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_001",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.5755,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_072",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.588,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_256",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.5907,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "line_findings": [],
+    "total_matches": 9,
+    "iterations": 1,
+    "impossible_vulns": [
+      "auth_bypass"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": true,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.106792"
+  },
+  "58e67f64aea314d5": {
+    "verdict": "vulnerable",
+    "confidence": 1.0,
+    "vulnerability_types": [
+      "sql_injection",
+      "xss",
+      "other_injection"
+    ],
+    "all_matched_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "xss",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_072",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.6059,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.6068,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_256",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.6079,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_107",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.6083,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_081",
+        "language": "php",
+        "severity": "high",
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "similarity_distance": 0.3436,
+        "cwes": [
+          {
+            "id": "CWE-287",
+            "name": "Improper Authentication"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A07:2021 \u2013 Identification and Authentication Failures",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "xss",
+        "description": "Escape all untrusted data before inserting into HTML output; Use a Content Security Policy (CSP) header; Validate and sanitize input server-side"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "line_findings": [],
+    "total_matches": 8,
+    "iterations": 1,
+    "impossible_vulns": [
+      "auth_bypass"
+    ],
+    "patterns_found": {
+      "has_os_calls": true,
+      "has_file_ops": false,
+      "has_sql": true,
+      "has_network": true,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.127353"
+  },
+  "9bb8711cddc54e3f": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "php",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 7,
+    "iterations": 1,
+    "impossible_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.142032"
+  },
+  "2c462f50aa9c48aa": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "php",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 7,
+    "iterations": 1,
+    "impossible_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.157742"
+  },
+  "bd2e11d3d47a0711": {
+    "verdict": "clean",
+    "confidence": 0.1,
+    "vulnerability_types": [],
+    "all_matched_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "xxe",
+      "other_injection"
+    ],
+    "top_severity": "",
+    "language_detected": "php",
+    "suspected_by_planner": [],
+    "evidence": [],
+    "fix_guidance": [],
+    "line_findings": [],
+    "total_matches": 9,
+    "iterations": 1,
+    "impossible_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "xxe",
+      "other_injection"
+    ],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": false,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": false
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:03:05.175774"
+  },
+  "ede1c4c20d4dd6ef": {
+    "verdict": "vulnerable",
+    "confidence": 1.0,
+    "vulnerability_types": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "all_matched_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_072",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.2864,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_107",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3026,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_256",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3345,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.429,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_001",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.4363,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "auth_bypass",
+        "description": "Enforce authentication on every protected endpoint; Use strong, well-reviewed authentication libraries; Implement multi-factor authentication for sensitive actions"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "line_findings": [
+      {
+        "line_num": 2,
+        "content": "$id = $_GET['id'];",
+        "vuln_type": "sql_injection",
+        "reason": "Unsanitized user input in query"
+      },
+      {
+        "line_num": 2,
+        "content": "$id = $_GET['id'];",
+        "vuln_type": "general",
+        "reason": "Unsanitized user input"
+      },
+      {
+        "line_num": 3,
+        "content": "$query = \"SELECT * FROM users WHERE id = $id\";",
+        "vuln_type": "sql_injection",
+        "reason": "SQL string concatenation"
+      }
+    ],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": true,
+      "has_network": true,
+      "has_eval": false,
+      "has_user_input": true
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-07T01:23:59.993050"
   }
 }

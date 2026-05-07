@@ -1,27 +1,27 @@
 {
   "metrics": {
-    "accuracy": 1.0,
-    "precision": 1.0,
+    "accuracy": 0.9778,
+    "precision": 0.9701,
     "recall": 1.0,
-    "f1": 1.0,
+    "f1": 0.9848,
     "vuln_type_accuracy": 0.7385,
     "tp": 65,
-    "fp": 0,
-    "tn": 0,
+    "fp": 2,
+    "tn": 23,
     "fn": 0,
-    "total": 65
+    "total": 90
   },
   "vector_only": {
-    "accuracy": 0.9538,
-    "precision": 1.0,
+    "accuracy": 0.9556,
+    "precision": 0.9841,
     "recall": 0.9538,
-    "f1": 0.9764,
+    "f1": 0.9687,
     "vuln_type_accuracy": 0.6615,
     "tp": 62,
-    "fp": 0,
-    "tn": 0,
+    "fp": 1,
+    "tn": 24,
     "fn": 3,
-    "total": 65
+    "total": 90
   },
   "cases": [
     {
@@ -69,12 +69,12 @@
         "xss"
       ],
       "pred_vulns": [
-        "xss",
-        "file_upload",
         "other_injection",
-        "auth_bypass",
-        "rce",
+        "xss",
         "sql_injection",
+        "rce",
+        "auth_bypass",
+        "file_upload",
         "command_injection"
       ],
       "vuln_match": true,
@@ -92,8 +92,8 @@
       "pred_vulns": [
         "other_injection",
         "auth_bypass",
-        "sql_injection",
-        "csrf"
+        "csrf",
+        "sql_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -109,11 +109,11 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
-        "auth_bypass",
-        "rce",
+        "xss",
         "sql_injection",
-        "xss"
+        "rce",
+        "auth_bypass",
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -129,11 +129,11 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
+        "xss",
         "auth_bypass",
         "path_traversal",
-        "xxe",
-        "xss"
+        "command_injection",
+        "xxe"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -149,8 +149,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
         "rce",
+        "command_injection",
         "sql_injection"
       ],
       "vuln_match": true,
@@ -166,9 +166,9 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "command_injection",
+        "other_injection",
         "auth_bypass",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -184,11 +184,11 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
+        "xss",
         "auth_bypass",
         "path_traversal",
-        "xxe",
-        "xss"
+        "command_injection",
+        "xxe"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -206,8 +206,8 @@
         "other_injection",
         "auth_bypass",
         "path_traversal",
-        "xxe",
-        "command_injection"
+        "command_injection",
+        "xxe"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -223,11 +223,11 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
+        "xss",
         "auth_bypass",
         "path_traversal",
-        "xxe",
-        "xss"
+        "command_injection",
+        "xxe"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -242,11 +242,11 @@
         "csrf"
       ],
       "pred_vulns": [
-        "xss",
         "other_injection",
+        "xss",
         "path_traversal",
-        "xxe",
-        "command_injection"
+        "command_injection",
+        "xxe"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -262,11 +262,11 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
+        "xss",
         "auth_bypass",
         "path_traversal",
-        "xxe",
-        "xss"
+        "command_injection",
+        "xxe"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -282,10 +282,10 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "xxe",
-        "path_traversal",
         "rce",
-        "command_injection"
+        "path_traversal",
+        "command_injection",
+        "xxe"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -301,10 +301,10 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
+        "xss",
         "auth_bypass",
         "path_traversal",
-        "xss"
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -319,8 +319,8 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "command_injection",
-        "other_injection"
+        "other_injection",
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -368,8 +368,8 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "command_injection",
-        "other_injection"
+        "other_injection",
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -401,8 +401,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
         "rce",
+        "command_injection",
         "sql_injection"
       ],
       "vuln_match": true,
@@ -419,8 +419,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
         "rce",
+        "command_injection",
         "sql_injection"
       ],
       "vuln_match": true,
@@ -437,8 +437,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
         "rce",
+        "command_injection",
         "sql_injection"
       ],
       "vuln_match": true,
@@ -455,8 +455,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
         "rce",
+        "command_injection",
         "sql_injection"
       ],
       "vuln_match": true,
@@ -473,8 +473,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
         "rce",
+        "command_injection",
         "sql_injection"
       ],
       "vuln_match": true,
@@ -490,10 +490,10 @@
         "xss"
       ],
       "pred_vulns": [
-        "xss",
-        "command_injection",
         "other_injection",
-        "rce"
+        "xss",
+        "rce",
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -508,10 +508,10 @@
         "xss"
       ],
       "pred_vulns": [
-        "xss",
-        "command_injection",
         "other_injection",
-        "rce"
+        "xss",
+        "rce",
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -526,9 +526,9 @@
         "xss"
       ],
       "pred_vulns": [
+        "other_injection",
         "xss",
-        "command_injection",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -543,9 +543,9 @@
         "xss"
       ],
       "pred_vulns": [
+        "other_injection",
         "xss",
-        "command_injection",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -560,9 +560,9 @@
         "xss"
       ],
       "pred_vulns": [
+        "other_injection",
         "xss",
-        "command_injection",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -578,10 +578,10 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
-        "path_traversal",
+        "xss",
         "rce",
-        "xss"
+        "path_traversal",
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -597,10 +597,10 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
-        "path_traversal",
+        "xss",
         "rce",
-        "xss"
+        "path_traversal",
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -741,10 +741,10 @@
         "auth_bypass"
       ],
       "pred_vulns": [
+        "other_injection",
         "xss",
-        "command_injection",
         "path_traversal",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -759,9 +759,9 @@
         "auth_bypass"
       ],
       "pred_vulns": [
+        "other_injection",
         "xss",
-        "command_injection",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -776,9 +776,9 @@
         "auth_bypass"
       ],
       "pred_vulns": [
+        "other_injection",
         "xss",
-        "command_injection",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -793,9 +793,9 @@
         "xss"
       ],
       "pred_vulns": [
+        "other_injection",
         "xss",
-        "command_injection",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -811,8 +811,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
         "rce",
+        "command_injection",
         "sql_injection"
       ],
       "vuln_match": true,
@@ -845,10 +845,10 @@
         "xss"
       ],
       "pred_vulns": [
-        "command_injection",
-        "file_upload",
         "rce",
-        "csrf"
+        "csrf",
+        "file_upload",
+        "command_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -863,8 +863,8 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "command_injection",
-        "rce"
+        "rce",
+        "command_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -880,8 +880,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
-        "rce"
+        "rce",
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -896,8 +896,8 @@
         "file_upload"
       ],
       "pred_vulns": [
-        "file_upload",
-        "csrf"
+        "csrf",
+        "file_upload"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -913,8 +913,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
         "rce",
+        "command_injection",
         "ssrf"
       ],
       "vuln_match": true,
@@ -931,9 +931,9 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "xxe",
+        "rce",
         "path_traversal",
-        "rce"
+        "xxe"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -949,8 +949,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "auth_bypass",
         "rce",
+        "auth_bypass",
         "csrf"
       ],
       "vuln_match": true,
@@ -966,10 +966,10 @@
         "xxe"
       ],
       "pred_vulns": [
-        "command_injection",
         "file_upload",
+        "other_injection",
         "path_traversal",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -984,9 +984,9 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "command_injection",
+        "other_injection",
         "path_traversal",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1002,11 +1002,11 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "auth_bypass",
-        "xxe",
-        "path_traversal",
         "rce",
-        "command_injection"
+        "auth_bypass",
+        "path_traversal",
+        "command_injection",
+        "xxe"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -1021,12 +1021,12 @@
         "csrf"
       ],
       "pred_vulns": [
-        "file_upload",
         "other_injection",
         "csrf",
-        "auth_bypass",
-        "rce",
         "sql_injection",
+        "rce",
+        "auth_bypass",
+        "file_upload",
         "command_injection"
       ],
       "vuln_match": true,
@@ -1043,9 +1043,9 @@
       ],
       "pred_vulns": [
         "other_injection",
+        "rce",
         "auth_bypass",
         "path_traversal",
-        "rce",
         "command_injection"
       ],
       "vuln_match": false,
@@ -1077,8 +1077,8 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "file_upload",
         "auth_bypass",
+        "file_upload",
         "sql_injection"
       ],
       "vuln_match": true,
@@ -1110,10 +1110,10 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "command_injection",
-        "path_traversal",
+        "xss",
         "rce",
-        "xss"
+        "path_traversal",
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1128,9 +1128,9 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "command_injection",
+        "other_injection",
         "path_traversal",
-        "other_injection"
+        "command_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1145,8 +1145,8 @@
         "file_upload"
       ],
       "pred_vulns": [
-        "path_traversal",
-        "rce"
+        "rce",
+        "path_traversal"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -1178,11 +1178,316 @@
       ],
       "pred_vulns": [
         "other_injection",
-        "path_traversal",
         "rce",
-        "csrf"
+        "csrf",
+        "path_traversal"
       ],
       "vuln_match": false,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_066",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_067",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_068",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_069",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_070",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_071",
+      "outcome": "TN",
+      "confidence": 0.6,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "file_upload"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_072",
+      "outcome": "TN",
+      "confidence": 0.8,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "other_injection",
+        "command_injection",
+        "sql_injection"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_073",
+      "outcome": "TN",
+      "confidence": 0.6,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "csrf",
+        "file_upload"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_074",
+      "outcome": "TN",
+      "confidence": 0.65,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "command_injection"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_075",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_076",
+      "outcome": "TN",
+      "confidence": 0.5,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "xss"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_077",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_078",
+      "outcome": "TN",
+      "confidence": 0.5,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "xss"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_079",
+      "outcome": "TN",
+      "confidence": 0.45,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "xss"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_080",
+      "outcome": "TN",
+      "confidence": 0.5,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "xss"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_081",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_082",
+      "outcome": "TN",
+      "confidence": 0.6,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "csrf"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_083",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_084",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_085",
+      "outcome": "TN",
+      "confidence": 0.55,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "csrf"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_086",
+      "outcome": "FP",
+      "confidence": 1.0,
+      "gt_verdict": false,
+      "pred_verdict": true,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "other_injection",
+        "sql_injection"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_087",
+      "outcome": "FP",
+      "confidence": 1.0,
+      "gt_verdict": false,
+      "pred_verdict": true,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "other_injection",
+        "xss",
+        "sql_injection"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_088",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_089",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_090",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
       "iterations": 1
     }
   ]
