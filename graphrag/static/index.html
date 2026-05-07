@@ -192,6 +192,43 @@
     .report-model-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 10px; background:var(--green-pale); border:1px solid #A7D9B0; border-radius:20px; font-size:12px; font-weight:600; color:var(--green-dark); }
     .cost-badge { display:inline-flex; align-items:center; gap:4px; padding:4px 10px; background:#F0F9FF; border:1px solid #BAE6FD; border-radius:20px; font-size:11px; font-weight:500; color:#0369A1; }
 
+    /* ─── PROFESSIONAL REPORT FORMATTING ─── */
+    .final-report { padding:40px; background:#fff; border-radius:8px; border:1px solid #e0e0e0; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+    .report-header { border-bottom:3px solid #028090; padding-bottom:20px; margin-bottom:30px; }
+    .report-header h2 { color:#028090; margin:0 0 10px 0; font-size:28px; font-weight:bold; }
+    .report-meta { color:#666; font-size:12px; margin:0; text-transform:uppercase; letter-spacing:0.5px; }
+    .report-content { line-height:1.8; color:#333; margin:20px 0; }
+
+    .report-heading-1 { font-size:24px; color:#028090; border-bottom:2px solid #028090; padding-bottom:10px; margin-top:35px; margin-bottom:20px; }
+    .report-heading-2 { font-size:20px; color:#00A896; border-bottom:1px solid #00A896; padding-bottom:8px; margin-top:28px; margin-bottom:15px; }
+    .report-heading-3 { font-size:18px; color:#02C39A; margin-top:20px; margin-bottom:12px; font-weight:600; }
+    .report-heading-4 { font-size:16px; color:#333; margin-top:15px; margin-bottom:10px; font-weight:600; }
+
+    .report-paragraph { line-height:1.8; color:#333; font-size:14px; margin:0 0 15px 0; text-align:justify; }
+    .report-paragraph strong { color:#028090; font-weight:600; }
+    .report-paragraph em { font-style:italic; color:#555; }
+
+    .code-block { margin:20px 0; border-radius:6px; overflow:hidden; border-left:4px solid #028090; background:#f5f5f5; }
+    .code-block pre { margin:0; padding:15px; background:#f5f5f5; overflow-x:auto; }
+    .code-block code { font-family:'Courier New','Consolas',monospace; font-size:13px; line-height:1.5; color:#333; display:block; }
+
+    .report-list-numbered { list-style-type:decimal; margin:20px 0 20px 30px; padding:0; }
+    .report-list-numbered li { margin:12px 0; line-height:1.7; color:#333; font-size:14px; }
+    .report-list-numbered li strong { color:#028090; font-weight:600; }
+    .report-list-numbered li code { background:#f0f4f5; padding:2px 6px; border-radius:3px; font-family:monospace; color:#d32f2f; }
+
+    .report-list-bullet { list-style-type:disc; margin:15px 0 15px 30px; padding:0; }
+    .report-list-bullet li { margin:8px 0; line-height:1.7; color:#333; font-size:14px; }
+    .report-list-bullet li strong { color:#028090; }
+
+    .report-list-sub { list-style-type:circle; margin:10px 0 10px 30px; padding:0; }
+    .report-list-sub li { margin:6px 0; line-height:1.6; color:#555; font-size:13px; }
+
+    .report-link { color:#028090; text-decoration:none; border-bottom:1px dotted #028090; word-break:break-all; }
+    .report-link:hover { color:#00A896; border-bottom-color:#00A896; }
+
+    .report-footer { margin-top:40px; padding-top:20px; border-top:2px solid #e0e0e0; text-align:center; background:#f9f9f9; padding:20px; border-radius:0 0 8px 8px; margin-left:-40px; margin-right:-40px; margin-bottom:-40px; }
+
     /* ─── MISC ─── */
     .cached-pill { display:inline-flex; align-items:center; gap:4px; padding:3px 9px; background:#F0FDF4; border:1px solid #BBF7D0; border-radius:20px; font-size:11px; color:#166534; font-weight:500; }
     .error-box { padding:10px 12px; background:#FEF2F2; border:1px solid #FECACA; border-radius:var(--r-sm); color:#B91C1C; font-size:13px; margin-top:8px; display:none; }
@@ -878,7 +915,16 @@ async function analyze() {
 
 /* ── Generate LLM Report on Demand ── */
 async function generateAndDisplayReport(analysisId, model) {
-  if (!model || !apiKeys[model]) {
+  if (!model) {
+    document.getElementById('reportCard').style.display = 'none';
+    return;
+  }
+
+  // Check if Ollama model (DeepSeek, Gemma) - no API key needed
+  const isOllama = model && (model.includes('deepseek') || model.includes('gemma'));
+
+  // For Gemini, require API key
+  if (!isOllama && !apiKeys[model]) {
     document.getElementById('reportCard').style.display = 'none';
     return;
   }
@@ -892,7 +938,7 @@ async function generateAndDisplayReport(analysisId, model) {
     const response = await fetch('/api/generate-report-stream', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ analysis_id: analysisId, api_key: apiKeys[model] || '' }),
+      body: JSON.stringify({ analysis_id: analysisId, model: model, api_key: apiKeys[model] || '' }),
     });
 
     if (!response.ok) {
@@ -919,7 +965,25 @@ async function generateAndDisplayReport(analysisId, model) {
               reportBody.innerHTML = '<div class="placeholder"><div class="spinner-green"></div><p>Generating with ' + esc(event.model) + '…</p></div>';
             } else if (event.type === 'report') {
               reportText = event.content;
-              reportBody.innerHTML = renderMd(reportText);
+              // Use new professional formatting
+              const formattedReport = formatReportText(reportText);
+              const reportHtml = `
+                <div class="final-report">
+                  <div class="report-header">
+                    <h2>🛡️ Security Analysis Report</h2>
+                    <p class="report-meta">Generated by: <strong>${esc(event.model || 'AI')}</strong> | ${new Date().toLocaleString()}</p>
+                  </div>
+                  <div class="report-content">
+                    ${formattedReport}
+                  </div>
+                  <div class="report-footer">
+                    <button onclick="downloadReport()" class="btn-secondary">📥 Download Report</button>
+                    <button onclick="printReport()" class="btn-secondary">🖨️ Print Report</button>
+                    <button onclick="copyReportToClipboard()" class="btn-secondary">📋 Copy to Clipboard</button>
+                  </div>
+                </div>
+              `;
+              reportBody.innerHTML = reportHtml;
             } else if (event.type === 'metadata') {
               const costEl = document.getElementById('costBadge');
               if (event.tokens_in || event.cost) {
@@ -941,6 +1005,201 @@ async function generateAndDisplayReport(analysisId, model) {
     showError('Report generation failed: ' + e.message);
     reportCard.style.display = 'none';
   }
+}
+
+/* ── Format Report Text (Professional Formatting) ── */
+function formatReportText(text) {
+  // Decode HTML entities
+  function decodeHtmlEntities(txt) {
+    const map = {'&amp;':'&', '&lt;':'<', '&gt;':'>', '&quot;':'"', '&#39;':"'", '&#x2F;':'/'};
+    return txt.replace(/&[^;]+;/g, (e) => map[e] || e);
+  }
+
+  text = decodeHtmlEntities(text);
+  const sections = text.split(/\n\n+/);
+  let html = '';
+
+  for (let section of sections) {
+    section = section.trim();
+    if (!section) continue;
+
+    // Check for headings
+    const headingMatch = section.match(/^(#{1,4})\s+(.+)$/m);
+    if (headingMatch) {
+      const level = headingMatch[1].length;
+      const title = headingMatch[2].trim();
+      html += `<h${level} class="report-heading-${level}">${esc(title)}</h${level}>`;
+      continue;
+    }
+
+    // Check for code blocks
+    if (section.includes('```') || (section.includes('`') && section.split('`').length > 2)) {
+      html += formatCodeBlock(section);
+      continue;
+    }
+
+    // Check for numbered lists
+    if (/^\d+\.\s+/.test(section)) {
+      html += formatNumberedList(section);
+      continue;
+    }
+
+    // Check for bulleted lists
+    if (/^[-*•]\s+/.test(section)) {
+      html += formatBulletList(section);
+      continue;
+    }
+
+    // Default: format as paragraph
+    html += formatParagraph(section);
+  }
+
+  return html;
+}
+
+function formatCodeBlock(text) {
+  let codeContent = text;
+  const codeMatch = text.match(/```(\w*)\n([\s\S]*?)```/);
+  const language = codeMatch ? codeMatch[1] : 'plaintext';
+
+  if (codeMatch) {
+    codeContent = codeMatch[2].trim();
+  } else {
+    codeContent = text.replace(/`/g, '').trim();
+  }
+
+  codeContent = esc(codeContent);
+  return `<div class="code-block"><pre><code class="language-${language}">${codeContent}</code></pre></div>`;
+}
+
+function formatNumberedList(text) {
+  const items = text.split(/\n(?=\d+\.\s+)/);
+  let html = '<ol class="report-list-numbered">';
+
+  for (let item of items) {
+    const match = item.match(/^\d+\.\s+(.+)$/m);
+    if (match) {
+      const content = match[1].trim();
+      const lines = content.split(/\n/);
+      html += '<li>' + formatInlineElements(lines[0]);
+
+      if (lines.length > 1) {
+        html += '<ul class="report-list-sub">';
+        for (let i = 1; i < lines.length; i++) {
+          const subLine = lines[i].trim();
+          if (subLine.match(/^[-*]/)) {
+            html += '<li>' + formatInlineElements(subLine.replace(/^[-*]\s*/, '')) + '</li>';
+          }
+        }
+        html += '</ul>';
+      }
+      html += '</li>';
+    }
+  }
+
+  html += '</ol>';
+  return html;
+}
+
+function formatBulletList(text) {
+  const items = text.split(/\n(?=[-*•]\s+)/);
+  let html = '<ul class="report-list-bullet">';
+
+  for (let item of items) {
+    const cleanItem = item.replace(/^[-*•]\s+/, '').trim();
+    const lines = cleanItem.split(/\n/);
+    html += '<li>' + formatInlineElements(lines[0]);
+
+    if (lines.length > 1) {
+      html += '<ul class="report-list-sub">';
+      for (let i = 1; i < lines.length; i++) {
+        const subLine = lines[i].trim();
+        if (subLine.match(/^[-*•]/)) {
+          html += '<li>' + formatInlineElements(subLine.replace(/^[-*•]\s*/, '')) + '</li>';
+        }
+      }
+      html += '</ul>';
+    }
+    html += '</li>';
+  }
+
+  html += '</ul>';
+  return html;
+}
+
+function formatParagraph(text) {
+  const lines = text.split(/\n/);
+  let formattedText = '';
+
+  for (let line of lines) {
+    line = line.trim();
+    if (line) {
+      formattedText += formatInlineElements(line) + ' ';
+    }
+  }
+
+  return `<p class="report-paragraph">${formattedText.trim()}</p>`;
+}
+
+function formatInlineElements(text) {
+  if (!text) return '';
+
+  text = esc(text);
+
+  // Bold
+  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/__(.*?)__/g, '<strong>$1</strong>');
+
+  // Italic
+  text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  text = text.replace(/_(.*?)_/g, '<em>$1</em>');
+
+  // Inline code
+  text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // URLs
+  text = text.replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" class="report-link">$1</a>');
+
+  return text;
+}
+
+/* ── Utility Functions for Reports ── */
+function downloadReport() {
+  const reportText = document.querySelector('.report-content') ? document.querySelector('.report-content').innerText : '';
+  const timestamp = new Date().toISOString().split('T')[0];
+  const filename = `security-report-${timestamp}.txt`;
+
+  const element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(reportText));
+  element.setAttribute('download', filename);
+  element.style.display = 'none';
+
+  document.body.appendChild(element);
+  element.click();
+  document.body.removeChild(element);
+}
+
+function printReport() {
+  window.print();
+}
+
+function copyReportToClipboard() {
+  const reportText = document.querySelector('.report-content') ? document.querySelector('.report-content').innerText : '';
+
+  navigator.clipboard.writeText(reportText).then(() => {
+    const btn = event.target;
+    const originalText = btn.textContent;
+    btn.textContent = '✓ Copied!';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.disabled = false;
+    }, 2000);
+  }).catch(err => {
+    console.error('Failed to copy:', err);
+    showError('Failed to copy report');
+  });
 }
 
 /* ── Cache ── */

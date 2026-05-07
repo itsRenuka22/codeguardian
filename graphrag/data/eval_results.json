@@ -34,10 +34,10 @@
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
         "path_traversal",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -52,9 +52,9 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -69,13 +69,13 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
-        "sql_injection",
-        "rce",
         "auth_bypass",
+        "command_injection",
         "file_upload",
-        "command_injection"
+        "rce",
+        "xss",
+        "other_injection",
+        "sql_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -90,10 +90,10 @@
         "csrf"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
         "csrf",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -108,12 +108,12 @@
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
-        "sql_injection",
-        "rce",
         "auth_bypass",
-        "command_injection"
+        "command_injection",
+        "rce",
+        "xss",
+        "other_injection",
+        "sql_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -128,11 +128,11 @@
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
         "auth_bypass",
-        "path_traversal",
         "command_injection",
+        "path_traversal",
+        "xss",
+        "other_injection",
         "xxe"
       ],
       "vuln_match": true,
@@ -148,10 +148,10 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "command_injection",
-        "sql_injection"
+        "sql_injection",
+        "rce",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -166,9 +166,9 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
-        "command_injection"
+        "command_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -183,11 +183,11 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
         "auth_bypass",
-        "path_traversal",
         "command_injection",
+        "path_traversal",
+        "xss",
+        "other_injection",
         "xxe"
       ],
       "vuln_match": true,
@@ -203,10 +203,10 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
-        "path_traversal",
         "command_injection",
+        "path_traversal",
+        "other_injection",
         "xxe"
       ],
       "vuln_match": true,
@@ -222,11 +222,11 @@
         "xxe"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
         "auth_bypass",
-        "path_traversal",
         "command_injection",
+        "path_traversal",
+        "xss",
+        "other_injection",
         "xxe"
       ],
       "vuln_match": true,
@@ -242,10 +242,10 @@
         "csrf"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
-        "path_traversal",
         "command_injection",
+        "path_traversal",
+        "xss",
+        "other_injection",
         "xxe"
       ],
       "vuln_match": false,
@@ -261,11 +261,11 @@
         "ssrf"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
         "auth_bypass",
-        "path_traversal",
         "command_injection",
+        "path_traversal",
+        "xss",
+        "other_injection",
         "xxe"
       ],
       "vuln_match": false,
@@ -281,10 +281,10 @@
         "deserialization"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
-        "path_traversal",
         "command_injection",
+        "path_traversal",
+        "rce",
+        "other_injection",
         "xxe"
       ],
       "vuln_match": false,
@@ -300,11 +300,11 @@
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
         "auth_bypass",
+        "command_injection",
         "path_traversal",
-        "command_injection"
+        "xss",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -319,8 +319,8 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection"
+        "command_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -335,8 +335,8 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -351,9 +351,9 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -368,8 +368,8 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection"
+        "command_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -384,8 +384,8 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -400,10 +400,10 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "command_injection",
-        "sql_injection"
+        "sql_injection",
+        "rce",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -418,10 +418,10 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "command_injection",
-        "sql_injection"
+        "sql_injection",
+        "rce",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -436,10 +436,10 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "command_injection",
-        "sql_injection"
+        "sql_injection",
+        "rce",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -454,10 +454,10 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "command_injection",
-        "sql_injection"
+        "sql_injection",
+        "rce",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -472,10 +472,10 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "command_injection",
-        "sql_injection"
+        "sql_injection",
+        "rce",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -490,10 +490,10 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "rce",
-        "command_injection"
+        "command_injection",
+        "other_injection",
+        "rce"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -508,10 +508,10 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "rce",
-        "command_injection"
+        "command_injection",
+        "other_injection",
+        "rce"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -526,9 +526,9 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "command_injection"
+        "command_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -543,9 +543,9 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "command_injection"
+        "command_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -560,9 +560,9 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "command_injection"
+        "command_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -577,11 +577,11 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
-        "rce",
+        "command_injection",
         "path_traversal",
-        "command_injection"
+        "rce",
+        "xss",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -596,11 +596,11 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
-        "rce",
+        "command_injection",
         "path_traversal",
-        "command_injection"
+        "rce",
+        "xss",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -615,10 +615,10 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -633,10 +633,10 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -651,10 +651,10 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -669,10 +669,10 @@
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -687,10 +687,10 @@
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -705,10 +705,10 @@
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -723,10 +723,10 @@
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -741,10 +741,10 @@
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
+        "command_injection",
         "path_traversal",
-        "command_injection"
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -759,9 +759,9 @@
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "command_injection"
+        "command_injection",
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -776,9 +776,9 @@
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "command_injection"
+        "command_injection",
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -793,9 +793,9 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "command_injection"
+        "command_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -810,10 +810,10 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "command_injection",
-        "sql_injection"
+        "sql_injection",
+        "rce",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -828,9 +828,9 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -845,10 +845,10 @@
         "xss"
       ],
       "pred_vulns": [
-        "rce",
-        "csrf",
+        "command_injection",
         "file_upload",
-        "command_injection"
+        "csrf",
+        "rce"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -863,8 +863,8 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "rce",
-        "command_injection"
+        "command_injection",
+        "rce"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -879,9 +879,9 @@
         "command_injection"
       ],
       "pred_vulns": [
+        "command_injection",
         "other_injection",
-        "rce",
-        "command_injection"
+        "rce"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -896,8 +896,8 @@
         "file_upload"
       ],
       "pred_vulns": [
-        "csrf",
-        "file_upload"
+        "file_upload",
+        "csrf"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -912,10 +912,10 @@
         "rce"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "command_injection",
-        "ssrf"
+        "other_injection",
+        "ssrf",
+        "rce"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -930,10 +930,10 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
+        "xxe",
         "path_traversal",
-        "xxe"
+        "other_injection",
+        "rce"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -948,10 +948,10 @@
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "auth_bypass",
-        "csrf"
+        "csrf",
+        "other_injection",
+        "rce"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -966,10 +966,10 @@
         "xxe"
       ],
       "pred_vulns": [
-        "file_upload",
-        "other_injection",
+        "command_injection",
         "path_traversal",
-        "command_injection"
+        "other_injection",
+        "file_upload"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -984,9 +984,9 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
+        "command_injection",
         "path_traversal",
-        "command_injection"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1001,11 +1001,11 @@
         "ssrf"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "auth_bypass",
-        "path_traversal",
         "command_injection",
+        "path_traversal",
+        "rce",
+        "other_injection",
         "xxe"
       ],
       "vuln_match": false,
@@ -1021,13 +1021,13 @@
         "csrf"
       ],
       "pred_vulns": [
-        "other_injection",
-        "csrf",
-        "sql_injection",
-        "rce",
         "auth_bypass",
+        "command_injection",
         "file_upload",
-        "command_injection"
+        "csrf",
+        "rce",
+        "other_injection",
+        "sql_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1042,11 +1042,11 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
         "auth_bypass",
+        "command_injection",
         "path_traversal",
-        "command_injection"
+        "rce",
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -1076,10 +1076,10 @@
         "file_upload"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
         "file_upload",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1109,11 +1109,11 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xss",
-        "rce",
+        "command_injection",
         "path_traversal",
-        "command_injection"
+        "rce",
+        "xss",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1128,9 +1128,9 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
+        "command_injection",
         "path_traversal",
-        "command_injection"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1145,8 +1145,8 @@
         "file_upload"
       ],
       "pred_vulns": [
-        "rce",
-        "path_traversal"
+        "path_traversal",
+        "rce"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -1161,8 +1161,8 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1177,10 +1177,10 @@
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
-        "rce",
+        "path_traversal",
         "csrf",
-        "path_traversal"
+        "rce",
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -1261,9 +1261,9 @@
       "pred_verdict": false,
       "gt_vulns": [],
       "pred_vulns": [
-        "other_injection",
         "command_injection",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1276,8 +1276,8 @@
       "pred_verdict": false,
       "gt_vulns": [],
       "pred_vulns": [
-        "csrf",
-        "file_upload"
+        "file_upload",
+        "csrf"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1436,8 +1436,8 @@
       "pred_verdict": true,
       "gt_vulns": [],
       "pred_vulns": [
-        "other_injection",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -1450,9 +1450,9 @@
       "pred_verdict": true,
       "gt_vulns": [],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
