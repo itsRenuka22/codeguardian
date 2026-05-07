@@ -7,8 +7,8 @@ logger = logging.getLogger(__name__)
 
 
 class GeminiClient(LLMClient):
-    # Use gemini-1.5-flash which is the stable, widely available model
-    model_id = "gemini-1.5-flash"
+    # Use gemini-flash-latest as specified in API documentation
+    model_id = "gemini-flash-latest"
     display_name = "Gemini Flash"
     _COST_IN  = 0.075  # $ per 1M input tokens (Flash pricing)
     _COST_OUT = 0.30   # $ per 1M output tokens (Flash pricing)
