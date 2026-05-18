@@ -130,7 +130,6 @@ SQL Injection, XSS, Auth Bypass, Command Injection, Path Traversal, Other Inject
 
 ```bash
 pip install -r requirements.txt
-pip install -r graphrag/requirements.txt
 ```
 
 For LLM-backed analysis (optional — GraphRAG works without any API key):
@@ -282,7 +281,6 @@ codeguardian/
 │   ├── index_vectors.py            # One-time ChromaDB indexing
 │   ├── config.py                   # Central configuration
 │   ├── setup_check.py              # Environment checker
-│   ├── requirements.txt
 │   │
 │   ├── agent/
 │   │   ├── agent.py                # CodeGuardianAgent orchestrator
