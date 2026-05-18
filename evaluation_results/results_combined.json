@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "total_test_cases": 120,
+    "evaluation_date": "2026-05-17",
+    "gemini_source": "OpenRouter (google/gemini-2.5-flash)",
+    "gemma_source": "Ollama local (gemma2:2b)",
+    "deepseek_source": "Ollama local (deepseek-r1:8b)"
+  },
+  "gemini_openrouter": {
+    "f1": 0.9574,
+    "precision": 0.9375,
+    "recall": 0.9783,
+    "accuracy": 0.9333,
+    "fpr": 0.2143,
+    "tp": 90,
+    "fp": 6,
+    "tn": 22,
+    "fn": 2,
+    "runtime_min": 0.85,
+    "avg_latency_s": 0.4251,
+    "llm_rate": 0.4333,
+    "llm_errors": 0,
+    "per_vuln_f1": {
+      "sql_injection": 0.6429,
+      "xss": 0.4333,
+      "auth_bypass": 0.1026,
+      "path_traversal": 0.5405,
+      "command_injection": 0.1176,
+      "other_injection": 0.1739,
+      "file_upload": 0.1818,
+      "ssrf": 0.4,
+      "csrf": 0.2857,
+      "template_injection": 0.0,
+      "rce": 0.6667
+    }
+  },
+  "gemma_3_1b": {
+    "f1": 0.8976,
+    "precision": 0.8142,
+    "recall": 1.0,
+    "accuracy": 0.825,
+    "fpr": 0.75,
+    "tp": 92,
+    "fp": 21,
+    "tn": 7,
+    "fn": 0,
+    "runtime_min": 2.02,
+    "avg_latency_s": 1.0096,
+    "llm_rate": 0.425,
+    "llm_errors": 1,
+    "per_vuln_f1": {
+      "sql_injection": 0.6429,
+      "xss": 0.4407,
+      "auth_bypass": 0.1026,
+      "path_traversal": 0.5405,
+      "command_injection": 0.1176,
+      "other_injection": 0.1739,
+      "file_upload": 0.1818,
+      "ssrf": 0.4,
+      "csrf": 0.2857,
+      "template_injection": 0.0,
+      "rce": 0.6667
+    }
+  },
+  "deepseek_r1": {
+    "f1": 0.9405,
+    "precision": 0.9355,
+    "recall": 0.9457,
+    "accuracy": 0.9083,
+    "fpr": 0.2143,
+    "tp": 87,
+    "fp": 6,
+    "tn": 22,
+    "fn": 5,
+    "runtime_min": 80.62,
+    "avg_latency_s": 40.3091,
+    "llm_rate": 0.425,
+    "llm_errors": 1,
+    "per_vuln_f1": {
+      "sql_injection": 0.6429,
+      "xss": 0.4333,
+      "auth_bypass": 0.1026,
+      "path_traversal": 0.5405,
+      "command_injection": 0.1176,
+      "other_injection": 0.1739,
+      "file_upload": 0.1818,
+      "ssrf": 0.4,
+      "csrf": 0.2857,
+      "template_injection": 0.6667,
+      "rce": 0.6667
+    }
+  }
+}

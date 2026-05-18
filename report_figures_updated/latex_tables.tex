@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{siunitx}
+\begin{document}
+
+% ─── Table 1: Multi-Model Evaluation Results ───────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Multi-Model Evaluation Results on 120-Case Hybrid Benchmark}
+\label{tab:results}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Model} & \textbf{F1} & \textbf{Precision} & \textbf{Recall} & \textbf{FPR} & \textbf{Runtime} & \textbf{Cost} \\
+\midrule
+Gemini 2.5 Flash (OpenRouter) & 0.957 & 0.938 & 0.978 & 0.214 & 0.8\,min & \$0.026 \\
+Gemma 3 1B (Ollama)           & 0.898 & 0.814 & 1.000 & 0.750 & 2.0\,min & Free \\
+DeepSeek R1 (Ollama)          & 0.941 & 0.935 & 0.946 & 0.214 & 80.6\,min & Free \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ─── Table 2: Confusion Matrices ───────────────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Confusion Matrices for All Models (120 Test Cases)}
+\label{tab:confusion}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{TP} & \textbf{FP} & \textbf{TN} & \textbf{FN} \\
+\midrule
+Gemini 2.5 Flash & 90 & 6 & 22 & 2 \\
+Gemma 3 1B       & 92 & 21 & 7 & 0 \\
+DeepSeek R1      & 87 & 6 & 22 & 5 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ─── Table 3: Performance Characteristics ──────────────────────────────────
+\begin{table}[htbp]
+\centering
+\caption{Performance Characteristics: Latency, Throughput, and LLM Consultation}
+\label{tab:perf}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Avg Latency (s)} & \textbf{Throughput (cases/min)} & \textbf{LLM Rate} & \textbf{LLM Errors} \\
+\midrule
+Gemini 2.5 Flash & 0.43 & 141.1 & 43.3% & 0 \\
+Gemma 3 1B       & 1.01 & 59.4 & 42.5% & 1 \\
+DeepSeek R1      & 40.3  & 1.49 & 42.5% & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\end{document}

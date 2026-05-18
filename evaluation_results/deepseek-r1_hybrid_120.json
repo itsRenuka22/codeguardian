@@ -2,48 +2,48 @@
   "model": "deepseek-r1",
   "mode": "hybrid",
   "threshold": 0.85,
-  "timestamp": "2026-05-16T20:06:07.676751",
+  "timestamp": "2026-05-17T20:49:05.508759",
   "eval_set_size": 120,
-  "total_runtime_s": 4923.2,
+  "total_runtime_s": 4837.16,
   "failures": 0,
   "classification": {
-    "f1": 0.9026,
-    "precision": 0.8544,
-    "recall": 0.9565,
-    "accuracy": 0.8417,
-    "fpr": 0.5357,
-    "tp": 88,
-    "fp": 15,
-    "tn": 13,
-    "fn": 4
+    "f1": 0.9405,
+    "precision": 0.9355,
+    "recall": 0.9457,
+    "accuracy": 0.9083,
+    "fpr": 0.2143,
+    "tp": 87,
+    "fp": 6,
+    "tn": 22,
+    "fn": 5
   },
   "llm_consultation": {
-    "overall_consulted": 52,
+    "overall_consulted": 51,
     "overall_total": 120,
-    "overall_rate": 0.4333,
-    "original_consulted": 38,
+    "overall_rate": 0.425,
+    "original_consulted": 37,
     "original_total": 90,
-    "original_rate": 0.4222,
+    "original_rate": 0.4111,
     "lowconf_consulted": 14,
     "lowconf_total": 30,
     "lowconf_rate": 0.4667,
-    "llm_agreed": 37,
-    "llm_disagreed": 15,
-    "agreement_rate": 0.7115
+    "llm_agreed": 35,
+    "llm_disagreed": 16,
+    "agreement_rate": 0.6863
   },
   "critic_stats": {
     "total_cases": 120,
-    "graphrag_only": 68,
+    "graphrag_only": 69,
     "llm_consulted": 52,
-    "llm_agreed": 37,
-    "llm_disagreed": 15,
-    "llm_errors": 0,
+    "llm_agreed": 35,
+    "llm_disagreed": 16,
+    "llm_errors": 1,
     "llm_rate": 0.433,
-    "agreement_rate": 0.712
+    "agreement_rate": 0.673
   },
   "latency": {
-    "mean": 41.026,
-    "total": 4923.12
+    "mean": 40.3091,
+    "total": 4837.09
   },
   "results": [
     {
@@ -65,15 +65,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.1344,
-        "planner": 0.002,
-        "executor": 0.131,
-        "critic": 0.0004
+        "total": 0.2004,
+        "planner": 0.0017,
+        "executor": 0.1972,
+        "critic": 0.0005
       },
       "memory": {
-        "before_mb": 544.0,
-        "after_mb": 581.11,
-        "delta_mb": 37.11
+        "before_mb": 365.05,
+        "after_mb": 406.14,
+        "delta_mb": 41.09
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -111,15 +111,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0243,
+        "total": 0.0263,
         "planner": 0.0005,
-        "executor": 0.0235,
+        "executor": 0.0254,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 581.11,
-        "after_mb": 581.48,
-        "delta_mb": 0.38
+        "before_mb": 406.17,
+        "after_mb": 407.5,
+        "delta_mb": 1.33
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -162,15 +162,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0291,
-        "planner": 0.0004,
-        "executor": 0.0283,
+        "total": 0.0354,
+        "planner": 0.0005,
+        "executor": 0.0345,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 581.48,
-        "after_mb": 572.39,
-        "delta_mb": -9.09
+        "before_mb": 407.52,
+        "after_mb": 408.5,
+        "delta_mb": 0.98
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -210,15 +210,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0266,
+        "total": 0.0285,
         "planner": 0.0003,
-        "executor": 0.026,
+        "executor": 0.0279,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 572.39,
-        "after_mb": 572.72,
-        "delta_mb": 0.33
+        "before_mb": 408.5,
+        "after_mb": 407.75,
+        "delta_mb": -0.75
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -261,14 +261,14 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0208,
+        "total": 0.0213,
         "planner": 0.0002,
-        "executor": 0.0202,
+        "executor": 0.0207,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 572.72,
-        "after_mb": 573.23,
+        "before_mb": 407.75,
+        "after_mb": 408.27,
         "delta_mb": 0.52
       },
       "hybrid_info": {
@@ -311,15 +311,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0266,
+        "total": 0.0291,
         "planner": 0.0006,
-        "executor": 0.0252,
+        "executor": 0.0277,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 573.23,
-        "after_mb": 572.89,
-        "delta_mb": -0.34
+        "before_mb": 408.28,
+        "after_mb": 408.67,
+        "delta_mb": 0.39
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -358,15 +358,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0259,
+        "total": 0.0241,
         "planner": 0.0005,
-        "executor": 0.0247,
+        "executor": 0.0229,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 572.89,
-        "after_mb": 570.91,
-        "delta_mb": -1.98
+        "before_mb": 408.7,
+        "after_mb": 404.66,
+        "delta_mb": -4.05
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -403,15 +403,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0253,
+        "total": 0.0232,
         "planner": 0.0008,
-        "executor": 0.024,
-        "critic": 0.0004
+        "executor": 0.022,
+        "critic": 0.0003
       },
       "memory": {
-        "before_mb": 570.91,
-        "after_mb": 571.42,
-        "delta_mb": 0.52
+        "before_mb": 404.66,
+        "after_mb": 400.17,
+        "delta_mb": -4.48
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -453,15 +453,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0273,
-        "planner": 0.0009,
-        "executor": 0.0258,
+        "total": 0.0182,
+        "planner": 0.0005,
+        "executor": 0.0171,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 571.42,
-        "after_mb": 564.45,
-        "delta_mb": -6.97
+        "before_mb": 400.17,
+        "after_mb": 400.19,
+        "delta_mb": 0.02
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -502,15 +502,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0221,
-        "planner": 0.0007,
-        "executor": 0.0208,
+        "total": 0.02,
+        "planner": 0.0005,
+        "executor": 0.019,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 564.45,
-        "after_mb": 560.66,
-        "delta_mb": -3.8
+        "before_mb": 400.19,
+        "after_mb": 400.31,
+        "delta_mb": 0.12
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -552,15 +552,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 152.8129,
-        "planner": 0.0009,
-        "executor": 0.0401,
-        "critic": 152.7701
+        "total": 123.9265,
+        "planner": 0.0008,
+        "executor": 0.021,
+        "critic": 123.9026
       },
       "memory": {
-        "before_mb": 560.66,
-        "after_mb": 28.52,
-        "delta_mb": -532.14
+        "before_mb": 400.31,
+        "after_mb": 33.47,
+        "delta_mb": -366.84
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -568,7 +568,7 @@
         "graphrag_confidence": 0.8,
         "llm_confidence": 0.7,
         "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The XML parsing method may allow XXE if the securityEnabled flag is not always true, despite the mitigation of external DTD access.",
+        "llm_reasoning": "The XML parsing method lacks full mitigation against XXE by not disabling entity expansion, despite restricting external entities, and contains a TODO indicating incomplete fixes.",
         "agreement": true
       },
       "ground_truth": {
@@ -601,15 +601,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.2513,
-        "planner": 0.0035,
-        "executor": 0.2466,
+        "total": 0.1659,
+        "planner": 0.0015,
+        "executor": 0.1632,
         "critic": 0.0005
       },
       "memory": {
-        "before_mb": 29.14,
-        "after_mb": 123.61,
-        "delta_mb": 94.47
+        "before_mb": 34.03,
+        "after_mb": 127.72,
+        "delta_mb": 93.69
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -633,12 +633,12 @@
     {
       "test_id": "eval_013",
       "verdict": "vulnerable",
-      "confidence": 0.8,
+      "confidence": 0.77,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "path_traversal",
         "xss",
-        "Information Disclosure"
+        "SSRF"
       ],
       "all_matched_vulns": [
         "command_injection",
@@ -647,27 +647,27 @@
         "xxe",
         "auth_bypass",
         "other_injection",
-        "Information Disclosure"
+        "SSRF"
       ],
       "language_detected": "python",
       "timing": {
-        "total": 202.2801,
+        "total": 161.6535,
         "planner": 0.0005,
-        "executor": 0.0225,
-        "critic": 202.2561
+        "executor": 0.0237,
+        "critic": 161.6283
       },
       "memory": {
-        "before_mb": 123.62,
-        "after_mb": 76.36,
-        "delta_mb": -47.27
+        "before_mb": 127.73,
+        "after_mb": 76.48,
+        "delta_mb": -51.25
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.8,
-        "llm_confidence": 0.8,
+        "llm_confidence": 0.7,
         "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The catch block returns error messages and prints stack traces, potentially exposing sensitive information to attackers.",
+        "llm_reasoning": "The user-controlled URL parameter is not sanitized and could be exploited for Server-Side Request Forgery if used in network operations.",
         "agreement": true
       },
       "ground_truth": {
@@ -698,15 +698,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0657,
-        "planner": 0.0022,
-        "executor": 0.0626,
+        "total": 0.0731,
+        "planner": 0.003,
+        "executor": 0.0685,
         "critic": 0.0005
       },
       "memory": {
-        "before_mb": 77.06,
-        "after_mb": 117.95,
-        "delta_mb": 40.89
+        "before_mb": 77.11,
+        "after_mb": 118.31,
+        "delta_mb": 41.2
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -745,14 +745,14 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0227,
+        "total": 0.0234,
         "planner": 0.0007,
-        "executor": 0.0213,
+        "executor": 0.022,
         "critic": 0.0004
       },
       "memory": {
-        "before_mb": 117.97,
-        "after_mb": 120.8,
+        "before_mb": 118.33,
+        "after_mb": 121.16,
         "delta_mb": 2.83
       },
       "hybrid_info": {
@@ -789,15 +789,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0268,
+        "total": 0.0301,
         "planner": 0.0009,
-        "executor": 0.0252,
+        "executor": 0.0285,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 120.81,
-        "after_mb": 122.14,
-        "delta_mb": 1.33
+        "before_mb": 121.17,
+        "after_mb": 122.62,
+        "delta_mb": 1.45
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -833,15 +833,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0211,
-        "planner": 0.0013,
-        "executor": 0.019,
+        "total": 0.0226,
+        "planner": 0.0009,
+        "executor": 0.0209,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 122.14,
-        "after_mb": 122.34,
-        "delta_mb": 0.2
+        "before_mb": 122.62,
+        "after_mb": 122.81,
+        "delta_mb": 0.19
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -879,15 +879,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0213,
-        "planner": 0.0011,
-        "executor": 0.0191,
+        "total": 0.0235,
+        "planner": 0.001,
+        "executor": 0.0214,
         "critic": 0.0004
       },
       "memory": {
-        "before_mb": 122.34,
-        "after_mb": 122.5,
-        "delta_mb": 0.16
+        "before_mb": 122.81,
+        "after_mb": 122.89,
+        "delta_mb": 0.08
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -923,15 +923,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0214,
-        "planner": 0.0011,
-        "executor": 0.0195,
+        "total": 0.0224,
+        "planner": 0.001,
+        "executor": 0.0205,
         "critic": 0.0004
       },
       "memory": {
-        "before_mb": 122.53,
-        "after_mb": 122.75,
-        "delta_mb": 0.22
+        "before_mb": 122.92,
+        "after_mb": 123.2,
+        "delta_mb": 0.28
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -967,15 +967,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0202,
+        "total": 0.0216,
         "planner": 0.0011,
-        "executor": 0.0182,
+        "executor": 0.0197,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 122.77,
-        "after_mb": 122.83,
-        "delta_mb": 0.06
+        "before_mb": 123.2,
+        "after_mb": 123.28,
+        "delta_mb": 0.08
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1016,13 +1016,13 @@
       "timing": {
         "total": 0.0281,
         "planner": 0.0004,
-        "executor": 0.0271,
+        "executor": 0.0272,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 122.84,
-        "after_mb": 123.27,
-        "delta_mb": 0.42
+        "before_mb": 123.3,
+        "after_mb": 123.7,
+        "delta_mb": 0.41
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1061,15 +1061,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0249,
+        "total": 0.0252,
         "planner": 0.0006,
-        "executor": 0.0236,
+        "executor": 0.0239,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 123.27,
-        "after_mb": 123.38,
-        "delta_mb": 0.11
+        "before_mb": 123.7,
+        "after_mb": 123.8,
+        "delta_mb": 0.09
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1113,9 +1113,9 @@
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 123.38,
-        "after_mb": 123.52,
-        "delta_mb": 0.14
+        "before_mb": 123.8,
+        "after_mb": 123.86,
+        "delta_mb": 0.06
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1154,15 +1154,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0239,
+        "total": 0.024,
         "planner": 0.0004,
-        "executor": 0.0229,
+        "executor": 0.0231,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 123.52,
-        "after_mb": 123.58,
-        "delta_mb": 0.06
+        "before_mb": 123.86,
+        "after_mb": 123.88,
+        "delta_mb": 0.02
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1200,14 +1200,14 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0245,
+        "total": 0.0244,
         "planner": 0.0006,
-        "executor": 0.0233,
+        "executor": 0.0232,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 123.59,
-        "after_mb": 123.62,
+        "before_mb": 123.88,
+        "after_mb": 123.91,
         "delta_mb": 0.03
       },
       "hybrid_info": {
@@ -1246,14 +1246,14 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.021,
+        "total": 0.0206,
         "planner": 0.0005,
-        "executor": 0.02,
+        "executor": 0.0197,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 123.62,
-        "after_mb": 123.66,
+        "before_mb": 123.91,
+        "after_mb": 123.94,
         "delta_mb": 0.03
       },
       "hybrid_info": {
@@ -1292,15 +1292,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0212,
+        "total": 0.0206,
         "planner": 0.0003,
-        "executor": 0.0205,
+        "executor": 0.02,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 123.67,
-        "after_mb": 123.77,
-        "delta_mb": 0.09
+        "before_mb": 123.95,
+        "after_mb": 124.0,
+        "delta_mb": 0.05
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1337,14 +1337,14 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0179,
+        "total": 0.0175,
         "planner": 0.0005,
-        "executor": 0.017,
+        "executor": 0.0166,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 123.78,
-        "after_mb": 123.8,
+        "before_mb": 124.02,
+        "after_mb": 124.03,
         "delta_mb": 0.02
       },
       "hybrid_info": {
@@ -1382,15 +1382,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0179,
+        "total": 0.0176,
         "planner": 0.0003,
-        "executor": 0.0173,
+        "executor": 0.0169,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 123.8,
-        "after_mb": 123.81,
-        "delta_mb": 0.02
+        "before_mb": 124.03,
+        "after_mb": 124.08,
+        "delta_mb": 0.05
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1427,15 +1427,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0178,
+        "total": 0.0176,
         "planner": 0.0005,
-        "executor": 0.0169,
+        "executor": 0.0167,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 123.81,
-        "after_mb": 123.86,
-        "delta_mb": 0.05
+        "before_mb": 124.09,
+        "after_mb": 124.19,
+        "delta_mb": 0.09
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1475,14 +1475,14 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0213,
+        "total": 0.0221,
         "planner": 0.0005,
-        "executor": 0.0203,
-        "critic": 0.0003
+        "executor": 0.0211,
+        "critic": 0.0002
       },
       "memory": {
-        "before_mb": 123.86,
-        "after_mb": 124.03,
+        "before_mb": 124.19,
+        "after_mb": 124.36,
         "delta_mb": 0.17
       },
       "hybrid_info": {
@@ -1523,15 +1523,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0204,
-        "planner": 0.0005,
-        "executor": 0.0194,
-        "critic": 0.0003
+        "total": 0.0206,
+        "planner": 0.0004,
+        "executor": 0.0197,
+        "critic": 0.0002
       },
       "memory": {
-        "before_mb": 124.03,
-        "after_mb": 124.06,
-        "delta_mb": 0.03
+        "before_mb": 124.36,
+        "after_mb": 124.38,
+        "delta_mb": 0.02
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1570,15 +1570,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0184,
-        "planner": 0.0006,
-        "executor": 0.0173,
+        "total": 0.0176,
+        "planner": 0.0005,
+        "executor": 0.0166,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 124.06,
-        "after_mb": 124.09,
-        "delta_mb": 0.03
+        "before_mb": 124.38,
+        "after_mb": 124.42,
+        "delta_mb": 0.05
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1617,15 +1617,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0247,
-        "planner": 0.0007,
-        "executor": 0.0234,
+        "total": 0.0262,
+        "planner": 0.0006,
+        "executor": 0.0249,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 124.09,
-        "after_mb": 124.45,
-        "delta_mb": 0.36
+        "before_mb": 124.42,
+        "after_mb": 124.83,
+        "delta_mb": 0.41
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1664,15 +1664,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0225,
+        "total": 0.022,
         "planner": 0.0008,
-        "executor": 0.0208,
-        "critic": 0.0004
+        "executor": 0.0204,
+        "critic": 0.0003
       },
       "memory": {
-        "before_mb": 124.45,
-        "after_mb": 124.5,
-        "delta_mb": 0.05
+        "before_mb": 124.83,
+        "after_mb": 124.83,
+        "delta_mb": 0.0
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1710,15 +1710,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0228,
+        "total": 0.0216,
         "planner": 0.0005,
-        "executor": 0.0219,
-        "critic": 0.0003
+        "executor": 0.0207,
+        "critic": 0.0002
       },
       "memory": {
-        "before_mb": 124.5,
-        "after_mb": 124.69,
-        "delta_mb": 0.19
+        "before_mb": 124.84,
+        "after_mb": 124.98,
+        "delta_mb": 0.14
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1756,15 +1756,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0225,
+        "total": 0.0205,
         "planner": 0.0004,
-        "executor": 0.0216,
-        "critic": 0.0003
+        "executor": 0.0197,
+        "critic": 0.0002
       },
       "memory": {
-        "before_mb": 124.69,
-        "after_mb": 124.69,
-        "delta_mb": 0.0
+        "before_mb": 124.98,
+        "after_mb": 125.02,
+        "delta_mb": 0.03
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1802,14 +1802,14 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0188,
+        "total": 0.0174,
         "planner": 0.0005,
-        "executor": 0.0178,
-        "critic": 0.0003
+        "executor": 0.0165,
+        "critic": 0.0002
       },
       "memory": {
-        "before_mb": 124.7,
-        "after_mb": 124.73,
+        "before_mb": 125.03,
+        "after_mb": 125.06,
         "delta_mb": 0.03
       },
       "hybrid_info": {
@@ -1848,15 +1848,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0185,
-        "planner": 0.0006,
-        "executor": 0.0175,
-        "critic": 0.0003
+        "total": 0.0174,
+        "planner": 0.0005,
+        "executor": 0.0165,
+        "critic": 0.0002
       },
       "memory": {
-        "before_mb": 124.73,
-        "after_mb": 124.73,
-        "delta_mb": 0.0
+        "before_mb": 125.06,
+        "after_mb": 125.08,
+        "delta_mb": 0.02
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1895,15 +1895,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0238,
-        "planner": 0.0006,
-        "executor": 0.0225,
+        "total": 0.0234,
+        "planner": 0.0005,
+        "executor": 0.0223,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 124.73,
-        "after_mb": 124.86,
-        "delta_mb": 0.12
+        "before_mb": 125.09,
+        "after_mb": 125.38,
+        "delta_mb": 0.28
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1940,15 +1940,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.019,
-        "planner": 0.0007,
-        "executor": 0.0177,
+        "total": 0.0176,
+        "planner": 0.0006,
+        "executor": 0.0165,
         "critic": 0.0003
       },
       "memory": {
-        "before_mb": 124.88,
-        "after_mb": 124.89,
-        "delta_mb": 0.02
+        "before_mb": 125.38,
+        "after_mb": 125.44,
+        "delta_mb": 0.06
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -1985,14 +1985,14 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0188,
+        "total": 0.0172,
         "planner": 0.0004,
-        "executor": 0.018,
+        "executor": 0.0165,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 124.89,
-        "after_mb": 124.92,
+        "before_mb": 125.44,
+        "after_mb": 125.47,
         "delta_mb": 0.03
       },
       "hybrid_info": {
@@ -2030,15 +2030,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0186,
-        "planner": 0.0005,
-        "executor": 0.0177,
-        "critic": 0.0003
+        "total": 0.0171,
+        "planner": 0.0004,
+        "executor": 0.0163,
+        "critic": 0.0002
       },
       "memory": {
-        "before_mb": 124.92,
-        "after_mb": 124.97,
-        "delta_mb": 0.05
+        "before_mb": 125.47,
+        "after_mb": 125.48,
+        "delta_mb": 0.02
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -2077,15 +2077,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0254,
+        "total": 0.0241,
         "planner": 0.0005,
-        "executor": 0.0243,
+        "executor": 0.0231,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 124.97,
-        "after_mb": 125.0,
-        "delta_mb": 0.03
+        "before_mb": 125.48,
+        "after_mb": 125.55,
+        "delta_mb": 0.06
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -2123,14 +2123,14 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0195,
+        "total": 0.0183,
         "planner": 0.0009,
-        "executor": 0.0175,
-        "critic": 0.0004
+        "executor": 0.0165,
+        "critic": 0.0003
       },
       "memory": {
-        "before_mb": 125.02,
-        "after_mb": 125.03,
+        "before_mb": 125.56,
+        "after_mb": 125.58,
         "delta_mb": 0.02
       },
       "hybrid_info": {
@@ -2155,7 +2155,7 @@
     {
       "test_id": "eval_046",
       "verdict": "vulnerable",
-      "confidence": 0.815,
+      "confidence": 0.83,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "command_injection",
@@ -2171,23 +2171,23 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 120.4169,
-        "planner": 0.0004,
-        "executor": 0.022,
-        "critic": 120.3912
+        "total": 153.0927,
+        "planner": 0.0003,
+        "executor": 0.0232,
+        "critic": 153.0686
       },
       "memory": {
-        "before_mb": 125.03,
-        "after_mb": 78.56,
-        "delta_mb": -46.47
+        "before_mb": 125.58,
+        "after_mb": 79.19,
+        "delta_mb": -46.39
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.8,
-        "llm_confidence": 0.85,
+        "llm_confidence": 0.9,
         "llm_verdict": "vulnerable",
-        "llm_reasoning": "The provided code snippet demonstrates a persistent XSS vulnerability by allowing script injection in the 'HwName' parameter without proper sanitization.",
+        "llm_reasoning": "The exploit demonstrates a persistent XSS vulnerability in the 'HwName' parameter due to inadequate input sanitization.",
         "agreement": true
       },
       "ground_truth": {
@@ -2203,38 +2203,33 @@
     {
       "test_id": "eval_047",
       "verdict": "clean",
-      "confidence": 0.19,
+      "confidence": 0.1,
       "predicted_vulnerable": false,
-      "vulnerability_types": [
-        "cross_site_scripting",
-        "sql_injection"
-      ],
+      "vulnerability_types": [],
       "all_matched_vulns": [
         "rce",
-        "command_injection",
-        "cross_site_scripting",
-        "sql_injection"
+        "command_injection"
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 167.4691,
-        "planner": 0.0028,
-        "executor": 0.1058,
-        "critic": 167.3594
+        "total": 126.8631,
+        "planner": 0.0019,
+        "executor": 0.0486,
+        "critic": 126.8103
       },
       "memory": {
-        "before_mb": 79.12,
-        "after_mb": 76.31,
-        "delta_mb": -2.81
+        "before_mb": 79.78,
+        "after_mb": 19.95,
+        "delta_mb": -59.83
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.1,
-        "llm_confidence": 0.4,
-        "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The snippet describes known vulnerabilities such as cross-site scripting and SQL injection in an ASP Talk script, suggesting potential issues.",
-        "agreement": false
+        "llm_confidence": 0.1,
+        "llm_verdict": "clean",
+        "llm_reasoning": "The provided input is not a code snippet but an exploit description; no vulnerabilities were identified in the absence of code.",
+        "agreement": true
       },
       "ground_truth": {
         "vulnerability_types": [
@@ -2248,39 +2243,37 @@
     },
     {
       "test_id": "eval_048",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.665,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.9,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
-        "other_injection",
-        "remote_code_execution"
+        "other_injection"
       ],
       "all_matched_vulns": [
         "rce",
         "command_injection",
-        "other_injection",
-        "remote_code_execution"
+        "other_injection"
       ],
       "language_detected": "python",
       "timing": {
-        "total": 118.3469,
-        "planner": 0.0016,
-        "executor": 0.1012,
-        "critic": 118.2434
+        "total": 107.8624,
+        "planner": 0.0023,
+        "executor": 0.3059,
+        "critic": 107.5537
       },
       "memory": {
-        "before_mb": 76.86,
-        "after_mb": 23.58,
-        "delta_mb": -53.28
+        "before_mb": 20.59,
+        "after_mb": 21.11,
+        "delta_mb": 0.52
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.65,
-        "llm_confidence": 0.7,
-        "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The script demonstrates a command injection vulnerability by injecting and executing arbitrary commands via hardcoded parameters.",
-        "agreement": true
+        "llm_confidence": 0.9,
+        "llm_verdict": "clean",
+        "llm_reasoning": "The code is an exploit script designed to demonstrate command injection in Sickbeard, but it does not contain any security vulnerabilities itself.",
+        "agreement": false
       },
       "ground_truth": {
         "vulnerability_types": [
@@ -2306,15 +2299,15 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 103.2275,
-        "planner": 0.0012,
-        "executor": 0.2078,
-        "critic": 103.0181
+        "total": 110.7398,
+        "planner": 0.0015,
+        "executor": 0.2091,
+        "critic": 110.5287
       },
       "memory": {
-        "before_mb": 24.28,
-        "after_mb": 74.58,
-        "delta_mb": 50.3
+        "before_mb": 21.77,
+        "after_mb": 74.97,
+        "delta_mb": 53.2
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -2322,7 +2315,7 @@
         "graphrag_confidence": 0.7,
         "llm_confidence": 0.7,
         "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The provided text describes an exploit for a file upload vulnerability in imageLibrary, but actual code was not provided for direct analysis.",
+        "llm_reasoning": "The provided text describes an exploit for a file upload vulnerability, indicating insecure handling of uploaded files.",
         "agreement": true
       },
       "ground_truth": {
@@ -2354,15 +2347,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0924,
+        "total": 0.089,
         "planner": 0.0036,
-        "executor": 0.0787,
+        "executor": 0.0786,
         "critic": 0.0004
       },
       "memory": {
-        "before_mb": 75.12,
-        "after_mb": 118.03,
-        "delta_mb": 42.91
+        "before_mb": 75.59,
+        "after_mb": 119.05,
+        "delta_mb": 43.45
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -2401,15 +2394,15 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 0.0374,
+        "total": 0.0336,
         "planner": 0.0003,
-        "executor": 0.0369,
-        "critic": 0.0002
+        "executor": 0.0331,
+        "critic": 0.0001
       },
       "memory": {
-        "before_mb": 118.05,
-        "after_mb": 120.56,
-        "delta_mb": 2.52
+        "before_mb": 119.06,
+        "after_mb": 121.41,
+        "delta_mb": 2.34
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -2433,7 +2426,7 @@
     {
       "test_id": "eval_052",
       "verdict": "vulnerable",
-      "confidence": 0.75,
+      "confidence": 0.795,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "csrf",
@@ -2450,23 +2443,23 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 85.5761,
+        "total": 102.788,
         "planner": 0.0001,
-        "executor": 0.0218,
-        "critic": 85.5537
+        "executor": 0.0285,
+        "critic": 102.759
       },
       "memory": {
-        "before_mb": 120.56,
-        "after_mb": 77.56,
-        "delta_mb": -43.0
+        "before_mb": 121.41,
+        "after_mb": 77.11,
+        "delta_mb": -44.3
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.75,
-        "llm_confidence": 0.75,
+        "llm_confidence": 0.9,
         "llm_verdict": "vulnerable",
-        "llm_reasoning": "The provided exploit description indicates a SQL injection vulnerability enabling authentication bypass.",
+        "llm_reasoning": "The provided exploit demonstrates a classic SQL injection bypassing authentication, confirming the vulnerability.",
         "agreement": true
       },
       "ground_truth": {
@@ -2498,15 +2491,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0713,
-        "planner": 0.0059,
-        "executor": 0.0635,
+        "total": 0.0702,
+        "planner": 0.0057,
+        "executor": 0.0626,
         "critic": 0.0007
       },
       "memory": {
-        "before_mb": 78.12,
-        "after_mb": 121.95,
-        "delta_mb": 43.83
+        "before_mb": 77.75,
+        "after_mb": 122.56,
+        "delta_mb": 44.81
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -2544,15 +2537,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0296,
+        "total": 0.0288,
         "planner": 0.0016,
-        "executor": 0.0265,
+        "executor": 0.0256,
         "critic": 0.0006
       },
       "memory": {
-        "before_mb": 121.95,
-        "after_mb": 123.59,
-        "delta_mb": 1.64
+        "before_mb": 122.56,
+        "after_mb": 124.08,
+        "delta_mb": 1.52
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -2594,15 +2587,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0357,
-        "planner": 0.0009,
-        "executor": 0.0339,
+        "total": 0.0373,
+        "planner": 0.001,
+        "executor": 0.0354,
         "critic": 0.0004
       },
       "memory": {
-        "before_mb": 123.61,
-        "after_mb": 125.16,
-        "delta_mb": 1.55
+        "before_mb": 124.09,
+        "after_mb": 125.75,
+        "delta_mb": 1.66
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -2646,15 +2639,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0341,
+        "total": 0.0364,
         "planner": 0.0005,
-        "executor": 0.0332,
+        "executor": 0.0355,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 125.17,
-        "after_mb": 126.12,
-        "delta_mb": 0.95
+        "before_mb": 125.77,
+        "after_mb": 126.75,
+        "delta_mb": 0.98
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -2684,7 +2677,7 @@
         "command_injection",
         "path_traversal",
         "other_injection",
-        "cross_site_scripting"
+        "Cross-site Scripting"
       ],
       "all_matched_vulns": [
         "command_injection",
@@ -2692,19 +2685,19 @@
         "auth_bypass",
         "path_traversal",
         "other_injection",
-        "cross_site_scripting"
+        "Cross-site Scripting"
       ],
       "language_detected": "javascript",
       "timing": {
-        "total": 110.1954,
+        "total": 85.6237,
         "planner": 0.0002,
-        "executor": 0.0201,
-        "critic": 110.1746
+        "executor": 0.0174,
+        "critic": 85.6054
       },
       "memory": {
-        "before_mb": 126.14,
-        "after_mb": 80.77,
-        "delta_mb": -45.38
+        "before_mb": 126.77,
+        "after_mb": 19.34,
+        "delta_mb": -107.42
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -2712,7 +2705,7 @@
         "graphrag_confidence": 0.65,
         "llm_confidence": 0.9,
         "llm_verdict": "vulnerable",
-        "llm_reasoning": "The application does not sanitize user-supplied input in the File parameter, enabling cross-site scripting attacks.",
+        "llm_reasoning": "The provided description and example exploit clearly demonstrate a cross-site scripting vulnerability due to improper sanitization of user input.",
         "agreement": true
       },
       "ground_truth": {
@@ -2727,9 +2720,9 @@
     },
     {
       "test_id": "eval_058",
-      "verdict": "clean",
-      "confidence": 0.41,
-      "predicted_vulnerable": false,
+      "verdict": "vulnerable",
+      "confidence": 0.8,
+      "predicted_vulnerable": true,
       "vulnerability_types": [
         "SQL Injection",
         "Cross-Site Scripting"
@@ -2741,23 +2734,23 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 115.4406,
-        "planner": 0.0008,
-        "executor": 0.0395,
-        "critic": 115.3994
+        "total": 124.4561,
+        "planner": 0.0009,
+        "executor": 0.1937,
+        "critic": 124.2585
       },
       "memory": {
-        "before_mb": 81.38,
-        "after_mb": 80.59,
-        "delta_mb": -0.78
+        "before_mb": 19.94,
+        "after_mb": 18.33,
+        "delta_mb": -1.61
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.2,
-        "llm_confidence": 0.9,
+        "llm_confidence": 0.8,
         "llm_verdict": "vulnerable",
-        "llm_reasoning": "The provided text explicitly describes SQL injection and XSS vulnerabilities in the application due to insufficient sanitization of user-supplied data.",
+        "llm_reasoning": "The provided description explicitly details SQL injection and XSS vulnerabilities due to insufficient input sanitization in the Active News Manager system.",
         "agreement": false
       },
       "ground_truth": {
@@ -2788,15 +2781,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0479,
-        "planner": 0.0027,
-        "executor": 0.0443,
-        "critic": 0.0003
+        "total": 0.3876,
+        "planner": 0.0054,
+        "executor": 0.3795,
+        "critic": 0.0012
       },
       "memory": {
-        "before_mb": 81.12,
-        "after_mb": 121.75,
-        "delta_mb": 40.62
+        "before_mb": 18.89,
+        "after_mb": 114.91,
+        "delta_mb": 96.02
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -2819,29 +2812,29 @@
     },
     {
       "test_id": "eval_060",
-      "verdict": "clean",
-      "confidence": 0.41,
-      "predicted_vulnerable": false,
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "predicted_vulnerable": true,
       "vulnerability_types": [
         "SQL Injection",
-        "Cross-site Scripting"
+        "Cross-Site Scripting"
       ],
       "all_matched_vulns": [
         "sql_injection",
         "SQL Injection",
-        "Cross-site Scripting"
+        "Cross-Site Scripting"
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 95.2417,
+        "total": 118.2723,
         "planner": 0.0002,
-        "executor": 0.0104,
-        "critic": 95.2308
+        "executor": 0.0195,
+        "critic": 118.2524
       },
       "memory": {
-        "before_mb": 121.77,
-        "after_mb": 80.8,
-        "delta_mb": -40.97
+        "before_mb": 114.91,
+        "after_mb": 74.95,
+        "delta_mb": -39.95
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -2849,7 +2842,7 @@
         "graphrag_confidence": 0.2,
         "llm_confidence": 0.9,
         "llm_verdict": "vulnerable",
-        "llm_reasoning": "The provided snippet explicitly describes SQL injection and cross-site scripting vulnerabilities in the application.",
+        "llm_reasoning": "The code lacks proper input sanitization, enabling SQL injection and XSS attacks as described.",
         "agreement": false
       },
       "ground_truth": {
@@ -2864,14 +2857,14 @@
     },
     {
       "test_id": "eval_061",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.62,
+      "verdict": "vulnerable",
+      "confidence": 0.9,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "command_injection",
         "xss",
         "other_injection",
-        "Cross-site Scripting"
+        "cross-site scripting"
       ],
       "all_matched_vulns": [
         "rce",
@@ -2879,19 +2872,19 @@
         "xss",
         "path_traversal",
         "other_injection",
-        "Cross-site Scripting"
+        "cross-site scripting"
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 117.8691,
-        "planner": 0.0007,
-        "executor": 0.0321,
-        "critic": 117.8356
+        "total": 95.6876,
+        "planner": 0.0009,
+        "executor": 0.0516,
+        "critic": 95.6347
       },
       "memory": {
-        "before_mb": 81.34,
-        "after_mb": 81.11,
-        "delta_mb": -0.23
+        "before_mb": 75.45,
+        "after_mb": 75.42,
+        "delta_mb": -0.03
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -2899,7 +2892,7 @@
         "graphrag_confidence": 0.5,
         "llm_confidence": 0.9,
         "llm_verdict": "vulnerable",
-        "llm_reasoning": "The vulnerability description explicitly details an XSS issue in the software.",
+        "llm_reasoning": "The code does not properly sanitize user input in the 'matchword' parameter, enabling cross-site scripting attacks.",
         "agreement": false
       },
       "ground_truth": {
@@ -2914,9 +2907,9 @@
     },
     {
       "test_id": "eval_062",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.76,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.9,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "path_traversal",
         "other_injection"
@@ -2928,15 +2921,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 123.0162,
+        "total": 147.2901,
         "planner": 0.0018,
-        "executor": 0.0579,
-        "critic": 122.9554
+        "executor": 0.054,
+        "critic": 147.233
       },
       "memory": {
-        "before_mb": 81.67,
-        "after_mb": 80.44,
-        "delta_mb": -1.23
+        "before_mb": 75.98,
+        "after_mb": 75.19,
+        "delta_mb": -0.8
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -2944,7 +2937,7 @@
         "graphrag_confidence": 0.7,
         "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code is an exploit module for a directory traversal vulnerability and does not contain any security flaws or vulnerabilities itself.",
+        "llm_reasoning": "The code is an exploit module for directory traversal and does not contain any inherent security vulnerabilities or unsafe practices.",
         "agreement": false
       },
       "ground_truth": {
@@ -2960,38 +2953,38 @@
     {
       "test_id": "eval_063",
       "verdict": "potentially_vulnerable",
-      "confidence": 0.715,
+      "confidence": 0.73,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "path_traversal",
-        "sensitive_data_exposure",
-        "remote_code_execution"
+        "insecure_data_storage",
+        "authentication_bypass"
       ],
       "all_matched_vulns": [
         "rce",
         "path_traversal",
-        "sensitive_data_exposure",
-        "remote_code_execution"
+        "insecure_data_storage",
+        "authentication_bypass"
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 112.2224,
-        "planner": 0.0012,
-        "executor": 0.0402,
-        "critic": 112.1804
+        "total": 115.7063,
+        "planner": 0.0011,
+        "executor": 0.0465,
+        "critic": 115.6521
       },
       "memory": {
-        "before_mb": 81.08,
-        "after_mb": 80.2,
-        "delta_mb": -0.88
+        "before_mb": 75.8,
+        "after_mb": 76.77,
+        "delta_mb": 0.97
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.7,
-        "llm_confidence": 0.75,
+        "llm_confidence": 0.8,
         "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The advisory describes multiple vulnerabilities including credential database disclosure and arbitrary file upload/delete, with evidence matching remote code execution and path traversal.",
+        "llm_reasoning": "The provided vulnerability description indicates potential issues with authentication and file handling in betaparticle blog, allowing unauthorized access or file manipulation.",
         "agreement": true
       },
       "ground_truth": {
@@ -3010,34 +3003,32 @@
       "confidence": 0.7,
       "predicted_vulnerable": true,
       "vulnerability_types": [
-        "other_injection",
-        "SQL Injection"
+        "other_injection"
       ],
       "all_matched_vulns": [
         "sql_injection",
-        "other_injection",
-        "SQL Injection"
+        "other_injection"
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 85.1437,
-        "planner": 0.0046,
-        "executor": 0.0509,
-        "critic": 85.0877
+        "total": 25.2431,
+        "planner": 0.0011,
+        "executor": 0.0495,
+        "critic": 25.1919
       },
       "memory": {
-        "before_mb": 80.72,
-        "after_mb": 80.5,
-        "delta_mb": -0.22
+        "before_mb": 77.33,
+        "after_mb": 116.53,
+        "delta_mb": 39.2
       },
       "hybrid_info": {
-        "method": "hybrid",
-        "llm_consulted": true,
+        "method": "graphrag_only",
+        "llm_consulted": false,
         "graphrag_confidence": 0.7,
-        "llm_confidence": 0.7,
-        "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The snippet describes a blind SQL injection vulnerability in the wishlist.asp file at the catid parameter, indicating potential security issues.",
-        "agreement": true
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
       },
       "ground_truth": {
         "vulnerability_types": [
@@ -3070,15 +3061,15 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 78.6579,
-        "planner": 0.0007,
-        "executor": 0.0428,
-        "critic": 78.614
+        "total": 71.211,
+        "planner": 0.0009,
+        "executor": 0.0365,
+        "critic": 71.1733
       },
       "memory": {
-        "before_mb": 81.06,
-        "after_mb": 80.77,
-        "delta_mb": -0.3
+        "before_mb": 116.56,
+        "after_mb": 76.78,
+        "delta_mb": -39.78
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3086,7 +3077,7 @@
         "graphrag_confidence": 0.65,
         "llm_confidence": 0.9,
         "llm_verdict": "vulnerable",
-        "llm_reasoning": "The provided vulnerability description shows clear SQL injection in the admin login and XSS in comment fields.",
+        "llm_reasoning": "The code exhibits clear vulnerabilities through SQL injection for admin login bypass and XSS in user input fields.",
         "agreement": true
       },
       "ground_truth": {
@@ -3115,15 +3106,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 87.3174,
+        "total": 105.8027,
         "planner": 0.0005,
-        "executor": 0.0386,
-        "critic": 87.2776
+        "executor": 0.0452,
+        "critic": 105.7545
       },
       "memory": {
-        "before_mb": 81.39,
-        "after_mb": 19.53,
-        "delta_mb": -61.86
+        "before_mb": 77.39,
+        "after_mb": 54.27,
+        "delta_mb": -23.12
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3131,7 +3122,7 @@
         "graphrag_confidence": 0.1,
         "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The Fibonacci function is pure and does not involve any user input, external systems, or potential security exploits.",
+        "llm_reasoning": "The code is a simple recursive function with no user input or external calls, thus no security vulnerabilities.",
         "agreement": true
       },
       "ground_truth": {
@@ -3154,15 +3145,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 83.8241,
-        "planner": 0.0007,
-        "executor": 0.1995,
-        "critic": 83.6236
+        "total": 69.3546,
+        "planner": 0.0015,
+        "executor": 0.1669,
+        "critic": 69.1854
       },
       "memory": {
-        "before_mb": 20.27,
-        "after_mb": 74.52,
-        "delta_mb": 54.25
+        "before_mb": 54.95,
+        "after_mb": 67.08,
+        "delta_mb": 12.12
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3170,7 +3161,7 @@
         "graphrag_confidence": 0.1,
         "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "The bubble sort implementation lacks any security-critical operations like I/O or system calls, making it inherently safe.",
+        "llm_reasoning": "The bubble sort function is a standard algorithm with no user input or external interactions, posing no security risks.",
         "agreement": true
       },
       "ground_truth": {
@@ -3194,15 +3185,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 67.5057,
-        "planner": 0.0005,
-        "executor": 0.0463,
-        "critic": 67.4585
+        "total": 98.1755,
+        "planner": 0.0013,
+        "executor": 0.0845,
+        "critic": 98.0893
       },
       "memory": {
-        "before_mb": 75.19,
-        "after_mb": 74.52,
-        "delta_mb": -0.67
+        "before_mb": 67.77,
+        "after_mb": 73.2,
+        "delta_mb": 5.44
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3210,7 +3201,7 @@
         "graphrag_confidence": 0.1,
         "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code is a straightforward prime checking function with no user input or external interactions, avoiding common security vulnerabilities.",
+        "llm_reasoning": "The code is a self-contained prime checking function with no user input or external calls, eliminating risks like injection attacks.",
         "agreement": true
       },
       "ground_truth": {
@@ -3223,40 +3214,37 @@
     {
       "test_id": "eval_069",
       "verdict": "clean",
-      "confidence": 0.31,
+      "confidence": 0.37,
       "predicted_vulnerable": false,
-      "vulnerability_types": [
-        "stack_overflow"
-      ],
+      "vulnerability_types": [],
       "all_matched_vulns": [
         "command_injection",
         "rce",
         "path_traversal",
         "auth_bypass",
         "xxe",
-        "other_injection",
-        "stack_overflow"
+        "other_injection"
       ],
       "language_detected": "python",
       "timing": {
-        "total": 99.354,
-        "planner": 0.0006,
-        "executor": 0.0405,
-        "critic": 99.3126
+        "total": 65.9705,
+        "planner": 0.0005,
+        "executor": 0.0398,
+        "critic": 65.9298
       },
       "memory": {
-        "before_mb": 75.17,
-        "after_mb": 74.62,
-        "delta_mb": -0.55
+        "before_mb": 73.91,
+        "after_mb": 73.16,
+        "delta_mb": -0.75
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.1,
-        "llm_confidence": 0.8,
-        "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "Recursive function lacks bounds checking for negative inputs, potentially leading to infinite recursion and stack overflow.",
-        "agreement": false
+        "llm_confidence": 1.0,
+        "llm_verdict": "clean",
+        "llm_reasoning": "The code is a simple recursive factorial function with no user input or external calls, making it free from common security vulnerabilities.",
+        "agreement": true
       },
       "ground_truth": {
         "vulnerable": false,
@@ -3268,7 +3256,7 @@
     {
       "test_id": "eval_070",
       "verdict": "clean",
-      "confidence": 0.37,
+      "confidence": 0.355,
       "predicted_vulnerable": false,
       "vulnerability_types": [],
       "all_matched_vulns": [
@@ -3281,23 +3269,23 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 70.925,
-        "planner": 0.0002,
-        "executor": 0.0304,
-        "critic": 70.894
+        "total": 70.0551,
+        "planner": 0.001,
+        "executor": 0.0469,
+        "critic": 70.0069
       },
       "memory": {
-        "before_mb": 75.27,
-        "after_mb": 74.53,
-        "delta_mb": -0.73
+        "before_mb": 73.83,
+        "after_mb": 73.17,
+        "delta_mb": -0.66
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.1,
-        "llm_confidence": 1.0,
+        "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code is a pure mathematical function with no user input, I/O, or external calls, thus free from common security vulnerabilities.",
+        "llm_reasoning": "The function is a pure mathematical implementation with no I/O or external operations, eliminating common security risks.",
         "agreement": true
       },
       "ground_truth": {
@@ -3309,9 +3297,9 @@
     },
     {
       "test_id": "eval_071",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.69,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 1.0,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "file_upload"
       ],
@@ -3323,23 +3311,23 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 112.5024,
-        "planner": 0.0006,
-        "executor": 0.0531,
-        "critic": 112.4483
+        "total": 98.7322,
+        "planner": 0.0007,
+        "executor": 0.0471,
+        "critic": 98.684
       },
       "memory": {
-        "before_mb": 75.2,
-        "after_mb": 75.05,
-        "delta_mb": -0.16
+        "before_mb": 73.83,
+        "after_mb": 66.27,
+        "delta_mb": -7.56
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.6,
-        "llm_confidence": 0.9,
+        "llm_confidence": 1.0,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code safely loads a JSON configuration file with a fallback, and JSON parsing is inherently safe against common vulnerabilities.",
+        "llm_reasoning": "The code loads a hardcoded config file with no user input, avoiding common vulnerabilities like injection.",
         "agreement": false
       },
       "ground_truth": {
@@ -3351,9 +3339,9 @@
     },
     {
       "test_id": "eval_072",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.86,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.95,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "command_injection",
         "sql_injection",
@@ -3368,23 +3356,23 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 82.5225,
-        "planner": 0.0006,
-        "executor": 0.0556,
-        "critic": 82.4651
+        "total": 84.7437,
+        "planner": 0.0011,
+        "executor": 0.0962,
+        "critic": 84.6442
       },
       "memory": {
-        "before_mb": 75.67,
-        "after_mb": 19.55,
-        "delta_mb": -56.12
+        "before_mb": 66.89,
+        "after_mb": 72.97,
+        "delta_mb": 6.08
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.8,
-        "llm_confidence": 1.0,
+        "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code uses parameterized SQLite queries, ensuring no SQL injection vulnerabilities.",
+        "llm_reasoning": "The code uses parameterized queries with SQLite, preventing SQL injection.",
         "agreement": false
       },
       "ground_truth": {
@@ -3396,9 +3384,9 @@
     },
     {
       "test_id": "eval_073",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.72,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 1.0,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "file_upload",
         "csrf"
@@ -3412,15 +3400,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 65.5292,
-        "planner": 0.0006,
-        "executor": 0.1921,
-        "critic": 65.3362
+        "total": 58.6536,
+        "planner": 0.002,
+        "executor": 0.043,
+        "critic": 58.6083
       },
       "memory": {
-        "before_mb": 20.34,
-        "after_mb": 72.78,
-        "delta_mb": 52.44
+        "before_mb": 73.66,
+        "after_mb": 73.0,
+        "delta_mb": -0.66
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3428,7 +3416,7 @@
         "graphrag_confidence": 0.6,
         "llm_confidence": 1.0,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code returns static data without any user input or external interactions, making it free from common security vulnerabilities.",
+        "llm_reasoning": "The function returns hardcoded static data without user input or external interactions, making it immune to common vulnerabilities like injection.",
         "agreement": false
       },
       "ground_truth": {
@@ -3440,9 +3428,9 @@
     },
     {
       "test_id": "eval_074",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.74,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.9,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "command_injection"
       ],
@@ -3453,23 +3441,23 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 89.3724,
+        "total": 96.9114,
         "planner": 0.0006,
-        "executor": 0.0441,
-        "critic": 89.3267
+        "executor": 0.0453,
+        "critic": 96.8651
       },
       "memory": {
-        "before_mb": 73.44,
-        "after_mb": 73.25,
-        "delta_mb": -0.19
+        "before_mb": 73.61,
+        "after_mb": 73.44,
+        "delta_mb": -0.17
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.65,
-        "llm_confidence": 0.95,
+        "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code does not involve user input or system command execution, avoiding common vulnerabilities like command injection.",
+        "llm_reasoning": "The code does not use user input or execute commands, making it immune to injection vulnerabilities.",
         "agreement": false
       },
       "ground_truth": {
@@ -3482,7 +3470,7 @@
     {
       "test_id": "eval_075",
       "verdict": "clean",
-      "confidence": 0.355,
+      "confidence": 0.34,
       "predicted_vulnerable": false,
       "vulnerability_types": [],
       "all_matched_vulns": [
@@ -3493,23 +3481,23 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 75.6353,
-        "planner": 0.0006,
-        "executor": 0.0353,
-        "critic": 75.5991
+        "total": 75.5785,
+        "planner": 0.0005,
+        "executor": 0.035,
+        "critic": 75.5426
       },
       "memory": {
-        "before_mb": 73.88,
-        "after_mb": 73.28,
-        "delta_mb": -0.59
+        "before_mb": 74.02,
+        "after_mb": 73.36,
+        "delta_mb": -0.66
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.1,
-        "llm_confidence": 0.95,
+        "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The function properly escapes HTML entities using html.escape, preventing XSS attacks.",
+        "llm_reasoning": "The function escapes the username with html.escape, which prevents HTML injection attacks.",
         "agreement": true
       },
       "ground_truth": {
@@ -3521,6 +3509,84 @@
     },
     {
       "test_id": "eval_076",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 57.1305,
+        "planner": 0.0006,
+        "executor": 0.0307,
+        "critic": 57.0983
+      },
+      "memory": {
+        "before_mb": 74.0,
+        "after_mb": 65.19,
+        "delta_mb": -8.81
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.5,
+        "llm_confidence": 1.0,
+        "llm_verdict": "clean",
+        "llm_reasoning": "The endpoint does not handle any user input and returns static data, eliminating risks like command injection, XSS, or other injections.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_077",
+      "verdict": "clean",
+      "confidence": 0.355,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 73.7516,
+        "planner": 0.0017,
+        "executor": 0.1386,
+        "critic": 73.611
+      },
+      "memory": {
+        "before_mb": 65.83,
+        "after_mb": 71.75,
+        "delta_mb": 5.92
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.95,
+        "llm_verdict": "clean",
+        "llm_reasoning": "The code does not handle user input or external data, avoiding common vulnerabilities such as injection.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_078",
       "verdict": "potentially_vulnerable",
       "confidence": 0.62,
       "predicted_vulnerable": true,
@@ -3534,15 +3600,15 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 68.9933,
-        "planner": 0.0004,
-        "executor": 0.0314,
-        "critic": 68.9611
+        "total": 76.3497,
+        "planner": 0.0005,
+        "executor": 0.0305,
+        "critic": 76.3183
       },
       "memory": {
-        "before_mb": 73.97,
-        "after_mb": 59.92,
-        "delta_mb": -14.05
+        "before_mb": 72.3,
+        "after_mb": 71.8,
+        "delta_mb": -0.5
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3550,85 +3616,7 @@
         "graphrag_confidence": 0.5,
         "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The endpoint handles no user input and serves static JSON, eliminating common injection risks.",
-        "agreement": true
-      },
-      "ground_truth": {
-        "vulnerable": false,
-        "vulnerability_types": [],
-        "severity": "none"
-      },
-      "from_cache": false
-    },
-    {
-      "test_id": "eval_077",
-      "verdict": "clean",
-      "confidence": 0.37,
-      "predicted_vulnerable": false,
-      "vulnerability_types": [],
-      "all_matched_vulns": [
-        "other_injection"
-      ],
-      "language_detected": "unknown",
-      "timing": {
-        "total": 61.039,
-        "planner": 0.0005,
-        "executor": 0.1155,
-        "critic": 60.9227
-      },
-      "memory": {
-        "before_mb": 60.48,
-        "after_mb": 17.88,
-        "delta_mb": -42.61
-      },
-      "hybrid_info": {
-        "method": "hybrid",
-        "llm_consulted": true,
-        "graphrag_confidence": 0.1,
-        "llm_confidence": 1.0,
-        "llm_verdict": "clean",
-        "llm_reasoning": "The endpoint returns static data without user input, avoiding vulnerabilities like injection.",
-        "agreement": true
-      },
-      "ground_truth": {
-        "vulnerable": false,
-        "vulnerability_types": [],
-        "severity": "none"
-      },
-      "from_cache": false
-    },
-    {
-      "test_id": "eval_078",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.635,
-      "predicted_vulnerable": true,
-      "vulnerability_types": [
-        "xss"
-      ],
-      "all_matched_vulns": [
-        "command_injection",
-        "xss",
-        "other_injection"
-      ],
-      "language_detected": "unknown",
-      "timing": {
-        "total": 54.4643,
-        "planner": 0.0024,
-        "executor": 0.2034,
-        "critic": 54.258
-      },
-      "memory": {
-        "before_mb": 18.45,
-        "after_mb": 18.0,
-        "delta_mb": -0.45
-      },
-      "hybrid_info": {
-        "method": "hybrid",
-        "llm_consulted": true,
-        "graphrag_confidence": 0.5,
-        "llm_confidence": 0.95,
-        "llm_verdict": "clean",
-        "llm_reasoning": "The endpoint returns static, non-user-controllable data with no input points, posing no security risks.",
+        "llm_reasoning": "The endpoint handles no user input and returns static data, avoiding common vulnerabilities like injection or XSS.",
         "agreement": true
       },
       "ground_truth": {
@@ -3654,15 +3642,15 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 63.7869,
-        "planner": 0.0008,
-        "executor": 0.177,
-        "critic": 63.6086
+        "total": 53.39,
+        "planner": 0.0014,
+        "executor": 0.0386,
+        "critic": 53.3497
       },
       "memory": {
-        "before_mb": 18.55,
-        "after_mb": 71.33,
-        "delta_mb": 52.78
+        "before_mb": 72.36,
+        "after_mb": 71.61,
+        "delta_mb": -0.75
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3670,7 +3658,7 @@
         "graphrag_confidence": 0.45,
         "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The redirect uses a hardcoded path with no user input, eliminating common vulnerabilities like path traversal or open redirects.",
+        "llm_reasoning": "The code is a simple hardcoded redirect with no user input, making it secure.",
         "agreement": true
       },
       "ground_truth": {
@@ -3683,36 +3671,38 @@
     {
       "test_id": "eval_080",
       "verdict": "potentially_vulnerable",
-      "confidence": 0.62,
+      "confidence": 0.7,
       "predicted_vulnerable": true,
       "vulnerability_types": [
-        "xss"
+        "xss",
+        "information_disclosure"
       ],
       "all_matched_vulns": [
         "command_injection",
         "xss",
-        "other_injection"
+        "other_injection",
+        "information_disclosure"
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 77.4165,
+        "total": 73.8998,
         "planner": 0.0006,
-        "executor": 0.0329,
-        "critic": 77.3826
+        "executor": 0.0344,
+        "critic": 73.8644
       },
       "memory": {
-        "before_mb": 71.84,
-        "after_mb": 70.66,
-        "delta_mb": -1.19
+        "before_mb": 72.16,
+        "after_mb": 71.7,
+        "delta_mb": -0.45
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.5,
-        "llm_confidence": 0.9,
-        "llm_verdict": "clean",
-        "llm_reasoning": "No user input is processed, so no injection vulnerabilities exist.",
-        "agreement": true
+        "llm_confidence": 0.7,
+        "llm_verdict": "potentially_vulnerable",
+        "llm_reasoning": "The endpoint exposes system metrics like uptime and memory usage, which could be used for reconnaissance.",
+        "agreement": false
       },
       "ground_truth": {
         "vulnerable": false,
@@ -3724,7 +3714,7 @@
     {
       "test_id": "eval_081",
       "verdict": "clean",
-      "confidence": 0.355,
+      "confidence": 0.37,
       "predicted_vulnerable": false,
       "vulnerability_types": [],
       "all_matched_vulns": [
@@ -3736,23 +3726,23 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 81.6409,
-        "planner": 0.0006,
-        "executor": 0.0456,
-        "critic": 81.5943
+        "total": 74.8173,
+        "planner": 0.0005,
+        "executor": 0.0698,
+        "critic": 74.7463
       },
       "memory": {
-        "before_mb": 71.17,
-        "after_mb": 71.17,
-        "delta_mb": 0.0
+        "before_mb": 72.19,
+        "after_mb": 71.94,
+        "delta_mb": -0.25
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.1,
-        "llm_confidence": 0.95,
+        "llm_confidence": 1.0,
         "llm_verdict": "clean",
-        "llm_reasoning": "The function safely truncates strings without any security risks, as it only performs string operations.",
+        "llm_reasoning": "The function safely truncates strings without any security risks.",
         "agreement": true
       },
       "ground_truth": {
@@ -3764,9 +3754,9 @@
     },
     {
       "test_id": "eval_082",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.72,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.9,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "csrf"
       ],
@@ -3778,23 +3768,23 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 51.6799,
-        "planner": 0.0005,
-        "executor": 0.0396,
-        "critic": 51.6385
+        "total": 74.2145,
+        "planner": 0.0013,
+        "executor": 0.0413,
+        "critic": 74.1716
       },
       "memory": {
-        "before_mb": 71.81,
-        "after_mb": 71.23,
-        "delta_mb": -0.58
+        "before_mb": 72.56,
+        "after_mb": 72.16,
+        "delta_mb": -0.41
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.6,
-        "llm_confidence": 1.0,
+        "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The function safely formats a datetime object without any user input or external commands, eliminating common vulnerabilities.",
+        "llm_reasoning": "The function formats a datetime object using a fixed format with no user input, eliminating risks like command injection.",
         "agreement": false
       },
       "ground_truth": {
@@ -3818,15 +3808,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 65.3223,
-        "planner": 0.0008,
-        "executor": 0.0398,
-        "critic": 65.2808
+        "total": 142.3263,
+        "planner": 0.0006,
+        "executor": 0.0399,
+        "critic": 142.2851
       },
       "memory": {
-        "before_mb": 71.91,
-        "after_mb": 70.58,
-        "delta_mb": -1.33
+        "before_mb": 72.8,
+        "after_mb": 17.72,
+        "delta_mb": -55.08
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3834,7 +3824,7 @@
         "graphrag_confidence": 0.1,
         "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The email validation function uses a regex pattern and does not involve any user input that could lead to injection vulnerabilities.",
+        "llm_reasoning": "The function only performs regex matching and does not execute any commands or handle sensitive data, making it secure.",
         "agreement": true
       },
       "ground_truth": {
@@ -3858,15 +3848,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 110.4583,
-        "planner": 0.0003,
-        "executor": 0.0355,
-        "critic": 110.4222
+        "total": 107.3265,
+        "planner": 0.0007,
+        "executor": 0.2352,
+        "critic": 107.0903
       },
       "memory": {
-        "before_mb": 71.2,
-        "after_mb": 70.7,
-        "delta_mb": -0.5
+        "before_mb": 18.38,
+        "after_mb": 70.91,
+        "delta_mb": 52.53
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3874,7 +3864,7 @@
         "graphrag_confidence": 0.1,
         "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The function performs only basic string operations without any security risks.",
+        "llm_reasoning": "The function performs only string transformations without any security flaws or injection points.",
         "agreement": true
       },
       "ground_truth": {
@@ -3886,9 +3876,9 @@
     },
     {
       "test_id": "eval_085",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.655,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.9,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "csrf"
       ],
@@ -3902,15 +3892,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 96.5135,
+        "total": 107.4901,
         "planner": 0.0007,
-        "executor": 0.0511,
-        "critic": 96.4614
+        "executor": 0.0667,
+        "critic": 107.4222
       },
       "memory": {
-        "before_mb": 71.3,
-        "after_mb": 71.77,
-        "delta_mb": 0.47
+        "before_mb": 71.55,
+        "after_mb": 69.62,
+        "delta_mb": -1.92
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -3918,7 +3908,7 @@
         "graphrag_confidence": 0.55,
         "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The password strength check function lacks any insecure operations or vulnerabilities, as it only performs basic character checks without involving external systems or inputs.",
+        "llm_reasoning": "The password strength check function lacks any insecure operations, input handling issues, or external interactions.",
         "agreement": false
       },
       "ground_truth": {
@@ -3944,15 +3934,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0457,
-        "planner": 0.0005,
-        "executor": 0.0451,
-        "critic": 0.0001
+        "total": 0.0654,
+        "planner": 0.0041,
+        "executor": 0.0606,
+        "critic": 0.0002
       },
       "memory": {
-        "before_mb": 72.45,
-        "after_mb": 107.11,
-        "delta_mb": 34.66
+        "before_mb": 70.22,
+        "after_mb": 105.91,
+        "delta_mb": 35.69
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -3988,15 +3978,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0286,
-        "planner": 0.0001,
-        "executor": 0.0284,
+        "total": 0.0402,
+        "planner": 0.0002,
+        "executor": 0.0397,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 107.11,
-        "after_mb": 109.95,
-        "delta_mb": 2.84
+        "before_mb": 105.91,
+        "after_mb": 108.89,
+        "delta_mb": 2.98
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4017,7 +4007,7 @@
     {
       "test_id": "eval_088",
       "verdict": "clean",
-      "confidence": 0.37,
+      "confidence": 0.355,
       "predicted_vulnerable": false,
       "vulnerability_types": [],
       "all_matched_vulns": [
@@ -4027,23 +4017,23 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 50.6867,
+        "total": 69.2163,
         "planner": 0.0001,
-        "executor": 0.0152,
-        "critic": 50.6712
+        "executor": 0.0206,
+        "critic": 69.1952
       },
       "memory": {
-        "before_mb": 109.97,
-        "after_mb": 72.42,
-        "delta_mb": -37.55
+        "before_mb": 108.91,
+        "after_mb": 70.59,
+        "delta_mb": -38.31
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.1,
-        "llm_confidence": 1.0,
+        "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code snippet only contains constant definitions with no user input, database queries, or potential security risks.",
+        "llm_reasoning": "The code snippet consists solely of constant definitions without any user input or insecure operations, indicating no security vulnerabilities.",
         "agreement": true
       },
       "ground_truth": {
@@ -4066,15 +4056,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 72.2349,
-        "planner": 0.0006,
-        "executor": 0.0393,
-        "critic": 72.1946
+        "total": 74.0636,
+        "planner": 0.0007,
+        "executor": 0.0528,
+        "critic": 74.0098
       },
       "memory": {
-        "before_mb": 73.02,
-        "after_mb": 72.3,
-        "delta_mb": -0.72
+        "before_mb": 71.16,
+        "after_mb": 70.88,
+        "delta_mb": -0.28
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -4082,7 +4072,7 @@
         "graphrag_confidence": 0.1,
         "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "The function includes input validation for the discount percentage and performs a straightforward calculation with no external data handling, minimizing security risks.",
+        "llm_reasoning": "The function includes a range check for the discount percent, ensuring it is within valid bounds, and no other security issues are apparent.",
         "agreement": true
       },
       "ground_truth": {
@@ -4106,15 +4096,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 49.7744,
+        "total": 46.8245,
         "planner": 0.0007,
-        "executor": 0.0452,
-        "critic": 49.728
+        "executor": 0.0611,
+        "critic": 46.7623
       },
       "memory": {
-        "before_mb": 72.88,
-        "after_mb": 72.22,
-        "delta_mb": -0.66
+        "before_mb": 71.45,
+        "after_mb": 71.09,
+        "delta_mb": -0.36
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -4122,7 +4112,7 @@
         "graphrag_confidence": 0.1,
         "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code does not involve user input, database interactions, or output functions, so it lacks common security vulnerabilities.",
+        "llm_reasoning": "The code uses only hardcoded data and internal PHP functions, with no user input or external interactions, thus free from common security vulnerabilities.",
         "agreement": true
       },
       "ground_truth": {
@@ -4149,15 +4139,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0441,
-        "planner": 0.0008,
-        "executor": 0.0431,
-        "critic": 0.0001
+        "total": 0.0747,
+        "planner": 0.0007,
+        "executor": 0.0737,
+        "critic": 0.0002
       },
       "memory": {
-        "before_mb": 72.91,
-        "after_mb": 110.45,
-        "delta_mb": 37.55
+        "before_mb": 71.77,
+        "after_mb": 109.77,
+        "delta_mb": 38.0
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4197,14 +4187,14 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0301,
-        "planner": 0.0001,
-        "executor": 0.0299,
+        "total": 0.0374,
+        "planner": 0.0002,
+        "executor": 0.037,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 110.45,
-        "after_mb": 111.62,
+        "before_mb": 109.77,
+        "after_mb": 110.94,
         "delta_mb": 1.17
       },
       "hybrid_info": {
@@ -4246,15 +4236,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0218,
+        "total": 0.0285,
         "planner": 0.0001,
-        "executor": 0.0216,
+        "executor": 0.0281,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 111.62,
-        "after_mb": 112.39,
-        "delta_mb": 0.77
+        "before_mb": 110.94,
+        "after_mb": 111.83,
+        "delta_mb": 0.89
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4296,15 +4286,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0225,
-        "planner": 0.0001,
-        "executor": 0.0222,
+        "total": 0.0332,
+        "planner": 0.0002,
+        "executor": 0.0327,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 112.41,
-        "after_mb": 112.92,
-        "delta_mb": 0.52
+        "before_mb": 111.84,
+        "after_mb": 112.34,
+        "delta_mb": 0.5
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4346,15 +4336,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0229,
-        "planner": 0.0001,
-        "executor": 0.0227,
+        "total": 0.0305,
+        "planner": 0.0002,
+        "executor": 0.0301,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 112.92,
-        "after_mb": 113.39,
-        "delta_mb": 0.47
+        "before_mb": 112.34,
+        "after_mb": 112.84,
+        "delta_mb": 0.5
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4396,15 +4386,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0337,
-        "planner": 0.0001,
-        "executor": 0.0334,
+        "total": 0.0461,
+        "planner": 0.0002,
+        "executor": 0.0456,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 113.41,
-        "after_mb": 115.38,
-        "delta_mb": 1.97
+        "before_mb": 112.86,
+        "after_mb": 114.84,
+        "delta_mb": 1.98
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4447,15 +4437,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0214,
-        "planner": 0.0001,
-        "executor": 0.021,
+        "total": 0.0373,
+        "planner": 0.0002,
+        "executor": 0.0368,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 115.41,
-        "after_mb": 116.23,
-        "delta_mb": 0.83
+        "before_mb": 114.86,
+        "after_mb": 115.8,
+        "delta_mb": 0.94
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4494,15 +4484,15 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 0.0294,
+        "total": 0.0416,
         "planner": 0.0002,
-        "executor": 0.0291,
+        "executor": 0.041,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 116.23,
-        "after_mb": 117.16,
-        "delta_mb": 0.92
+        "before_mb": 115.8,
+        "after_mb": 116.67,
+        "delta_mb": 0.88
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4528,7 +4518,7 @@
     {
       "test_id": "eval_low_009",
       "verdict": "potentially_vulnerable",
-      "confidence": 0.75,
+      "confidence": 0.81,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "command_injection",
@@ -4544,23 +4534,23 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 116.0335,
-        "planner": 0.0001,
-        "executor": 0.0157,
-        "critic": 116.0169
+        "total": 143.025,
+        "planner": 0.0002,
+        "executor": 0.0278,
+        "critic": 142.9951
       },
       "memory": {
-        "before_mb": 117.16,
-        "after_mb": 75.11,
-        "delta_mb": -42.05
+        "before_mb": 116.67,
+        "after_mb": 70.83,
+        "delta_mb": -45.84
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.75,
-        "llm_confidence": 0.75,
-        "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "User input is sanitized but still used in a shell command via os.popen, potentially allowing command injection if not all dangerous characters are handled.",
+        "llm_confidence": 0.95,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The code uses user-provided input in a shell command without proper sanitization, allowing attackers to inject arbitrary commands by exploiting characters not banned, such as '&&'.",
         "agreement": true
       },
       "ground_truth": {
@@ -4590,15 +4580,15 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 0.0628,
+        "total": 0.0767,
         "planner": 0.0009,
-        "executor": 0.0616,
+        "executor": 0.0755,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 75.7,
-        "after_mb": 116.42,
-        "delta_mb": 40.72
+        "before_mb": 71.44,
+        "after_mb": 114.23,
+        "delta_mb": 42.8
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4640,15 +4630,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0457,
-        "planner": 0.0007,
-        "executor": 0.0448,
+        "total": 0.0445,
+        "planner": 0.0009,
+        "executor": 0.0435,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 116.44,
-        "after_mb": 119.98,
-        "delta_mb": 3.55
+        "before_mb": 114.25,
+        "after_mb": 118.77,
+        "delta_mb": 4.52
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4688,15 +4678,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0224,
+        "total": 0.0239,
         "planner": 0.0002,
-        "executor": 0.0221,
+        "executor": 0.0236,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 119.98,
-        "after_mb": 120.69,
-        "delta_mb": 0.7
+        "before_mb": 118.77,
+        "after_mb": 119.52,
+        "delta_mb": 0.75
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4738,14 +4728,14 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0234,
+        "total": 0.0236,
         "planner": 0.0002,
-        "executor": 0.023,
+        "executor": 0.0232,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 120.7,
-        "after_mb": 121.36,
+        "before_mb": 119.53,
+        "after_mb": 120.19,
         "delta_mb": 0.66
       },
       "hybrid_info": {
@@ -4786,15 +4776,15 @@
       ],
       "language_detected": "php",
       "timing": {
-        "total": 0.0253,
+        "total": 0.0252,
         "planner": 0.0002,
-        "executor": 0.025,
+        "executor": 0.0249,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 121.36,
-        "after_mb": 121.77,
-        "delta_mb": 0.41
+        "before_mb": 120.19,
+        "after_mb": 120.89,
+        "delta_mb": 0.7
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4820,43 +4810,41 @@
     {
       "test_id": "eval_low_015",
       "verdict": "potentially_vulnerable",
-      "confidence": 0.765,
+      "confidence": 0.78,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "command_injection",
         "xxe",
         "path_traversal",
         "other_injection",
-        "Path Traversal",
-        "Local File Inclusion"
+        "arbitrary_file_access"
       ],
       "all_matched_vulns": [
         "command_injection",
         "xxe",
         "path_traversal",
         "other_injection",
-        "Path Traversal",
-        "Local File Inclusion"
+        "arbitrary_file_access"
       ],
       "language_detected": "python",
       "timing": {
-        "total": 76.3036,
-        "planner": 0.0004,
-        "executor": 0.0294,
-        "critic": 76.2725
+        "total": 129.6791,
+        "planner": 0.0002,
+        "executor": 0.0246,
+        "critic": 129.6528
       },
       "memory": {
-        "before_mb": 121.77,
-        "after_mb": 75.47,
-        "delta_mb": -46.3
+        "before_mb": 120.89,
+        "after_mb": 75.83,
+        "delta_mb": -45.06
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.75,
-        "llm_confidence": 0.8,
+        "llm_confidence": 0.85,
         "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The code constructs file paths directly from user input without proper sanitization, allowing attackers to access arbitrary files through directory traversal.",
+        "llm_reasoning": "The code constructs file paths from user input without proper sanitization, risking path traversal attacks in debug mode where arbitrary file access is enabled.",
         "agreement": true
       },
       "ground_truth": {
@@ -4874,7 +4862,7 @@
     {
       "test_id": "eval_low_016",
       "verdict": "potentially_vulnerable",
-      "confidence": 0.75,
+      "confidence": 0.78,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "command_injection",
@@ -4882,7 +4870,7 @@
         "path_traversal",
         "other_injection",
         "TOCTOU",
-        "Symlink Attack"
+        "Race Condition"
       ],
       "all_matched_vulns": [
         "command_injection",
@@ -4890,27 +4878,27 @@
         "path_traversal",
         "other_injection",
         "TOCTOU",
-        "Symlink Attack"
+        "Race Condition"
       ],
       "language_detected": "python",
       "timing": {
-        "total": 83.1636,
+        "total": 127.4955,
         "planner": 0.0008,
-        "executor": 0.0504,
-        "critic": 83.1109
+        "executor": 0.0524,
+        "critic": 127.4418
       },
       "memory": {
-        "before_mb": 76.02,
-        "after_mb": 74.64,
-        "delta_mb": -1.38
+        "before_mb": 76.39,
+        "after_mb": 75.98,
+        "delta_mb": -0.41
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.75,
-        "llm_confidence": 0.75,
+        "llm_confidence": 0.85,
         "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "Race condition allows attacker to manipulate the file between the security checks and access, potentially bypassing restrictions.",
+        "llm_reasoning": "The code has a TOCTOU race condition where file checks occur before access, allowing an attacker to modify the file between the check and use, potentially enabling unauthorized access or symlink attacks.",
         "agreement": true
       },
       "ground_truth": {
@@ -4944,15 +4932,15 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 0.0533,
-        "planner": 0.001,
-        "executor": 0.052,
+        "total": 0.0538,
+        "planner": 0.0009,
+        "executor": 0.0527,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 75.23,
-        "after_mb": 114.97,
-        "delta_mb": 39.73
+        "before_mb": 76.61,
+        "after_mb": 117.09,
+        "delta_mb": 40.48
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -4978,7 +4966,7 @@
     {
       "test_id": "eval_low_018",
       "verdict": "potentially_vulnerable",
-      "confidence": 0.69,
+      "confidence": 0.675,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "other_injection",
@@ -4993,23 +4981,23 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 77.1975,
-        "planner": 0.0003,
-        "executor": 0.0316,
-        "critic": 77.1651
+        "total": 77.7506,
+        "planner": 0.0002,
+        "executor": 0.0288,
+        "critic": 77.7212
       },
       "memory": {
-        "before_mb": 114.97,
-        "after_mb": 21.06,
-        "delta_mb": -93.91
+        "before_mb": 117.09,
+        "after_mb": 76.7,
+        "delta_mb": -40.39
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.6,
-        "llm_confidence": 0.9,
-        "llm_verdict": "vulnerable",
-        "llm_reasoning": "Direct concatenation of user input into LDAP filter without proper escaping allows attackers to manipulate queries and exploit LDAP injection.",
+        "llm_confidence": 0.85,
+        "llm_verdict": "potentially_vulnerable",
+        "llm_reasoning": "The LDAP filter is constructed by directly inserting user input without proper escaping, allowing for LDAP injection attacks.",
         "agreement": true
       },
       "ground_truth": {
@@ -5044,15 +5032,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 42.2937,
+        "total": 33.1523,
         "planner": 0.0007,
-        "executor": 0.2259,
-        "critic": 42.0665
+        "executor": 0.0565,
+        "critic": 33.0935
       },
       "memory": {
-        "before_mb": 21.67,
-        "after_mb": 71.52,
-        "delta_mb": 49.84
+        "before_mb": 77.3,
+        "after_mb": 76.75,
+        "delta_mb": -0.55
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -5060,7 +5048,7 @@
         "graphrag_confidence": 0.6,
         "llm_confidence": 0.95,
         "llm_verdict": "vulnerable",
-        "llm_reasoning": "User input from query parameters is directly inserted into an HTML template without sanitization, enabling Cross-Site Scripting (XSS) attacks.",
+        "llm_reasoning": "User input from query parameters is directly inserted into an HTML template without escaping, allowing for cross-site scripting attacks.",
         "agreement": true
       },
       "ground_truth": {
@@ -5083,34 +5071,34 @@
       "vulnerability_types": [
         "auth_bypass",
         "other_injection",
-        "Template Injection"
+        "template_injection"
       ],
       "all_matched_vulns": [
         "command_injection",
         "path_traversal",
         "auth_bypass",
         "other_injection",
-        "Template Injection"
+        "template_injection"
       ],
       "language_detected": "python",
       "timing": {
-        "total": 97.0516,
-        "planner": 0.001,
-        "executor": 0.0427,
-        "critic": 97.0075
+        "total": 69.906,
+        "planner": 0.0009,
+        "executor": 0.0423,
+        "critic": 69.8624
       },
       "memory": {
-        "before_mb": 72.19,
-        "after_mb": 70.95,
-        "delta_mb": -1.23
+        "before_mb": 77.39,
+        "after_mb": 76.89,
+        "delta_mb": -0.5
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.65,
         "llm_confidence": 0.85,
-        "llm_verdict": "vulnerable",
-        "llm_reasoning": "Directly using user-controlled input as template source allows for injection attacks that can execute arbitrary code.",
+        "llm_verdict": "potentially_vulnerable",
+        "llm_reasoning": "The code uses user-supplied input directly to render a template, allowing attackers to inject malicious template code for potential code execution.",
         "agreement": true
       },
       "ground_truth": {
@@ -5133,7 +5121,7 @@
       "vulnerability_types": [
         "auth_bypass",
         "other_injection",
-        "Mass assignment"
+        "mass_assignment"
       ],
       "all_matched_vulns": [
         "command_injection",
@@ -5141,27 +5129,27 @@
         "path_traversal",
         "auth_bypass",
         "other_injection",
-        "Mass assignment"
+        "mass_assignment"
       ],
       "language_detected": "python",
       "timing": {
-        "total": 52.2878,
-        "planner": 0.0008,
-        "executor": 0.0425,
-        "critic": 52.2443
+        "total": 50.8806,
+        "planner": 0.0014,
+        "executor": 0.0517,
+        "critic": 50.8272
       },
       "memory": {
-        "before_mb": 71.55,
-        "after_mb": 70.73,
-        "delta_mb": -0.81
+        "before_mb": 77.53,
+        "after_mb": 76.06,
+        "delta_mb": -1.47
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.6,
         "llm_confidence": 0.9,
-        "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The code uses mass assignment without a whitelist, allowing attackers to set arbitrary user attributes.",
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The code performs mass assignment without a whitelist, allowing attackers to set arbitrary attributes on the User model.",
         "agreement": true
       },
       "ground_truth": {
@@ -5179,39 +5167,39 @@
     {
       "test_id": "eval_low_022",
       "verdict": "potentially_vulnerable",
-      "confidence": 0.695,
+      "confidence": 0.665,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "other_injection",
         "csrf",
-        "deserialization_vulnerability"
+        "insecure_deserialization"
       ],
       "all_matched_vulns": [
         "command_injection",
         "auth_bypass",
         "other_injection",
         "csrf",
-        "deserialization_vulnerability"
+        "insecure_deserialization"
       ],
       "language_detected": "python",
       "timing": {
-        "total": 135.4306,
-        "planner": 0.0011,
-        "executor": 0.0717,
-        "critic": 135.3573
+        "total": 83.5589,
+        "planner": 0.001,
+        "executor": 0.0562,
+        "critic": 83.4956
       },
       "memory": {
-        "before_mb": 71.38,
-        "after_mb": 64.56,
-        "delta_mb": -6.81
+        "before_mb": 76.7,
+        "after_mb": 17.81,
+        "delta_mb": -58.89
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.65,
-        "llm_confidence": 0.8,
+        "llm_confidence": 0.7,
         "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The code deserializes arbitrary JSON input into a User object using Jackson ObjectMapper, which could exploit deserialization vulnerabilities if the input contains malicious payloads.",
+        "llm_reasoning": "The code deserializes arbitrary JSON input with ObjectMapper, risking remote code execution from malicious payloads.",
         "agreement": true
       },
       "ground_truth": {
@@ -5228,9 +5216,9 @@
     },
     {
       "test_id": "eval_low_023",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.725,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.9,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "xxe",
         "auth_bypass",
@@ -5245,15 +5233,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 150.3307,
-        "planner": 0.0013,
-        "executor": 0.1692,
-        "critic": 150.1593
+        "total": 81.2454,
+        "planner": 0.0007,
+        "executor": 0.1928,
+        "critic": 81.0514
       },
       "memory": {
-        "before_mb": 65.25,
-        "after_mb": 26.69,
-        "delta_mb": -38.56
+        "before_mb": 18.48,
+        "after_mb": 30.45,
+        "delta_mb": 11.97
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -5261,7 +5249,7 @@
         "graphrag_confidence": 0.65,
         "llm_confidence": 0.9,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code uses xml.etree.ElementTree which does not allow external entities, preventing XXE, and there are no command executions, so it is secure.",
+        "llm_reasoning": "The XML parsing with ElementTree does not support external entities, mitigating XXE risks, and no command execution is present, making the code secure.",
         "agreement": false
       },
       "ground_truth": {
@@ -5279,7 +5267,7 @@
     {
       "test_id": "eval_low_024",
       "verdict": "potentially_vulnerable",
-      "confidence": 0.76,
+      "confidence": 0.745,
       "predicted_vulnerable": true,
       "vulnerability_types": [
         "xss",
@@ -5296,23 +5284,23 @@
       ],
       "language_detected": "java",
       "timing": {
-        "total": 83.4993,
-        "planner": 0.0012,
-        "executor": 0.1987,
-        "critic": 83.2984
+        "total": 70.0011,
+        "planner": 0.0015,
+        "executor": 0.1673,
+        "critic": 69.8316
       },
       "memory": {
-        "before_mb": 27.36,
-        "after_mb": 72.95,
-        "delta_mb": 45.59
+        "before_mb": 31.02,
+        "after_mb": 72.16,
+        "delta_mb": 41.14
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.7,
-        "llm_confidence": 0.9,
-        "llm_verdict": "vulnerable",
-        "llm_reasoning": "The code does not disable external general entities in XML parsing, allowing XML External Entities (XXE) attacks.",
+        "llm_confidence": 0.85,
+        "llm_verdict": "potentially_vulnerable",
+        "llm_reasoning": "The XML parser does not disable external general entities, allowing attackers to exploit XXE for unauthorized data access.",
         "agreement": true
       },
       "ground_truth": {
@@ -5330,7 +5318,7 @@
     {
       "test_id": "eval_low_025",
       "verdict": "clean",
-      "confidence": 0.34,
+      "confidence": 0.355,
       "predicted_vulnerable": false,
       "vulnerability_types": [],
       "all_matched_vulns": [
@@ -5340,23 +5328,23 @@
       ],
       "language_detected": "javascript",
       "timing": {
-        "total": 98.7626,
-        "planner": 0.0023,
-        "executor": 0.0661,
-        "critic": 98.6937
+        "total": 87.9696,
+        "planner": 0.001,
+        "executor": 0.0691,
+        "critic": 87.899
       },
       "memory": {
-        "before_mb": 73.59,
-        "after_mb": 73.45,
-        "delta_mb": -0.14
+        "before_mb": 72.75,
+        "after_mb": 72.72,
+        "delta_mb": -0.03
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.1,
-        "llm_confidence": 0.9,
+        "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "No evidence of path traversal or command injection as the code lacks file system access or shell commands, and user input is handled safely in JSON parsing.",
+        "llm_reasoning": "The code does not handle user input in a way that enables path traversal, command injection, or other common vulnerabilities as it lacks file system access or command execution.",
         "agreement": true
       },
       "ground_truth": {
@@ -5386,15 +5374,15 @@
       ],
       "language_detected": "unknown",
       "timing": {
-        "total": 0.0562,
+        "total": 0.0607,
         "planner": 0.001,
-        "executor": 0.0549,
+        "executor": 0.0594,
         "critic": 0.0002
       },
       "memory": {
-        "before_mb": 74.16,
-        "after_mb": 114.23,
-        "delta_mb": 40.08
+        "before_mb": 73.34,
+        "after_mb": 114.2,
+        "delta_mb": 40.86
       },
       "hybrid_info": {
         "method": "graphrag_only",
@@ -5439,14 +5427,14 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 0.0345,
-        "planner": 0.0006,
-        "executor": 0.0336,
+        "total": 0.0311,
+        "planner": 0.0007,
+        "executor": 0.0298,
         "critic": 0.0001
       },
       "memory": {
-        "before_mb": 114.25,
-        "after_mb": 116.17,
+        "before_mb": 114.22,
+        "after_mb": 116.14,
         "delta_mb": 1.92
       },
       "hybrid_info": {
@@ -5472,9 +5460,9 @@
     },
     {
       "test_id": "eval_low_028",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.845,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.95,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "command_injection",
         "sql_injection",
@@ -5491,15 +5479,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 153.2926,
+        "total": 182.6562,
         "planner": 0.0002,
-        "executor": 0.0302,
-        "critic": 153.2597
+        "executor": 0.026,
+        "critic": 182.6292
       },
       "memory": {
-        "before_mb": 116.17,
-        "after_mb": 74.19,
-        "delta_mb": -41.98
+        "before_mb": 116.14,
+        "after_mb": 74.67,
+        "delta_mb": -41.47
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -5507,7 +5495,7 @@
         "graphrag_confidence": 0.8,
         "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "The code validates user inputs against whitelists for SQL query parameters, preventing SQL injection.",
+        "llm_reasoning": "User input for sorting is validated against a whitelist, preventing SQL injection.",
         "agreement": false
       },
       "ground_truth": {
@@ -5522,43 +5510,41 @@
     },
     {
       "test_id": "eval_low_029",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.735,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.9,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "sql_injection",
         "command_injection",
         "auth_bypass",
-        "other_injection",
-        "Cross-Site Scripting"
+        "other_injection"
       ],
       "all_matched_vulns": [
         "sql_injection",
         "command_injection",
         "auth_bypass",
-        "other_injection",
-        "Cross-Site Scripting"
+        "other_injection"
       ],
       "language_detected": "php",
       "timing": {
-        "total": 138.6447,
-        "planner": 0.0013,
-        "executor": 0.0599,
-        "critic": 138.5812
+        "total": 107.4039,
+        "planner": 0.0008,
+        "executor": 0.0472,
+        "critic": 107.3551
       },
       "memory": {
-        "before_mb": 74.94,
-        "after_mb": 75.86,
-        "delta_mb": 0.92
+        "before_mb": 75.27,
+        "after_mb": 74.86,
+        "delta_mb": -0.41
       },
       "hybrid_info": {
         "method": "hybrid",
         "llm_consulted": true,
         "graphrag_confidence": 0.75,
-        "llm_confidence": 0.7,
-        "llm_verdict": "potentially_vulnerable",
-        "llm_reasoning": "The 'stock' field is outputted without proper escaping, potentially allowing XSS if user-controllable.",
-        "agreement": true
+        "llm_confidence": 0.9,
+        "llm_verdict": "clean",
+        "llm_reasoning": "The code validates user input for SQL ordering against a predefined list and escapes output, preventing SQL injection and XSS.",
+        "agreement": false
       },
       "ground_truth": {
         "vulnerability_types": [],
@@ -5572,9 +5558,9 @@
     },
     {
       "test_id": "eval_low_030",
-      "verdict": "potentially_vulnerable",
-      "confidence": 0.81,
-      "predicted_vulnerable": true,
+      "verdict": "clean",
+      "confidence": 0.95,
+      "predicted_vulnerable": false,
       "vulnerability_types": [
         "command_injection",
         "path_traversal",
@@ -5589,15 +5575,15 @@
       ],
       "language_detected": "python",
       "timing": {
-        "total": 90.0918,
-        "planner": 0.0007,
-        "executor": 0.0445,
-        "critic": 90.0459
+        "total": 64.3856,
+        "planner": 0.0008,
+        "executor": 0.0503,
+        "critic": 64.334
       },
       "memory": {
-        "before_mb": 76.45,
-        "after_mb": 75.91,
-        "delta_mb": -0.55
+        "before_mb": 75.48,
+        "after_mb": 75.19,
+        "delta_mb": -0.3
       },
       "hybrid_info": {
         "method": "hybrid",
@@ -5605,7 +5591,7 @@
         "graphrag_confidence": 0.75,
         "llm_confidence": 0.95,
         "llm_verdict": "clean",
-        "llm_reasoning": "User input is safely passed as a variable with autoescape enabled, mitigating XSS risks.",
+        "llm_reasoning": "User input is safely passed as a variable to the template, not embedded in the template source, preventing template injection.",
         "agreement": false
       },
       "ground_truth": {

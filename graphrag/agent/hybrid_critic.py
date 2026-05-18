@@ -228,16 +228,42 @@ class HybridCritic(Critic):
         llm_result: dict,
         top_distance: float,
     ) -> HybridCriticScore:
-        """Weighted merge of GraphRAG and LLM scores → new HybridCriticScore."""
+        """
+        Merge GraphRAG and LLM scores.
+
+        When the two sources disagree on the binary clean/not-clean axis, the
+        LLM verdict wins outright — it was specifically invoked to resolve the
+        low-confidence case and has broader context than the similarity index.
+        When they agree, confidence is boosted via a weighted average.
+        """
         g_conf = graphrag_score.confidence
         l_conf = llm_result["confidence"]
-        merged_conf = round(
-            g_conf * self.graphrag_weight + l_conf * self.llm_weight, 3
-        )
-        merged_conf = max(0.0, min(1.0, merged_conf))
+        g_verdict = graphrag_score.verdict
+        l_verdict = llm_result["verdict"]
 
-        # Use the parent verdict helper with the merged confidence
-        merged_verdict = self._verdict_from_score(merged_conf, top_distance)
+        # Agreement: do the verdicts agree on the binary clean/not-clean axis?
+        g_is_vuln = g_verdict != "clean"
+        l_is_vuln = l_verdict != "clean"
+        agreed = g_is_vuln == l_is_vuln
+
+        if agreed:
+            self.stats["llm_agreed"] += 1
+            # Both agree — weighted merge boosts confidence
+            merged_conf = round(
+                g_conf * self.graphrag_weight + l_conf * self.llm_weight, 3
+            )
+            merged_conf = max(0.0, min(1.0, merged_conf))
+            merged_verdict = self._verdict_from_score(merged_conf, top_distance)
+            final_conf = merged_conf
+        else:
+            # Disagreement — LLM overrides GraphRAG
+            self.stats["llm_disagreed"] += 1
+            merged_verdict = l_verdict
+            final_conf = round(l_conf, 3)
+            print(
+                f"  🔄 OVERRIDE: GraphRAG={g_verdict}({g_conf:.2f}) → "
+                f"LLM={l_verdict}({l_conf:.2f})"
+            )
 
         # Combine vuln types (GraphRAG is authoritative; LLM supplements)
         combined_vulns = list(dict.fromkeys(
@@ -247,29 +273,20 @@ class HybridCritic(Critic):
         # Highest severity stays from GraphRAG
         top_severity = graphrag_score.top_severity
 
-        # Agreement: do the verdicts agree on the binary clean/not-clean axis?
-        g_is_vuln = graphrag_score.verdict != "clean"
-        l_is_vuln = llm_result["verdict"] != "clean"
-        agreed = g_is_vuln == l_is_vuln
-        if agreed:
-            self.stats["llm_agreed"] += 1
-        else:
-            self.stats["llm_disagreed"] += 1
-
         # Retry decision stays consistent with the base class
         all_impossible = (
             bool(combined_vulns)
             and len(graphrag_score.impossible_vulns) == len(combined_vulns)
         )
         should_retry = (
-            merged_conf < self.retry_threshold
-            and graphrag_score.vuln_types_found  # reuse plan from graphrag
+            final_conf < self.retry_threshold
+            and graphrag_score.vuln_types_found
             and not all_impossible
         )
 
         return HybridCriticScore(
             # ── CriticScore fields ──
-            confidence=merged_conf,
+            confidence=final_conf,
             verdict=merged_verdict,
             should_retry=should_retry,
             retry_reason=graphrag_score.retry_reason if should_retry else "",
@@ -282,8 +299,8 @@ class HybridCritic(Critic):
             llm_consulted=True,
             agreement=agreed,
             graphrag_confidence=g_conf,
-            graphrag_verdict=graphrag_score.verdict,
-            llm_verdict=llm_result["verdict"],
+            graphrag_verdict=g_verdict,
+            llm_verdict=l_verdict,
             llm_confidence=l_conf,
             llm_reasoning=llm_result.get("reasoning", ""),
         )
