@@ -1,0 +1,4592 @@
+{
+  "model": "gemma3-1b",
+  "model_display": "Gemma 3 1B (Ollama)",
+  "timestamp": "2026-05-15T21:14:18.255697",
+  "eval_set_size": 90,
+  "total_runtime_s": 1266.27,
+  "failures": 0,
+  "results": [
+    {
+      "test_id": "eval_001",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0019,
+        "executor": 0.0321,
+        "critic": 0.0005,
+        "llm_report": 20.9948,
+        "total": 21.0304
+      },
+      "memory": {
+        "before_mb": 525.66,
+        "after_mb": 151.02,
+        "delta_mb": -374.64
+      },
+      "tokens": {
+        "input": 572,
+        "output": 811,
+        "code_chars": 3649
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 14,
+        "avg_distance": 0.3559,
+        "top_distance": 0.1545
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4133,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_002",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0021,
+        "executor": 0.052,
+        "critic": 0.0002,
+        "llm_report": 12.0931,
+        "total": 12.1478
+      },
+      "memory": {
+        "before_mb": 152.33,
+        "after_mb": 196.8,
+        "delta_mb": 44.47
+      },
+      "tokens": {
+        "input": 570,
+        "output": 548,
+        "code_chars": 1650
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 8,
+        "avg_distance": 0.2334,
+        "top_distance": 0.095
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 2771,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_003",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "vulnerabilities": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "file_upload",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0017,
+        "executor": 0.0321,
+        "critic": 0.0001,
+        "llm_report": 18.5566,
+        "total": 18.591
+      },
+      "memory": {
+        "before_mb": 196.81,
+        "after_mb": 205.91,
+        "delta_mb": 9.09
+      },
+      "tokens": {
+        "input": 569,
+        "output": 868,
+        "code_chars": 1013
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 12,
+        "avg_distance": 0.4485,
+        "top_distance": 0.2864
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4287,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_004",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "auth_bypass",
+        "csrf",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "csrf",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0014,
+        "executor": 0.0461,
+        "critic": 0.0002,
+        "llm_report": 17.7388,
+        "total": 17.7868
+      },
+      "memory": {
+        "before_mb": 205.91,
+        "after_mb": 206.81,
+        "delta_mb": 0.91
+      },
+      "tokens": {
+        "input": 587,
+        "output": 830,
+        "code_chars": 1249
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 11,
+        "avg_distance": 0.286,
+        "top_distance": 0.1506
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4078,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "csrf"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Csrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_005",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "sql_injection",
+        "rce",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0012,
+        "executor": 0.0366,
+        "critic": 0.0002,
+        "llm_report": 14.7504,
+        "total": 14.789
+      },
+      "memory": {
+        "before_mb": 206.81,
+        "after_mb": 152.42,
+        "delta_mb": -54.39
+      },
+      "tokens": {
+        "input": 597,
+        "output": 666,
+        "code_chars": 741
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 9,
+        "avg_distance": 0.4048,
+        "top_distance": 0.0447
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3457,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_006",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "vulnerabilities": [
+        "path_traversal",
+        "xxe",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "xxe",
+        "xss",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0017,
+        "executor": 0.035,
+        "critic": 0.0004,
+        "llm_report": 15.6655,
+        "total": 15.7034
+      },
+      "memory": {
+        "before_mb": 153.56,
+        "after_mb": 199.16,
+        "delta_mb": 45.59
+      },
+      "tokens": {
+        "input": 554,
+        "output": 728,
+        "code_chars": 2407
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2756,
+        "top_distance": 0.1271
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3734,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_007",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "command_injection",
+        "rce",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0025,
+        "executor": 0.0417,
+        "critic": 0.0004,
+        "llm_report": 11.8702,
+        "total": 11.9155
+      },
+      "memory": {
+        "before_mb": 199.17,
+        "after_mb": 205.17,
+        "delta_mb": 6.0
+      },
+      "tokens": {
+        "input": 542,
+        "output": 548,
+        "code_chars": 2176
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 13,
+        "avg_distance": 0.3167,
+        "top_distance": 0.1041
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 2724,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_008",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0027,
+        "executor": 0.0417,
+        "critic": 0.0005,
+        "llm_report": 13.3378,
+        "total": 13.3829
+      },
+      "memory": {
+        "before_mb": 205.19,
+        "after_mb": 206.23,
+        "delta_mb": 1.05
+      },
+      "tokens": {
+        "input": 490,
+        "output": 627,
+        "code_chars": 3202
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2724,
+        "top_distance": 0.1128
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3197,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_009",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "vulnerabilities": [
+        "path_traversal",
+        "xss",
+        "xxe",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "xss",
+        "xxe",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0023,
+        "executor": 0.0361,
+        "critic": 0.0003,
+        "llm_report": 22.0258,
+        "total": 22.065
+      },
+      "memory": {
+        "before_mb": 206.23,
+        "after_mb": 155.98,
+        "delta_mb": -50.25
+      },
+      "tokens": {
+        "input": 556,
+        "output": 1024,
+        "code_chars": 2107
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2739,
+        "top_distance": 0.1257
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 5108,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_010",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "command_injection",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "xxe",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0019,
+        "executor": 0.0416,
+        "critic": 0.0004,
+        "llm_report": 23.8391,
+        "total": 23.8835
+      },
+      "memory": {
+        "before_mb": 157.05,
+        "after_mb": 197.25,
+        "delta_mb": 40.2
+      },
+      "tokens": {
+        "input": 554,
+        "output": 1110,
+        "code_chars": 1882
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2679,
+        "top_distance": 0.0752
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 5114,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_011",
+      "verdict": "vulnerable",
+      "confidence": 0.8,
+      "vulnerabilities": [
+        "xss",
+        "path_traversal"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "auth_bypass",
+        "xss",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0049,
+        "executor": 0.0351,
+        "critic": 0.0008,
+        "llm_report": 12.9793,
+        "total": 13.0208
+      },
+      "memory": {
+        "before_mb": 197.27,
+        "after_mb": 206.27,
+        "delta_mb": 9.0
+      },
+      "tokens": {
+        "input": 520,
+        "output": 589,
+        "code_chars": 3484
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.3254,
+        "top_distance": 0.1793
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3087,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xxe"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xxe vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_012",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "xxe",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xxe",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0045,
+        "executor": 0.0392,
+        "critic": 0.0007,
+        "llm_report": 19.7078,
+        "total": 19.7532
+      },
+      "memory": {
+        "before_mb": 206.28,
+        "after_mb": 89.03,
+        "delta_mb": -117.25
+      },
+      "tokens": {
+        "input": 554,
+        "output": 850,
+        "code_chars": 3992
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2847,
+        "top_distance": 0.1519
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4342,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "csrf"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Csrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_013",
+      "verdict": "vulnerable",
+      "confidence": 0.8,
+      "vulnerabilities": [
+        "path_traversal",
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "xss",
+        "xxe",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0025,
+        "executor": 0.0433,
+        "critic": 0.0008,
+        "llm_report": 14.8818,
+        "total": 14.9296
+      },
+      "memory": {
+        "before_mb": 90.08,
+        "after_mb": 134.39,
+        "delta_mb": 44.31
+      },
+      "tokens": {
+        "input": 503,
+        "output": 640,
+        "code_chars": 2013
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2837,
+        "top_distance": 0.1333
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3187,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "ssrf"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Ssrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_014",
+      "verdict": "vulnerable",
+      "confidence": 0.85,
+      "vulnerabilities": [
+        "command_injection",
+        "path_traversal"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0022,
+        "executor": 0.0465,
+        "critic": 0.0004,
+        "llm_report": 15.9178,
+        "total": 15.9674
+      },
+      "memory": {
+        "before_mb": 134.41,
+        "after_mb": 139.11,
+        "delta_mb": 4.7
+      },
+      "tokens": {
+        "input": 512,
+        "output": 671,
+        "code_chars": 2593
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 14,
+        "avg_distance": 0.3363,
+        "top_distance": 0.1212
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3421,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "deserialization"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Deserialization vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_015",
+      "verdict": "vulnerable",
+      "confidence": 0.85,
+      "vulnerabilities": [
+        "path_traversal",
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0032,
+        "executor": 0.0303,
+        "critic": 0.0004,
+        "llm_report": 13.8836,
+        "total": 13.9178
+      },
+      "memory": {
+        "before_mb": 139.12,
+        "after_mb": 93.19,
+        "delta_mb": -45.94
+      },
+      "tokens": {
+        "input": 511,
+        "output": 549,
+        "code_chars": 2521
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2688,
+        "top_distance": 0.124
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 2782,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_016",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0062,
+        "executor": 0.0495,
+        "critic": 0.0004,
+        "llm_report": 22.5647,
+        "total": 22.6213
+      },
+      "memory": {
+        "before_mb": 94.22,
+        "after_mb": 86.25,
+        "delta_mb": -7.97
+      },
+      "tokens": {
+        "input": 481,
+        "output": 917,
+        "code_chars": 3812
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2524,
+        "top_distance": 0.0645
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4583,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_017",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.0034,
+        "executor": 0.0462,
+        "critic": 0.0005,
+        "llm_report": 15.0562,
+        "total": 15.107
+      },
+      "memory": {
+        "before_mb": 87.25,
+        "after_mb": 122.55,
+        "delta_mb": 35.3
+      },
+      "tokens": {
+        "input": 474,
+        "output": 625,
+        "code_chars": 3821
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2375,
+        "top_distance": 0.063
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3184,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_018",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.004,
+        "executor": 0.043,
+        "critic": 0.0005,
+        "llm_report": 16.5542,
+        "total": 16.6029
+      },
+      "memory": {
+        "before_mb": 122.56,
+        "after_mb": 131.28,
+        "delta_mb": 8.72
+      },
+      "tokens": {
+        "input": 509,
+        "output": 692,
+        "code_chars": 4524
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2251,
+        "top_distance": 0.0617
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3644,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_019",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0044,
+        "executor": 0.0387,
+        "critic": 0.0006,
+        "llm_report": 19.7085,
+        "total": 19.7529
+      },
+      "memory": {
+        "before_mb": 131.3,
+        "after_mb": 91.11,
+        "delta_mb": -40.19
+      },
+      "tokens": {
+        "input": 479,
+        "output": 815,
+        "code_chars": 4515
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2397,
+        "top_distance": 0.0597
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4326,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_020",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.0035,
+        "executor": 0.0349,
+        "critic": 0.0004,
+        "llm_report": 17.5478,
+        "total": 17.5873
+      },
+      "memory": {
+        "before_mb": 92.14,
+        "after_mb": 134.3,
+        "delta_mb": 42.16
+      },
+      "tokens": {
+        "input": 472,
+        "output": 741,
+        "code_chars": 4590
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2249,
+        "top_distance": 0.0585
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3830,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_021",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0018,
+        "executor": 0.0508,
+        "critic": 0.0003,
+        "llm_report": 14.7675,
+        "total": 14.8209
+      },
+      "memory": {
+        "before_mb": 134.31,
+        "after_mb": 135.95,
+        "delta_mb": 1.64
+      },
+      "tokens": {
+        "input": 514,
+        "output": 613,
+        "code_chars": 1741
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 17,
+        "avg_distance": 0.3221,
+        "top_distance": 0.0535
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3108,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_022",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.001,
+        "executor": 0.0369,
+        "critic": 0.0003,
+        "llm_report": 13.9096,
+        "total": 13.9484
+      },
+      "memory": {
+        "before_mb": 135.97,
+        "after_mb": 136.14,
+        "delta_mb": 0.17
+      },
+      "tokens": {
+        "input": 514,
+        "output": 580,
+        "code_chars": 2472
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 17,
+        "avg_distance": 0.3221,
+        "top_distance": 0.0532
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3032,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_023",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0028,
+        "executor": 0.042,
+        "critic": 0.0003,
+        "llm_report": 13.687,
+        "total": 13.7325
+      },
+      "memory": {
+        "before_mb": 136.14,
+        "after_mb": 83.34,
+        "delta_mb": -52.8
+      },
+      "tokens": {
+        "input": 473,
+        "output": 545,
+        "code_chars": 2467
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 17,
+        "avg_distance": 0.3221,
+        "top_distance": 0.0534
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 2964,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_024",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0011,
+        "executor": 0.1009,
+        "critic": 0.0004,
+        "llm_report": 18.1256,
+        "total": 18.2285
+      },
+      "memory": {
+        "before_mb": 84.48,
+        "after_mb": 130.42,
+        "delta_mb": 45.94
+      },
+      "tokens": {
+        "input": 514,
+        "output": 724,
+        "code_chars": 1727
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 17,
+        "avg_distance": 0.3219,
+        "top_distance": 0.0528
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3786,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_025",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0033,
+        "executor": 0.0503,
+        "critic": 0.0004,
+        "llm_report": 15.9982,
+        "total": 16.0528
+      },
+      "memory": {
+        "before_mb": 130.42,
+        "after_mb": 84.69,
+        "delta_mb": -45.73
+      },
+      "tokens": {
+        "input": 473,
+        "output": 666,
+        "code_chars": 2522
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 17,
+        "avg_distance": 0.3222,
+        "top_distance": 0.0535
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3459,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_026",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0021,
+        "executor": 0.0416,
+        "critic": 0.0003,
+        "llm_report": 14.4447,
+        "total": 14.489
+      },
+      "memory": {
+        "before_mb": 85.81,
+        "after_mb": 130.36,
+        "delta_mb": 44.55
+      },
+      "tokens": {
+        "input": 476,
+        "output": 599,
+        "code_chars": 2127
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 15,
+        "avg_distance": 0.2949,
+        "top_distance": 0.0457
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3071,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_027",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0016,
+        "executor": 0.0441,
+        "critic": 0.0003,
+        "llm_report": 16.7547,
+        "total": 16.8009
+      },
+      "memory": {
+        "before_mb": 130.38,
+        "after_mb": 78.56,
+        "delta_mb": -51.81
+      },
+      "tokens": {
+        "input": 476,
+        "output": 660,
+        "code_chars": 1215
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 15,
+        "avg_distance": 0.2949,
+        "top_distance": 0.0457
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3103,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_028",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0023,
+        "executor": 0.0438,
+        "critic": 0.0004,
+        "llm_report": 14.1465,
+        "total": 14.1933
+      },
+      "memory": {
+        "before_mb": 79.67,
+        "after_mb": 121.45,
+        "delta_mb": 41.78
+      },
+      "tokens": {
+        "input": 475,
+        "output": 575,
+        "code_chars": 2154
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.235,
+        "top_distance": 0.0457
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 2917,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_029",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0018,
+        "executor": 0.0391,
+        "critic": 0.0003,
+        "llm_report": 15.9815,
+        "total": 16.0229
+      },
+      "memory": {
+        "before_mb": 121.45,
+        "after_mb": 124.72,
+        "delta_mb": 3.27
+      },
+      "tokens": {
+        "input": 475,
+        "output": 654,
+        "code_chars": 1284
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2347,
+        "top_distance": 0.0458
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3198,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_030",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0027,
+        "executor": 0.0395,
+        "critic": 0.0003,
+        "llm_report": 18.6536,
+        "total": 18.6963
+      },
+      "memory": {
+        "before_mb": 124.72,
+        "after_mb": 77.23,
+        "delta_mb": -47.48
+      },
+      "tokens": {
+        "input": 475,
+        "output": 770,
+        "code_chars": 2135
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2356,
+        "top_distance": 0.0473
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3730,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_031",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0014,
+        "executor": 0.0442,
+        "critic": 0.0003,
+        "llm_report": 25.7864,
+        "total": 25.8328
+      },
+      "memory": {
+        "before_mb": 78.3,
+        "after_mb": 75.78,
+        "delta_mb": -2.52
+      },
+      "tokens": {
+        "input": 516,
+        "output": 922,
+        "code_chars": 1945
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 15,
+        "avg_distance": 0.2982,
+        "top_distance": 0.0537
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4810,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_032",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0017,
+        "executor": 0.0583,
+        "critic": 0.0005,
+        "llm_report": 21.79,
+        "total": 21.851
+      },
+      "memory": {
+        "before_mb": 76.86,
+        "after_mb": 118.52,
+        "delta_mb": 41.66
+      },
+      "tokens": {
+        "input": 516,
+        "output": 749,
+        "code_chars": 1761
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 15,
+        "avg_distance": 0.2986,
+        "top_distance": 0.0553
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3729,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_033",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.0018,
+        "executor": 0.0527,
+        "critic": 0.0007,
+        "llm_report": 25.8706,
+        "total": 25.9264
+      },
+      "memory": {
+        "before_mb": 118.52,
+        "after_mb": 117.38,
+        "delta_mb": -1.14
+      },
+      "tokens": {
+        "input": 515,
+        "output": 922,
+        "code_chars": 2150
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2257,
+        "top_distance": 0.0553
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4768,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_034",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.0016,
+        "executor": 0.0486,
+        "critic": 0.0005,
+        "llm_report": 23.1063,
+        "total": 23.1576
+      },
+      "memory": {
+        "before_mb": 117.41,
+        "after_mb": 122.27,
+        "delta_mb": 4.86
+      },
+      "tokens": {
+        "input": 514,
+        "output": 848,
+        "code_chars": 2871
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 15,
+        "avg_distance": 0.3012,
+        "top_distance": 0.0867
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4031,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_035",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.002,
+        "executor": 0.0448,
+        "critic": 0.0006,
+        "llm_report": 19.068,
+        "total": 19.1162
+      },
+      "memory": {
+        "before_mb": 122.28,
+        "after_mb": 127.02,
+        "delta_mb": 4.73
+      },
+      "tokens": {
+        "input": 514,
+        "output": 691,
+        "code_chars": 3600
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 15,
+        "avg_distance": 0.301,
+        "top_distance": 0.0862
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3512,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_036",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.0012,
+        "executor": 0.0524,
+        "critic": 0.0004,
+        "llm_report": 17.761,
+        "total": 17.8153
+      },
+      "memory": {
+        "before_mb": 127.02,
+        "after_mb": 76.14,
+        "delta_mb": -50.88
+      },
+      "tokens": {
+        "input": 475,
+        "output": 637,
+        "code_chars": 1906
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 11,
+        "avg_distance": 0.2707,
+        "top_distance": 0.0717
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3244,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_037",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.0022,
+        "executor": 0.0589,
+        "critic": 0.0004,
+        "llm_report": 18.4201,
+        "total": 18.482
+      },
+      "memory": {
+        "before_mb": 77.2,
+        "after_mb": 119.22,
+        "delta_mb": 42.02
+      },
+      "tokens": {
+        "input": 475,
+        "output": 666,
+        "code_chars": 1817
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 11,
+        "avg_distance": 0.2711,
+        "top_distance": 0.073
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3406,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_038",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.0014,
+        "executor": 0.0434,
+        "critic": 0.0004,
+        "llm_report": 17.4493,
+        "total": 17.4947
+      },
+      "memory": {
+        "before_mb": 119.23,
+        "after_mb": 124.69,
+        "delta_mb": 5.45
+      },
+      "tokens": {
+        "input": 475,
+        "output": 635,
+        "code_chars": 1952
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2275,
+        "top_distance": 0.0729
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3244,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_039",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.0013,
+        "executor": 0.0374,
+        "critic": 0.0004,
+        "llm_report": 21.3917,
+        "total": 21.4311
+      },
+      "memory": {
+        "before_mb": 124.7,
+        "after_mb": 76.25,
+        "delta_mb": -48.45
+      },
+      "tokens": {
+        "input": 475,
+        "output": 767,
+        "code_chars": 2051
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2269,
+        "top_distance": 0.0711
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3834,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_040",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.002,
+        "executor": 0.0744,
+        "critic": 0.0005,
+        "llm_report": 29.2421,
+        "total": 29.3196
+      },
+      "memory": {
+        "before_mb": 77.28,
+        "after_mb": 76.31,
+        "delta_mb": -0.97
+      },
+      "tokens": {
+        "input": 513,
+        "output": 1018,
+        "code_chars": 2342
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 15,
+        "avg_distance": 0.2779,
+        "top_distance": 0.0781
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4876,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_041",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0028,
+        "executor": 0.0675,
+        "critic": 0.0008,
+        "llm_report": 20.7549,
+        "total": 20.8267
+      },
+      "memory": {
+        "before_mb": 77.39,
+        "after_mb": 76.14,
+        "delta_mb": -1.25
+      },
+      "tokens": {
+        "input": 472,
+        "output": 746,
+        "code_chars": 2544
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2525,
+        "top_distance": 0.0906
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3957,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_042",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0018,
+        "executor": 0.0543,
+        "critic": 0.0005,
+        "llm_report": 21.8166,
+        "total": 21.8735
+      },
+      "memory": {
+        "before_mb": 77.16,
+        "after_mb": 119.25,
+        "delta_mb": 42.09
+      },
+      "tokens": {
+        "input": 473,
+        "output": 811,
+        "code_chars": 1486
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2389,
+        "top_distance": 0.0656
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4167,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_043",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0025,
+        "executor": 0.0382,
+        "critic": 0.0003,
+        "llm_report": 15.6449,
+        "total": 15.6861
+      },
+      "memory": {
+        "before_mb": 119.25,
+        "after_mb": 124.8,
+        "delta_mb": 5.55
+      },
+      "tokens": {
+        "input": 475,
+        "output": 633,
+        "code_chars": 1700
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.235,
+        "top_distance": 0.0458
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3143,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_044",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0024,
+        "executor": 0.0507,
+        "critic": 0.0003,
+        "llm_report": 18.8697,
+        "total": 18.9236
+      },
+      "memory": {
+        "before_mb": 124.81,
+        "after_mb": 125.58,
+        "delta_mb": 0.77
+      },
+      "tokens": {
+        "input": 514,
+        "output": 763,
+        "code_chars": 1920
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 17,
+        "avg_distance": 0.3221,
+        "top_distance": 0.053
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3727,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_045",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "planner": 0.0038,
+        "executor": 0.039,
+        "critic": 0.0004,
+        "llm_report": 24.4198,
+        "total": 24.4641
+      },
+      "memory": {
+        "before_mb": 125.59,
+        "after_mb": 85.11,
+        "delta_mb": -40.48
+      },
+      "tokens": {
+        "input": 509,
+        "output": 943,
+        "code_chars": 3639
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.2258,
+        "top_distance": 0.0629
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4476,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_046",
+      "verdict": "vulnerable",
+      "confidence": 0.8,
+      "vulnerabilities": [
+        "command_injection",
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "file_upload",
+        "csrf"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0022,
+        "executor": 0.0568,
+        "critic": 0.0003,
+        "llm_report": 18.8831,
+        "total": 18.9425
+      },
+      "memory": {
+        "before_mb": 85.17,
+        "after_mb": 119.25,
+        "delta_mb": 34.08
+      },
+      "tokens": {
+        "input": 564,
+        "output": 737,
+        "code_chars": 1208
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.3948,
+        "top_distance": 0.341
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3691,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_047",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0021,
+        "executor": 0.0275,
+        "critic": 0.0002,
+        "llm_report": 0.0,
+        "total": 0.0299
+      },
+      "memory": {
+        "before_mb": 119.25,
+        "after_mb": 125.34,
+        "delta_mb": 6.09
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 1354
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.5466,
+        "top_distance": 0.5432
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_048",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "vulnerabilities": [
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0006,
+        "executor": 0.0237,
+        "critic": 0.0002,
+        "llm_report": 13.5672,
+        "total": 13.5917
+      },
+      "memory": {
+        "before_mb": 125.36,
+        "after_mb": 130.09,
+        "delta_mb": 4.73
+      },
+      "tokens": {
+        "input": 508,
+        "output": 537,
+        "code_chars": 1766
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 9,
+        "avg_distance": 0.3871,
+        "top_distance": 0.3653
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 2653,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_049",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.7,
+      "vulnerabilities": [
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "file_upload",
+        "csrf"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0016,
+        "executor": 0.0267,
+        "critic": 0.0002,
+        "llm_report": 15.5888,
+        "total": 15.6174
+      },
+      "memory": {
+        "before_mb": 130.09,
+        "after_mb": 88.98,
+        "delta_mb": -41.11
+      },
+      "tokens": {
+        "input": 467,
+        "output": 605,
+        "code_chars": 1022
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.5018,
+        "top_distance": 0.4811
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 2934,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "file_upload"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "File Upload vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_050",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "command_injection",
+        "rce",
+        "ssrf",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "ssrf",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0037,
+        "executor": 0.0548,
+        "critic": 0.0004,
+        "llm_report": 19.2785,
+        "total": 19.3389
+      },
+      "memory": {
+        "before_mb": 89.88,
+        "after_mb": 76.92,
+        "delta_mb": -12.95
+      },
+      "tokens": {
+        "input": 585,
+        "output": 722,
+        "code_chars": 4849
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 15,
+        "avg_distance": 0.3548,
+        "top_distance": 0.3166
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3518,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "rce"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Rce vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_051",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.001,
+        "executor": 0.0598,
+        "critic": 0.0002,
+        "llm_report": 20.4067,
+        "total": 20.468
+      },
+      "memory": {
+        "before_mb": 78.11,
+        "after_mb": 79.22,
+        "delta_mb": 1.11
+      },
+      "tokens": {
+        "input": 518,
+        "output": 735,
+        "code_chars": 913
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.3959,
+        "top_distance": 0.3202
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3622,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_052",
+      "verdict": "vulnerable",
+      "confidence": 0.75,
+      "vulnerabilities": [
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "auth_bypass",
+        "other_injection",
+        "csrf"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.001,
+        "executor": 0.0479,
+        "critic": 0.0002,
+        "llm_report": 23.6478,
+        "total": 23.697
+      },
+      "memory": {
+        "before_mb": 80.28,
+        "after_mb": 79.42,
+        "delta_mb": -0.86
+      },
+      "tokens": {
+        "input": 458,
+        "output": 833,
+        "code_chars": 403
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.388,
+        "top_distance": 0.2995
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3962,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_053",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "command_injection",
+        "path_traversal",
+        "file_upload",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "file_upload",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0064,
+        "executor": 0.0504,
+        "critic": 0.0008,
+        "llm_report": 16.7321,
+        "total": 16.791
+      },
+      "memory": {
+        "before_mb": 80.41,
+        "after_mb": 126.25,
+        "delta_mb": 45.84
+      },
+      "tokens": {
+        "input": 638,
+        "output": 655,
+        "code_chars": 8026
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 15,
+        "avg_distance": 0.3725,
+        "top_distance": 0.2689
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3185,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xxe"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xxe vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_054",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0056,
+        "executor": 0.0556,
+        "critic": 0.0008,
+        "llm_report": 25.046,
+        "total": 25.1092
+      },
+      "memory": {
+        "before_mb": 126.25,
+        "after_mb": 129.62,
+        "delta_mb": 3.38
+      },
+      "tokens": {
+        "input": 518,
+        "output": 1026,
+        "code_chars": 6565
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 12,
+        "avg_distance": 0.4658,
+        "top_distance": 0.3345
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 5036,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_055",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "auth_bypass",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0037,
+        "executor": 0.0453,
+        "critic": 0.0005,
+        "llm_report": 25.1804,
+        "total": 25.2306
+      },
+      "memory": {
+        "before_mb": 129.64,
+        "after_mb": 81.28,
+        "delta_mb": -48.36
+      },
+      "tokens": {
+        "input": 573,
+        "output": 989,
+        "code_chars": 3789
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 13,
+        "avg_distance": 0.3935,
+        "top_distance": 0.3079
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 5120,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "ssrf"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Ssrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_056",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "vulnerabilities": [
+        "command_injection",
+        "auth_bypass",
+        "file_upload",
+        "csrf",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "file_upload",
+        "csrf",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0019,
+        "executor": 0.0555,
+        "critic": 0.0003,
+        "llm_report": 17.963,
+        "total": 18.0211
+      },
+      "memory": {
+        "before_mb": 82.44,
+        "after_mb": 127.77,
+        "delta_mb": 45.33
+      },
+      "tokens": {
+        "input": 605,
+        "output": 711,
+        "code_chars": 1918
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 12,
+        "avg_distance": 0.3917,
+        "top_distance": 0.2864
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3668,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "csrf"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Csrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_057",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "vulnerabilities": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "javascript",
+      "timing": {
+        "planner": 0.001,
+        "executor": 0.0364,
+        "critic": 0.0001,
+        "llm_report": 21.5738,
+        "total": 21.6115
+      },
+      "memory": {
+        "before_mb": 127.77,
+        "after_mb": 80.53,
+        "delta_mb": -47.23
+      },
+      "tokens": {
+        "input": 493,
+        "output": 864,
+        "code_chars": 502
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.4894,
+        "top_distance": 0.3988
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4405,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_058",
+      "verdict": "clean",
+      "confidence": 0.2,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "sql_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0012,
+        "executor": 0.0415,
+        "critic": 0.0002,
+        "llm_report": 0.0,
+        "total": 0.043
+      },
+      "memory": {
+        "before_mb": 81.62,
+        "after_mb": 118.5,
+        "delta_mb": 36.88
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 556
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.5837,
+        "top_distance": 0.5686
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_059",
+      "verdict": "vulnerable",
+      "confidence": 0.85,
+      "vulnerabilities": [
+        "sql_injection",
+        "file_upload",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "file_upload",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0013,
+        "executor": 0.0318,
+        "critic": 0.0002,
+        "llm_report": 22.4544,
+        "total": 22.4883
+      },
+      "memory": {
+        "before_mb": 118.52,
+        "after_mb": 126.75,
+        "delta_mb": 8.23
+      },
+      "tokens": {
+        "input": 527,
+        "output": 888,
+        "code_chars": 3339
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.3291,
+        "top_distance": 0.2581
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4011,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "file_upload"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "File Upload vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_060",
+      "verdict": "clean",
+      "confidence": 0.2,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "sql_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.001,
+        "executor": 0.0245,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0257
+      },
+      "memory": {
+        "before_mb": 126.75,
+        "after_mb": 132.05,
+        "delta_mb": 5.3
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 543
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.5387,
+        "top_distance": 0.5233
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_061",
+      "verdict": "clean",
+      "confidence": 0.5,
+      "vulnerabilities": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0003,
+        "executor": 0.0141,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0147
+      },
+      "memory": {
+        "before_mb": 132.05,
+        "after_mb": 132.73,
+        "delta_mb": 0.69
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 578
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.5616,
+        "top_distance": 0.536
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_062",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.7,
+      "vulnerabilities": [
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0007,
+        "executor": 0.0196,
+        "critic": 0.0002,
+        "llm_report": 17.4836,
+        "total": 17.5045
+      },
+      "memory": {
+        "before_mb": 132.75,
+        "after_mb": 133.39,
+        "delta_mb": 0.64
+      },
+      "tokens": {
+        "input": 497,
+        "output": 703,
+        "code_chars": 1957
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.4208,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3570,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_063",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.7,
+      "vulnerabilities": [
+        "path_traversal"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "path_traversal"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0016,
+        "executor": 0.0293,
+        "critic": 0.0001,
+        "llm_report": 12.8336,
+        "total": 12.8647
+      },
+      "memory": {
+        "before_mb": 133.39,
+        "after_mb": 133.81,
+        "delta_mb": 0.42
+      },
+      "tokens": {
+        "input": 419,
+        "output": 522,
+        "code_chars": 951
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.4952,
+        "top_distance": 0.4599
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3000,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "file_upload"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "File Upload vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_064",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.7,
+      "vulnerabilities": [
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0019,
+        "executor": 0.033,
+        "critic": 0.0003,
+        "llm_report": 20.6543,
+        "total": 20.6896
+      },
+      "memory": {
+        "before_mb": 133.83,
+        "after_mb": 82.91,
+        "delta_mb": -50.92
+      },
+      "tokens": {
+        "input": 534,
+        "output": 801,
+        "code_chars": 1305
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.4229,
+        "top_distance": 0.3818
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3808,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_065",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "vulnerabilities": [
+        "csrf",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "path_traversal",
+        "csrf",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.001,
+        "executor": 0.0324,
+        "critic": 0.0002,
+        "llm_report": 15.5267,
+        "total": 15.5605
+      },
+      "memory": {
+        "before_mb": 83.91,
+        "after_mb": 121.72,
+        "delta_mb": 37.81
+      },
+      "tokens": {
+        "input": 496,
+        "output": 611,
+        "code_chars": 394
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.4795,
+        "top_distance": 0.4515
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 2978,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      }
+    },
+    {
+      "test_id": "eval_066",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "auth_bypass",
+        "file_upload",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0004,
+        "executor": 0.0338,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0343
+      },
+      "memory": {
+        "before_mb": 121.75,
+        "after_mb": 127.84,
+        "delta_mb": 6.09
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 92
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.6404,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_067",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0159,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0162
+      },
+      "memory": {
+        "before_mb": 127.84,
+        "after_mb": 128.3,
+        "delta_mb": 0.45
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 196
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 9,
+        "avg_distance": 0.6558,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_068",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.012,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0122
+      },
+      "memory": {
+        "before_mb": 128.31,
+        "after_mb": 128.7,
+        "delta_mb": 0.39
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 155
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.6227,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_069",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "path_traversal",
+        "auth_bypass",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0093,
+        "critic": 0.0,
+        "llm_report": 0.0,
+        "total": 0.0095
+      },
+      "memory": {
+        "before_mb": 128.7,
+        "after_mb": 128.83,
+        "delta_mb": 0.12
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 91
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.6276,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_070",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0,
+        "executor": 0.0087,
+        "critic": 0.0,
+        "llm_report": 0.0,
+        "total": 0.0088
+      },
+      "memory": {
+        "before_mb": 128.83,
+        "after_mb": 128.95,
+        "delta_mb": 0.12
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 64
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.6412,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_071",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.6,
+      "vulnerabilities": [
+        "file_upload"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "file_upload",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0112,
+        "critic": 0.0001,
+        "llm_report": 16.3986,
+        "total": 16.41
+      },
+      "memory": {
+        "before_mb": 128.95,
+        "after_mb": 129.36,
+        "delta_mb": 0.41
+      },
+      "tokens": {
+        "input": 378,
+        "output": 674,
+        "code_chars": 248
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 9,
+        "avg_distance": 0.5431,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3365,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_072",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.8,
+      "vulnerabilities": [
+        "command_injection",
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0005,
+        "executor": 0.0388,
+        "critic": 0.0001,
+        "llm_report": 15.6796,
+        "total": 15.7191
+      },
+      "memory": {
+        "before_mb": 129.36,
+        "after_mb": 83.55,
+        "delta_mb": -45.81
+      },
+      "tokens": {
+        "input": 436,
+        "output": 603,
+        "code_chars": 206
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 12,
+        "avg_distance": 0.583,
+        "top_distance": 0.4036
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3080,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_073",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.6,
+      "vulnerabilities": [
+        "file_upload",
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "file_upload",
+        "other_injection",
+        "csrf"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0007,
+        "executor": 0.0482,
+        "critic": 0.0003,
+        "llm_report": 22.7829,
+        "total": 22.8323
+      },
+      "memory": {
+        "before_mb": 84.66,
+        "after_mb": 83.75,
+        "delta_mb": -0.91
+      },
+      "tokens": {
+        "input": 403,
+        "output": 900,
+        "code_chars": 168
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.5311,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 4125,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_074",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "vulnerabilities": [
+        "command_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0006,
+        "executor": 0.0425,
+        "critic": 0.0001,
+        "llm_report": 19.0251,
+        "total": 19.0685
+      },
+      "memory": {
+        "before_mb": 84.83,
+        "after_mb": 123.22,
+        "delta_mb": 38.39
+      },
+      "tokens": {
+        "input": 364,
+        "output": 768,
+        "code_chars": 205
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.5372,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3616,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_075",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0004,
+        "executor": 0.0307,
+        "critic": 0.0,
+        "llm_report": 0.0,
+        "total": 0.0312
+      },
+      "memory": {
+        "before_mb": 123.22,
+        "after_mb": 126.42,
+        "delta_mb": 3.2
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 135
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 9,
+        "avg_distance": 0.523,
+        "top_distance": 0.4036
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_076",
+      "verdict": "clean",
+      "confidence": 0.5,
+      "vulnerabilities": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0091,
+        "critic": 0.0,
+        "llm_report": 0.0,
+        "total": 0.0093
+      },
+      "memory": {
+        "before_mb": 126.44,
+        "after_mb": 126.89,
+        "delta_mb": 0.45
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 93
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.7316,
+        "top_distance": 0.6732
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_077",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0097,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0099
+      },
+      "memory": {
+        "before_mb": 126.89,
+        "after_mb": 127.2,
+        "delta_mb": 0.31
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 163
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.7416,
+        "top_distance": 0.6468
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_078",
+      "verdict": "clean",
+      "confidence": 0.5,
+      "vulnerabilities": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0066,
+        "critic": 0.0,
+        "llm_report": 0.0,
+        "total": 0.0068
+      },
+      "memory": {
+        "before_mb": 127.2,
+        "after_mb": 127.36,
+        "delta_mb": 0.16
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 94
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.7197,
+        "top_distance": 0.6787
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_079",
+      "verdict": "clean",
+      "confidence": 0.45,
+      "vulnerabilities": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "auth_bypass",
+        "path_traversal",
+        "xss"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0068,
+        "critic": 0.0,
+        "llm_report": 0.0,
+        "total": 0.007
+      },
+      "memory": {
+        "before_mb": 127.36,
+        "after_mb": 127.52,
+        "delta_mb": 0.16
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 76
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.714,
+        "top_distance": 0.6293
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_080",
+      "verdict": "clean",
+      "confidence": 0.5,
+      "vulnerabilities": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0061,
+        "critic": 0.0,
+        "llm_report": 0.0,
+        "total": 0.0062
+      },
+      "memory": {
+        "before_mb": 127.52,
+        "after_mb": 127.66,
+        "delta_mb": 0.14
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 123
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 5,
+        "avg_distance": 0.7422,
+        "top_distance": 0.7163
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_081",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "file_upload",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0106,
+        "critic": 0.0,
+        "llm_report": 0.0,
+        "total": 0.0108
+      },
+      "memory": {
+        "before_mb": 127.66,
+        "after_mb": 127.92,
+        "delta_mb": 0.27
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 129
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.6162,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_082",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.6,
+      "vulnerabilities": [
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection",
+        "csrf"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0096,
+        "critic": 0.0,
+        "llm_report": 15.5116,
+        "total": 15.5213
+      },
+      "memory": {
+        "before_mb": 127.92,
+        "after_mb": 128.02,
+        "delta_mb": 0.09
+      },
+      "tokens": {
+        "input": 337,
+        "output": 622,
+        "code_chars": 107
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.574,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3099,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_083",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "file_upload",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0002,
+        "executor": 0.083,
+        "critic": 0.0002,
+        "llm_report": 0.0,
+        "total": 0.0835
+      },
+      "memory": {
+        "before_mb": 128.02,
+        "after_mb": 129.16,
+        "delta_mb": 1.14
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 145
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 9,
+        "avg_distance": 0.5926,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_084",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0002,
+        "executor": 0.0869,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0873
+      },
+      "memory": {
+        "before_mb": 129.16,
+        "after_mb": 129.19,
+        "delta_mb": 0.03
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 84
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.5897,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_085",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.55,
+      "vulnerabilities": [
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection",
+        "csrf"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "planner": 0.0031,
+        "executor": 0.0395,
+        "critic": 0.0001,
+        "llm_report": 17.1906,
+        "total": 17.2334
+      },
+      "memory": {
+        "before_mb": 129.19,
+        "after_mb": 123.45,
+        "delta_mb": -5.73
+      },
+      "tokens": {
+        "input": 395,
+        "output": 672,
+        "code_chars": 285
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 10,
+        "avg_distance": 0.5461,
+        "top_distance": 0.3808
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3365,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_086",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0004,
+        "executor": 0.0386,
+        "critic": 0.0001,
+        "llm_report": 12.8521,
+        "total": 12.8913
+      },
+      "memory": {
+        "before_mb": 123.48,
+        "after_mb": 125.14,
+        "delta_mb": 1.66
+      },
+      "tokens": {
+        "input": 355,
+        "output": 514,
+        "code_chars": 106
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 9,
+        "avg_distance": 0.4811,
+        "top_distance": 0.3026
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 2559,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_087",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "vulnerabilities": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0003,
+        "executor": 0.0404,
+        "critic": 0.0001,
+        "llm_report": 18.7363,
+        "total": 18.7773
+      },
+      "memory": {
+        "before_mb": 125.14,
+        "after_mb": 129.19,
+        "delta_mb": 4.05
+      },
+      "tokens": {
+        "input": 450,
+        "output": 742,
+        "code_chars": 263
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 8,
+        "avg_distance": 0.5204,
+        "top_distance": 0.3436
+      },
+      "llm_report": {
+        "generated": true,
+        "length": 3414,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_088",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0004,
+        "executor": 0.0299,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0304
+      },
+      "memory": {
+        "before_mb": 129.2,
+        "after_mb": 129.72,
+        "delta_mb": 0.52
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 91
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 7,
+        "avg_distance": 0.5113,
+        "top_distance": 0.3873
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_089",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0002,
+        "executor": 0.0188,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0191
+      },
+      "memory": {
+        "before_mb": 129.72,
+        "after_mb": 130.41,
+        "delta_mb": 0.69
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 273
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 7,
+        "avg_distance": 0.66,
+        "top_distance": 0.3873
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    },
+    {
+      "test_id": "eval_090",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "vulnerabilities": [],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "planner": 0.0001,
+        "executor": 0.0144,
+        "critic": 0.0001,
+        "llm_report": 0.0,
+        "total": 0.0147
+      },
+      "memory": {
+        "before_mb": 130.41,
+        "after_mb": 131.2,
+        "delta_mb": 0.8
+      },
+      "tokens": {
+        "input": 0,
+        "output": 0,
+        "code_chars": 275
+      },
+      "cost_usd": 0.0,
+      "retrieval": {
+        "match_count": 9,
+        "avg_distance": 0.6597,
+        "top_distance": 0.3752
+      },
+      "llm_report": {
+        "generated": false,
+        "length": 0,
+        "error": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      }
+    }
+  ]
+}

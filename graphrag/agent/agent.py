@@ -16,15 +16,33 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from .planner import Planner
 from .executor import Executor
 from .critic import Critic
+from .hybrid_critic import HybridCritic
 from .memory import Memory
 from line_detector import detect_vulnerable_lines
 
 
 class CodeGuardianAgent:
-    def __init__(self, querier, cache_path: str = None):
+    def __init__(
+        self,
+        querier,
+        cache_path: str = None,
+        use_hybrid: bool = False,
+        llm_client=None,
+        llm_threshold: float = 0.85,
+        llm_weight: float = 0.30,
+    ):
         self.planner = Planner()
         self.executor = Executor(querier)
-        self.critic = Critic(retry_threshold=0.35, max_retries=2)
+        if use_hybrid:
+            self.critic = HybridCritic(
+                llm_client=llm_client,
+                llm_threshold=llm_threshold,
+                llm_weight=llm_weight,
+                retry_threshold=0.35,
+                max_retries=2,
+            )
+        else:
+            self.critic = Critic(retry_threshold=0.35, max_retries=2)
         cache_path = cache_path or os.path.join(
             os.path.dirname(__file__), "..", "data", "agent_cache.json"
         )
@@ -33,9 +51,8 @@ class CodeGuardianAgent:
     # ── factory ───────────────────────────────────────────────────────────────
 
     @classmethod
-    def from_config(cls, config):
+    def from_config(cls, config, use_hybrid: bool = False, llm_client=None, **kwargs):
         """Build a ready-to-use agent from the project config module."""
-        import chromadb
         from graph_store import make_graph_store
         from graph_builder import GraphBuilder
         from vector_indexer import VectorIndexer
@@ -65,11 +82,17 @@ class CodeGuardianAgent:
                 kb = json.load(f)
             indexer.index_all_code(kb)
 
-        chroma_client = chromadb.PersistentClient(path=config.CHROMA_PATH)
+        chroma_client = indexer.client
         querier = HybridQuerier(store, chroma_client, config.CHROMA_COLLECTION_NAME)
 
         cache_path = os.path.join(os.path.dirname(config.__file__), "data", "agent_cache.json")
-        return cls(querier=querier, cache_path=cache_path)
+        return cls(
+            querier=querier,
+            cache_path=cache_path,
+            use_hybrid=use_hybrid,
+            llm_client=llm_client,
+            **kwargs,
+        )
 
     # ── main API ──────────────────────────────────────────────────────────────
 

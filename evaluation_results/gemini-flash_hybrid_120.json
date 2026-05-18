@@ -1,0 +1,5599 @@
+{
+  "model": "gemini-flash",
+  "mode": "hybrid",
+  "threshold": 0.85,
+  "timestamp": "2026-05-16T20:20:50.642525",
+  "eval_set_size": 120,
+  "total_runtime_s": 114.06,
+  "failures": 0,
+  "classification": {
+    "f1": 0.9215,
+    "precision": 0.8889,
+    "recall": 0.9565,
+    "accuracy": 0.875,
+    "fpr": 0.3929,
+    "tp": 88,
+    "fp": 11,
+    "tn": 17,
+    "fn": 4
+  },
+  "llm_consultation": {
+    "overall_consulted": 12,
+    "overall_total": 120,
+    "overall_rate": 0.1,
+    "original_consulted": 12,
+    "original_total": 90,
+    "original_rate": 0.1333,
+    "lowconf_consulted": 0,
+    "lowconf_total": 30,
+    "lowconf_rate": 0.0,
+    "llm_agreed": 8,
+    "llm_disagreed": 4,
+    "agreement_rate": 0.6667
+  },
+  "critic_stats": {
+    "total_cases": 120,
+    "graphrag_only": 108,
+    "llm_consulted": 52,
+    "llm_agreed": 8,
+    "llm_disagreed": 4,
+    "llm_errors": 40,
+    "llm_rate": 0.433,
+    "agreement_rate": 0.154
+  },
+  "latency": {
+    "mean": 0.9503,
+    "total": 114.04
+  },
+  "results": [
+    {
+      "test_id": "eval_001",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.1382,
+        "planner": 0.0019,
+        "executor": 0.1349,
+        "critic": 0.0004
+      },
+      "memory": {
+        "before_mb": 551.95,
+        "after_mb": 603.98,
+        "delta_mb": 52.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_002",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0255,
+        "planner": 0.0004,
+        "executor": 0.0247,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 603.98,
+        "after_mb": 604.38,
+        "delta_mb": 0.39
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_003",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "file_upload",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0286,
+        "planner": 0.0004,
+        "executor": 0.0278,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 604.38,
+        "after_mb": 605.27,
+        "delta_mb": 0.89
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.9,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_004",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "csrf",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "csrf",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0272,
+        "planner": 0.0003,
+        "executor": 0.0266,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 605.27,
+        "after_mb": 605.64,
+        "delta_mb": 0.38
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "csrf"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Csrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_005",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "sql_injection",
+        "rce",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0209,
+        "planner": 0.0002,
+        "executor": 0.0203,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 605.64,
+        "after_mb": 606.12,
+        "delta_mb": 0.48
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_006",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "xxe",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "xxe",
+        "xss",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0278,
+        "planner": 0.0005,
+        "executor": 0.0265,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 606.12,
+        "after_mb": 607.09,
+        "delta_mb": 0.97
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.9,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_007",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "command_injection",
+        "rce",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0242,
+        "planner": 0.0005,
+        "executor": 0.0231,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 607.09,
+        "after_mb": 607.36,
+        "delta_mb": 0.27
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_008",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0214,
+        "planner": 0.0008,
+        "executor": 0.0203,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 607.36,
+        "after_mb": 607.88,
+        "delta_mb": 0.52
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_009",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "xss",
+        "xxe",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "xss",
+        "xxe",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.019,
+        "planner": 0.0005,
+        "executor": 0.0178,
+        "critic": 0.0004
+      },
+      "memory": {
+        "before_mb": 607.88,
+        "after_mb": 607.89,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.9,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_010",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "xxe",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.02,
+        "planner": 0.0005,
+        "executor": 0.019,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 607.89,
+        "after_mb": 608.02,
+        "delta_mb": 0.12
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_011",
+      "verdict": "vulnerable",
+      "confidence": 0.845,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "path_traversal",
+        "CWE-611: Improper Restriction of XML External Entity Reference"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "auth_bypass",
+        "xss",
+        "path_traversal",
+        "xxe",
+        "other_injection",
+        "CWE-611: Improper Restriction of XML External Entity Reference"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 5.3244,
+        "planner": 0.0008,
+        "executor": 0.0221,
+        "critic": 5.3006
+      },
+      "memory": {
+        "before_mb": 608.02,
+        "after_mb": 587.22,
+        "delta_mb": -20.8
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.8,
+        "llm_confidence": 0.95,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The XMLInputFactory is conditionally configured with security properties, allowing for XML External Entity (XXE) injection when securityEnabled is false or when DTD processing is not fully disabled.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xxe"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xxe vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_012",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xxe",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xxe",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0398,
+        "planner": 0.003,
+        "executor": 0.0351,
+        "critic": 0.0006
+      },
+      "memory": {
+        "before_mb": 587.22,
+        "after_mb": 581.7,
+        "delta_mb": -5.52
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "csrf"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Csrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_013",
+      "verdict": "vulnerable",
+      "confidence": 0.83,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "xss",
+        "Information Exposure",
+        "Broken Access Control"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "xss",
+        "xxe",
+        "auth_bypass",
+        "other_injection",
+        "Information Exposure",
+        "Broken Access Control"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 19.6839,
+        "planner": 0.0007,
+        "executor": 0.0212,
+        "critic": 19.6568
+      },
+      "memory": {
+        "before_mb": 581.7,
+        "after_mb": 162.84,
+        "delta_mb": -418.86
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.8,
+        "llm_confidence": 0.9,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The application leaks sensitive stack traces through error handling and relies on a user-controlled parameter to determine access to internal resources without proper server-side validation.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "ssrf"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Ssrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_014",
+      "verdict": "vulnerable",
+      "confidence": 0.85,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "path_traversal"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.1384,
+        "planner": 0.0063,
+        "executor": 0.1306,
+        "critic": 0.0005
+      },
+      "memory": {
+        "before_mb": 163.41,
+        "after_mb": 204.95,
+        "delta_mb": 41.55
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.85,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "deserialization"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Deserialization vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_015",
+      "verdict": "vulnerable",
+      "confidence": 0.85,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0398,
+        "planner": 0.001,
+        "executor": 0.038,
+        "critic": 0.0005
+      },
+      "memory": {
+        "before_mb": 204.97,
+        "after_mb": 205.7,
+        "delta_mb": 0.73
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.85,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_016",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0258,
+        "planner": 0.001,
+        "executor": 0.0242,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 205.72,
+        "after_mb": 206.72,
+        "delta_mb": 1.0
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_017",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0206,
+        "planner": 0.0009,
+        "executor": 0.019,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 206.72,
+        "after_mb": 206.88,
+        "delta_mb": 0.16
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_018",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0215,
+        "planner": 0.001,
+        "executor": 0.0193,
+        "critic": 0.0004
+      },
+      "memory": {
+        "before_mb": 206.88,
+        "after_mb": 206.97,
+        "delta_mb": 0.09
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_019",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0216,
+        "planner": 0.0011,
+        "executor": 0.0197,
+        "critic": 0.0004
+      },
+      "memory": {
+        "before_mb": 206.98,
+        "after_mb": 207.14,
+        "delta_mb": 0.16
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_020",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.019,
+        "planner": 0.0011,
+        "executor": 0.0172,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 207.17,
+        "after_mb": 207.2,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_021",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0269,
+        "planner": 0.0004,
+        "executor": 0.026,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 207.22,
+        "after_mb": 207.58,
+        "delta_mb": 0.36
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_022",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0267,
+        "planner": 0.0007,
+        "executor": 0.0254,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 207.58,
+        "after_mb": 207.64,
+        "delta_mb": 0.06
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_023",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0262,
+        "planner": 0.0006,
+        "executor": 0.0251,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 207.64,
+        "after_mb": 207.69,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_024",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0249,
+        "planner": 0.0004,
+        "executor": 0.024,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 207.69,
+        "after_mb": 207.8,
+        "delta_mb": 0.11
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_025",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0253,
+        "planner": 0.0006,
+        "executor": 0.0241,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 207.8,
+        "after_mb": 207.84,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_026",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0214,
+        "planner": 0.0006,
+        "executor": 0.0205,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 207.84,
+        "after_mb": 207.91,
+        "delta_mb": 0.06
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_027",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0211,
+        "planner": 0.0003,
+        "executor": 0.0205,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 207.92,
+        "after_mb": 207.95,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_028",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0181,
+        "planner": 0.0005,
+        "executor": 0.0172,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 207.95,
+        "after_mb": 207.97,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_029",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0177,
+        "planner": 0.0003,
+        "executor": 0.0171,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 207.97,
+        "after_mb": 208.0,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_030",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0184,
+        "planner": 0.0005,
+        "executor": 0.0175,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 208.02,
+        "after_mb": 208.06,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_031",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0224,
+        "planner": 0.0005,
+        "executor": 0.0215,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 208.06,
+        "after_mb": 208.19,
+        "delta_mb": 0.12
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_032",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0223,
+        "planner": 0.0004,
+        "executor": 0.0213,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 208.19,
+        "after_mb": 208.2,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_033",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "path_traversal",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0193,
+        "planner": 0.0006,
+        "executor": 0.0182,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 208.2,
+        "after_mb": 208.22,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_034",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0246,
+        "planner": 0.0006,
+        "executor": 0.0233,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 208.22,
+        "after_mb": 210.03,
+        "delta_mb": 1.81
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_035",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0221,
+        "planner": 0.0008,
+        "executor": 0.0206,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 210.03,
+        "after_mb": 210.05,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_036",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0213,
+        "planner": 0.0004,
+        "executor": 0.0205,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 210.05,
+        "after_mb": 210.12,
+        "delta_mb": 0.08
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.9,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_037",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0216,
+        "planner": 0.0004,
+        "executor": 0.0209,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 210.12,
+        "after_mb": 210.16,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.9,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_038",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0182,
+        "planner": 0.0005,
+        "executor": 0.0173,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 210.16,
+        "after_mb": 210.17,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.9,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_039",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.018,
+        "planner": 0.0005,
+        "executor": 0.0171,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 210.19,
+        "after_mb": 210.2,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.9,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_040",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.024,
+        "planner": 0.0005,
+        "executor": 0.0229,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 210.22,
+        "after_mb": 210.34,
+        "delta_mb": 0.12
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_041",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0187,
+        "planner": 0.0006,
+        "executor": 0.0176,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 210.36,
+        "after_mb": 210.38,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_042",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0181,
+        "planner": 0.0004,
+        "executor": 0.0174,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 210.38,
+        "after_mb": 210.39,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_043",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0193,
+        "planner": 0.0004,
+        "executor": 0.0184,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 210.39,
+        "after_mb": 210.45,
+        "delta_mb": 0.06
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_044",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "command_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0251,
+        "planner": 0.0004,
+        "executor": 0.0242,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 210.45,
+        "after_mb": 210.55,
+        "delta_mb": 0.09
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_045",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0196,
+        "planner": 0.0009,
+        "executor": 0.0178,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 210.56,
+        "after_mb": 210.59,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_046",
+      "verdict": "vulnerable",
+      "confidence": 0.86,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "csrf",
+        "Stored Cross-Site Scripting (XSS)"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "file_upload",
+        "csrf",
+        "Stored Cross-Site Scripting (XSS)"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 3.1227,
+        "planner": 0.0003,
+        "executor": 0.0198,
+        "critic": 3.1024
+      },
+      "memory": {
+        "before_mb": 210.59,
+        "after_mb": 214.98,
+        "delta_mb": 4.39
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.8,
+        "llm_confidence": 1.0,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The application fails to sanitize the 'HwName' parameter in the XML payload of the CreateDevice request, allowing for persistent script execution as documented in CVE-2019-7671.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_047",
+      "verdict": "clean",
+      "confidence": 0.37,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [
+        "Cross-Site Scripting (XSS)",
+        "SQL Injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "Cross-Site Scripting (XSS)",
+        "SQL Injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 6.0892,
+        "planner": 0.0009,
+        "executor": 0.0251,
+        "critic": 6.063
+      },
+      "memory": {
+        "before_mb": 214.98,
+        "after_mb": 217.86,
+        "delta_mb": 2.88
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 1.0,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The provided text is a vulnerability disclosure report documenting confirmed SQL injection and reflected cross-site scripting vulnerabilities in the ASP Talk application.",
+        "agreement": false
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_048",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 44.4037,
+        "planner": 0.0007,
+        "executor": 0.03,
+        "critic": 44.3723
+      },
+      "memory": {
+        "before_mb": 217.86,
+        "after_mb": 165.39,
+        "delta_mb": -52.47
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.65,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Command Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_049",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.79,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "csrf",
+        "Unrestricted File Upload",
+        "Remote Code Execution (RCE)"
+      ],
+      "all_matched_vulns": [
+        "file_upload",
+        "csrf",
+        "Unrestricted File Upload",
+        "Remote Code Execution (RCE)"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 3.481,
+        "planner": 0.0012,
+        "executor": 0.0469,
+        "critic": 3.4326
+      },
+      "memory": {
+        "before_mb": 166.05,
+        "after_mb": 206.66,
+        "delta_mb": 40.61
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.7,
+        "llm_confidence": 1.0,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The provided text is an exploit report for a known unrestricted file upload vulnerability in an ASP-based image library that allows for the execution of arbitrary web shells.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "file_upload"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "File Upload vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_050",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "rce",
+        "ssrf",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "ssrf",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0515,
+        "planner": 0.0032,
+        "executor": 0.047,
+        "critic": 0.0004
+      },
+      "memory": {
+        "before_mb": 206.67,
+        "after_mb": 211.47,
+        "delta_mb": 4.8
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "rce"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Rce vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_051",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.0249,
+        "planner": 0.0003,
+        "executor": 0.0244,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 211.47,
+        "after_mb": 212.64,
+        "delta_mb": 1.17
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_052",
+      "verdict": "vulnerable",
+      "confidence": 0.825,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "csrf",
+        "SQL Injection",
+        "Authentication Bypass"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "auth_bypass",
+        "other_injection",
+        "csrf",
+        "SQL Injection",
+        "Authentication Bypass"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 2.499,
+        "planner": 0.0001,
+        "executor": 0.0169,
+        "critic": 2.4818
+      },
+      "memory": {
+        "before_mb": 212.64,
+        "after_mb": 213.39,
+        "delta_mb": 0.75
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.75,
+        "llm_confidence": 1.0,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The snippet explicitly documents a classic SQL injection vulnerability in a login form where tautological payloads (' or '1=1) are used to bypass authentication.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Auth Bypass vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_053",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "path_traversal",
+        "file_upload",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "file_upload",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.054,
+        "planner": 0.0059,
+        "executor": 0.046,
+        "critic": 0.0008
+      },
+      "memory": {
+        "before_mb": 213.39,
+        "after_mb": 214.33,
+        "delta_mb": 0.94
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xxe"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xxe vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_054",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.026,
+        "planner": 0.0017,
+        "executor": 0.0228,
+        "critic": 0.0006
+      },
+      "memory": {
+        "before_mb": 214.34,
+        "after_mb": 215.09,
+        "delta_mb": 0.75
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "other_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Other Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_055",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "auth_bypass",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0272,
+        "planner": 0.0009,
+        "executor": 0.0255,
+        "critic": 0.0004
+      },
+      "memory": {
+        "before_mb": 215.11,
+        "after_mb": 215.86,
+        "delta_mb": 0.75
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "ssrf"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Ssrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_056",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "auth_bypass",
+        "file_upload",
+        "csrf",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "file_upload",
+        "csrf",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0284,
+        "planner": 0.0004,
+        "executor": 0.0276,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 215.86,
+        "after_mb": 216.23,
+        "delta_mb": 0.38
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "csrf"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Csrf vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_057",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.755,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "path_traversal",
+        "other_injection",
+        "Cross-Site Scripting (XSS)"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection",
+        "Cross-Site Scripting (XSS)"
+      ],
+      "language_detected": "javascript",
+      "timing": {
+        "total": 3.1065,
+        "planner": 0.0001,
+        "executor": 0.0136,
+        "critic": 3.0923
+      },
+      "memory": {
+        "before_mb": 216.25,
+        "after_mb": 216.58,
+        "delta_mb": 0.33
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.65,
+        "llm_confidence": 1.0,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The fileview.asp script fails to sanitize the 'File' parameter, allowing reflected script execution as demonstrated by the provided proof-of-concept URL.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_058",
+      "verdict": "clean",
+      "confidence": 0.44,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [
+        "SQL Injection",
+        "Cross-Site Scripting (XSS)"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "SQL Injection",
+        "Cross-Site Scripting (XSS)"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 3.7299,
+        "planner": 0.0006,
+        "executor": 0.0246,
+        "critic": 3.7045
+      },
+      "memory": {
+        "before_mb": 216.58,
+        "after_mb": 216.72,
+        "delta_mb": 0.14
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.2,
+        "llm_confidence": 1.0,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The provided text is a security advisory documenting confirmed SQL injection and XSS vulnerabilities within the 'articleID' parameter of the 'activenews_view.asp' script.",
+        "agreement": false
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_059",
+      "verdict": "vulnerable",
+      "confidence": 0.85,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "file_upload",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "file_upload",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.043,
+        "planner": 0.0026,
+        "executor": 0.0395,
+        "critic": 0.0003
+      },
+      "memory": {
+        "before_mb": 216.73,
+        "after_mb": 218.19,
+        "delta_mb": 1.45
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.85,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "file_upload"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "File Upload vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_060",
+      "verdict": "clean",
+      "confidence": 0.44,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [
+        "SQL Injection",
+        "Cross-Site Scripting (XSS)"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "SQL Injection",
+        "Cross-Site Scripting (XSS)"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 3.4854,
+        "planner": 0.0002,
+        "executor": 0.0098,
+        "critic": 3.4752
+      },
+      "memory": {
+        "before_mb": 218.2,
+        "after_mb": 218.27,
+        "delta_mb": 0.06
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.2,
+        "llm_confidence": 1.0,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The provided advisory explicitly identifies the 'page' parameter in default.asp as vulnerable to SQL injection and cross-site scripting due to insufficient input validation.",
+        "agreement": false
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_061",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "xss",
+        "other_injection",
+        "Cross-Site Scripting (XSS)"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "xss",
+        "path_traversal",
+        "other_injection",
+        "Cross-Site Scripting (XSS)"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 2.8027,
+        "planner": 0.0008,
+        "executor": 0.0309,
+        "critic": 2.7706
+      },
+      "memory": {
+        "before_mb": 218.27,
+        "after_mb": 218.45,
+        "delta_mb": 0.19
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.5,
+        "llm_confidence": 1.0,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The provided text is a vulnerability report confirming that the 'matchword' parameter in search_results.asp is susceptible to reflected cross-site scripting due to insufficient input sanitization.",
+        "agreement": false
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_062",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.7,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.3997,
+        "planner": 0.0016,
+        "executor": 0.0426,
+        "critic": 0.3549
+      },
+      "memory": {
+        "before_mb": 218.45,
+        "after_mb": 222.33,
+        "delta_mb": 3.88
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.7,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Path Traversal vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_063",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.79,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "path_traversal",
+        "Insecure Data Storage",
+        "Unrestricted File Upload",
+        "Arbitrary File Deletion",
+        "Improper Authentication"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "path_traversal",
+        "Insecure Data Storage",
+        "Unrestricted File Upload",
+        "Arbitrary File Deletion",
+        "Improper Authentication"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 2.4793,
+        "planner": 0.0009,
+        "executor": 0.0268,
+        "critic": 2.4513
+      },
+      "memory": {
+        "before_mb": 222.33,
+        "after_mb": 222.75,
+        "delta_mb": 0.42
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.7,
+        "llm_confidence": 1.0,
+        "llm_verdict": "vulnerable",
+        "llm_reasoning": "The provided security advisory confirms unauthenticated arbitrary file upload, file deletion, and exposure of the credential database in betaparticle blog versions 3.0 and earlier.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "file_upload"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "File Upload vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_064",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.7,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.2214,
+        "planner": 0.0012,
+        "executor": 0.0372,
+        "critic": 0.1827
+      },
+      "memory": {
+        "before_mb": 222.77,
+        "after_mb": 223.17,
+        "delta_mb": 0.41
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.7,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Sql Injection vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_065",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "csrf",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "path_traversal",
+        "csrf",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.4967,
+        "planner": 0.0006,
+        "executor": 0.0301,
+        "critic": 0.466
+      },
+      "memory": {
+        "before_mb": 223.17,
+        "after_mb": 223.47,
+        "delta_mb": 0.3
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.65,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Xss vulnerability: untrusted input flows into a sensitive operation without adequate sanitization."
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_066",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "auth_bypass",
+        "file_upload",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.4698,
+        "planner": 0.0001,
+        "executor": 0.0162,
+        "critic": 0.4533
+      },
+      "memory": {
+        "before_mb": 223.48,
+        "after_mb": 223.67,
+        "delta_mb": 0.19
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_067",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2162,
+        "planner": 0.0003,
+        "executor": 0.0284,
+        "critic": 0.1875
+      },
+      "memory": {
+        "before_mb": 223.69,
+        "after_mb": 223.81,
+        "delta_mb": 0.12
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_068",
+      "verdict": "clean",
+      "confidence": 0.37,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 2.877,
+        "planner": 0.0002,
+        "executor": 0.0205,
+        "critic": 2.8562
+      },
+      "memory": {
+        "before_mb": 223.83,
+        "after_mb": 223.94,
+        "delta_mb": 0.11
+      },
+      "hybrid_info": {
+        "method": "hybrid",
+        "llm_consulted": true,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 1.0,
+        "llm_verdict": "clean",
+        "llm_reasoning": "The code is a standard and safe implementation of a primality test using trial division up to the square root of the input.",
+        "agreement": true
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_069",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "path_traversal",
+        "auth_bypass",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2257,
+        "planner": 0.0002,
+        "executor": 0.0255,
+        "critic": 0.1999
+      },
+      "memory": {
+        "before_mb": 223.94,
+        "after_mb": 223.98,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_070",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "path_traversal",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.237,
+        "planner": 0.0002,
+        "executor": 0.0271,
+        "critic": 0.2096
+      },
+      "memory": {
+        "before_mb": 223.98,
+        "after_mb": 224.03,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_071",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.6,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "file_upload"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "file_upload",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2144,
+        "planner": 0.0003,
+        "executor": 0.0243,
+        "critic": 0.1896
+      },
+      "memory": {
+        "before_mb": 224.05,
+        "after_mb": 224.2,
+        "delta_mb": 0.16
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.6,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_072",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.8,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2352,
+        "planner": 0.0003,
+        "executor": 0.0379,
+        "critic": 0.1967
+      },
+      "memory": {
+        "before_mb": 224.2,
+        "after_mb": 224.45,
+        "delta_mb": 0.25
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.8,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_073",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.6,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "file_upload",
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "file_upload",
+        "other_injection",
+        "csrf"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2391,
+        "planner": 0.0002,
+        "executor": 0.0267,
+        "critic": 0.212
+      },
+      "memory": {
+        "before_mb": 224.47,
+        "after_mb": 224.62,
+        "delta_mb": 0.16
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.6,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_074",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.1978,
+        "planner": 0.0003,
+        "executor": 0.0277,
+        "critic": 0.1695
+      },
+      "memory": {
+        "before_mb": 224.62,
+        "after_mb": 224.72,
+        "delta_mb": 0.09
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.65,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_075",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2203,
+        "planner": 0.0003,
+        "executor": 0.0292,
+        "critic": 0.1907
+      },
+      "memory": {
+        "before_mb": 224.72,
+        "after_mb": 224.81,
+        "delta_mb": 0.09
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_076",
+      "verdict": "clean",
+      "confidence": 0.5,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.2003,
+        "planner": 0.0001,
+        "executor": 0.0134,
+        "critic": 0.1867
+      },
+      "memory": {
+        "before_mb": 224.81,
+        "after_mb": 224.86,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.5,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_077",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.2119,
+        "planner": 0.0002,
+        "executor": 0.0153,
+        "critic": 0.1963
+      },
+      "memory": {
+        "before_mb": 224.86,
+        "after_mb": 224.97,
+        "delta_mb": 0.11
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_078",
+      "verdict": "clean",
+      "confidence": 0.5,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.1953,
+        "planner": 0.0002,
+        "executor": 0.0187,
+        "critic": 0.1764
+      },
+      "memory": {
+        "before_mb": 224.97,
+        "after_mb": 225.03,
+        "delta_mb": 0.06
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.5,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_079",
+      "verdict": "clean",
+      "confidence": 0.45,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "auth_bypass",
+        "path_traversal",
+        "xss"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.199,
+        "planner": 0.0002,
+        "executor": 0.0156,
+        "critic": 0.1831
+      },
+      "memory": {
+        "before_mb": 225.03,
+        "after_mb": 225.16,
+        "delta_mb": 0.12
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.45,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_080",
+      "verdict": "clean",
+      "confidence": 0.5,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.2165,
+        "planner": 0.0002,
+        "executor": 0.0187,
+        "critic": 0.1974
+      },
+      "memory": {
+        "before_mb": 225.17,
+        "after_mb": 225.22,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.5,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_081",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "file_upload",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.1942,
+        "planner": 0.0002,
+        "executor": 0.0228,
+        "critic": 0.1711
+      },
+      "memory": {
+        "before_mb": 225.22,
+        "after_mb": 225.31,
+        "delta_mb": 0.09
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_082",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.6,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection",
+        "csrf"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.1891,
+        "planner": 0.0002,
+        "executor": 0.0265,
+        "critic": 0.1623
+      },
+      "memory": {
+        "before_mb": 225.31,
+        "after_mb": 225.34,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.6,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_083",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "file_upload",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.4119,
+        "planner": 0.0003,
+        "executor": 0.0286,
+        "critic": 0.3829
+      },
+      "memory": {
+        "before_mb": 225.34,
+        "after_mb": 225.42,
+        "delta_mb": 0.08
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_084",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.1948,
+        "planner": 0.0003,
+        "executor": 0.0245,
+        "critic": 0.1698
+      },
+      "memory": {
+        "before_mb": 225.42,
+        "after_mb": 225.47,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_085",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.55,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection",
+        "csrf"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2132,
+        "planner": 0.0004,
+        "executor": 0.0263,
+        "critic": 0.1864
+      },
+      "memory": {
+        "before_mb": 225.47,
+        "after_mb": 225.55,
+        "delta_mb": 0.08
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.55,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_086",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.034,
+        "planner": 0.0002,
+        "executor": 0.0336,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 225.55,
+        "after_mb": 225.56,
+        "delta_mb": 0.02
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_087",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0197,
+        "planner": 0.0002,
+        "executor": 0.0194,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 225.56,
+        "after_mb": 225.61,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_088",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.1993,
+        "planner": 0.0001,
+        "executor": 0.0093,
+        "critic": 0.1899
+      },
+      "memory": {
+        "before_mb": 225.61,
+        "after_mb": 225.66,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_089",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.2226,
+        "planner": 0.0003,
+        "executor": 0.0302,
+        "critic": 0.1918
+      },
+      "memory": {
+        "before_mb": 225.66,
+        "after_mb": 225.7,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_090",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "xxe",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.1974,
+        "planner": 0.0003,
+        "executor": 0.026,
+        "critic": 0.1709
+      },
+      "memory": {
+        "before_mb": 225.7,
+        "after_mb": 225.75,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerable": false,
+        "vulnerability_types": [],
+        "severity": "none"
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_001",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0272,
+        "planner": 0.0003,
+        "executor": 0.0267,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 225.75,
+        "after_mb": 226.44,
+        "delta_mb": 0.69
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "addslashes() appears to sanitize input but can be bypassed with multi-byte character encodings (e.g., GBK) where a second byte 0x5c creates a valid character, effectively unescaping the added backslash and allowing SQL injection.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_002",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0226,
+        "planner": 0.0001,
+        "executor": 0.0223,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 226.44,
+        "after_mb": 226.48,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "The regex validates that the input consists only of digits, which seems sufficient, but the resulting integer is still directly concatenated into the SQL string. While harder to exploit than string injection, certain database-specific payloads (e.g., very long integers triggering overflow behavior) can still cause issues, and critically the pattern trains developers to rely on format validation instead of parameterized queries.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_003",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0154,
+        "planner": 0.0001,
+        "executor": 0.0152,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 226.48,
+        "after_mb": 226.58,
+        "delta_mb": 0.09
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "htmlspecialchars() without ENT_QUOTES only escapes <, >, &, and double-quote. Single quotes used as attribute delimiters in data-username='...' are NOT escaped, allowing an attacker to inject onclick='malicious_code()' or other event handlers by breaking out of the single-quoted attribute.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_004",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0178,
+        "planner": 0.0001,
+        "executor": 0.0175,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 226.58,
+        "after_mb": 226.66,
+        "delta_mb": 0.08
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "FILTER_SANITIZE_EMAIL removes illegal email characters but does NOT escape SQL special characters. A crafted email like \"a'@b.com\" passes email validation and still contains a single quote that breaks the SQL string context. The name field uses FILTER_SANITIZE_STRING which strips tags but also does not SQL-escape.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_005",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0179,
+        "planner": 0.0001,
+        "executor": 0.0176,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 226.66,
+        "after_mb": 226.75,
+        "delta_mb": 0.09
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "strip_tags() with allowed tags permits those tags to retain ANY attribute. So <b onclick=\"alert(1)\"> or <em style=\"background:url(javascript:alert(1))\"> passes strip_tags. The SQL insertion is safe, but the output is raw HTML with potentially malicious event-handler attributes.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_006",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0184,
+        "planner": 0.0001,
+        "executor": 0.0181,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 226.75,
+        "after_mb": 226.8,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "HTML-encoding quotes (&#39; and &quot;) prevents XSS but does NOT prevent SQL injection \u2014 the database receives the encoded string and may decode HTML entities depending on configuration. More critically, the input still contains backslash, NULL bytes, and other SQL metacharacters not addressed by this approach. A payload like %\\' UNION SELECT... can escape the LIKE context.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_007",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.85,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.018,
+        "planner": 0.0001,
+        "executor": 0.0177,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 226.81,
+        "after_mb": 226.88,
+        "delta_mb": 0.06
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.85,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "all(c in string.digits for c in user_id) validates that only digit characters are present, which is nearly sufficient for integer IDs. However the value is still embedded directly via f-string rather than parameterized. While exploiting a pure-integer field is difficult, this is an unsafe pattern: it breaks immediately if the schema ever changes to allow alphanumeric IDs, and certain DB behaviors (expression evaluation, type coercion) can be leveraged.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_008",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "path_traversal",
+        "auth_bypass"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.0195,
+        "planner": 0.0001,
+        "executor": 0.0192,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 226.88,
+        "after_mb": 226.98,
+        "delta_mb": 0.11
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "low",
+        "vulnerable": true,
+        "explanation": "parseInt() with radix 10 coerces the input to an integer and checks for NaN, which is a reasonable guard for integer IDs. However, the value is still template-interpolated into raw SQL rather than passed as a parameterized query parameter. The risk is low for simple integer fields but the pattern is inherently unsafe: JavaScript's number precision (IEEE 754) can produce unexpected values for very large IDs, and the pattern scales dangerously to string fields.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_009",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.75,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "file_upload",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "file_upload",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.189,
+        "planner": 0.0001,
+        "executor": 0.0136,
+        "critic": 0.1751
+      },
+      "memory": {
+        "before_mb": 226.98,
+        "after_mb": 227.03,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.75,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Blacklist-based filtering removes specific shell metacharacters but misses others. Specifically: whitespace-separated additional arguments, path traversal (../), and especially newline-split commands via %0a (URL-decoded before the check). An attacker can also use ${IFS} as a space substitute in some shells, or pass filenames that are valid shell glob patterns. The fundamental flaw is using a denylist instead of a safelist or subprocess with args list.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_010",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.0237,
+        "planner": 0.0002,
+        "executor": 0.0232,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 227.03,
+        "after_mb": 227.2,
+        "delta_mb": 0.17
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Doubling single quotes ('' instead of ') is a valid SQL escaping technique in some databases but is fragile in Java: it doesn't account for backslash escaping in MySQL (where \\' also ends a string), Unicode quote characters (U+2018, U+2019), or encoding attacks. Most critically, it doesn't use PreparedStatement, so the query is re-parsed each time, eliminating any structural separation between code and data.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_011",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "csrf",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "csrf",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0225,
+        "planner": 0.0002,
+        "executor": 0.0222,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 227.2,
+        "after_mb": 228.8,
+        "delta_mb": 1.59
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Second-order SQL injection: the username is properly escaped on registration (insert), giving a false sense of security. However, when retrieved from the database for the password change, it is trusted as safe and directly concatenated into a new query. An attacker registers with username \"admin'--\" which is stored safely, but when used in the UPDATE query it becomes: UPDATE users SET password=... WHERE username='admin'--' \u2014 resetting the admin's password.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_012",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.019,
+        "planner": 0.0001,
+        "executor": 0.0187,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 228.8,
+        "after_mb": 228.89,
+        "delta_mb": 0.09
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Mixed pattern: the id parameter is safely parameterized (?) and action is whitelisted. However, the table name is directly interpolated into the SQL string without validation. PDO prepared statements cannot parameterize table/column names \u2014 only values. An attacker can inject: table=users WHERE 1=1 UNION SELECT password,null FROM users-- to exfiltrate any table.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_013",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "xss",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0207,
+        "planner": 0.0001,
+        "executor": 0.0204,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 228.89,
+        "after_mb": 229.0,
+        "delta_mb": 0.11
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Character encoding mismatch XSS: htmlentities() is called with ISO-8859-1 but the database connection uses UTF-8. A payload using overlong UTF-8 sequences or certain Unicode characters (e.g., U+FF1C FULLWIDTH LESS-THAN SIGN rendered as < by some browsers) can slip through Latin-1 encoding validation and render as HTML tags in a UTF-8 page context.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_014",
+      "verdict": "vulnerable",
+      "confidence": 1.0,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.0232,
+        "planner": 0.0001,
+        "executor": 0.0229,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 229.0,
+        "after_mb": 229.03,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 1.0,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "PDO with ATTR_EMULATE_PREPARES=true and charset=gbk is vulnerable to SQL injection. With emulated prepares, PDO performs string interpolation in PHP rather than sending a true parameterized query to MySQL. Combined with GBK charset, a multi-byte character attack (e.g., the 0xbf27 technique) can cause addslashes-style escaping to be bypassed, breaking out of the string context.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_015",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.75,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "xxe",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xxe",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.1832,
+        "planner": 0.0002,
+        "executor": 0.018,
+        "critic": 0.1648
+      },
+      "memory": {
+        "before_mb": 229.03,
+        "after_mb": 229.16,
+        "delta_mb": 0.12
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.75,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Context-dependent vulnerability: in production (FLASK_ENV != 'development') the code correctly whitelists report names and is safe. In development mode, any file path is accepted, enabling ../../../etc/passwd style path traversal. The danger is that FLASK_ENV may be inadvertently set to 'development' in staging or misconfigured production environments, or that the dev branch gets deployed.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_016",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.75,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "file_upload",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "file_upload",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2161,
+        "planner": 0.0003,
+        "executor": 0.023,
+        "critic": 0.1925
+      },
+      "memory": {
+        "before_mb": 229.16,
+        "after_mb": 229.28,
+        "delta_mb": 0.12
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.75,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Time-of-check/time-of-use (TOCTOU) race condition: the code correctly calls os.path.realpath() to detect symlinks and verify the path stays within SAFE_DIR. However, between the realpath() check and the send_file() call, an attacker with write access to the upload directory can replace the legitimate file with a symlink pointing to /etc/passwd or another sensitive file. The fix is to open the file descriptor atomically and verify after opening.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_017",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "path_traversal",
+        "ssrf",
+        "auth_bypass",
+        "xss",
+        "other_injection"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.0358,
+        "planner": 0.0007,
+        "executor": 0.0348,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 229.28,
+        "after_mb": 229.41,
+        "delta_mb": 0.12
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "GraphQL injection: the user-supplied ID is directly interpolated into the GraphQL query string. An attacker can inject additional fields or fragments: id: 1) { passwordHash } user(id: 2 to extract sensitive fields not intended to be returned. This is analogous to SQL injection but at the GraphQL layer. The fix is to use GraphQL variables instead of string interpolation.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_018",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.6,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "path_traversal",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.2082,
+        "planner": 0.0003,
+        "executor": 0.023,
+        "critic": 0.1846
+      },
+      "memory": {
+        "before_mb": 229.41,
+        "after_mb": 229.17,
+        "delta_mb": -0.23
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.6,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "LDAP injection with partial escaping: only the wildcard (*) is escaped, but LDAP filter metacharacters (, ), \\, NUL, and | remain unescaped. An attacker can inject: username=admin)(&) to create filter (&(uid=admin)(&)(userPassword=...)) which evaluates to true for any password (authentication bypass). The password field is completely unescaped as well.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_019",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.6,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "rce",
+        "command_injection",
+        "auth_bypass",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2046,
+        "planner": 0.0004,
+        "executor": 0.0255,
+        "critic": 0.1786
+      },
+      "memory": {
+        "before_mb": 229.17,
+        "after_mb": 229.33,
+        "delta_mb": 0.16
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.6,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "template_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Server-Side Template Injection (SSTI) via Jinja2: the user-controlled 'name' is embedded directly into the template source string before rendering. An attacker can inject Jinja2 expressions: name={{7*7}} returns 49, and name={{''.__class__.__mro__[1].__subclasses__()}} can enumerate Python classes for RCE. The correct fix is render_template_string('<h1>Hello {{ name }}</h1>', name=name) where the input is a variable, not part of the template.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_020",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2205,
+        "planner": 0.0005,
+        "executor": 0.0333,
+        "critic": 0.1866
+      },
+      "memory": {
+        "before_mb": 229.33,
+        "after_mb": 229.38,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.65,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "template_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Mako SSTI: the user controls the entire template string passed to Template(). Mako templates support arbitrary Python expressions in ${...} blocks. An attacker can inject: ${__import__('os').system('id')} for OS command execution or ${open('/etc/passwd').read()} to read arbitrary files. The error message also leaks exception details.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_021",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.6,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "path_traversal",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2062,
+        "planner": 0.0005,
+        "executor": 0.0329,
+        "critic": 0.1726
+      },
+      "memory": {
+        "before_mb": 229.38,
+        "after_mb": 229.41,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.6,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Mass assignment vulnerability: the code iterates over all JSON keys and sets them as object attributes with no whitelist. An attacker can POST {\"username\": \"user\", \"password\": \"pass\", \"is_admin\": true, \"role\": \"superuser\", \"email_verified\": true} to set privileged fields. The User model likely has fields like is_admin, role, or balance that should not be user-settable.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_022",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "other_injection",
+        "csrf"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "auth_bypass",
+        "other_injection",
+        "csrf"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2062,
+        "planner": 0.0006,
+        "executor": 0.0363,
+        "critic": 0.169
+      },
+      "memory": {
+        "before_mb": 229.41,
+        "after_mb": 229.61,
+        "delta_mb": 0.2
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.65,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Mass assignment via Jackson deserialization: ObjectMapper.convertValue() maps all JSON fields directly to the User object. While the ID is preserved, an attacker can set role=ADMIN, accountBalance=999999, emailVerified=true, or any other User model field. The @AuthenticationPrincipal check only verifies the user is logged in \u2014 it does not prevent privilege escalation via field injection.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_023",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.65,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xxe",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "xxe",
+        "file_upload",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2038,
+        "planner": 0.0004,
+        "executor": 0.0257,
+        "critic": 0.1775
+      },
+      "memory": {
+        "before_mb": 229.61,
+        "after_mb": 229.66,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.65,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "XXE (XML External Entity) injection: Python's xml.etree.ElementTree is vulnerable to entity expansion attacks. An attacker can send: <?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]><config><key>&xxe;</key></config> to read local files. Python's stdlib XML parsers (minidom, ElementTree, expat) are vulnerable to XXE by default. The lxml library with resolve_entities=False or defusedxml should be used instead.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_024",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.7,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "xss",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "java",
+      "timing": {
+        "total": 0.2048,
+        "planner": 0.0007,
+        "executor": 0.0331,
+        "critic": 0.1707
+      },
+      "memory": {
+        "before_mb": 229.66,
+        "after_mb": 229.94,
+        "delta_mb": 0.28
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.7,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "XXE in Java DocumentBuilder: DocumentBuilderFactory by default allows external entity processing and external DTD loading. An attacker can inject a DOCTYPE with an external entity pointing to file:///etc/passwd, internal network resources (SSRF), or use recursive entity expansion (billion laughs attack) for DoS. The commented-out fix shows exactly what's missing.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_025",
+      "verdict": "clean",
+      "confidence": 0.1,
+      "predicted_vulnerable": false,
+      "vulnerability_types": [],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "javascript",
+      "timing": {
+        "total": 0.1974,
+        "planner": 0.0004,
+        "executor": 0.0303,
+        "critic": 0.1666
+      },
+      "memory": {
+        "before_mb": 229.94,
+        "after_mb": 230.09,
+        "delta_mb": 0.16
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.1,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Prototype pollution: the deepMerge function recursively copies properties without checking for __proto__, constructor, or prototype keys. An attacker can POST {\"__proto__\": {\"isAdmin\": true}} to pollute Object.prototype, affecting all objects in the Node.js process. Subsequent checks like if (user.isAdmin) will return true for all users. This can lead to authentication bypass, privilege escalation, or RCE depending on how polluted properties are used.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_026",
+      "verdict": "vulnerable",
+      "confidence": 0.95,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "xss"
+      ],
+      "all_matched_vulns": [
+        "path_traversal",
+        "auth_bypass",
+        "xss"
+      ],
+      "language_detected": "unknown",
+      "timing": {
+        "total": 0.0296,
+        "planner": 0.0005,
+        "executor": 0.0288,
+        "critic": 0.0002
+      },
+      "memory": {
+        "before_mb": 230.09,
+        "after_mb": 230.17,
+        "delta_mb": 0.08
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.95,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "NoSQL injection via MongoDB operator injection: when username and password are taken directly from req.body (parsed as JSON), an attacker can send {\"username\": \"admin\", \"password\": {\"$gt\": \"\"}} \u2014 the $gt operator causes MongoDB to return users where password is greater than empty string (all users). This bypasses password authentication entirely. The fix is to validate that username and password are strings, not objects.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_027",
+      "verdict": "vulnerable",
+      "confidence": 0.9,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "ssrf",
+        "auth_bypass",
+        "xxe",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "rce",
+        "ssrf",
+        "auth_bypass",
+        "xxe",
+        "path_traversal",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.0232,
+        "planner": 0.0002,
+        "executor": 0.0227,
+        "critic": 0.0001
+      },
+      "memory": {
+        "before_mb": 230.17,
+        "after_mb": 230.2,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.9,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [
+          "ssrf"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "SSRF with insufficient URL validation: the code checks that the scheme is http or https but does not validate the hostname or IP address. An attacker can fetch internal network resources: http://169.254.169.254/latest/meta-data/ (AWS metadata), http://192.168.1.1/admin (internal router), or http://localhost:6379/ (local Redis). Scheme-only validation is a common but insufficient SSRF mitigation.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_028",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.8,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "sql_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "sql_injection",
+        "rce",
+        "path_traversal",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.2145,
+        "planner": 0.0002,
+        "executor": 0.0216,
+        "critic": 0.1922
+      },
+      "memory": {
+        "before_mb": 230.2,
+        "after_mb": 230.25,
+        "delta_mb": 0.05
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.8,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [],
+        "severity": "none",
+        "vulnerable": false,
+        "explanation": "This code is SAFE despite using f-string interpolation for SQL. Both dynamic values (sort_field and sort_order) are validated against strict whitelists of allowed values before being interpolated. Since they can only ever be one of the predefined safe strings, no injection is possible. This is a false positive case to test that the hybrid critic correctly identifies safe whitelist-validated patterns.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_029",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.75,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "sql_injection",
+        "command_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "sql_injection",
+        "command_injection",
+        "auth_bypass",
+        "other_injection"
+      ],
+      "language_detected": "php",
+      "timing": {
+        "total": 0.2033,
+        "planner": 0.0004,
+        "executor": 0.03,
+        "critic": 0.1718
+      },
+      "memory": {
+        "before_mb": 230.25,
+        "after_mb": 230.28,
+        "delta_mb": 0.03
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.75,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [],
+        "severity": "none",
+        "vulnerable": false,
+        "explanation": "This code is SAFE. The ORDER BY direction is validated against an explicit allowlist ['ASC', 'DESC'] with a safe default fallback. Only one of two safe string literals can ever be interpolated into the query. The output is also properly escaped with htmlspecialchars(). This is a false positive designed to verify the hybrid critic does not flag correctly validated dynamic SQL.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    },
+    {
+      "test_id": "eval_low_030",
+      "verdict": "potentially_vulnerable",
+      "confidence": 0.75,
+      "predicted_vulnerable": true,
+      "vulnerability_types": [
+        "command_injection",
+        "path_traversal",
+        "file_upload",
+        "other_injection"
+      ],
+      "all_matched_vulns": [
+        "command_injection",
+        "path_traversal",
+        "file_upload",
+        "other_injection"
+      ],
+      "language_detected": "python",
+      "timing": {
+        "total": 0.1956,
+        "planner": 0.0005,
+        "executor": 0.0274,
+        "critic": 0.1673
+      },
+      "memory": {
+        "before_mb": 230.28,
+        "after_mb": 230.38,
+        "delta_mb": 0.09
+      },
+      "hybrid_info": {
+        "method": "graphrag_only",
+        "llm_consulted": false,
+        "graphrag_confidence": 0.75,
+        "llm_confidence": 0.0,
+        "llm_verdict": "",
+        "llm_reasoning": "",
+        "agreement": null
+      },
+      "ground_truth": {
+        "vulnerability_types": [],
+        "severity": "none",
+        "vulnerable": false,
+        "explanation": "This code is SAFE from SSTI. The critical difference from a vulnerable pattern is that user input (name) is passed as a template VARIABLE via render(name=name), not embedded into the template source string itself. The template string is a constant literal with a {{ name }} placeholder. With autoescape enabled, any HTML in the name variable will also be escaped, preventing XSS. This tests whether the hybrid critic correctly distinguishes safe variable-binding from unsafe template-source injection.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "from_cache": false
+    }
+  ]
+}

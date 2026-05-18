@@ -30,6 +30,7 @@ class GeminiClient:
         # Model: gemini-flash-latest (free tier)
         # Version: v1beta (matches curl)
         self.model_name = 'gemini-flash-latest'
+        #self.model_name = 'gemini-2.5-flash'
         self.api_version = 'v1beta'
         self.base_url = f'https://generativelanguage.googleapis.com/{self.api_version}'
         self.endpoint = f'{self.base_url}/models/{self.model_name}:generateContent'

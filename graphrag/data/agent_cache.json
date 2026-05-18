@@ -1,1 +1,169 @@
-{}
+{
+  "cc0abd5d0aad5a76": {
+    "verdict": "vulnerable",
+    "confidence": 1.0,
+    "vulnerability_types": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "all_matched_vulns": [
+      "sql_injection",
+      "auth_bypass",
+      "other_injection"
+    ],
+    "top_severity": "critical",
+    "language_detected": "php",
+    "suspected_by_planner": [
+      "sql_injection"
+    ],
+    "evidence": [
+      {
+        "code_id": "code_072",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.2864,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_107",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3026,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_256",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3345,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_054",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3463,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      },
+      {
+        "code_id": "code_001",
+        "language": "php",
+        "severity": "critical",
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "similarity_distance": 0.3574,
+        "cwes": [
+          {
+            "id": "CWE-89",
+            "name": "Improper Neutralization of Special Elements in SQL Command"
+          }
+        ],
+        "owasp_docs": [
+          {
+            "title": "A03:2021 \u2013 Injection",
+            "url": "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+          }
+        ]
+      }
+    ],
+    "fix_guidance": [
+      {
+        "vuln_type": "sql_injection",
+        "description": "Use prepared statements with parameterized queries; Use stored procedures with proper parameterization; Validate and escape all user-supplied input"
+      },
+      {
+        "vuln_type": "auth_bypass",
+        "description": "Enforce authentication on every protected endpoint; Use strong, well-reviewed authentication libraries; Implement multi-factor authentication for sensitive actions"
+      },
+      {
+        "vuln_type": "other_injection",
+        "description": "Validate and sanitize all user-supplied input; Use parameterized APIs instead of string concatenation; Apply output encoding appropriate to the context"
+      }
+    ],
+    "line_findings": [
+      {
+        "line_num": 1,
+        "content": "<?php $id = $_GET[\"id\"]; $q = \"SELECT * FROM users WHERE id = $id\"; mysqli_query($conn, $q); ?>",
+        "vuln_type": "sql_injection",
+        "reason": "Unsanitized user input in query"
+      },
+      {
+        "line_num": 1,
+        "content": "<?php $id = $_GET[\"id\"]; $q = \"SELECT * FROM users WHERE id = $id\"; mysqli_query($conn, $q); ?>",
+        "vuln_type": "general",
+        "reason": "Unsanitized user input"
+      }
+    ],
+    "total_matches": 10,
+    "iterations": 1,
+    "impossible_vulns": [],
+    "patterns_found": {
+      "has_os_calls": false,
+      "has_file_ops": false,
+      "has_sql": true,
+      "has_network": false,
+      "has_eval": false,
+      "has_user_input": true
+    },
+    "from_cache": false,
+    "_cached_at": "2026-05-18T00:42:34.309627"
+  }
+}

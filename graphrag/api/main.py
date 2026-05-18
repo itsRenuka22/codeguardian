@@ -32,10 +32,15 @@ _pool = ThreadPoolExecutor(max_workers=2)
 # ── Agent (lazy) ──────────────────────────────────────────────
 _agent = None
 _agent_error: Optional[str] = None
+_hybrid_enabled: bool = False
+_hybrid_llm_client = None
 
 
-def _get_agent():
-    global _agent, _agent_error
+def _get_agent(use_hybrid: bool = False, llm_client=None):
+    global _agent, _agent_error, _hybrid_enabled, _hybrid_llm_client
+    if use_hybrid != _hybrid_enabled or (use_hybrid and llm_client != _hybrid_llm_client):
+        # Reset agent if hybrid mode changes
+        _agent = None
     if _agent is not None:
         return _agent
     if _agent_error:
@@ -43,7 +48,11 @@ def _get_agent():
     try:
         import config
         from agent.agent import CodeGuardianAgent
-        _agent = CodeGuardianAgent.from_config(config)
+        _agent = CodeGuardianAgent.from_config(
+            config, use_hybrid=use_hybrid, llm_client=llm_client
+        )
+        _hybrid_enabled = use_hybrid
+        _hybrid_llm_client = llm_client
     except Exception as exc:
         _agent_error = str(exc)
         raise RuntimeError(_agent_error) from exc
@@ -165,12 +174,27 @@ async def analyze(request: Request):
     code      = body.get("code", "").strip()
     model_key = body.get("model", "").strip()
     api_key   = body.get("api_key", "").strip()
+    use_hybrid = body.get("use_hybrid", False)
+    hybrid_model = body.get("hybrid_model", "").strip()
 
     if not code:
         raise HTTPException(400, "No code provided")
 
     try:
-        result = _get_agent().analyze(code)
+        # Build hybrid mode if requested
+        llm_client = None
+        if use_hybrid and hybrid_model:
+            try:
+                llm_client = _make_llm(hybrid_model, api_key or "")
+            except Exception as exc:
+                raise HTTPException(400, f"Failed to init hybrid LLM: {exc}") from exc
+
+        agent = _get_agent(use_hybrid=use_hybrid, llm_client=llm_client)
+        result = agent.analyze(code)
+
+        # Add hybrid metadata if applicable
+        if use_hybrid and hasattr(agent.critic, "get_stats"):
+            result["hybrid_stats"] = agent.critic.get_stats()
     except Exception as exc:
         raise HTTPException(500, str(exc)) from exc
 
@@ -305,13 +329,23 @@ async def analyze_stream(request: Request):
     body      = await request.json()
     code      = body.get("code", "").strip()
     model_key = body.get("model", "").strip()
+    use_hybrid = body.get("use_hybrid", False)
+    hybrid_model = body.get("hybrid_model", "").strip()
 
     if not code:
         raise HTTPException(400, "No code provided")
 
     async def event_generator():
         try:
-            agent = _get_agent()
+            # Build hybrid mode if requested
+            llm_client = None
+            if use_hybrid and hybrid_model:
+                try:
+                    llm_client = _make_llm(hybrid_model, "")
+                except Exception as exc:
+                    yield f"data: {json.dumps({'type': 'warning', 'message': f'Hybrid LLM init failed: {exc}'})}\n\n"
+
+            agent = _get_agent(use_hybrid=use_hybrid, llm_client=llm_client)
 
             # ── PLANNER ────────────────────────────────────────────
             yield f"data: {json.dumps({'type': 'progress', 'step': 'planning', 'message': '🎯 PLANNER: Analyzing code structure…'})}\n\n"
@@ -342,25 +376,38 @@ async def analyze_stream(request: Request):
                 yield f"data: {json.dumps({'type': 'detail', 'step': 'searching', 'message': f'→ Top match: distance {top_dist:.3f} ({sim_label})'})}\n\n"
 
             # ── CRITIC ─────────────────────────────────────────────
-            yield f"data: {json.dumps({'type': 'progress', 'step': 'scoring', 'message': '🧠 CRITIC: Evaluating results…'})}\n\n"
+            mode_label = "(Hybrid: GraphRAG + LLM)" if use_hybrid else "(GraphRAG only)"
+            yield f"data: {json.dumps({'type': 'progress', 'step': 'scoring', 'message': f'🧠 CRITIC {mode_label}: Evaluating results…'})}\n\n"
             yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': '→ Running semantic validation…'})}\n\n"
 
             score = agent.critic.score(code, exec_result)
 
+            # Add hybrid-specific details if consulted
+            if use_hybrid and hasattr(score, 'llm_consulted') and score.llm_consulted:
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ GraphRAG confidence: {score.graphrag_confidence*100:.0f}%'})}\n\n"
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ LLM consulted (threshold: 0.85)'})}\n\n"
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ LLM confidence: {score.llm_confidence*100:.0f}%'})}\n\n"
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Agreement: {score.agreement}'})}\n\n"
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Merged confidence: {score.confidence*100:.0f}% (70% GraphRAG + 30% LLM)'})}\n\n"
+            else:
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Confidence: {score.confidence*100:.0f}%'})}\n\n"
+
             yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Verdict: {score.verdict.upper()}'})}\n\n"
-            yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Confidence: {score.confidence*100:.0f}%'})}\n\n"
 
             # ── STORE SESSION & RETURN RESULTS ──────────────────────
             analysis_id = str(uuid.uuid4())
+            formatted = agent._format(code, plan, exec_result, score, 1)
+            if use_hybrid and hasattr(agent.critic, "get_stats"):
+                formatted["hybrid_stats"] = agent.critic.get_stats()
+
             _analysis_sessions[analysis_id] = {
                 "code": code,
-                "result": agent._format(code, plan, exec_result, score, 1),
+                "result": formatted,
                 "model": model_key,
                 "timestamp": datetime.now(),
             }
 
-            result = agent._format(code, plan, exec_result, score, 1)
-            yield f"data: {json.dumps({'type': 'complete', 'analysis_id': analysis_id, **result})}\n\n"
+            yield f"data: {json.dumps({'type': 'complete', 'analysis_id': analysis_id, **formatted})}\n\n"
 
         except Exception as exc:
             yield f"data: {json.dumps({'type': 'error', 'message': str(exc)})}\n\n"

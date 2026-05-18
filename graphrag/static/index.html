@@ -1423,13 +1423,11 @@ function renderEval(d) {
           Dataset Notes
         </div>
         <p style="font-size:13px;line-height:1.7;color:var(--text-muted)">
-          All 65 evaluation cases are <strong style="color:var(--text-primary)">vulnerable</strong> (no negative examples),
-          so binary precision/recall/F1 reflect detection ability.
           The differentiating metric is <strong style="color:var(--green)">Vuln-Type Accuracy</strong> —
           whether the correct category (SQL Injection, XSS, etc.) was identified.
           Graph enrichment is key to achieving this: it links vector matches to their CWE/OWASP nodes
           and fix patterns, enabling precise classification.
-          ${vo ? `<br><br>GraphRAG: <strong style="color:var(--green)">${pctStr(m.vuln_type_accuracy)}</strong> vs Vector-Only: <strong style="color:#64748B">${pctStr(vo.vuln_type_accuracy)}</strong>.` : ''}
+          ${vo ? `<br><br>GraphRAG: <strong style="color:var(--green)">${pctStr(m.vuln_type_accuracy)}</strong>` : ''}
         </p>
       </div>
     </div>
