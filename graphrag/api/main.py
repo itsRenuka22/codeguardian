@@ -7,11 +7,18 @@ Run from graphrag/ directory:
 import os
 import sys
 import json
-from typing import Optional
+import uuid
+from typing import Optional, Dict
+from datetime import datetime, timedelta
 from concurrent.futures import ThreadPoolExecutor
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
+
+# Load environment variables from .env file (located in parent directory)
+_ENV_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env")
+load_dotenv(_ENV_PATH)
 
 _HERE     = os.path.dirname(os.path.abspath(__file__))
 _GRAPHRAG = os.path.dirname(_HERE)
@@ -25,10 +32,15 @@ _pool = ThreadPoolExecutor(max_workers=2)
 # ── Agent (lazy) ──────────────────────────────────────────────
 _agent = None
 _agent_error: Optional[str] = None
+_hybrid_enabled: bool = False
+_hybrid_llm_client = None
 
 
-def _get_agent():
-    global _agent, _agent_error
+def _get_agent(use_hybrid: bool = False, llm_client=None):
+    global _agent, _agent_error, _hybrid_enabled, _hybrid_llm_client
+    if use_hybrid != _hybrid_enabled or (use_hybrid and llm_client != _hybrid_llm_client):
+        # Reset agent if hybrid mode changes
+        _agent = None
     if _agent is not None:
         return _agent
     if _agent_error:
@@ -36,49 +48,118 @@ def _get_agent():
     try:
         import config
         from agent.agent import CodeGuardianAgent
-        _agent = CodeGuardianAgent.from_config(config)
+        _agent = CodeGuardianAgent.from_config(
+            config, use_hybrid=use_hybrid, llm_client=llm_client
+        )
+        _hybrid_enabled = use_hybrid
+        _hybrid_llm_client = llm_client
     except Exception as exc:
         _agent_error = str(exc)
         raise RuntimeError(_agent_error) from exc
     return _agent
 
 
+# ── Analysis session store (1-hour TTL) ──────────────────────
+_analysis_sessions: Dict[str, dict] = {}
+
+def _cleanup_sessions():
+    """Remove sessions older than 1 hour"""
+    cutoff = datetime.now() - timedelta(hours=1)
+    expired = [sid for sid, data in _analysis_sessions.items() if data.get("timestamp", datetime.now()) < cutoff]
+    for sid in expired:
+        del _analysis_sessions[sid]
+
 # ── Runtime API key store ──────────────────────────────────────
 _api_keys: dict = {}
 
 # Ollama model registry (models actually pulled locally)
 _OLLAMA_MODELS = {
-    "deepseek": "deepseek-r1:latest",
-    "qwen7b":   "qwen2.5:7b",
-    "qwen14b":  "qwen2.5:14b",
-    "gemma":    "gemma3:1b",
+    "deepseek-r1": "deepseek-r1:8b",
+    "gemma3-1b":   "gemma2:2b",
 }
 
 # Cloud model display names for /api/models
 _CLOUD_MODELS = [
-    ("claude", "ClaudeClient"),
-    ("gpt4",   "OpenAIClient"),
-    ("gemini", "GeminiClient"),
+    ("gemini-flash", "GeminiClient"),
 ]
 
 
 def _make_llm(model_key: str, api_key: str = ""):
-    from models.claude_client  import ClaudeClient
-    from models.openai_client  import OpenAIClient
     from models.ollama_client  import OllamaClient
     from models.gemini_client  import GeminiClient
 
     key = api_key or _api_keys.get(model_key, "")
 
-    if model_key == "claude":   return ClaudeClient(api_key=key)
-    if model_key == "gpt4":     return OpenAIClient(api_key=key)
-    if model_key == "gemini":   return GeminiClient(api_key=key)
+    if model_key == "gemini-flash": return GeminiClient(api_key=key)
     if model_key in _OLLAMA_MODELS:
         return OllamaClient(model=_OLLAMA_MODELS[model_key])
     raise ValueError(f"Unknown model key: {model_key!r}")
 
 
 _STATIC = os.path.join(_GRAPHRAG, "static")
+
+
+def _generate_template_report(code: str, verdict: str, confidence: float, vulnerabilities: list) -> str:
+    """Generate quick report from template (fallback if LLM times out)"""
+
+    confidence_pct = confidence * 100
+
+    vuln_details = ""
+    if vulnerabilities:
+        vuln_details = "\n\n### Identified Vulnerabilities:\n"
+        for vuln in vulnerabilities:
+            vuln_details += f"- **{vuln}**\n"
+
+    risk_level = "LOW"
+    if verdict.lower() == "vulnerable":
+        risk_level = "CRITICAL"
+    elif verdict.lower() == "potentially_vulnerable":
+        risk_level = "HIGH"
+
+    recommendation = "Review code before deployment"
+    if verdict.lower() == "vulnerable":
+        recommendation = "Fix vulnerabilities immediately before any deployment"
+    elif verdict.lower() == "clean":
+        recommendation = "Code appears secure. Continue following security best practices"
+
+    report = f"""# Security Analysis Report
+
+## Executive Summary
+
+Code analysis detected a verdict of **{verdict.upper().replace('_', ' ')}** with **{confidence_pct:.0f}% confidence**.{vuln_details}
+
+## Risk Assessment
+
+**Risk Level:** {risk_level}
+
+**Severity:** {verdict.replace('_', ' ').upper()}
+
+**Recommendation:** {recommendation}
+
+## Code Review Guidance
+
+- Verify input validation for all user inputs
+- Check for proper output encoding
+- Review error handling mechanisms
+- Ensure secure dependency versions
+- Validate authentication and authorization
+
+## Next Steps
+
+1. Address identified vulnerabilities
+2. Conduct manual code review
+3. Run automated security tests
+4. Perform thorough testing
+5. Deploy to production when ready
+
+---
+
+*Report generated by CodeGuardian AI Security Analysis System*
+*Analysis Confidence: {confidence_pct:.0f}%*
+"""
+
+    return report
+
 
 # ── Routes ────────────────────────────────────────────────────
 
@@ -93,12 +174,27 @@ async def analyze(request: Request):
     code      = body.get("code", "").strip()
     model_key = body.get("model", "").strip()
     api_key   = body.get("api_key", "").strip()
+    use_hybrid = body.get("use_hybrid", False)
+    hybrid_model = body.get("hybrid_model", "").strip()
 
     if not code:
         raise HTTPException(400, "No code provided")
 
     try:
-        result = _get_agent().analyze(code)
+        # Build hybrid mode if requested
+        llm_client = None
+        if use_hybrid and hybrid_model:
+            try:
+                llm_client = _make_llm(hybrid_model, api_key or "")
+            except Exception as exc:
+                raise HTTPException(400, f"Failed to init hybrid LLM: {exc}") from exc
+
+        agent = _get_agent(use_hybrid=use_hybrid, llm_client=llm_client)
+        result = agent.analyze(code)
+
+        # Add hybrid metadata if applicable
+        if use_hybrid and hasattr(agent.critic, "get_stats"):
+            result["hybrid_stats"] = agent.critic.get_stats()
     except Exception as exc:
         raise HTTPException(500, str(exc)) from exc
 
@@ -124,10 +220,203 @@ async def analyze(request: Request):
     return JSONResponse(result)
 
 
+@app.post("/api/analyze-quick")
+async def analyze_quick(request: Request):
+    """Fast GraphRAG analysis without LLM report (~5 seconds)"""
+    _cleanup_sessions()
+
+    body      = await request.json()
+    code      = body.get("code", "").strip()
+    model_key = body.get("model", "").strip()
+
+    if not code:
+        raise HTTPException(400, "No code provided")
+
+    try:
+        result = _get_agent().analyze(code)
+    except Exception as exc:
+        raise HTTPException(500, str(exc)) from exc
+
+    # Generate analysis ID and store session
+    analysis_id = str(uuid.uuid4())
+    _analysis_sessions[analysis_id] = {
+        "code": code,
+        "result": result,
+        "model": model_key,
+        "timestamp": datetime.now(),
+    }
+
+    return JSONResponse({
+        "analysis_id": analysis_id,
+        "verdict": result.get("verdict"),
+        "confidence": result.get("confidence"),
+        "vulnerability_types": result.get("vulnerability_types", []),
+        "vulnerabilities": result.get("vulnerabilities", []),
+        "evidence": result.get("evidence", []),
+        "fix_guidance": result.get("fix_guidance", []),
+    })
+
+
+@app.post("/api/generate-report-stream")
+async def generate_report_stream(request: Request):
+    """Generate LLM report on demand for stored analysis"""
+    body        = await request.json()
+    analysis_id = body.get("analysis_id", "").strip()
+    api_key     = body.get("api_key", "").strip()
+
+    # Retrieve stored analysis
+    session = _analysis_sessions.get(analysis_id)
+    if not session:
+        raise HTTPException(404, "Analysis session not found or expired")
+
+    model_key = session.get("model", "gemini-flash")
+    code = session["code"]
+    result = session["result"]
+    verdict = result.get("verdict", "unknown")
+
+    async def event_generator():
+        import socket
+        import urllib.error
+
+        try:
+            # Skip report generation for clean code
+            if verdict.lower() == "clean":
+                yield f"data: {json.dumps({'type': 'info', 'message': 'No report needed — code is clean'})}\n\n"
+                yield f"data: {json.dumps({'type': 'complete'})}\n\n"
+                return
+
+            # Get LLM client
+            llm = _make_llm(model_key, api_key or _api_keys.get(model_key, ""))
+
+            if not llm.is_available:
+                yield f"data: {json.dumps({'type': 'error', 'message': f'{llm.display_name} — API key not configured'})}\n\n"
+                return
+
+            yield f"data: {json.dumps({'type': 'start', 'model': llm.display_name})}\n\n"
+            yield f"data: {json.dumps({'type': 'progress', 'message': 'Calling LLM...'})}\n\n"
+
+            # Generate report
+            try:
+                report_data = llm.generate_report(result, code)
+                yield f"data: {json.dumps({'type': 'report', 'content': report_data['text']})}\n\n"
+                yield f"data: {json.dumps({'type': 'metadata', 'tokens_in': report_data['input_tokens'], 'tokens_out': report_data['output_tokens'], 'cost': report_data['cost_usd']})}\n\n"
+            except (socket.timeout, urllib.error.URLError) as e:
+                timeout_val = getattr(llm, "_TIMEOUT_S", "unknown")
+                yield f"data: {json.dumps({'type': 'progress', 'message': f'Timeout after {timeout_val}s — using template'})}\n\n"
+
+                # Use fallback template instead of failing
+                vulnerabilities = result.get("vulnerabilities", [])
+                confidence = result.get("confidence", 0)
+                report = _generate_template_report(code, verdict, confidence, vulnerabilities)
+                yield f"data: {json.dumps({'type': 'report', 'content': report, 'fallback': True})}\n\n"
+            except Exception as e:
+                msg = f"{llm.display_name} error: {str(e)}"
+                yield f"data: {json.dumps({'type': 'error', 'message': msg})}\n\n"
+                return
+
+            yield f"data: {json.dumps({'type': 'complete'})}\n\n"
+        except Exception as exc:
+            yield f"data: {json.dumps({'type': 'error', 'message': str(exc)})}\n\n"
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
+@app.post("/api/analyze-stream")
+async def analyze_stream(request: Request):
+    """Streaming analysis with real-time agent progress visibility"""
+    _cleanup_sessions()
+
+    body      = await request.json()
+    code      = body.get("code", "").strip()
+    model_key = body.get("model", "").strip()
+    use_hybrid = body.get("use_hybrid", False)
+    hybrid_model = body.get("hybrid_model", "").strip()
+
+    if not code:
+        raise HTTPException(400, "No code provided")
+
+    async def event_generator():
+        try:
+            # Build hybrid mode if requested
+            llm_client = None
+            if use_hybrid and hybrid_model:
+                try:
+                    llm_client = _make_llm(hybrid_model, "")
+                except Exception as exc:
+                    yield f"data: {json.dumps({'type': 'warning', 'message': f'Hybrid LLM init failed: {exc}'})}\n\n"
+
+            agent = _get_agent(use_hybrid=use_hybrid, llm_client=llm_client)
+
+            # ── PLANNER ────────────────────────────────────────────
+            yield f"data: {json.dumps({'type': 'progress', 'step': 'planning', 'message': '🎯 PLANNER: Analyzing code structure…'})}\n\n"
+
+            plan = agent.planner.plan(code)
+
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'planning', 'message': f'→ Language detected: {plan.language.upper()}'})}\n\n"
+            if plan.suspected_vulns:
+                vuln_list = ', '.join(plan.suspected_vulns)
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'planning', 'message': f'→ Suspected: {vuln_list}'})}\n\n"
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'planning', 'message': f'→ Building {len(plan.queries)} search queries'})}\n\n"
+
+            # ── EXECUTOR ───────────────────────────────────────────
+            yield f"data: {json.dumps({'type': 'progress', 'step': 'searching', 'message': f'⚙️ EXECUTOR: Running {len(plan.queries)} queries in parallel…'})}\n\n"
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'searching', 'message': '→ Knowledge base: 260 examples across 12 vulnerability types'})}\n\n"
+
+            exec_result = agent.executor.execute(plan)
+            matches = exec_result.matches
+            top_dist = min((m.get("similarity_distance", 1.0) for m in matches), default=1.0)
+
+            sim_label = (
+                "very similar"       if top_dist < 0.30 else
+                "moderately similar" if top_dist < 0.45 else
+                "weakly similar"
+            )
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'searching', 'message': f'→ {len(matches)} unique matches retrieved'})}\n\n"
+            if matches:
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'searching', 'message': f'→ Top match: distance {top_dist:.3f} ({sim_label})'})}\n\n"
+
+            # ── CRITIC ─────────────────────────────────────────────
+            mode_label = "(Hybrid: GraphRAG + LLM)" if use_hybrid else "(GraphRAG only)"
+            yield f"data: {json.dumps({'type': 'progress', 'step': 'scoring', 'message': f'🧠 CRITIC {mode_label}: Evaluating results…'})}\n\n"
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': '→ Running semantic validation…'})}\n\n"
+
+            score = agent.critic.score(code, exec_result)
+
+            # Add hybrid-specific details if consulted
+            if use_hybrid and hasattr(score, 'llm_consulted') and score.llm_consulted:
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ GraphRAG confidence: {score.graphrag_confidence*100:.0f}%'})}\n\n"
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ LLM consulted (threshold: 0.85)'})}\n\n"
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ LLM confidence: {score.llm_confidence*100:.0f}%'})}\n\n"
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Agreement: {score.agreement}'})}\n\n"
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Merged confidence: {score.confidence*100:.0f}% (70% GraphRAG + 30% LLM)'})}\n\n"
+            else:
+                yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Confidence: {score.confidence*100:.0f}%'})}\n\n"
+
+            yield f"data: {json.dumps({'type': 'detail', 'step': 'scoring', 'message': f'→ Verdict: {score.verdict.upper()}'})}\n\n"
+
+            # ── STORE SESSION & RETURN RESULTS ──────────────────────
+            analysis_id = str(uuid.uuid4())
+            formatted = agent._format(code, plan, exec_result, score, 1)
+            if use_hybrid and hasattr(agent.critic, "get_stats"):
+                formatted["hybrid_stats"] = agent.critic.get_stats()
+
+            _analysis_sessions[analysis_id] = {
+                "code": code,
+                "result": formatted,
+                "model": model_key,
+                "timestamp": datetime.now(),
+            }
+
+            yield f"data: {json.dumps({'type': 'complete', 'analysis_id': analysis_id, **formatted})}\n\n"
+
+        except Exception as exc:
+            yield f"data: {json.dumps({'type': 'error', 'message': str(exc)})}\n\n"
+
+    return StreamingResponse(event_generator(), media_type="text/event-stream")
+
+
 @app.get("/api/models")
 async def list_models():
-    from models.claude_client  import ClaudeClient
-    from models.openai_client  import OpenAIClient
     from models.gemini_client  import GeminiClient
     from models.ollama_client  import OllamaClient
 
@@ -139,8 +428,8 @@ async def list_models():
 
     out = []
 
-    # Cloud models
-    for key, Cls in [("claude", ClaudeClient), ("gpt4", OpenAIClient), ("gemini", GeminiClient)]:
+    # Cloud models (Gemini only)
+    for key, Cls in [("gemini-flash", GeminiClient)]:
         k = _api_keys.get(key, "")
         try:
             inst  = Cls(api_key=k)
@@ -180,7 +469,7 @@ async def configure_model(request: Request):
     body  = await request.json()
     model = body.get("model", "")
     key   = body.get("api_key", "").strip()
-    if model not in ("claude", "gpt4", "gemini"):
+    if model not in ("gemini-flash",):
         raise HTTPException(400, f"Unknown cloud model: {model!r}")
     _api_keys[model] = key
     return {"status": "ok", "model": model}
@@ -430,10 +719,23 @@ def _run_model_eval_sync(model_keys: list, max_cases: int) -> dict:
                     "latency_s":  r["latency_s"],
                     "reasoning":  r.get("reasoning", ""),
                 })
+            except TimeoutError as exc:
+                cases_log.append({
+                    "test_id": case.get("test_id", "?"),
+                    "error":   f"TIMEOUT: {str(exc)}",
+                    "error_type": "timeout",
+                })
+            except RuntimeError as exc:
+                cases_log.append({
+                    "test_id": case.get("test_id", "?"),
+                    "error":   f"LLM_ERROR: {str(exc)}",
+                    "error_type": "llm_error",
+                })
             except Exception as exc:
                 cases_log.append({
                     "test_id": case.get("test_id", "?"),
-                    "error":   str(exc),
+                    "error":   f"UNKNOWN: {str(exc)}",
+                    "error_type": "unknown",
                 })
 
         n = len(cases) or 1

@@ -1,11 +1,12 @@
 {
-  "dataset_version": "1.0",
-  "created_at": "2026-04-11",
-  "description": "Held-out test cases for evaluating CodeGuardian detection accuracy",
-  "total_items": 65,
+  "dataset_version": "2.0_hybrid",
+  "created_at": "2026-05-16",
+  "description": "Merged evaluation set: original 90 cases + 30 low-confidence hybrid cases. Use this for comprehensive hybrid GraphRAG+LLM evaluation.",
+  "total_items": 120,
   "composition": {
     "vulnerable_code": 45,
-    "exploit_patterns": 20
+    "exploit_patterns": 20,
+    "low_confidence_hybrid": 30
   },
   "test_cases": [
     {
@@ -2065,37 +2066,870 @@
         "vulnerability_types": [],
         "severity": "none"
       }
+    },
+    {
+      "test_id": "eval_low_001",
+      "source": "synthetic",
+      "original_id": "ambig_addslashes_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n$user = addslashes($_POST['username']);\n$query = \"SELECT * FROM users WHERE username = '$user' AND active = 1\";\n$result = mysqli_query($conn, $query);\nif ($result && mysqli_num_rows($result) > 0) {\n    $row = mysqli_fetch_assoc($result);\n    $_SESSION['user_id'] = $row['id'];\n    header('Location: dashboard.php');\n}\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "addslashes() appears to sanitize input but can be bypassed with multi-byte character encodings (e.g., GBK) where a second byte 0x5c creates a valid character, effectively unescaping the added backslash and allowing SQL injection.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_002",
+      "source": "synthetic",
+      "original_id": "ambig_numeric_regex_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n$id = $_GET['id'];\nif (preg_match('/^[0-9]+$/', $id)) {\n    $query = \"SELECT first_name, last_name, email FROM users WHERE id = \" . $id;\n    $result = mysqli_query($conn, $query);\n    while ($row = mysqli_fetch_assoc($result)) {\n        echo \"<p>\" . $row['first_name'] . \" \" . $row['last_name'] . \"</p>\";\n    }\n} else {\n    die('Invalid ID format');\n}\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "The regex validates that the input consists only of digits, which seems sufficient, but the resulting integer is still directly concatenated into the SQL string. While harder to exploit than string injection, certain database-specific payloads (e.g., very long integers triggering overflow behavior) can still cause issues, and critically the pattern trains developers to rely on format validation instead of parameterized queries.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_003",
+      "source": "synthetic",
+      "original_id": "ambig_htmlspecialchars_attr_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n$name = htmlspecialchars($_GET['name']);\necho \"<div class='user-profile' data-username='\" . $name . \"' onclick='loadProfile()'>\";\necho \"    <span>\" . $name . \"</span>\";\necho \"</div>\";\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "htmlspecialchars() without ENT_QUOTES only escapes <, >, &, and double-quote. Single quotes used as attribute delimiters in data-username='...' are NOT escaped, allowing an attacker to inject onclick='malicious_code()' or other event handlers by breaking out of the single-quoted attribute.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-79",
+        "cwe_name": "Improper Neutralization of Input During Web Page Generation",
+        "owasp_category": "xss"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_004",
+      "source": "synthetic",
+      "original_id": "ambig_filter_var_email_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);\n$name  = filter_var($_POST['name'],  FILTER_SANITIZE_STRING);\n$query = \"SELECT id FROM subscribers WHERE email = '$email' AND name = '$name'\";\n$result = mysqli_query($conn, $query);\nif (!$result || mysqli_num_rows($result) === 0) {\n    mysqli_query($conn, \"INSERT INTO subscribers (email, name) VALUES ('$email', '$name')\");\n}\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "FILTER_SANITIZE_EMAIL removes illegal email characters but does NOT escape SQL special characters. A crafted email like \"a'@b.com\" passes email validation and still contains a single quote that breaks the SQL string context. The name field uses FILTER_SANITIZE_STRING which strips tags but also does not SQL-escape.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_005",
+      "source": "synthetic",
+      "original_id": "ambig_strip_tags_xss_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n$allowed_tags = '<b><i><u><em><strong>';\n$comment = strip_tags($_POST['comment'], $allowed_tags);\nmysqli_query($conn, \"INSERT INTO comments (body) VALUES ('\" . mysqli_real_escape_string($conn, $comment) . \"')\");\n?>\n<!-- Later, when displaying: -->\n<?php\n$row = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT body FROM comments LIMIT 1'));\necho $row['body'];  // Outputs allowed tags with any attributes\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "strip_tags() with allowed tags permits those tags to retain ANY attribute. So <b onclick=\"alert(1)\"> or <em style=\"background:url(javascript:alert(1))\"> passes strip_tags. The SQL insertion is safe, but the output is raw HTML with potentially malicious event-handler attributes.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-79",
+        "cwe_name": "Improper Neutralization of Input During Web Page Generation",
+        "owasp_category": "xss"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_006",
+      "source": "synthetic",
+      "original_id": "ambig_str_replace_sqli_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n$input = str_replace(\"'\", \"&#39;\", $_GET['search']);\n$input = str_replace('\"', '&quot;', $input);\n$query = \"SELECT title, content FROM articles WHERE title LIKE '%\" . $input . \"%' OR content LIKE '%\" . $input . \"%'\";\n$results = mysqli_query($conn, $query);\nwhile ($row = mysqli_fetch_assoc($results)) {\n    echo \"<h3>\" . htmlspecialchars($row['title']) . \"</h3>\";\n    echo \"<p>\" . htmlspecialchars($row['content']) . \"</p>\";\n}\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "HTML-encoding quotes (&#39; and &quot;) prevents XSS but does NOT prevent SQL injection \u2014 the database receives the encoded string and may decode HTML entities depending on configuration. More critically, the input still contains backslash, NULL bytes, and other SQL metacharacters not addressed by this approach. A payload like %\\' UNION SELECT... can escape the LIKE context.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_007",
+      "source": "synthetic",
+      "original_id": "ambig_digits_check_python_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "import string\nfrom flask import request\nimport sqlite3\n\ndef get_user_profile():\n    user_id = request.args.get('id', '')\n    if not user_id or not all(c in string.digits for c in user_id):\n        return 'Invalid ID', 400\n    conn = sqlite3.connect('users.db')\n    cursor = conn.cursor()\n    query = f\"SELECT username, email, role FROM users WHERE id = {user_id}\"\n    cursor.execute(query)\n    row = cursor.fetchone()\n    conn.close()\n    return {'username': row[0], 'email': row[1], 'role': row[2]} if row else 'Not found'",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "all(c in string.digits for c in user_id) validates that only digit characters are present, which is nearly sufficient for integer IDs. However the value is still embedded directly via f-string rather than parameterized. While exploiting a pure-integer field is difficult, this is an unsafe pattern: it breaks immediately if the schema ever changes to allow alphanumeric IDs, and certain DB behaviors (expression evaluation, type coercion) can be leveraged.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "low",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_008",
+      "source": "synthetic",
+      "original_id": "ambig_parseint_js_001",
+      "type": "vulnerable_code",
+      "language": "javascript",
+      "code": "const express = require('express');\nconst mysql = require('mysql2');\nconst app = express();\nconst db = mysql.createConnection({ host: 'localhost', user: 'root', database: 'app' });\n\napp.get('/user', (req, res) => {\n    const id = parseInt(req.query.id, 10);\n    if (isNaN(id)) {\n        return res.status(400).json({ error: 'Invalid ID' });\n    }\n    const query = `SELECT id, username, email FROM users WHERE id = ${id}`;\n    db.query(query, (err, results) => {\n        res.json(results);\n    });\n});",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "low",
+        "vulnerable": true,
+        "explanation": "parseInt() with radix 10 coerces the input to an integer and checks for NaN, which is a reasonable guard for integer IDs. However, the value is still template-interpolated into raw SQL rather than passed as a parameterized query parameter. The risk is low for simple integer fields but the pattern is inherently unsafe: JavaScript's number precision (IEEE 754) can produce unexpected values for very large IDs, and the pattern scales dangerously to string fields.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "low",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_009",
+      "source": "synthetic",
+      "original_id": "ambig_replace_cmdi_python_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "import os\nfrom flask import request, jsonify\n\nBANNED_CHARS = [';', '|', '&', '`', '$', '(', ')', '<', '>', '\\n', '\\r']\n\ndef scan_file():\n    filename = request.args.get('filename', '')\n    for ch in BANNED_CHARS:\n        filename = filename.replace(ch, '')\n    if not filename:\n        return jsonify({'error': 'No filename'}), 400\n    output = os.popen(f'file {filename}').read()\n    return jsonify({'result': output})",
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Blacklist-based filtering removes specific shell metacharacters but misses others. Specifically: whitespace-separated additional arguments, path traversal (../), and especially newline-split commands via %0a (URL-decoded before the check). An attacker can also use ${IFS} as a space substitute in some shells, or pass filenames that are valid shell glob patterns. The fundamental flaw is using a denylist instead of a safelist or subprocess with args list.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-78",
+        "cwe_name": "Improper Neutralization of Special Elements used in an OS Command",
+        "owasp_category": "command_injection"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_010",
+      "source": "synthetic",
+      "original_id": "ambig_replacequotes_java_001",
+      "type": "vulnerable_code",
+      "language": "java",
+      "code": "import java.sql.*;\nimport javax.servlet.http.*;\n\npublic class UserServlet extends HttpServlet {\n    protected void doGet(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        String username = request.getParameter(\"username\");\n        // Attempt to escape single quotes\n        username = username.replaceAll(\"'\", \"''\");\n        String query = \"SELECT id, email, role FROM users WHERE username = '\" + username + \"'\";\n        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);\n             Statement stmt = conn.createStatement();\n             ResultSet rs = stmt.executeQuery(query)) {\n            if (rs.next()) {\n                response.getWriter().write(rs.getString(\"email\"));\n            }\n        }\n    }\n}",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Doubling single quotes ('' instead of ') is a valid SQL escaping technique in some databases but is fragile in Java: it doesn't account for backslash escaping in MySQL (where \\' also ends a string), Unicode quote characters (U+2018, U+2019), or encoding attacks. Most critically, it doesn't use PreparedStatement, so the query is re-parsed each time, eliminating any structural separation between code and data.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "ambiguous_sanitization",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_011",
+      "source": "synthetic",
+      "original_id": "ctx_second_order_sqli_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n// Registration endpoint \u2014 sanitized on insert\n$username = mysqli_real_escape_string($conn, $_POST['username']);\nmysqli_query($conn, \"INSERT INTO users (username, password) VALUES ('$username', '\" . password_hash($_POST['password'], PASSWORD_BCRYPT) . \"')\");\n\n// Password change endpoint \u2014 username fetched from DB, not re-sanitized\n$current_user = $_SESSION['username'];  // e.g. admin'--\n$row = mysqli_fetch_assoc(mysqli_query($conn, \"SELECT id FROM users WHERE username='$current_user'\"));\nif ($row) {\n    $new_pass = password_hash($_POST['new_password'], PASSWORD_BCRYPT);\n    $update = \"UPDATE users SET password='$new_pass' WHERE username='$current_user'\";\n    mysqli_query($conn, $update);\n}\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Second-order SQL injection: the username is properly escaped on registration (insert), giving a false sense of security. However, when retrieved from the database for the password change, it is trusted as safe and directly concatenated into a new query. An attacker registers with username \"admin'--\" which is stored safely, but when used in the UPDATE query it becomes: UPDATE users SET password=... WHERE username='admin'--' \u2014 resetting the admin's password.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "second_order",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.40"
+      }
+    },
+    {
+      "test_id": "eval_low_012",
+      "source": "synthetic",
+      "original_id": "ctx_dynamic_table_prepared_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n$allowed_actions = ['view', 'edit', 'delete'];\n$action = in_array($_GET['action'], $allowed_actions) ? $_GET['action'] : 'view';\n$table = $_GET['table'];  // \u2190 not validated\n$id = (int) $_GET['id'];\n\n$stmt = $pdo->prepare(\"SELECT * FROM $table WHERE id = ? AND deleted_at IS NULL\");\n$stmt->execute([$id]);\n$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);\nforeach ($rows as $row) {\n    echo htmlspecialchars(json_encode($row));\n}\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Mixed pattern: the id parameter is safely parameterized (?) and action is whitelisted. However, the table name is directly interpolated into the SQL string without validation. PDO prepared statements cannot parameterize table/column names \u2014 only values. An attacker can inject: table=users WHERE 1=1 UNION SELECT password,null FROM users-- to exfiltrate any table.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "mixed_patterns",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.45"
+      }
+    },
+    {
+      "test_id": "eval_low_013",
+      "source": "synthetic",
+      "original_id": "ctx_encoding_mismatch_xss_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n// Store: encode as Latin-1 to prevent XSS\n$comment = htmlentities($_POST['comment'], ENT_QUOTES, 'ISO-8859-1');\nmysqli_query($conn, \"INSERT INTO comments (body, charset) VALUES ('\" . mysqli_real_escape_string($conn, $comment) . \"', 'latin1')\");\n?>\n<!-- Retrieve and display (database/connection is UTF-8) -->\n<?php\n$row = mysqli_fetch_assoc(mysqli_query($conn, 'SELECT body FROM comments WHERE id=1'));\n// DB returns UTF-8 string; htmlentities with Latin-1 encoding may have missed\n// UTF-8 multibyte sequences that encode to angle brackets\necho $row['body'];\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Character encoding mismatch XSS: htmlentities() is called with ISO-8859-1 but the database connection uses UTF-8. A payload using overlong UTF-8 sequences or certain Unicode characters (e.g., U+FF1C FULLWIDTH LESS-THAN SIGN rendered as < by some browsers) can slip through Latin-1 encoding validation and render as HTML tags in a UTF-8 page context.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-79",
+        "cwe_name": "Improper Neutralization of Input During Web Page Generation",
+        "owasp_category": "xss"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "context_dependent",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.40"
+      }
+    },
+    {
+      "test_id": "eval_low_014",
+      "source": "synthetic",
+      "original_id": "ctx_pdo_emulate_prepares_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\ntry {\n    $pdo = new PDO('mysql:host=localhost;dbname=app;charset=gbk', $user, $pass);\n    $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, true);\n    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);\n\n    $id = $_GET['id'];\n    $stmt = $pdo->prepare('SELECT * FROM products WHERE id = :id');\n    $stmt->bindParam(':id', $id, PDO::PARAM_INT);\n    $stmt->execute();\n    $product = $stmt->fetch(PDO::FETCH_ASSOC);\n    echo json_encode($product);\n} catch (PDOException $e) {\n    error_log($e->getMessage());\n    die('Database error');\n}\n?>",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "PDO with ATTR_EMULATE_PREPARES=true and charset=gbk is vulnerable to SQL injection. With emulated prepares, PDO performs string interpolation in PHP rather than sending a true parameterized query to MySQL. Combined with GBK charset, a multi-byte character attack (e.g., the 0xbf27 technique) can cause addslashes-style escaping to be bypassed, breaking out of the string context.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-89",
+        "cwe_name": "Improper Neutralization of Special Elements used in an SQL Command",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "context_dependent",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.40"
+      }
+    },
+    {
+      "test_id": "eval_low_015",
+      "source": "synthetic",
+      "original_id": "ctx_debug_mode_path_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "import os\nfrom flask import Flask, request, abort\n\napp = Flask(__name__)\nDEBUG = os.getenv('FLASK_ENV', 'production') == 'development'\nALLOWED_REPORTS = ['monthly', 'weekly', 'daily', 'annual']\n\n@app.route('/report')\ndef get_report():\n    report_name = request.args.get('name', 'monthly')\n    if DEBUG:\n        # Dev mode: allow arbitrary file access for testing\n        file_path = f'./reports/{report_name}.pdf'\n        with open(file_path, 'rb') as f:\n            return f.read(), 200, {'Content-Type': 'application/pdf'}\n    else:\n        if report_name not in ALLOWED_REPORTS:\n            abort(403)\n        file_path = f'./reports/{report_name}.pdf'\n        with open(file_path, 'rb') as f:\n            return f.read(), 200, {'Content-Type': 'application/pdf'}",
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Context-dependent vulnerability: in production (FLASK_ENV != 'development') the code correctly whitelists report names and is safe. In development mode, any file path is accepted, enabling ../../../etc/passwd style path traversal. The danger is that FLASK_ENV may be inadvertently set to 'development' in staging or misconfigured production environments, or that the dev branch gets deployed.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-22",
+        "cwe_name": "Improper Limitation of a Pathname to a Restricted Directory",
+        "owasp_category": "path_traversal"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "context_dependent",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.45"
+      }
+    },
+    {
+      "test_id": "eval_low_016",
+      "source": "synthetic",
+      "original_id": "ctx_toctou_path_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "import os\nfrom flask import request, send_file, abort\n\nSAFE_DIR = '/var/app/uploads'\n\n@app.route('/download')\ndef download_file():\n    filename = request.args.get('file')\n    if not filename:\n        abort(400)\n    full_path = os.path.join(SAFE_DIR, filename)\n    # TOCTOU: check happens before use\n    if not os.path.exists(full_path):\n        abort(404)\n    if not os.path.realpath(full_path).startswith(SAFE_DIR):\n        abort(403)\n    # Race window here \u2014 attacker can replace file with symlink between check and open\n    return send_file(full_path)",
+      "ground_truth": {
+        "vulnerability_types": [
+          "path_traversal"
+        ],
+        "severity": "medium",
+        "vulnerable": true,
+        "explanation": "Time-of-check/time-of-use (TOCTOU) race condition: the code correctly calls os.path.realpath() to detect symlinks and verify the path stays within SAFE_DIR. However, between the realpath() check and the send_file() call, an attacker with write access to the upload directory can replace the legitimate file with a symlink pointing to /etc/passwd or another sensitive file. The fix is to open the file descriptor atomically and verify after opening.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-367",
+        "cwe_name": "Time-of-check Time-of-use Race Condition",
+        "owasp_category": "path_traversal"
+      },
+      "source_metadata": {
+        "security_level": "medium",
+        "category": "context_dependent",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.40"
+      }
+    },
+    {
+      "test_id": "eval_low_017",
+      "source": "synthetic",
+      "original_id": "ctx_graphql_injection_001",
+      "type": "vulnerable_code",
+      "language": "javascript",
+      "code": "const { graphql, buildSchema } = require('graphql');\nconst express = require('express');\nconst app = express();\n\napp.get('/api/user', async (req, res) => {\n    const userId = req.query.id;\n    // Directly interpolating user input into GraphQL query\n    const query = `\n        query {\n            user(id: ${userId}) {\n                name\n                email\n                role\n                passwordHash\n            }\n        }\n    `;\n    try {\n        const result = await graphql({ schema, source: query });\n        res.json(result.data);\n    } catch (e) {\n        res.status(500).json({ error: e.message });\n    }\n});",
+      "ground_truth": {
+        "vulnerability_types": [
+          "sql_injection"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "GraphQL injection: the user-supplied ID is directly interpolated into the GraphQL query string. An attacker can inject additional fields or fragments: id: 1) { passwordHash } user(id: 2 to extract sensitive fields not intended to be returned. This is analogous to SQL injection but at the GraphQL layer. The fix is to use GraphQL variables instead of string interpolation.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-943",
+        "cwe_name": "Improper Neutralization of Special Elements in Data Query Logic",
+        "owasp_category": "sql_injection"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "novel_pattern",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.40"
+      }
+    },
+    {
+      "test_id": "eval_low_018",
+      "source": "synthetic",
+      "original_id": "ctx_ldap_partial_escape_001",
+      "type": "vulnerable_code",
+      "language": "java",
+      "code": "import javax.naming.*;\nimport javax.naming.directory.*;\nimport javax.servlet.http.*;\n\npublic class LdapAuth extends HttpServlet {\n    protected void doPost(HttpServletRequest req, HttpServletResponse resp)\n            throws ServletException, IOException {\n        String username = req.getParameter(\"username\");\n        String password = req.getParameter(\"password\");\n        // Only escaping the wildcard\n        username = username.replace(\"*\", \"\\\\2a\");\n        String filter = \"(&(uid=\" + username + \")(userPassword=\" + password + \"))\";\n        DirContext ctx = new InitialDirContext(env);\n        NamingEnumeration<?> results = ctx.search(\"ou=users,dc=example,dc=com\", filter, controls);\n        if (results.hasMore()) {\n            resp.sendRedirect(\"/dashboard\");\n        }\n    }\n}",
+      "ground_truth": {
+        "vulnerability_types": [
+          "command_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "LDAP injection with partial escaping: only the wildcard (*) is escaped, but LDAP filter metacharacters (, ), \\, NUL, and | remain unescaped. An attacker can inject: username=admin)(&) to create filter (&(uid=admin)(&)(userPassword=...)) which evaluates to true for any password (authentication bypass). The password field is completely unescaped as well.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-90",
+        "cwe_name": "Improper Neutralization of Special Elements used in an LDAP Query",
+        "owasp_category": "command_injection"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "uncommon_vuln",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.35"
+      }
+    },
+    {
+      "test_id": "eval_low_019",
+      "source": "synthetic",
+      "original_id": "novel_ssti_jinja2_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "from flask import Flask, request, render_template_string\n\napp = Flask(__name__)\n\n@app.route('/greet')\ndef greet():\n    name = request.args.get('name', 'Guest')\n    # Dangerous: user input directly in template string\n    template = f\"<h1>Hello, {name}!</h1><p>Welcome to our service.</p>\"\n    return render_template_string(template)",
+      "ground_truth": {
+        "vulnerability_types": [
+          "template_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Server-Side Template Injection (SSTI) via Jinja2: the user-controlled 'name' is embedded directly into the template source string before rendering. An attacker can inject Jinja2 expressions: name={{7*7}} returns 49, and name={{''.__class__.__mro__[1].__subclasses__()}} can enumerate Python classes for RCE. The correct fix is render_template_string('<h1>Hello {{ name }}</h1>', name=name) where the input is a variable, not part of the template.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-94",
+        "cwe_name": "Improper Control of Generation of Code",
+        "owasp_category": "command_injection"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "novel_pattern",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.40"
+      }
+    },
+    {
+      "test_id": "eval_low_020",
+      "source": "synthetic",
+      "original_id": "novel_ssti_mako_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "from mako.template import Template\nfrom flask import request, Response\n\n@app.route('/render')\ndef render_custom():\n    user_template = request.args.get('tmpl', 'Hello World')\n    # User controls the entire template source\n    try:\n        t = Template(user_template)\n        result = t.render()\n        return Response(result, content_type='text/html')\n    except Exception as e:\n        return f'Template error: {str(e)}', 400",
+      "ground_truth": {
+        "vulnerability_types": [
+          "template_injection"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Mako SSTI: the user controls the entire template string passed to Template(). Mako templates support arbitrary Python expressions in ${...} blocks. An attacker can inject: ${__import__('os').system('id')} for OS command execution or ${open('/etc/passwd').read()} to read arbitrary files. The error message also leaks exception details.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-94",
+        "cwe_name": "Improper Control of Generation of Code",
+        "owasp_category": "command_injection"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "novel_pattern",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.40"
+      }
+    },
+    {
+      "test_id": "eval_low_021",
+      "source": "synthetic",
+      "original_id": "novel_mass_assignment_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "from flask import request, jsonify\nfrom models import User, db\n\n@app.route('/api/register', methods=['POST'])\ndef register():\n    data = request.get_json()\n    # Mass assignment: no field whitelist\n    user = User()\n    for key, value in data.items():\n        setattr(user, key, value)\n    db.session.add(user)\n    db.session.commit()\n    return jsonify({'id': user.id, 'username': user.username}), 201",
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Mass assignment vulnerability: the code iterates over all JSON keys and sets them as object attributes with no whitelist. An attacker can POST {\"username\": \"user\", \"password\": \"pass\", \"is_admin\": true, \"role\": \"superuser\", \"email_verified\": true} to set privileged fields. The User model likely has fields like is_admin, role, or balance that should not be user-settable.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-915",
+        "cwe_name": "Improperly Controlled Modification of Dynamically-Determined Object Attributes",
+        "owasp_category": "auth_bypass"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "novel_pattern",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.35"
+      }
+    },
+    {
+      "test_id": "eval_low_022",
+      "source": "synthetic",
+      "original_id": "novel_mass_assignment_java_001",
+      "type": "vulnerable_code",
+      "language": "java",
+      "code": "import org.springframework.web.bind.annotation.*;\nimport com.fasterxml.jackson.databind.ObjectMapper;\n\n@RestController\npublic class UserController {\n    @PostMapping(\"/api/users/update\")\n    public ResponseEntity<?> updateUser(\n            @RequestBody Map<String, Object> updates,\n            @AuthenticationPrincipal UserDetails principal) {\n        User user = userRepository.findByUsername(principal.getUsername());\n        ObjectMapper mapper = new ObjectMapper();\n        // Merge all fields from request into user object\n        User updated = mapper.convertValue(updates, User.class);\n        updated.setId(user.getId());  // Preserve ID\n        userRepository.save(updated);\n        return ResponseEntity.ok(updated);\n    }\n}",
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "Mass assignment via Jackson deserialization: ObjectMapper.convertValue() maps all JSON fields directly to the User object. While the ID is preserved, an attacker can set role=ADMIN, accountBalance=999999, emailVerified=true, or any other User model field. The @AuthenticationPrincipal check only verifies the user is logged in \u2014 it does not prevent privilege escalation via field injection.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-915",
+        "cwe_name": "Improperly Controlled Modification of Dynamically-Determined Object Attributes",
+        "owasp_category": "auth_bypass"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "novel_pattern",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.35"
+      }
+    },
+    {
+      "test_id": "eval_low_023",
+      "source": "synthetic",
+      "original_id": "novel_xxe_python_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "import xml.etree.ElementTree as ET\nfrom flask import request, jsonify\n\n@app.route('/api/parse-config', methods=['POST'])\ndef parse_config():\n    xml_data = request.data\n    try:\n        root = ET.fromstring(xml_data)\n        config = {}\n        for child in root:\n            config[child.tag] = child.text\n        return jsonify(config)\n    except ET.ParseError as e:\n        return jsonify({'error': str(e)}), 400",
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "XXE (XML External Entity) injection: Python's xml.etree.ElementTree is vulnerable to entity expansion attacks. An attacker can send: <?xml version='1.0'?><!DOCTYPE foo [<!ENTITY xxe SYSTEM 'file:///etc/passwd'>]><config><key>&xxe;</key></config> to read local files. Python's stdlib XML parsers (minidom, ElementTree, expat) are vulnerable to XXE by default. The lxml library with resolve_entities=False or defusedxml should be used instead.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-611",
+        "cwe_name": "Improper Restriction of XML External Entity Reference",
+        "owasp_category": "xss"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "uncommon_vuln",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.35"
+      }
+    },
+    {
+      "test_id": "eval_low_024",
+      "source": "synthetic",
+      "original_id": "novel_xxe_java_001",
+      "type": "vulnerable_code",
+      "language": "java",
+      "code": "import org.w3c.dom.*;\nimport javax.xml.parsers.*;\nimport java.io.*;\n\n@WebServlet(\"/parse\")\npublic class XmlParserServlet extends HttpServlet {\n    protected void doPost(HttpServletRequest req, HttpServletResponse resp)\n            throws IOException, ServletException {\n        String xmlInput = req.getParameter(\"data\");\n        try {\n            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();\n            // Missing: factory.setFeature(\"http://xml.org/sax/features/external-general-entities\", false);\n            DocumentBuilder builder = factory.newDocumentBuilder();\n            Document doc = builder.parse(new InputSource(new StringReader(xmlInput)));\n            NodeList nodes = doc.getElementsByTagName(\"name\");\n            resp.getWriter().write(nodes.item(0).getTextContent());\n        } catch (Exception e) {\n            resp.sendError(500, e.getMessage());\n        }\n    }\n}",
+      "ground_truth": {
+        "vulnerability_types": [
+          "xss"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "XXE in Java DocumentBuilder: DocumentBuilderFactory by default allows external entity processing and external DTD loading. An attacker can inject a DOCTYPE with an external entity pointing to file:///etc/passwd, internal network resources (SSRF), or use recursive entity expansion (billion laughs attack) for DoS. The commented-out fix shows exactly what's missing.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-611",
+        "cwe_name": "Improper Restriction of XML External Entity Reference",
+        "owasp_category": "xss"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "uncommon_vuln",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.35"
+      }
+    },
+    {
+      "test_id": "eval_low_025",
+      "source": "synthetic",
+      "original_id": "novel_prototype_pollution_001",
+      "type": "vulnerable_code",
+      "language": "javascript",
+      "code": "const express = require('express');\nconst app = express();\napp.use(express.json());\n\nfunction deepMerge(target, source) {\n    for (const key of Object.keys(source)) {\n        if (source[key] && typeof source[key] === 'object') {\n            if (!target[key]) target[key] = {};\n            deepMerge(target[key], source[key]);\n        } else {\n            target[key] = source[key];\n        }\n    }\n    return target;\n}\n\napp.post('/api/settings', (req, res) => {\n    const userSettings = req.body;\n    const defaults = { theme: 'light', language: 'en' };\n    const merged = deepMerge(defaults, userSettings);\n    res.json({ settings: merged });\n});",
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "Prototype pollution: the deepMerge function recursively copies properties without checking for __proto__, constructor, or prototype keys. An attacker can POST {\"__proto__\": {\"isAdmin\": true}} to pollute Object.prototype, affecting all objects in the Node.js process. Subsequent checks like if (user.isAdmin) will return true for all users. This can lead to authentication bypass, privilege escalation, or RCE depending on how polluted properties are used.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-1321",
+        "cwe_name": "Improperly Controlled Modification of Object Prototype Attributes",
+        "owasp_category": "auth_bypass"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "novel_pattern",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.35"
+      }
+    },
+    {
+      "test_id": "eval_low_026",
+      "source": "synthetic",
+      "original_id": "novel_nosql_injection_001",
+      "type": "vulnerable_code",
+      "language": "javascript",
+      "code": "const express = require('express');\nconst mongoose = require('mongoose');\nconst User = require('./models/User');\nconst app = express();\napp.use(express.json());\n\napp.post('/login', async (req, res) => {\n    const { username, password } = req.body;\n    try {\n        const user = await User.findOne({\n            username: username,\n            password: password\n        });\n        if (user) {\n            req.session.userId = user._id;\n            res.json({ success: true, token: generateToken(user) });\n        } else {\n            res.status(401).json({ error: 'Invalid credentials' });\n        }\n    } catch (e) {\n        res.status(500).json({ error: 'Server error' });\n    }\n});",
+      "ground_truth": {
+        "vulnerability_types": [
+          "auth_bypass"
+        ],
+        "severity": "critical",
+        "vulnerable": true,
+        "explanation": "NoSQL injection via MongoDB operator injection: when username and password are taken directly from req.body (parsed as JSON), an attacker can send {\"username\": \"admin\", \"password\": {\"$gt\": \"\"}} \u2014 the $gt operator causes MongoDB to return users where password is greater than empty string (all users). This bypasses password authentication entirely. The fix is to validate that username and password are strings, not objects.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-943",
+        "cwe_name": "Improper Neutralization of Special Elements in Data Query Logic",
+        "owasp_category": "auth_bypass"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "novel_pattern",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.35"
+      }
+    },
+    {
+      "test_id": "eval_low_027",
+      "source": "synthetic",
+      "original_id": "novel_ssrf_scheme_check_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "import requests\nfrom urllib.parse import urlparse\nfrom flask import request, jsonify\n\n@app.route('/fetch')\ndef fetch_url():\n    url = request.args.get('url', '')\n    parsed = urlparse(url)\n    # Only check scheme \u2014 IP/hostname not validated\n    if parsed.scheme not in ('http', 'https'):\n        return jsonify({'error': 'Only HTTP/HTTPS allowed'}), 400\n    try:\n        resp = requests.get(url, timeout=5, allow_redirects=True)\n        return jsonify({'content': resp.text[:1000], 'status': resp.status_code})\n    except requests.RequestException as e:\n        return jsonify({'error': str(e)}), 500",
+      "ground_truth": {
+        "vulnerability_types": [
+          "ssrf"
+        ],
+        "severity": "high",
+        "vulnerable": true,
+        "explanation": "SSRF with insufficient URL validation: the code checks that the scheme is http or https but does not validate the hostname or IP address. An attacker can fetch internal network resources: http://169.254.169.254/latest/meta-data/ (AWS metadata), http://192.168.1.1/admin (internal router), or http://localhost:6379/ (local Redis). Scheme-only validation is a common but insufficient SSRF mitigation.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "CWE-918",
+        "cwe_name": "Server-Side Request Forgery",
+        "owasp_category": "ssrf"
+      },
+      "source_metadata": {
+        "security_level": "high",
+        "category": "novel_pattern",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.40"
+      }
+    },
+    {
+      "test_id": "eval_low_028",
+      "source": "synthetic",
+      "original_id": "edge_whitelist_dynamic_field_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "from flask import request, jsonify, abort\nimport sqlite3\n\nALLOWED_SORT_FIELDS = {'name', 'email', 'created_at', 'last_login'}\nALLOWED_ORDERS = {'ASC', 'DESC'}\n\n@app.route('/api/users')\ndef list_users():\n    sort_field = request.args.get('sort', 'name')\n    sort_order = request.args.get('order', 'ASC').upper()\n    if sort_field not in ALLOWED_SORT_FIELDS:\n        abort(400)\n    if sort_order not in ALLOWED_ORDERS:\n        abort(400)\n    conn = sqlite3.connect('users.db')\n    cursor = conn.cursor()\n    # Both dynamic parts validated against whitelists\n    query = f\"SELECT id, name, email FROM users ORDER BY {sort_field} {sort_order}\"\n    cursor.execute(query)\n    rows = cursor.fetchall()\n    conn.close()\n    return jsonify(rows)",
+      "ground_truth": {
+        "vulnerability_types": [],
+        "severity": "none",
+        "vulnerable": false,
+        "explanation": "This code is SAFE despite using f-string interpolation for SQL. Both dynamic values (sort_field and sort_order) are validated against strict whitelists of allowed values before being interpolated. Since they can only ever be one of the predefined safe strings, no injection is possible. This is a false positive case to test that the hybrid critic correctly identifies safe whitelist-validated patterns.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "N/A",
+        "cwe_name": "Not applicable \u2014 code is safe",
+        "owasp_category": "none"
+      },
+      "source_metadata": {
+        "security_level": "low",
+        "category": "false_positive_test",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_029",
+      "source": "synthetic",
+      "original_id": "edge_safe_order_direction_001",
+      "type": "vulnerable_code",
+      "language": "php",
+      "code": "<?php\n$allowed_dirs = ['ASC', 'DESC'];\n$order = strtoupper(trim($_GET['order'] ?? 'ASC'));\nif (!in_array($order, $allowed_dirs, true)) {\n    $order = 'ASC';\n}\n$stmt = $pdo->prepare(\"SELECT id, name, price, stock FROM products ORDER BY price $order\");\n$stmt->execute();\n$products = $stmt->fetchAll(PDO::FETCH_ASSOC);\nforeach ($products as $p) {\n    echo \"<tr><td>\" . htmlspecialchars($p['name']) . \"</td>\";\n    echo \"<td>\" . number_format($p['price'], 2) . \"</td></tr>\";\n}\n?>",
+      "ground_truth": {
+        "vulnerability_types": [],
+        "severity": "none",
+        "vulnerable": false,
+        "explanation": "This code is SAFE. The ORDER BY direction is validated against an explicit allowlist ['ASC', 'DESC'] with a safe default fallback. Only one of two safe string literals can ever be interpolated into the query. The output is also properly escaped with htmlspecialchars(). This is a false positive designed to verify the hybrid critic does not flag correctly validated dynamic SQL.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "N/A",
+        "cwe_name": "Not applicable \u2014 code is safe",
+        "owasp_category": "none"
+      },
+      "source_metadata": {
+        "security_level": "low",
+        "category": "false_positive_test",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
+    },
+    {
+      "test_id": "eval_low_030",
+      "source": "synthetic",
+      "original_id": "edge_jinja2_autoescape_001",
+      "type": "vulnerable_code",
+      "language": "python",
+      "code": "from jinja2 import Environment, select_autoescape, FileSystemLoader\nfrom flask import request, render_template_string\n\nenv = Environment(\n    loader=FileSystemLoader('templates'),\n    autoescape=select_autoescape(['html', 'xml', 'htm'])\n)\n\n@app.route('/greet')\ndef greet():\n    name = request.args.get('name', 'Guest')\n    # Safe: user input passed as a VARIABLE, not embedded in template source\n    template = env.from_string(\"<h1>Hello {{ name }}!</h1><p>Welcome.</p>\")\n    return template.render(name=name)",
+      "ground_truth": {
+        "vulnerability_types": [],
+        "severity": "none",
+        "vulnerable": false,
+        "explanation": "This code is SAFE from SSTI. The critical difference from a vulnerable pattern is that user input (name) is passed as a template VARIABLE via render(name=name), not embedded into the template source string itself. The template string is a constant literal with a {{ name }} placeholder. With autoescape enabled, any HTML in the name variable will also be escaped, preventing XSS. This tests whether the hybrid critic correctly distinguishes safe variable-binding from unsafe template-source injection.",
+        "confidence_expectation": "low",
+        "llm_consultation_expected": true
+      },
+      "expected_citations": {
+        "cwe": "N/A",
+        "cwe_name": "Not applicable \u2014 code is safe",
+        "owasp_category": "none"
+      },
+      "source_metadata": {
+        "security_level": "low",
+        "category": "false_positive_test",
+        "designed_for": "hybrid_evaluation",
+        "expected_graphrag_confidence": "< 0.50"
+      }
     }
-  ],
-  "statistics": {
-    "by_source": {
-      "dvwa": 5,
-      "webgoat": 10,
-      "owasp_benchmark": 30,
-      "exploitdb": 20
-    },
-    "by_type": {
-      "vulnerable_code": 45,
-      "exploit_pattern": 20
-    },
-    "by_vulnerability": {
-      "auth_bypass": 7,
-      "sql_injection": 12,
-      "xss": 12,
-      "csrf": 3,
-      "command_injection": 6,
-      "other_injection": 8,
-      "path_traversal": 8,
-      "xxe": 2,
-      "ssrf": 2,
-      "deserialization": 1,
-      "file_upload": 3,
-      "rce": 1
-    },
-    "by_severity": {
-      "high": 34,
-      "critical": 20,
-      "medium": 11
-    }
-  }
+  ]
 }

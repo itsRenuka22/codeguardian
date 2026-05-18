@@ -1,27 +1,27 @@
 {
   "metrics": {
-    "accuracy": 1.0,
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "vuln_type_accuracy": 0.7385,
-    "tp": 65,
-    "fp": 0,
-    "tn": 0,
-    "fn": 0,
-    "total": 65
+    "accuracy": 0.8556,
+    "precision": 0.9643,
+    "recall": 0.8308,
+    "f1": 0.8926,
+    "vuln_type_accuracy": 0.6,
+    "tp": 54,
+    "fp": 2,
+    "tn": 23,
+    "fn": 11,
+    "total": 90
   },
   "vector_only": {
-    "accuracy": 0.9538,
-    "precision": 1.0,
+    "accuracy": 0.9556,
+    "precision": 0.9841,
     "recall": 0.9538,
-    "f1": 0.9764,
+    "f1": 0.9687,
     "vuln_type_accuracy": 0.6615,
     "tp": 62,
-    "fp": 0,
-    "tn": 0,
+    "fp": 1,
+    "tn": 24,
     "fn": 3,
-    "total": 65
+    "total": 90
   },
   "cases": [
     {
@@ -34,10 +34,10 @@
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
         "path_traversal",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -52,9 +52,9 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -62,20 +62,17 @@
     {
       "test_id": "eval_003",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "xss"
       ],
       "pred_vulns": [
-        "xss",
-        "file_upload",
-        "other_injection",
         "auth_bypass",
-        "rce",
+        "xss",
         "sql_injection",
-        "command_injection"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -90,10 +87,10 @@
         "csrf"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
+        "csrf",
         "sql_injection",
-        "csrf"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -101,19 +98,18 @@
     {
       "test_id": "eval_005",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
         "auth_bypass",
+        "command_injection",
         "rce",
-        "sql_injection",
-        "xss"
+        "xss",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -121,21 +117,19 @@
     {
       "test_id": "eval_006",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
-        "auth_bypass",
-        "path_traversal",
         "xxe",
-        "xss"
+        "xss",
+        "path_traversal",
+        "other_injection"
       ],
-      "vuln_match": true,
+      "vuln_match": false,
       "iterations": 1
     },
     {
@@ -148,10 +142,9 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "command_injection",
-        "rce",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -159,14 +152,13 @@
     {
       "test_id": "eval_008",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "other_injection"
       ],
       "pred_vulns": [
-        "command_injection",
         "auth_bypass",
         "other_injection"
       ],
@@ -176,19 +168,17 @@
     {
       "test_id": "eval_009",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
-        "auth_bypass",
-        "path_traversal",
         "xxe",
-        "xss"
+        "xss",
+        "path_traversal",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -196,18 +186,17 @@
     {
       "test_id": "eval_010",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
-        "auth_bypass",
-        "path_traversal",
         "xxe",
-        "command_injection"
+        "command_injection",
+        "path_traversal",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -215,38 +204,33 @@
     {
       "test_id": "eval_011",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.8,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "xxe"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
-        "auth_bypass",
-        "path_traversal",
-        "xxe",
-        "xss"
+        "xss",
+        "path_traversal"
       ],
-      "vuln_match": true,
+      "vuln_match": false,
       "iterations": 1
     },
     {
       "test_id": "eval_012",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "csrf"
       ],
       "pred_vulns": [
-        "xss",
-        "other_injection",
-        "path_traversal",
         "xxe",
-        "command_injection"
+        "xss",
+        "path_traversal",
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -254,19 +238,15 @@
     {
       "test_id": "eval_013",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.8,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "ssrf"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
-        "auth_bypass",
-        "path_traversal",
-        "xxe",
-        "xss"
+        "xss",
+        "path_traversal"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -274,18 +254,15 @@
     {
       "test_id": "eval_014",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.85,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "deserialization"
       ],
       "pred_vulns": [
-        "other_injection",
-        "xxe",
-        "path_traversal",
-        "rce",
-        "command_injection"
+        "command_injection",
+        "path_traversal"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -293,20 +270,17 @@
     {
       "test_id": "eval_015",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.85,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
-        "auth_bypass",
-        "path_traversal",
-        "xss"
+        "xss",
+        "path_traversal"
       ],
-      "vuln_match": true,
+      "vuln_match": false,
       "iterations": 1
     },
     {
@@ -335,8 +309,8 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -351,9 +325,9 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -384,8 +358,8 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -400,10 +374,9 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "command_injection",
-        "rce",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -418,10 +391,9 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "command_injection",
-        "rce",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -436,10 +408,8 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
-        "rce",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -454,10 +424,9 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "command_injection",
-        "rce",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -472,10 +441,8 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
-        "rce",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -491,9 +458,7 @@
       ],
       "pred_vulns": [
         "xss",
-        "command_injection",
-        "other_injection",
-        "rce"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -509,9 +474,7 @@
       ],
       "pred_vulns": [
         "xss",
-        "command_injection",
-        "other_injection",
-        "rce"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -519,7 +482,7 @@
     {
       "test_id": "eval_028",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
@@ -527,7 +490,6 @@
       ],
       "pred_vulns": [
         "xss",
-        "command_injection",
         "other_injection"
       ],
       "vuln_match": true,
@@ -536,7 +498,7 @@
     {
       "test_id": "eval_029",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
@@ -544,7 +506,6 @@
       ],
       "pred_vulns": [
         "xss",
-        "command_injection",
         "other_injection"
       ],
       "vuln_match": true,
@@ -553,7 +514,7 @@
     {
       "test_id": "eval_030",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
@@ -561,7 +522,6 @@
       ],
       "pred_vulns": [
         "xss",
-        "command_injection",
         "other_injection"
       ],
       "vuln_match": true,
@@ -577,11 +537,9 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
+        "xss",
         "path_traversal",
-        "rce",
-        "xss"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -596,11 +554,9 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
+        "xss",
         "path_traversal",
-        "rce",
-        "xss"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -608,17 +564,16 @@
     {
       "test_id": "eval_033",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -633,10 +588,9 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -651,10 +605,9 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
         "path_traversal",
-        "sql_injection"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -662,17 +615,15 @@
     {
       "test_id": "eval_036",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "path_traversal",
-        "sql_injection"
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -680,17 +631,15 @@
     {
       "test_id": "eval_037",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "path_traversal",
-        "sql_injection"
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -698,17 +647,15 @@
     {
       "test_id": "eval_038",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "path_traversal",
-        "sql_injection"
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -716,17 +663,15 @@
     {
       "test_id": "eval_039",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.9,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "path_traversal",
-        "sql_injection"
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -742,7 +687,6 @@
       ],
       "pred_vulns": [
         "xss",
-        "command_injection",
         "path_traversal",
         "other_injection"
       ],
@@ -752,7 +696,7 @@
     {
       "test_id": "eval_041",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
@@ -760,7 +704,6 @@
       ],
       "pred_vulns": [
         "xss",
-        "command_injection",
         "other_injection"
       ],
       "vuln_match": false,
@@ -769,7 +712,7 @@
     {
       "test_id": "eval_042",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
@@ -777,7 +720,6 @@
       ],
       "pred_vulns": [
         "xss",
-        "command_injection",
         "other_injection"
       ],
       "vuln_match": false,
@@ -786,7 +728,7 @@
     {
       "test_id": "eval_043",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
@@ -794,7 +736,6 @@
       ],
       "pred_vulns": [
         "xss",
-        "command_injection",
         "other_injection"
       ],
       "vuln_match": true,
@@ -810,10 +751,9 @@
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "command_injection",
-        "rce",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -828,9 +768,9 @@
         "other_injection"
       ],
       "pred_vulns": [
-        "other_injection",
         "xss",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -838,7 +778,7 @@
     {
       "test_id": "eval_046",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.8,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
@@ -846,8 +786,6 @@
       ],
       "pred_vulns": [
         "command_injection",
-        "file_upload",
-        "rce",
         "csrf"
       ],
       "vuln_match": false,
@@ -855,51 +793,45 @@
     },
     {
       "test_id": "eval_047",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.1,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "sql_injection"
       ],
-      "pred_vulns": [
-        "command_injection",
-        "rce"
-      ],
+      "pred_vulns": [],
       "vuln_match": false,
       "iterations": 1
     },
     {
       "test_id": "eval_048",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.65,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "command_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "command_injection",
-        "rce"
+        "other_injection"
       ],
-      "vuln_match": true,
+      "vuln_match": false,
       "iterations": 1
     },
     {
       "test_id": "eval_049",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.7,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "file_upload"
       ],
       "pred_vulns": [
-        "file_upload",
         "csrf"
       ],
-      "vuln_match": true,
+      "vuln_match": false,
       "iterations": 1
     },
     {
@@ -912,10 +844,10 @@
         "rce"
       ],
       "pred_vulns": [
-        "other_injection",
         "command_injection",
-        "rce",
-        "ssrf"
+        "other_injection",
+        "ssrf",
+        "rce"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -930,10 +862,9 @@
         "path_traversal"
       ],
       "pred_vulns": [
-        "other_injection",
         "xxe",
         "path_traversal",
-        "rce"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
@@ -941,19 +872,16 @@
     {
       "test_id": "eval_052",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.75,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "auth_bypass"
       ],
       "pred_vulns": [
-        "other_injection",
-        "auth_bypass",
-        "rce",
         "csrf"
       ],
-      "vuln_match": true,
+      "vuln_match": false,
       "iterations": 1
     },
     {
@@ -967,9 +895,9 @@
       ],
       "pred_vulns": [
         "command_injection",
-        "file_upload",
         "path_traversal",
-        "other_injection"
+        "other_injection",
+        "file_upload"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -994,19 +922,17 @@
     {
       "test_id": "eval_055",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "ssrf"
       ],
       "pred_vulns": [
-        "other_injection",
         "auth_bypass",
-        "xxe",
         "path_traversal",
-        "rce",
-        "command_injection"
+        "other_injection",
+        "xxe"
       ],
       "vuln_match": false,
       "iterations": 1
@@ -1014,121 +940,109 @@
     {
       "test_id": "eval_056",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.95,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "csrf"
       ],
       "pred_vulns": [
-        "file_upload",
-        "other_injection",
-        "csrf",
         "auth_bypass",
-        "rce",
-        "sql_injection",
-        "command_injection"
+        "command_injection",
+        "file_upload",
+        "csrf",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
     },
     {
       "test_id": "eval_057",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.65,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
-        "auth_bypass",
+        "command_injection",
         "path_traversal",
-        "rce",
-        "command_injection"
+        "other_injection"
       ],
       "vuln_match": false,
       "iterations": 1
     },
     {
       "test_id": "eval_058",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.2,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "sql_injection"
       ],
-      "pred_vulns": [
-        "sql_injection"
-      ],
-      "vuln_match": true,
+      "pred_vulns": [],
+      "vuln_match": false,
       "iterations": 1
     },
     {
       "test_id": "eval_059",
       "outcome": "TP",
-      "confidence": 1.0,
+      "confidence": 0.85,
       "gt_verdict": true,
       "pred_verdict": true,
       "gt_vulns": [
         "file_upload"
       ],
       "pred_vulns": [
-        "other_injection",
         "file_upload",
-        "auth_bypass",
-        "sql_injection"
+        "sql_injection",
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
     },
     {
       "test_id": "eval_060",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.2,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "sql_injection"
       ],
-      "pred_vulns": [
-        "sql_injection"
-      ],
-      "vuln_match": true,
+      "pred_vulns": [],
+      "vuln_match": false,
       "iterations": 1
     },
     {
       "test_id": "eval_061",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.5,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "xss"
       ],
       "pred_vulns": [
-        "other_injection",
+        "xss",
         "command_injection",
-        "path_traversal",
-        "rce",
-        "xss"
+        "other_injection"
       ],
       "vuln_match": true,
       "iterations": 1
     },
     {
       "test_id": "eval_062",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.7,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "path_traversal"
       ],
       "pred_vulns": [
-        "command_injection",
         "path_traversal",
         "other_injection"
       ],
@@ -1137,52 +1051,353 @@
     },
     {
       "test_id": "eval_063",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.7,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "file_upload"
       ],
       "pred_vulns": [
-        "path_traversal",
-        "rce"
+        "path_traversal"
       ],
       "vuln_match": false,
       "iterations": 1
     },
     {
       "test_id": "eval_064",
-      "outcome": "TP",
-      "confidence": 1.0,
+      "outcome": "FN",
+      "confidence": 0.7,
       "gt_verdict": true,
-      "pred_verdict": true,
+      "pred_verdict": false,
       "gt_vulns": [
         "sql_injection"
       ],
       "pred_vulns": [
-        "other_injection",
-        "sql_injection"
+        "other_injection"
+      ],
+      "vuln_match": false,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_065",
+      "outcome": "FN",
+      "confidence": 0.65,
+      "gt_verdict": true,
+      "pred_verdict": false,
+      "gt_vulns": [
+        "xss"
+      ],
+      "pred_vulns": [
+        "csrf",
+        "other_injection"
+      ],
+      "vuln_match": false,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_066",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_067",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_068",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_069",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_070",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_071",
+      "outcome": "TN",
+      "confidence": 0.6,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "file_upload"
       ],
       "vuln_match": true,
       "iterations": 1
     },
     {
-      "test_id": "eval_065",
-      "outcome": "TP",
-      "confidence": 1.0,
-      "gt_verdict": true,
-      "pred_verdict": true,
-      "gt_vulns": [
-        "xss"
-      ],
+      "test_id": "eval_072",
+      "outcome": "TN",
+      "confidence": 0.8,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
       "pred_vulns": [
-        "other_injection",
-        "path_traversal",
-        "rce",
+        "command_injection",
+        "sql_injection",
+        "other_injection"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_073",
+      "outcome": "TN",
+      "confidence": 0.6,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "file_upload",
         "csrf"
       ],
-      "vuln_match": false,
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_074",
+      "outcome": "TN",
+      "confidence": 0.65,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "command_injection"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_075",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_076",
+      "outcome": "TN",
+      "confidence": 0.5,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "xss"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_077",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_078",
+      "outcome": "TN",
+      "confidence": 0.5,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "xss"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_079",
+      "outcome": "TN",
+      "confidence": 0.45,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "xss"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_080",
+      "outcome": "TN",
+      "confidence": 0.5,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "xss"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_081",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_082",
+      "outcome": "TN",
+      "confidence": 0.6,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "csrf"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_083",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_084",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_085",
+      "outcome": "TN",
+      "confidence": 0.55,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "csrf"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_086",
+      "outcome": "FP",
+      "confidence": 1.0,
+      "gt_verdict": false,
+      "pred_verdict": true,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "sql_injection",
+        "other_injection"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_087",
+      "outcome": "FP",
+      "confidence": 1.0,
+      "gt_verdict": false,
+      "pred_verdict": true,
+      "gt_vulns": [],
+      "pred_vulns": [
+        "xss",
+        "sql_injection",
+        "other_injection"
+      ],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_088",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_089",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
+      "iterations": 1
+    },
+    {
+      "test_id": "eval_090",
+      "outcome": "TN",
+      "confidence": 0.1,
+      "gt_verdict": false,
+      "pred_verdict": false,
+      "gt_vulns": [],
+      "pred_vulns": [],
+      "vuln_match": true,
       "iterations": 1
     }
   ]

@@ -16,15 +16,33 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 from .planner import Planner
 from .executor import Executor
 from .critic import Critic
+from .hybrid_critic import HybridCritic
 from .memory import Memory
 from line_detector import detect_vulnerable_lines
 
 
 class CodeGuardianAgent:
-    def __init__(self, querier, cache_path: str = None):
+    def __init__(
+        self,
+        querier,
+        cache_path: str = None,
+        use_hybrid: bool = False,
+        llm_client=None,
+        llm_threshold: float = 0.85,
+        llm_weight: float = 0.30,
+    ):
         self.planner = Planner()
         self.executor = Executor(querier)
-        self.critic = Critic(retry_threshold=0.35, max_retries=2)
+        if use_hybrid:
+            self.critic = HybridCritic(
+                llm_client=llm_client,
+                llm_threshold=llm_threshold,
+                llm_weight=llm_weight,
+                retry_threshold=0.35,
+                max_retries=2,
+            )
+        else:
+            self.critic = Critic(retry_threshold=0.35, max_retries=2)
         cache_path = cache_path or os.path.join(
             os.path.dirname(__file__), "..", "data", "agent_cache.json"
         )
@@ -33,9 +51,8 @@ class CodeGuardianAgent:
     # ── factory ───────────────────────────────────────────────────────────────
 
     @classmethod
-    def from_config(cls, config):
+    def from_config(cls, config, use_hybrid: bool = False, llm_client=None, **kwargs):
         """Build a ready-to-use agent from the project config module."""
-        import chromadb
         from graph_store import make_graph_store
         from graph_builder import GraphBuilder
         from vector_indexer import VectorIndexer
@@ -65,11 +82,17 @@ class CodeGuardianAgent:
                 kb = json.load(f)
             indexer.index_all_code(kb)
 
-        chroma_client = chromadb.PersistentClient(path=config.CHROMA_PATH)
+        chroma_client = indexer.client
         querier = HybridQuerier(store, chroma_client, config.CHROMA_COLLECTION_NAME)
 
         cache_path = os.path.join(os.path.dirname(config.__file__), "data", "agent_cache.json")
-        return cls(querier=querier, cache_path=cache_path)
+        return cls(
+            querier=querier,
+            cache_path=cache_path,
+            use_hybrid=use_hybrid,
+            llm_client=llm_client,
+            **kwargs,
+        )
 
     # ── main API ──────────────────────────────────────────────────────────────
 
@@ -89,7 +112,7 @@ class CodeGuardianAgent:
         while True:
             iterations += 1
             exec_result = self.executor.execute(plan)
-            score = self.critic.score(exec_result)
+            score = self.critic.score(code, exec_result)
 
             if not score.should_retry:
                 break
@@ -103,6 +126,9 @@ class CodeGuardianAgent:
 
     def _format(self, code, plan, exec_result, score, iterations) -> dict:
         matches = exec_result.matches
+        is_clean   = score.verdict == "clean"
+        impossible = set(score.impossible_vulns)
+        possible_vulns = [v for v in score.vuln_types_found if v not in impossible]
 
         evidence = []
         for m in matches[:5]:
@@ -122,28 +148,32 @@ class CodeGuardianAgent:
         for m in matches:
             for fp in m.get("fix_patterns", []):
                 desc = fp.get("description", "")
-                if desc and desc not in seen_fixes:
+                vt   = fp.get("vuln_type", "")
+                if desc and desc not in seen_fixes and vt not in impossible:
                     seen_fixes.add(desc)
                     fix_guidance.append({
-                        "vuln_type":   fp.get("vuln_type", ""),
+                        "vuln_type":   vt,
                         "description": desc,
                     })
 
-        line_findings = detect_vulnerable_lines(code, score.vuln_types_found)
+        line_findings = detect_vulnerable_lines(code, possible_vulns)
 
         return {
-            "verdict":           score.verdict,
-            "confidence":        score.confidence,
-            "vulnerability_types": score.vuln_types_found,
-            "top_severity":      score.top_severity,
-            "language_detected": plan.language,
+            "verdict":              score.verdict,
+            "confidence":           score.confidence,
+            "vulnerability_types":  possible_vulns,
+            "all_matched_vulns":    score.vuln_types_found,
+            "top_severity":         "" if is_clean else score.top_severity,
+            "language_detected":    plan.language,
             "suspected_by_planner": plan.suspected_vulns,
-            "evidence":          evidence,
-            "fix_guidance":      fix_guidance,
-            "line_findings":     line_findings,
-            "total_matches":     len(matches),
-            "iterations":        iterations,
-            "from_cache":        False,
+            "evidence":             [] if is_clean else evidence,
+            "fix_guidance":         [] if is_clean else fix_guidance,
+            "line_findings":        [] if is_clean else line_findings,
+            "total_matches":        len(matches),
+            "iterations":           iterations,
+            "impossible_vulns":     score.impossible_vulns,
+            "patterns_found":       score.patterns_found,
+            "from_cache":           False,
         }
 
     # ── utilities ─────────────────────────────────────────────────────────────
