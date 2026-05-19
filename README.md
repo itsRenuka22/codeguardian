@@ -101,26 +101,44 @@ This design ensures the fast GraphRAG path handles ~57% of cases with no LLM cos
 
 ## Dataset
 
-### Code Examples (260 total)
+### Knowledge Base — Code Examples (260 total)
 
-| Source | Count | Language | Notes |
-|--------|-------|----------|-------|
-| DVWA | 19 | PHP | Educational web security examples |
-| OWASP WebGoat | 69 | Java | Official OWASP training lessons |
-| OWASP Benchmark | 50 | Java | Test cases with known ground truth |
-| Exploit-DB | 109 | Multi | Real-world exploit code |
-| GitHub Issues | 13 | Various | Production bugs from open-source projects |
+| Source | Count | Primary Languages | Notes |
+|--------|-------|-------------------|-------|
+| Exploit-DB | 159 | Python, Ruby, Perl | Real-world exploit code |
+| OWASP WebGoat | 59 | Java | Official OWASP training lessons |
+| OWASP Benchmark | 20 | Java | Test cases with known ground truth |
+| DVWA | 14 | PHP | Educational web security examples |
+| GitHub Issues | 8 | Various | Production bugs from open-source projects |
+
+**Language breakdown:** Python 108 · Java 79 · Ruby 41 · PHP 17 · Perl 8 · JavaScript 5 · Go 1
+
+**Severity breakdown:** High 118 · Critical 103 · Medium 39
 
 ### Evaluation Set (120 cases)
 
-| Split | Count | Purpose |
-|-------|-------|---------|
-| Original cases | 90 | Standard benchmark (DVWA, WebGoat, Exploit-DB, synthetic) |
-| Low-confidence cases | 30 | Designed to score below 0.85 GraphRAG confidence — exercises the LLM path |
+| Split | Total | Vulnerable | Clean | Purpose |
+|-------|-------|-----------|-------|---------|
+| Original | 90 | 65 | 25 | Standard benchmark (OWASP Benchmark, Exploit-DB, WebGoat, DVWA) |
+| Low-confidence | 30 | 27 | 3 | Designed to score below 0.85 GraphRAG threshold — exercises LLM path |
+| **Total** | **120** | **92** | **28** | |
+
+**Eval set sources:** OWASP Benchmark 30 · Synthetic clean baseline 25 · Synthetic low-conf 30 · Exploit-DB 20 · WebGoat 10 · DVWA 5
+
+**Eval set languages:** Java 44 · Python 30 · PHP 21 · JavaScript 9 · Other/web 12 · Ruby 3 · Perl 1
 
 ### Vulnerability Types Covered (13)
 
-SQL Injection, XSS, Auth Bypass, Command Injection, Path Traversal, Other Injection, File Upload, SSRF, CSRF, Template Injection, RCE, XXE, Deserialization
+| Knowledge Base | Evaluation Set |
+|----------------|----------------|
+| Command Injection (44) | SQL Injection (23) |
+| RCE (34) | XSS (17) |
+| Other Injection (33) | Auth Bypass (11) |
+| Auth Bypass (31) | Path Traversal (10) |
+| Path Traversal (30) | Command Injection (8) |
+| SQL Injection (25) | Other Injection (8) |
+| File Upload (25) | File Upload (3) · CSRF (3) · SSRF (3) |
+| XXE (19) · XSS (8) · CSRF (6) · SSRF (5) | Template Injection (2) · XXE (2) · RCE (1) · Deserialization (1) |
 
 ---
 
