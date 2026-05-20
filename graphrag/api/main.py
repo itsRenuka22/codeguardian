@@ -641,9 +641,113 @@ async def eval_models(request: Request):
     if not models:
         raise HTTPException(400, "No models selected")
 
-    loop   = asyncio.get_event_loop()
-    result = await loop.run_in_executor(_pool, _run_model_eval_sync, models, max_cases)
-    return JSONResponse(result)
+    async def stream():
+        import asyncio, config as cfg
+        loop = asyncio.get_event_loop()
+
+        with open(cfg.EVALUATION_SET_PATH) as f:
+            ev = json.load(f)
+        cases = ev.get("test_cases", [])[:max_cases]
+
+        results_by_model = {}
+
+        for model_key in models:
+            try:
+                llm = await loop.run_in_executor(None, _make_llm, model_key)
+            except Exception as exc:
+                results_by_model[model_key] = {"error": str(exc)}
+                yield f"data: {json.dumps({'type':'model_error','model':model_key,'error':str(exc)})}\n\n"
+                continue
+
+            if not llm.is_available:
+                msg = f"{llm.display_name} — API key not configured or service unavailable"
+                results_by_model[model_key] = {"model_name": llm.display_name, "error": msg}
+                yield f"data: {json.dumps({'type':'model_error','model':model_key,'model_name':llm.display_name,'error':msg})}\n\n"
+                continue
+
+            tp = fp = tn = fn = 0
+            total_cost = total_latency = 0.0
+            vuln_matches = gt_pos = 0
+            cases_log = []
+
+            yield f"data: {json.dumps({'type':'model_start','model':model_key,'model_name':llm.display_name,'total':len(cases)})}\n\n"
+
+            def _d(a, b): return round(a / b, 4) if b else 0.0
+
+            for i, case in enumerate(cases):
+                gt      = case["ground_truth"]
+                gt_vuln = gt.get("vulnerable", True)
+                gt_types = set(gt.get("vulnerability_types", []))
+                if gt_vuln:
+                    gt_pos += 1
+
+                try:
+                    r = await loop.run_in_executor(None, _zero_shot_evaluate, llm, case["code"])
+                    pred_vuln  = r["verdict"] in ("vulnerable", "potentially_vulnerable")
+                    pred_types = set(r["vulnerability_types"])
+                    type_match = bool(gt_types & pred_types) if gt_types else True
+
+                    if gt_vuln and pred_vuln:       tp += 1
+                    elif gt_vuln and not pred_vuln: fn += 1
+                    elif pred_vuln:                 fp += 1
+                    else:                           tn += 1
+
+                    if gt_vuln and type_match:
+                        vuln_matches += 1
+
+                    total_cost    += r["cost_usd"]
+                    total_latency += r["latency_s"]
+
+                    outcome = (
+                        "TP" if (gt_vuln and pred_vuln) else
+                        "FN" if (gt_vuln and not pred_vuln) else
+                        "FP" if pred_vuln else "TN"
+                    )
+                    case_result = {
+                        "test_id":      case["test_id"],
+                        "outcome":      outcome,
+                        "gt_verdict":   gt_vuln,
+                        "pred_verdict": pred_vuln,
+                        "gt_vulns":     list(gt_types),
+                        "pred_vulns":   list(pred_types),
+                        "type_match":   type_match,
+                        "cost_usd":     round(r["cost_usd"], 6),
+                        "latency_s":    r["latency_s"],
+                        "reasoning":    r.get("reasoning", ""),
+                    }
+                except RuntimeError as exc:
+                    case_result = {"test_id": case.get("test_id", "?"), "error": f"LLM_ERROR: {exc}", "error_type": "llm_error"}
+                except Exception as exc:
+                    case_result = {"test_id": case.get("test_id", "?"), "error": f"UNKNOWN: {exc}", "error_type": "unknown"}
+
+                cases_log.append(case_result)
+                prec_now = _d(tp, tp + fp)
+                rec_now  = _d(tp, tp + fn)
+                f1_now   = _d(2 * prec_now * rec_now, prec_now + rec_now)
+                yield f"data: {json.dumps({'type':'case_done','model':model_key,'case_index':i,'done':i+1,'total':len(cases),'case':case_result,'running_metrics':{'tp':tp,'fp':fp,'tn':tn,'fn':fn,'f1':f1_now}})}\n\n"
+
+            n = len(cases) or 1
+            prec = _d(tp, tp + fp)
+            rec  = _d(tp, tp + fn)
+            f1   = _d(2 * prec * rec, prec + rec)
+
+            model_result = {
+                "model_name": llm.display_name,
+                "metrics": {
+                    "accuracy": _d(tp + tn, n), "precision": prec, "recall": rec, "f1": f1,
+                    "vuln_type_accuracy": _d(vuln_matches, gt_pos),
+                    "tp": tp, "fp": fp, "tn": tn, "fn": fn, "total": len(cases),
+                },
+                "total_cost_usd": round(total_cost, 4),
+                "avg_latency_s":  round(total_latency / n, 2),
+                "cases": cases_log,
+            }
+            results_by_model[model_key] = model_result
+            yield f"data: {json.dumps({'type':'model_done','model':model_key,'result':model_result})}\n\n"
+
+        yield f"data: {json.dumps({'type':'done','models':results_by_model,'num_cases':len(cases)})}\n\n"
+
+    return StreamingResponse(stream(), media_type="text/event-stream")
 
 
 _ZERO_SHOT_PROMPT = """\
