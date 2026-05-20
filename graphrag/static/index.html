@@ -470,7 +470,7 @@
     <div><div class="stat-num">260</div><div class="stat-label">Code Examples</div></div>
     <div><div class="stat-num">12</div><div class="stat-label">Vuln Types</div></div>
     <div><div class="stat-num">673</div><div class="stat-label">CVE Records</div></div>
-    <div><div class="stat-num">90</div><div class="stat-label">Eval Cases</div></div>
+    <div><div class="stat-num">120</div><div class="stat-label">Eval Cases</div></div>
   </div>
 </div>
 
@@ -605,7 +605,7 @@
   <div class="eval-page">
 
     <div class="eval-topbar">
-      <h2>GraphRAG Evaluation — 90 Test Cases</h2>
+      <h2>GraphRAG Evaluation — 120 Test Cases</h2>
       <div class="eval-actions">
         <button class="btn-secondary" onclick="loadEvalResults()">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -621,7 +621,7 @@
     <div id="evalDashboard">
       <div class="placeholder" style="background:#fff;border:1px solid var(--border);border-radius:var(--r-md);padding:60px 24px;">
         <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        <p>Click <strong>Run Evaluation</strong> to evaluate all 65 cases,<br>or <strong>Load Cached</strong> if a previous run exists.</p>
+        <p>Click <strong>Run Evaluation</strong> to evaluate all 120 cases,<br>or <strong>Load Cached</strong> if a previous run exists.</p>
       </div>
     </div>
 
@@ -1467,7 +1467,7 @@ async function runEval() {
   document.getElementById('evalDashboard').innerHTML = `
     <div class="placeholder" style="background:#fff;border:1px solid var(--border);border-radius:var(--r-md);padding:80px 24px;">
       <div class="spinner-green"></div>
-      <p>Evaluating all 65 test cases + vector-only comparison…<br>
+      <p>Evaluating all 120 test cases + vector-only comparison…<br>
       <small style="color:var(--text-muted)">Cached results are reused. May take a few minutes on first run.</small></p>
     </div>`;
   try {

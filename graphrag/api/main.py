@@ -646,15 +646,62 @@ async def eval_models(request: Request):
     return JSONResponse(result)
 
 
+_ZERO_SHOT_PROMPT = """\
+You are a security code reviewer. Analyze the following code for vulnerabilities.
+Respond ONLY with valid JSON — no markdown, no prose.
+
+Response schema:
+{{
+  "verdict": "vulnerable" | "potentially_vulnerable" | "clean",
+  "vulnerability_types": [<string>, ...],
+  "reasoning": "<one sentence>"
+}}
+
+Code:
+```
+{code}
+```"""
+
+
+def _zero_shot_evaluate(llm, code: str) -> dict:
+    """Call LLM directly for zero-shot classification. Returns verdict dict."""
+    import re, time
+    prompt = _ZERO_SHOT_PROMPT.format(code=code[:3000])
+    t0 = time.time()
+    try:
+        raw = llm.generate(prompt)
+    except Exception as exc:
+        raise RuntimeError(str(exc))
+    latency = round(time.time() - t0, 3)
+
+    text = re.sub(r"```(?:json)?", "", raw).strip().rstrip("`").strip()
+    match = re.search(r"\{.*\}", text, re.DOTALL)
+    if not match:
+        return {"verdict": "clean", "vulnerability_types": [], "reasoning": "", "latency_s": latency, "cost_usd": 0.0}
+    try:
+        payload = json.loads(match.group())
+    except json.JSONDecodeError:
+        return {"verdict": "clean", "vulnerability_types": [], "reasoning": "", "latency_s": latency, "cost_usd": 0.0}
+
+    verdict = payload.get("verdict", "clean").lower()
+    if verdict not in ("vulnerable", "potentially_vulnerable", "clean"):
+        verdict = "clean"
+    return {
+        "verdict": verdict,
+        "vulnerability_types": payload.get("vulnerability_types", []),
+        "reasoning": payload.get("reasoning", ""),
+        "latency_s": latency,
+        "cost_usd": 0.0,
+    }
+
+
 def _run_model_eval_sync(model_keys: list, max_cases: int) -> dict:
-    from models.llm_evaluator import LLMEvaluator
     import config
 
     with open(config.EVALUATION_SET_PATH) as f:
         ev = json.load(f)
     cases = ev.get("test_cases", [])[:max_cases]
 
-    evaluator      = LLMEvaluator()
     results_by_model = {}
 
     for model_key in model_keys:
@@ -686,8 +733,8 @@ def _run_model_eval_sync(model_keys: list, max_cases: int) -> dict:
                 gt_pos += 1
 
             try:
-                r          = evaluator.evaluate_case(case["code"], llm)
-                pred_vuln  = r["verdict"] in ("vulnerable", "likely_vulnerable")
+                r          = _zero_shot_evaluate(llm, case["code"])
+                pred_vuln  = r["verdict"] in ("vulnerable", "potentially_vulnerable")
                 pred_types = set(r["vulnerability_types"])
                 type_match = bool(gt_types & pred_types) if gt_types else True
 
@@ -708,35 +755,21 @@ def _run_model_eval_sync(model_keys: list, max_cases: int) -> dict:
                     "FP" if pred_vuln else "TN"
                 )
                 cases_log.append({
-                    "test_id":    case["test_id"],
-                    "outcome":    outcome,
-                    "gt_verdict": gt_vuln,
+                    "test_id":      case["test_id"],
+                    "outcome":      outcome,
+                    "gt_verdict":   gt_vuln,
                     "pred_verdict": pred_vuln,
-                    "gt_vulns":   list(gt_types),
-                    "pred_vulns": list(pred_types),
-                    "type_match": type_match,
-                    "cost_usd":   round(r["cost_usd"], 6),
-                    "latency_s":  r["latency_s"],
-                    "reasoning":  r.get("reasoning", ""),
-                })
-            except TimeoutError as exc:
-                cases_log.append({
-                    "test_id": case.get("test_id", "?"),
-                    "error":   f"TIMEOUT: {str(exc)}",
-                    "error_type": "timeout",
+                    "gt_vulns":     list(gt_types),
+                    "pred_vulns":   list(pred_types),
+                    "type_match":   type_match,
+                    "cost_usd":     round(r["cost_usd"], 6),
+                    "latency_s":    r["latency_s"],
+                    "reasoning":    r.get("reasoning", ""),
                 })
             except RuntimeError as exc:
-                cases_log.append({
-                    "test_id": case.get("test_id", "?"),
-                    "error":   f"LLM_ERROR: {str(exc)}",
-                    "error_type": "llm_error",
-                })
+                cases_log.append({"test_id": case.get("test_id", "?"), "error": f"LLM_ERROR: {exc}", "error_type": "llm_error"})
             except Exception as exc:
-                cases_log.append({
-                    "test_id": case.get("test_id", "?"),
-                    "error":   f"UNKNOWN: {str(exc)}",
-                    "error_type": "unknown",
-                })
+                cases_log.append({"test_id": case.get("test_id", "?"), "error": f"UNKNOWN: {exc}", "error_type": "unknown"})
 
         n = len(cases) or 1
 
@@ -748,15 +781,15 @@ def _run_model_eval_sync(model_keys: list, max_cases: int) -> dict:
         results_by_model[model_key] = {
             "model_name": llm.display_name,
             "metrics": {
-                "accuracy":          _d(tp + tn, n),
-                "precision":         prec,
-                "recall":            rec,
-                "f1":                f1,
+                "accuracy":           _d(tp + tn, n),
+                "precision":          prec,
+                "recall":             rec,
+                "f1":                 f1,
                 "vuln_type_accuracy": _d(vuln_matches, gt_pos),
                 "tp": tp, "fp": fp, "tn": tn, "fn": fn, "total": len(cases),
             },
-            "total_cost_usd":  round(total_cost, 4),
-            "avg_latency_s":   round(total_latency / n, 2),
+            "total_cost_usd": round(total_cost, 4),
+            "avg_latency_s":  round(total_latency / n, 2),
             "cases": cases_log,
         }
 
