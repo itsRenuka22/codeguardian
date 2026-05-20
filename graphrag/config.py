@@ -28,7 +28,7 @@ PROCESSED_DATA_DIR = str(PROJECT_ROOT / "data" / "processed")
 DATA_PATH = PROCESSED_DATA_DIR
 KNOWLEDGE_BASE_PATH = os.path.join(PROCESSED_DATA_DIR, "rag_knowledge_base_code_only.json")
 CITATION_MAP_PATH = os.path.join(PROCESSED_DATA_DIR, "citation_map.json")
-EVALUATION_SET_PATH = os.path.join(PROCESSED_DATA_DIR, "evaluation_set.json")
+EVALUATION_SET_PATH = os.path.join(PROCESSED_DATA_DIR, "evaluation_set_hybrid.json")
 
 # Embedding model (local, no API key required)
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
