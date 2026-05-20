@@ -669,7 +669,8 @@ def _zero_shot_evaluate(llm, code: str) -> dict:
     prompt = _ZERO_SHOT_PROMPT.format(code=code[:3000])
     t0 = time.time()
     try:
-        raw = llm.generate(prompt)
+        result = llm.generate_raw("", prompt)
+        raw = result["text"] if isinstance(result, dict) else result
     except Exception as exc:
         raise RuntimeError(str(exc))
     latency = round(time.time() - t0, 3)
